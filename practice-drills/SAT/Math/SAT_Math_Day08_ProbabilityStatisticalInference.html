@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Probability &amp; Statistical Inference — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:46pt;font-weight:900;color:#fff;text-align:center;line-height:1.05;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:400px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .q-body{display:flex;gap:20px;align-items:flex-start;margin-bottom:10px;}
+  .q-text{flex:1;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+  .q-note{font-size:10pt;font-family:'Source Serif 4',serif;color:var(--text);line-height:1.65;margin-bottom:8px;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:32pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 13</div>
+  <div class="c-title">PROBABILITY &amp;<br><span>STATISTICAL INFERENCE</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Basic and compound probability, two-way tables, expected value, and measures of center and spread.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Probability &amp; Statistical Inference — SAT Reference</h2><p>Core rules you must know cold for the data &amp; probability unit</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">Basic probability</span><span class="fm-val">favorable outcomes ÷ total outcomes</span></div><div class="fm"><span class="fm-label">Complement rule</span><span class="fm-val">P(not A) = 1 − P(A)</span></div><div class="fm"><span class="fm-label">Independent events (AND)</span><span class="fm-val">multiply the individual probabilities</span></div><div class="fm"><span class="fm-label">Mutually exclusive (OR)</span><span class="fm-val">add the individual probabilities</span></div><div class="fm"><span class="fm-label">General addition rule</span><span class="fm-val">P(A or B) = P(A) + P(B) − P(A and B)</span></div><div class="fm"><span class="fm-label">Conditional probability</span><span class="fm-val">P(A | B) = P(A and B) ÷ P(B)</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">With vs. Without Replacement</span><h4>The denominator shrinks without replacement</h4><p>Drawing a second item without replacing the first means the total count is one smaller for the second draw — the probabilities are NOT identical.</p></div>
+<div class="rc"><span class="rc-tag">Conditional Probability</span><h4>Restrict to the given condition first</h4><p>P(A | B) means: narrow your sample space down to just the cases where B happened, THEN find what fraction of those also satisfy A.</p></div>
+<div class="rc"><span class="rc-tag">Two-Way Tables</span><h4>Match the numerator to what's asked</h4><p>"P(X and Y)" uses the joint cell over the grand total. "P(X | Y)" uses the joint cell over the ROW or COLUMN total for Y — not the grand total.</p></div>
+<div class="rc"><span class="rc-tag">Expected Value</span><h4>Weight each outcome by its probability</h4><p>Expected value = Σ (outcome value × probability of that outcome). It's a weighted average, not just the biggest possible payout.</p></div>
+<div class="rc"><span class="rc-tag">Sample Statistics</span><h4>A sample statistic estimates the population parameter</h4><p>A well-chosen sample's mean or proportion is the best available estimate for the population's mean or proportion — that's the basis of statistical inference.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Using "with replacement" probabilities when the problem draws without replacement</div><div class="trap">Dividing by the grand total when the question asks for a conditional probability</div><div class="trap">Forgetting to subtract the overlap in the general addition rule</div><div class="trap">Confusing the mean, median, and range of a small dataset</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 13 — Probability &amp; Statistical Inference</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Weighted Probability</div></div>
+  
+  <div class="qs">At a factory, 60% of products come from Machine A and 40% from Machine B. 5% of Machine A's products are defective, and 8% of Machine B's products are defective. What is the probability that a randomly selected product is defective?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>6.2%</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>13%</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4%</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>6.5%</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="C">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Combinatorics &amp; Probability</div></div>
+  
+  <div class="qs">A committee of 3 people is chosen at random from a group of 4 men and 3 women. What is the probability that the committee includes exactly 2 women?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3/7</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>12/35</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4/7</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Independent Events</div></div>
+  <div class="qs">A fair coin is flipped twice. What is the probability of getting heads both times?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/8</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Basic Probability</div></div>
+  <div class="qs">A fair six-sided die is rolled once. What is the probability of rolling an even number?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/6</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2/3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/2</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Dependent Events</div></div>
+  <div class="qs">From the bag of 5 red, 3 blue, and 2 green marbles, two marbles are drawn WITHOUT replacement. What is the probability that both are red?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2/9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>5/9</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4/9</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Complement Rule</div></div>
+  <div class="qs">A fair coin is flipped twice. What is the probability of getting at least one heads?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Mutually Exclusive Events</div></div>
+  <div class="qs">A fair six-sided die is rolled once. What is the probability of rolling a 2 or a 5?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/6</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>5/6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/2</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Conditional Probability</div></div>
+  <div class="qs">In a school of 100 students, 60 play a sport. Of those 60, 20 also play a musical instrument. What is the probability a randomly chosen sport-player also plays an instrument?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>3/10</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2/3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/3</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Expected Value</div></div>
+  <div class="qs">A game pays $10 with probability 0.2, and $0 otherwise. What is the expected value of playing the game?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>$2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>$10</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>$0.20</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>$8</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Mean</div></div>
+  <div class="qs">What is the mean of the dataset {2, 4, 6, 8, 10}?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>30</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>8</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Median</div></div>
+  <div class="qs">What is the median of the dataset {3, 7, 9, 2, 5}?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5.2</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Sample Proportion</div></div>
+  <div class="qs">In a survey of 200 people, 120 said they prefer Product A. What is the sample proportion who prefer Product A?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3/10</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5/3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2/5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3/5</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Margin of Error</div></div>
+  <div class="qs">A poll reports 45% support, with a margin of error of ±3%. What is the highest plausible support percentage?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>48%</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>42%</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>45%</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>51%</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Two-Way Tables</div></div>
+  <div class="qs">Of 50 students (30 male, 20 female), 28 like a particular sport: 18 of the males and 10 of the females. What is the probability a randomly chosen student is female AND likes the sport?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>10/28</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>3/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1/5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/2</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Conditional Probability</div></div>
+  <div class="qs">Using the same table (30 male, 20 female; 18 male / 10 female like the sport), what is the probability a randomly chosen student likes the sport, GIVEN that the student is female?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>10/28</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2/5</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Addition Rule</div></div>
+  <div class="qs">If P(A) = 0.5, P(B) = 0.4, and P(A and B) = 0.1, what is P(A or B)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0.9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>0.1</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1.0</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0.8</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Independent Events</div></div>
+  <div class="qs">A fair coin is flipped twice. What is the probability of getting exactly one heads?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/8</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="C">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Sampling &amp; Inference</div></div>
+  <div class="qs">A random sample of 50 people from a large population has a sample mean of 72. What is the best estimate of the population mean?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>50</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>36</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>72</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>144</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Range</div></div>
+  <div class="qs">What is the range of the dataset {4, 9, 15, 22, 30}?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>30</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>26</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>15</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>80</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Independent Events</div></div>
+  <div class="qs">From the bag of 5 red, 3 blue, and 2 green marbles, a marble is drawn, replaced, and a second marble is drawn. What is the probability that BOTH draws are non-red?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>9/25</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/4</button></div>
+</div>
+
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Probability &amp; Statistical Inference</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Probability &amp; Statistical Inference Handout &nbsp;·&nbsp; SAT Math Day 13</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Probability & Statistical Inference (Day 13): '+score+'/'+total+' (needs work)' : 'Probability & Statistical Inference (Day 13): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

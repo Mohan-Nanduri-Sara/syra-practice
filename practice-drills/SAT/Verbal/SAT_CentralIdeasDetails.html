@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Central Ideas & Details — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Information & Ideas</div>
+  <div class="c-title">CENTRAL IDEAS<br><span>& DETAILS</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Identify what a passage is really saying — not just what it mentions.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">2</span><span class="s-lbl">Question Types</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Central Ideas & Details — Quick Reference</h2><p>What the SAT tests and how to find the right answer</p></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Type 1</span><h4>Main Idea / Purpose</h4><p>What is the passage primarily doing? The correct answer captures the passage as a whole — not just one detail, and not broader than what the text actually claims.</p></div>
+<div class="rc"><span class="rc-tag">Type 2</span><h4>Detail / According to</h4><p>What does the text say about X? The answer must be directly stated or shown in the passage — inference is not required for these questions.</p></div>
+<div class="rc"><span class="rc-tag">Trap 1</span><h4>Too Narrow</h4><p>An answer that only captures one supporting detail is wrong for a main idea question, even if it's perfectly accurate.</p></div>
+<div class="rc"><span class="rc-tag">Trap 2</span><h4>Too Broad</h4><p>An answer that goes beyond what the passage actually claims is wrong — even if it sounds logical.</p></div>
+<div class="rc"><span class="rc-tag">Trap 3</span><h4>True but Not Stated</h4><p>For detail questions, an answer that is probably true based on outside knowledge but not stated in the passage is always wrong.</p></div>
+<div class="rc"><span class="rc-tag">Trap 4</span><h4>Distortion</h4><p>One word changed can make a true statement false. "Argues that X is impossible" vs. "argues that X is unlikely" — these are different claims.</p></div>
+</div>
+<div class="method-box"><h3>Syra's Method</h3>
+<div class="ms"><div class="mn">1</div><div class="mt"><strong>Read the full passage before looking at the question.</strong> For main idea questions, your job is to summarize the passage in one sentence before you read the choices. Then match.</div></div>
+<div class="ms"><div class="mn">2</div><div class="mt"><strong>For detail questions, locate the specific line.</strong> Re-read the relevant portion of the passage word for word. The correct answer will paraphrase it accurately; wrong answers distort it.</div></div>
+<div class="ms"><div class="mn">3</div><div class="mt"><strong>Apply the Goldilocks test.</strong> The correct main idea answer is not too narrow (just a detail), not too broad (beyond the text), but exactly right — the whole passage in miniature.</div></div>
+</div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Too narrow (just a detail)</div><div class="trap">Too broad (beyond text)</div><div class="trap">True but not stated</div><div class="trap">Distortion of wording</div><div class="trap">Opposite of what text says</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">CentralIdeasDetails</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+<div class="qb" data-q="1" data-ans="B">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">In the 1840s, Hungarian physician Ignaz Semmelweis noticed that the mortality rate in a maternity ward staffed by medical students was far higher than in a ward staffed by midwives. He realized the key difference: medical students came directly from performing autopsies. He introduced mandatory handwashing with chlorinated lime solution, and the death rate plummeted. Despite this evidence, the medical establishment rejected his findings, and Semmelweis died in a psychiatric institution before his work was vindicated.</div>
+  <div class="qs">Which choice best states the main purpose of the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>To argue that medical institutions have always been resistant to new ideas</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>To describe how Semmelweis discovered and proved the importance of handwashing, and the unjust rejection of his findings</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>To explain the differences between medical students and midwives in 19th-century hospitals</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>To show that the germ theory of disease was well understood in the 1840s</button></div>
+</div>
+</div>
+<div class="ph-r">Question 2</div></div>
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The following text is from Toni Morrison's 1987 novel <em>Beloved</em>.
+
+Sethe's yard had not been a welcome place for years. No coloredpeople would visit. The family had given up any expectation of help from that quarter. They were resigned to the fact that the haunting was not going to stop.</div>
+  <div class="qs">Which choice best describes the overall situation presented in the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Sethe has recently moved into a new home and is making friends with her neighbors</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The community avoids Sethe's home because of a supernatural presence, and the family has accepted this isolation</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Sethe is searching for help from the community but is being deliberately ignored</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The haunting of Sethe's home has recently begun and is frightening the family</button></div>
+</div>
+</div>
+<div class="ph-r">Question 3</div></div>
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Research in urban planning has consistently found that mixed-use neighborhoods — those containing residential, commercial, and recreational space in close proximity — generate significantly higher rates of pedestrian activity than single-use zones. Residents of mixed-use areas walk more, drive less, and report higher levels of social connection with neighbors. Planners increasingly view mixed-use zoning as a tool for improving both environmental sustainability and community wellbeing.</div>
+  <div class="qs">According to the text, what do planners believe about mixed-use zoning?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>It is effective at reducing property values in commercial districts</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>It increases pedestrian activity and social connection while supporting environmental and community goals</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>It is primarily useful for reducing car traffic on major highways</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>It has been shown to increase crime rates in urban areas</button></div>
+</div>
+</div>
+<div class="ph-r">Question 4</div></div>
+<div class="qb" data-q="4" data-ans="B">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">James Baldwin's essays are often discussed as political writing, but Baldwin himself resisted that label. He maintained that his primary obligation was to truth, not to any political program. He believed that the honest examination of human experience — including the experience of racial injustice — was itself the highest form of political act, precisely because it refused the simplifications that ideology demands.</div>
+  <div class="qs">Which choice best describes Baldwin's view of his own writing?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>He saw it as explicitly political and aligned with the civil rights movement's goals</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>He believed honest examination of human experience was itself a form of political action, superior to ideological writing</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>He considered his essays to be primarily literary rather than concerned with racial injustice</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>He rejected the idea that writing could have any political effect at all</button></div>
+</div>
+</div>
+<div class="ph-r">Question 5</div></div>
+<div class="qb" data-q="5" data-ans="C">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The common assumption that sleep is a passive state — the body simply "switching off" — has been overturned by neuroscience. During sleep, the brain is extraordinarily active: it consolidates memories, clears toxic metabolic waste products via the recently discovered glymphatic system, and regulates emotional responses. Far from being a waste of time, sleep is now understood as essential to cognitive and physical health.</div>
+  <div class="qs">Which choice best states the main idea of the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Sleep is a passive state in which the brain temporarily shuts down</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The glymphatic system is the most important discovery in modern neuroscience</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Neuroscience has shown that sleep is a highly active and essential process for cognitive and physical health</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>People who sleep less than eight hours per night are at serious risk of cognitive decline</button></div>
+</div>
+</div>
+<div class="ph-r">Question 6</div></div>
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage"><span class="hl">The Voyager 1 spacecraft, launched in 1977, crossed into interstellar space in 2012 — becoming the first human-made object to travel beyond the heliosphere.</span> It continues to transmit data to Earth despite being more than 23 billion kilometers away, a testament to the durability of 1970s engineering and the commitment of NASA scientists who have monitored the mission for nearly five decades.</div>
+  <div class="qs">Which choice best describes the function of the underlined sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>To argue that modern spacecraft are better engineered than those from the 1970s</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>To establish Voyager 1's historic significance as the first human-made object to enter interstellar space</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>To explain why NASA scientists have continued to monitor the mission for five decades</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>To compare Voyager 1's achievements with those of other deep-space probes</button></div>
+</div>
+</div>
+<div class="ph-r">Question 7</div></div>
+<div class="qb" data-q="7" data-ans="C">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Economist Ha-Joon Chang argues that the policies wealthy nations now prescribe to developing countries — free trade, deregulation, privatization — are precisely the policies those wealthy nations rejected during their own periods of economic development. Britain and the United States both used heavy tariffs and industrial policy to build their economies before embracing free trade only once their dominance was secure.</div>
+  <div class="qs">According to the text, what is the core of Ha-Joon Chang's argument?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Free trade and deregulation are the most effective tools for economic development in all contexts</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Developing countries should not attempt to industrialize because wealthy nations have already claimed those markets</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Wealthy nations advocate free-market policies for developing countries while having themselves relied on protectionist measures during their own development</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Britain and the United States succeeded economically despite their use of tariffs and industrial policy</button></div>
+</div>
+</div>
+<div class="ph-r">Question 8</div></div>
+<div class="qb" data-q="8" data-ans="B">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">In her landmark 1975 essay "Visual Pleasure and Narrative Cinema," film theorist Laura Mulvey introduced the concept of the "male gaze" — the tendency of mainstream cinema to position the camera and narrative from a heterosexual male perspective, presenting women as objects of visual pleasure rather than as active subjects. Mulvey argued this structure was not accidental but built into the conventions of classical Hollywood filmmaking.</div>
+  <div class="qs">Which choice best states the main purpose of the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>To argue that women should be given more prominent roles in Hollywood films</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>To explain Laura Mulvey's concept of the male gaze and her argument that it is structurally embedded in classical Hollywood cinema</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>To compare Laura Mulvey's film theory with other feminist approaches to cinema</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>To describe how the conventions of classical Hollywood filmmaking developed over time</button></div>
+</div>
+</div>
+<div class="ph-r">Question 9</div></div>
+<div class="qb" data-q="9" data-ans="C">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The collapse of the bee population in North America and Europe over the past two decades has alarmed ecologists, not primarily because of the commercial honey industry, but because bees pollinate roughly one-third of the food crops humans consume. Without adequate pollination, fruit, vegetable, and nut yields would fall catastrophically. Scientists have identified a combination of factors driving the collapse: pesticides, habitat loss, disease, and climate disruption.</div>
+  <div class="qs">According to the text, why are scientists primarily concerned about the decline of bee populations?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Because bees produce honey that is essential to the global food economy</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Because the loss of bees would devastate the commercial beekeeping industry</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Because bees pollinate roughly a third of human food crops, and their loss would cause catastrophic declines in yield</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Because bees are important indicators of overall ecosystem health</button></div>
+</div>
+</div>
+<div class="ph-r">Question 10</div></div>
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">In the late 19th century, the city of Vienna became an unlikely incubator of modernity. Within a few decades, it produced Freud's theory of the unconscious, Wittgenstein's philosophy of language, Klimt's decorative revolution in painting, and Schoenberg's dismantling of tonal harmony in music. Historians have debated why: some point to the creative tension of a multiethnic empire in decline; others credit the city's dense intellectual café culture, which enabled thinkers from different disciplines to collide.</div>
+  <div class="qs">Which choice best describes what historians have proposed to explain Vienna's cultural productivity in the late 19th century?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Vienna's art and music schools attracted talented students from across Europe</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The Habsburg Empire's wealth allowed artists and intellectuals to pursue their work without financial pressure</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Either the creative tension of a multiethnic empire in decline, or the dense intellectual café culture that enabled cross-disciplinary exchange</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Vienna's geographic position at the center of Europe gave it access to a wide range of cultural influences</button></div>
+</div>
+</div>
+<div class="ph-r">Question 11</div></div>
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The following text is from George Orwell's 1949 novel <em>Nineteen Eighty-Four</em>.
+
+It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.</div>
+  <div class="qs">What does the detail about the clocks striking thirteen most likely suggest?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The story takes place in a country with a different time system than the reader's</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The society depicted operates according to rules that are subtly but fundamentally different from the reader's familiar world</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The protagonist is confused about the time</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The setting is a military installation where 24-hour time is used</button></div>
+</div>
+</div>
+<div class="ph-r">Question 12</div></div>
+<div class="qb" data-q="12" data-ans="C">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Scholars of Indigenous literature have argued that Leslie Marmon Silko's novel <em>Ceremony</em> cannot be understood through the framework of Western literary realism, which treats time as linear and the individual as the primary unit of narrative. In Silko's Laguna Pueblo cosmology, time is cyclical, and the self is constituted through relationships with ancestors, land, and community rather than through individual psychological development.</div>
+  <div class="qs">Which choice best states the main claim of the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Silko's novel is inferior to Western literary realism because it rejects individualism</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Western literary realism is the dominant framework for understanding all modern fiction</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Understanding Silko's novel requires a framework based in Laguna Pueblo cosmology rather than Western literary conventions</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Silko deliberately incorporated Western realist techniques into her novel to reach a broader audience</button></div>
+</div>
+</div>
+<div class="ph-r">Question 13</div></div>
+<div class="qb" data-q="13" data-ans="B">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Marine biologist Sylvia Earle has spent more than six decades documenting the degradation of ocean ecosystems. She argues that the ocean is not an inexhaustible resource but a finite system that is rapidly approaching critical thresholds. Her particular concern is the decline of large predatory fish — tuna, sharks, swordfish — which have been reduced to less than 10% of their historical abundance by commercial fishing.</div>
+  <div class="qs">According to the text, what is Earle's specific focus within the broader problem of ocean degradation?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The pollution of coastal waters by industrial chemicals and plastic waste</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The decline of large predatory fish due to commercial fishing</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The acidification of the ocean caused by carbon dioxide absorption</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The destruction of coral reef ecosystems by rising sea temperatures</button></div>
+</div>
+</div>
+<div class="ph-r">Question 14</div></div>
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The following text is from Charlotte Brontë's 1847 novel <em>Jane Eyre</em>.
+
+There was no possibility of taking a walk that day. We had been wandering, indeed, in the leafless shrubbery an hour in the morning; but since dinner (Mrs. Reed, when there was no company, dined early) the cold winter wind had brought with it clouds so sombre, and a rain so penetrating, that further outdoor exercise was out of the question.</div>
+  <div class="qs">What does the passage primarily establish?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The protagonist's resentment toward Mrs. Reed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The physical and atmospheric conditions that confine the narrator indoors on a cold, wet day</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The social hierarchy of the household, with Mrs. Reed at its head</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The protagonist's preference for outdoor activity over indoor life</button></div>
+</div>
+</div>
+<div class="ph-r">Question 15</div></div>
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Research by organizational psychologist Adam Grant suggests that the most productive employees in many workplaces are not those who compete aggressively for individual recognition — "takers" in Grant's framework — but rather those who freely share knowledge, help colleagues, and contribute to collective goals — "givers." However, Grant's research also shows that the least productive employees are also givers: those who give so freely that they neglect their own work and burn out.</div>
+  <div class="qs">Which choice best states the main idea of the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Takers are always less productive than givers in workplace environments</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Giving behavior in the workplace produces uniformly positive outcomes for both individuals and organizations</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>While givers can be the most productive employees, excessive giving without limits leads to the worst outcomes</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Organizations should reward takers because they are motivated by competition</button></div>
+</div>
+</div>
+<div class="ph-r">Question 16</div></div>
+<div class="qb" data-q="16" data-ans="B">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Astronomer Cecilia Payne-Gaposchkin's 1925 doctoral dissertation proposed that the sun and other stars are composed primarily of hydrogen — a claim that was at the time rejected by the leading astronomer Henry Norris Russell as "impossible." Four years later, Russell arrived at the same conclusion through his own work and published it without adequately crediting Payne-Gaposchkin. Her discovery is now considered one of the most significant in 20th-century astrophysics.</div>
+  <div class="qs">According to the text, why is Payne-Gaposchkin's case historically significant?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>She was the first woman to earn a doctoral degree in astronomy</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>She made a fundamental astrophysical discovery that was initially rejected, later claimed by another without proper credit, and is now recognized as groundbreaking</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>She discovered that the sun is primarily composed of helium rather than hydrogen</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>She worked with Henry Norris Russell to develop a new theory of stellar composition</button></div>
+</div>
+</div>
+<div class="ph-r">Question 17</div></div>
+<div class="qb" data-q="17" data-ans="C">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The philosophy of pragmatism, developed by William James and John Dewey in the late 19th and early 20th centuries, holds that the value of an idea is determined not by its correspondence to abstract truth but by its practical consequences. An idea is "true" if acting on it produces useful, workable results. Critics charge that this view makes truth relative and unstable; pragmatists respond that all knowledge is provisional and that demanding absolute certainty is itself an intellectual dead end.</div>
+  <div class="qs">Which choice best describes the debate presented in the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Pragmatism versus empiricism as competing approaches to scientific methodology</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The dispute between James and Dewey over the correct definition of pragmatism</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The pragmatist view that truth is determined by practical consequences, and the critics' objection that this makes truth relative</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The historical development of American philosophy from the 18th to the 20th century</button></div>
+</div>
+</div>
+<div class="ph-r">Question 18</div></div>
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Contemporary neuroscientist Lisa Feldman Barrett challenges the classical view that emotions are universal, biologically fixed responses — hardwired into the brain and expressed identically across cultures. Drawing on cross-cultural research, she argues that emotions are "constructed" — they are the brain's active predictions about what is happening in the body and the world, shaped heavily by prior experience, language, and cultural context.</div>
+  <div class="qs">According to the text, what does Barrett argue about emotions?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Emotions are universal and identical across all human cultures</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Emotions are constructed by the brain through prediction, shaped by experience, language, and culture</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Emotions are exclusively the product of language and have no biological basis</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The classical view of emotions is correct and Barrett's critique is unfounded</button></div>
+</div>
+</div>
+<div class="ph-r">Question 19</div></div>
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">The following text is from Herman Melville's 1851 novel <em>Moby Dick</em>.
+
+Call me Ishmael. Some years ago — never mind how long precisely — having little money in my pocket and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</div>
+  <div class="qs">Which choice best describes the effect of the opening sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>It establishes that the narrator is unreliable because he refuses to give his real name</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>It immediately creates intimacy and directness while subtly suggesting the narrator may not be entirely forthcoming</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>It introduces the novel's central theme of identity and self-reinvention</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>It indicates that the narrator has been at sea for many years</button></div>
+</div>
+</div>
+<div class="ph-r">Question 20</div></div>
+<div class="qb" data-q="20" data-ans="B">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Central Ideas & Details</div></div>
+  <div class="passage">Historian Saidiya Hartman's concept of "critical fabulation" describes a method of historical writing that acknowledges the gaps and silences in the archive — particularly the archive of slavery — and fills them not with invented fiction but with carefully reasoned speculation grounded in what the archive does reveal. Hartman argues this approach is necessary because the experiences of enslaved people were systematically unrecorded or destroyed.</div>
+  <div class="qs">Which choice best states the main purpose of the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>To argue that historians should use fictional techniques to make history more engaging</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>To explain Hartman's method of critical fabulation and the reason she developed it</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>To criticize historians who rely too heavily on archival documents</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>To describe the specific historical events that Hartman investigates in her research</button></div>
+</div>
+<div style="display:flex;justify-content:center;padding:20px 0 32px;">
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Central Ideas & Details</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">B</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Central Ideas & Details Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+'
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Central Ideas & Details: '+score+'/'+total+' (needs work)' : 'Central Ideas & Details: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Parabola &amp; Circles — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:46pt;font-weight:900;color:#fff;text-align:center;line-height:1.05;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:420px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .diagram-box{width:220px;max-width:100%;margin:0 auto 12px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#FAF8F3;}
+  .diagram-box svg{display:block;width:100%;height:auto;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;text-align:center;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:32pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 11</div>
+  <div class="c-title">PARABOLA<br><span>&amp; CIRCLES</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Circle equations, vertex form, axis of symmetry, roots, discriminant, and reading conic graphs.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Parabola &amp; Circles — SAT Reference</h2><p>Core rules you must know cold for the conics unit</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">Circle standard form</span><span class="fm-val">(x−h)² + (y−k)² = r², center (h,k), radius r</span></div><div class="fm"><span class="fm-label">Parabola vertex form</span><span class="fm-val">y = a(x−h)² + k, vertex (h,k)</span></div><div class="fm"><span class="fm-label">Axis of symmetry</span><span class="fm-val">x = h (matches the vertex's x-value)</span></div><div class="fm"><span class="fm-label">Direction of opening</span><span class="fm-val">a &gt; 0 opens up, a &lt; 0 opens down</span></div><div class="fm"><span class="fm-label">Discriminant (b²−4ac)</span><span class="fm-val">positive=2 roots, zero=1 root, negative=0 real roots</span></div><div class="fm"><span class="fm-label">Sum/product of roots</span><span class="fm-val">sum = −b/a, product = c/a</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Circle Equation Signs</span><h4>The center's signs are OPPOSITE what's written</h4><p>In (x−h)²+(y−k)²=r², a term like (x+3)² means h=−3, not +3. Always flip the sign inside the parentheses to get the center coordinate.</p></div>
+<div class="rc"><span class="rc-tag">Radius vs r²</span><h4>Take the square root before answering</h4><p>The right-hand side of a circle's equation is r², not r. Forgetting to take the square root is one of the most common circle-equation errors.</p></div>
+<div class="rc"><span class="rc-tag">Completing the Square</span><h4>Works the same for circles and parabolas</h4><p>Whether converting a circle's general form or a parabola's standard form, group the variable terms, complete the square, and adjust the constant to compensate.</p></div>
+<div class="rc"><span class="rc-tag">The Leading Coefficient 'a'</span><h4>Controls both direction and width</h4><p>The sign of a determines whether a parabola opens up or down. The size of |a| determines width: larger |a| means a narrower, steeper curve.</p></div>
+<div class="rc"><span class="rc-tag">Reading Graphs</span><h4>Vertex and intercepts can be read directly</h4><p>On a graphed parabola, the vertex is the highest/lowest point, and x-intercepts are exactly where the curve crosses the x-axis — no algebra needed if the graph is clear.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Reading the center's sign directly from the equation instead of flipping it</div><div class="trap">Forgetting to take the square root of r² to get the radius</div><div class="trap">Confusing a negative discriminant (0 real roots) with a parabola that opens downward</div><div class="trap">Mixing up which curve is "narrower" when comparing two parabolas' |a| values</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 11 — Parabola &amp; Circles</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Line-Circle Intersection</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="52.0" y1="286.0" x2="52.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="70.0" y1="286.0" x2="70.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="88.0" y1="286.0" x2="88.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="106.0" y1="286.0" x2="106.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="124.0" y1="286.0" x2="124.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="142.0" y1="286.0" x2="142.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="178.0" y1="286.0" x2="178.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="196.0" y1="286.0" x2="196.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="214.0" y1="286.0" x2="214.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="232.0" y1="286.0" x2="232.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="250.0" y1="286.0" x2="250.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="268.0" y1="286.0" x2="268.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="268.0" x2="286.0" y2="268.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="250.0" x2="286.0" y2="250.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="232.0" x2="286.0" y2="232.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="214.0" x2="286.0" y2="214.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="196.0" x2="286.0" y2="196.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="178.0" x2="286.0" y2="178.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="142.0" x2="286.0" y2="142.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="124.0" x2="286.0" y2="124.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="106.0" x2="286.0" y2="106.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="88.0" x2="286.0" y2="88.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="70.0" x2="286.0" y2="70.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="52.0" x2="286.0" y2="52.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-7</text>
+<text x="70.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-5</text>
+<text x="106.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-3</text>
+<text x="142.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="178.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="214.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="250.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="286.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">7</text>
+<text x="154.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-7</text>
+<text x="154.0" y="253.0" font-size="8" fill="#6B7280" text-anchor="end">-5</text>
+<text x="154.0" y="217.0" font-size="8" fill="#6B7280" text-anchor="end">-3</text>
+<text x="154.0" y="181.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="154.0" y="145.0" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="154.0" y="109.0" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="154.0" y="73.0" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="154.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">7</text>
+<path d="M 250.0,160.0 L 249.66,152.16 L 248.63,144.37 L 246.93,136.71 L 244.57,129.22 L 241.57,121.96 L 237.94,115.0 L 233.72,108.38 L 228.94,102.15 L 223.64,96.36 L 217.85,91.06 L 211.62,86.28 L 205.0,82.06 L 198.04,78.43 L 190.78,75.43 L 183.29,73.07 L 175.63,71.37 L 167.84,70.34 L 160.0,70.0 L 152.16,70.34 L 144.37,71.37 L 136.71,73.07 L 129.22,75.43 L 121.96,78.43 L 115.0,82.06 L 108.38,86.28 L 102.15,91.06 L 96.36,96.36 L 91.06,102.15 L 86.28,108.38 L 82.06,115.0 L 78.43,121.96 L 75.43,129.22 L 73.07,136.71 L 71.37,144.37 L 70.34,152.16 L 70.0,160.0 L 70.34,167.84 L 71.37,175.63 L 73.07,183.29 L 75.43,190.78 L 78.43,198.04 L 82.06,205.0 L 86.28,211.62 L 91.06,217.85 L 96.36,223.64 L 102.15,228.94 L 108.38,233.72 L 115.0,237.94 L 121.96,241.57 L 129.22,244.57 L 136.71,246.93 L 144.37,248.63 L 152.16,249.66 L 160.0,250.0 L 167.84,249.66 L 175.63,248.63 L 183.29,246.93 L 190.78,244.57 L 198.04,241.57 L 205.0,237.94 L 211.62,233.72 L 217.85,228.94 L 223.64,223.64 L 228.94,217.85 L 233.72,211.62 L 237.94,205.0 L 241.57,198.04 L 244.57,190.78 L 246.93,183.29 L 248.63,175.63 L 249.66,167.84 L 250.0,160.0 Z" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+<line x1="34.0" y1="268.0" x2="286.0" y2="16.0" stroke="#C8962E" stroke-width="2"/>
+</svg></div>
+  <div class="qs">Using the graph, a line has equation y = x + 1 and a circle has equation x² + y² = 25. What is the sum of the x-coordinates of the two points where they intersect?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>−1</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−12</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>12</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="C">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Circle Equations</div></div>
+  
+  <div class="qs">A circle has the equation (x + 1)² + (y − 4)² = 49. What is the radius of the circle?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>49</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>24.5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>7</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>14</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Circle Equations</div></div>
+  
+  <div class="qs">What is the equation of a circle with center (0, 0) and radius 6?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>x² + y² = 6</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>x² + y² = 36</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>x² + y² = 12</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(x − 6)² + y² = 36</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Circle Equations</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="55.0" y1="286.0" x2="55.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="76.0" y1="286.0" x2="76.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="97.0" y1="286.0" x2="97.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="118.0" y1="286.0" x2="118.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="139.0" y1="286.0" x2="139.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="181.0" y1="286.0" x2="181.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="202.0" y1="286.0" x2="202.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="223.0" y1="286.0" x2="223.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="244.0" y1="286.0" x2="244.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="265.0" y1="286.0" x2="265.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="265.0" x2="286.0" y2="265.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="244.0" x2="286.0" y2="244.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="223.0" x2="286.0" y2="223.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="202.0" x2="286.0" y2="202.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="181.0" x2="286.0" y2="181.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="139.0" x2="286.0" y2="139.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="118.0" x2="286.0" y2="118.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="97.0" x2="286.0" y2="97.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="76.0" x2="286.0" y2="76.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="55.0" x2="286.0" y2="55.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="118.0" y1="286.0" x2="118.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="139.0" x2="286.0" y2="139.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">-4</text>
+<text x="55.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">-3</text>
+<text x="76.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">-2</text>
+<text x="97.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="139.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="160.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="181.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="202.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">4</text>
+<text x="223.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="244.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">6</text>
+<text x="265.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">7</text>
+<text x="286.0" y="151.0" font-size="8" fill="#6B7280" text-anchor="middle">8</text>
+<text x="112.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-7</text>
+<text x="112.0" y="268.0" font-size="8" fill="#6B7280" text-anchor="end">-6</text>
+<text x="112.0" y="247.0" font-size="8" fill="#6B7280" text-anchor="end">-5</text>
+<text x="112.0" y="226.0" font-size="8" fill="#6B7280" text-anchor="end">-4</text>
+<text x="112.0" y="205.0" font-size="8" fill="#6B7280" text-anchor="end">-3</text>
+<text x="112.0" y="184.0" font-size="8" fill="#6B7280" text-anchor="end">-2</text>
+<text x="112.0" y="163.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="112.0" y="121.0" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="112.0" y="100.0" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="112.0" y="79.0" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="112.0" y="58.0" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="112.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<path d="M 244.0,160.0 L 243.68,152.68 L 242.72,145.41 L 241.14,138.26 L 238.93,131.27 L 236.13,124.5 L 232.75,118.0 L 228.81,111.82 L 224.35,106.01 L 219.4,100.6 L 213.99,95.65 L 208.18,91.19 L 202.0,87.25 L 195.5,83.87 L 188.73,81.07 L 181.74,78.86 L 174.59,77.28 L 167.32,76.32 L 160.0,76.0 L 152.68,76.32 L 145.41,77.28 L 138.26,78.86 L 131.27,81.07 L 124.5,83.87 L 118.0,87.25 L 111.82,91.19 L 106.01,95.65 L 100.6,100.6 L 95.65,106.01 L 91.19,111.82 L 87.25,118.0 L 83.87,124.5 L 81.07,131.27 L 78.86,138.26 L 77.28,145.41 L 76.32,152.68 L 76.0,160.0 L 76.32,167.32 L 77.28,174.59 L 78.86,181.74 L 81.07,188.73 L 83.87,195.5 L 87.25,202.0 L 91.19,208.18 L 95.65,213.99 L 100.6,219.4 L 106.01,224.35 L 111.82,228.81 L 118.0,232.75 L 124.5,236.13 L 131.27,238.93 L 138.26,241.14 L 145.41,242.72 L 152.68,243.68 L 160.0,244.0 L 167.32,243.68 L 174.59,242.72 L 181.74,241.14 L 188.73,238.93 L 195.5,236.13 L 202.0,232.75 L 208.18,228.81 L 213.99,224.35 L 219.4,219.4 L 224.35,213.99 L 228.81,208.18 L 232.75,202.0 L 236.13,195.5 L 238.93,188.73 L 241.14,181.74 L 242.72,174.59 L 243.68,167.32 L 244.0,160.0 Z" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+</svg></div>
+  <div class="qs">What is the equation of the circle shown in the graph?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(x + 2)² + (y − 1)² = 16</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(x − 2)² + (y + 1)² = 4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(x − 2)² + (y + 1)² = 8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(x − 2)² + (y + 1)² = 16</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Circle Equations</div></div>
+  
+  <div class="qs">What is the equation of a circle with center (−2, 5) and radius 3?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(x + 2)² + (y − 5)² = 9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(x − 2)² + (y + 5)² = 9</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(x + 2)² + (y − 5)² = 3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(x + 2)² + (y − 5)² = 6</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Circles &amp; Midpoints</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="59.2" y1="286.0" x2="59.2" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="84.4" y1="286.0" x2="84.4" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="109.6" y1="286.0" x2="109.6" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="134.8" y1="286.0" x2="134.8" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="185.2" y1="286.0" x2="185.2" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="210.4" y1="286.0" x2="210.4" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="235.6" y1="286.0" x2="235.6" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="260.8" y1="286.0" x2="260.8" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="266.62" x2="286.0" y2="266.62" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="247.23" x2="286.0" y2="247.23" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="227.85" x2="286.0" y2="227.85" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="208.46" x2="286.0" y2="208.46" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="189.08" x2="286.0" y2="189.08" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="169.69" x2="286.0" y2="169.69" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="150.31" x2="286.0" y2="150.31" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="130.92" x2="286.0" y2="130.92" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="111.54" x2="286.0" y2="111.54" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="92.15" x2="286.0" y2="92.15" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="72.77" x2="286.0" y2="72.77" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="53.38" x2="286.0" y2="53.38" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="59.2" y1="286.0" x2="59.2" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="266.62" x2="286.0" y2="266.62" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="84.4" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="109.6" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="134.8" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="160.0" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">4</text>
+<text x="185.2" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="210.4" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">6</text>
+<text x="235.6" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">7</text>
+<text x="260.8" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">8</text>
+<text x="286.0" y="278.62" font-size="8" fill="#6B7280" text-anchor="middle">9</text>
+<text x="53.2" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="53.2" y="250.23" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="53.2" y="211.46" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="53.2" y="172.69" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="53.2" y="133.92" font-size="8" fill="#6B7280" text-anchor="end">7</text>
+<text x="53.2" y="95.15" font-size="8" fill="#6B7280" text-anchor="end">9</text>
+<text x="53.2" y="56.38" font-size="8" fill="#6B7280" text-anchor="end">11</text>
+<line x1="84.4" y1="227.85" x2="235.6" y2="72.77" stroke="#00A99D" stroke-width="2"/>
+<circle cx="84.4" cy="227.85" r="4" fill="#0D1B3E"/>
+<text x="74.4" y="245.85" font-size="10.5" font-weight="700" fill="#0D1B3E">A(1, 2)</text>
+<circle cx="235.6" cy="72.77" r="4" fill="#0D1B3E"/>
+<text x="243.6" y="64.77" font-size="10.5" font-weight="700" fill="#0D1B3E">B(7, 10)</text>
+</svg></div>
+  <div class="qs">Using the graph, points A(1, 2) and B(7, 10) are endpoints of a circle's diameter. What is the center of the circle?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(8, 12)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(3, 4)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(4, 6)</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(6, 8)</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Point vs Circle</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="52.0" y1="286.0" x2="52.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="70.0" y1="286.0" x2="70.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="88.0" y1="286.0" x2="88.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="106.0" y1="286.0" x2="106.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="124.0" y1="286.0" x2="124.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="142.0" y1="286.0" x2="142.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="178.0" y1="286.0" x2="178.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="196.0" y1="286.0" x2="196.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="214.0" y1="286.0" x2="214.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="232.0" y1="286.0" x2="232.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="250.0" y1="286.0" x2="250.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="268.0" y1="286.0" x2="268.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="268.0" x2="286.0" y2="268.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="250.0" x2="286.0" y2="250.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="232.0" x2="286.0" y2="232.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="214.0" x2="286.0" y2="214.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="196.0" x2="286.0" y2="196.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="178.0" x2="286.0" y2="178.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="142.0" x2="286.0" y2="142.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="124.0" x2="286.0" y2="124.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="106.0" x2="286.0" y2="106.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="88.0" x2="286.0" y2="88.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="70.0" x2="286.0" y2="70.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="52.0" x2="286.0" y2="52.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-7</text>
+<text x="70.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-5</text>
+<text x="106.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-3</text>
+<text x="142.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="178.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="214.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="250.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="286.0" y="172.0" font-size="8" fill="#6B7280" text-anchor="middle">7</text>
+<text x="154.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-7</text>
+<text x="154.0" y="253.0" font-size="8" fill="#6B7280" text-anchor="end">-5</text>
+<text x="154.0" y="217.0" font-size="8" fill="#6B7280" text-anchor="end">-3</text>
+<text x="154.0" y="181.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="154.0" y="145.0" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="154.0" y="109.0" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="154.0" y="73.0" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="154.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">7</text>
+<path d="M 250.0,160.0 L 249.66,152.16 L 248.63,144.37 L 246.93,136.71 L 244.57,129.22 L 241.57,121.96 L 237.94,115.0 L 233.72,108.38 L 228.94,102.15 L 223.64,96.36 L 217.85,91.06 L 211.62,86.28 L 205.0,82.06 L 198.04,78.43 L 190.78,75.43 L 183.29,73.07 L 175.63,71.37 L 167.84,70.34 L 160.0,70.0 L 152.16,70.34 L 144.37,71.37 L 136.71,73.07 L 129.22,75.43 L 121.96,78.43 L 115.0,82.06 L 108.38,86.28 L 102.15,91.06 L 96.36,96.36 L 91.06,102.15 L 86.28,108.38 L 82.06,115.0 L 78.43,121.96 L 75.43,129.22 L 73.07,136.71 L 71.37,144.37 L 70.34,152.16 L 70.0,160.0 L 70.34,167.84 L 71.37,175.63 L 73.07,183.29 L 75.43,190.78 L 78.43,198.04 L 82.06,205.0 L 86.28,211.62 L 91.06,217.85 L 96.36,223.64 L 102.15,228.94 L 108.38,233.72 L 115.0,237.94 L 121.96,241.57 L 129.22,244.57 L 136.71,246.93 L 144.37,248.63 L 152.16,249.66 L 160.0,250.0 L 167.84,249.66 L 175.63,248.63 L 183.29,246.93 L 190.78,244.57 L 198.04,241.57 L 205.0,237.94 L 211.62,233.72 L 217.85,228.94 L 223.64,223.64 L 228.94,217.85 L 233.72,211.62 L 237.94,205.0 L 241.57,198.04 L 244.57,190.78 L 246.93,183.29 L 248.63,175.63 L 249.66,167.84 L 250.0,160.0 Z" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+<circle cx="232.0" cy="88.0" r="4" fill="#C8962E"/>
+<text x="240.0" y="80.0" font-size="10.5" font-weight="700" fill="#C8962E">Q(4, 4)</text>
+</svg></div>
+  <div class="qs">Using the graph, a circle is centered at the origin with radius 5. Is point Q(4, 4) inside, on, or outside the circle?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Inside</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Outside</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>On the circle</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Cannot be determined</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Completing the Square</div></div>
+  
+  <div class="qs">The equation x² + y² − 6x + 4y − 3 = 0 represents a circle. What is its radius?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>16</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>13</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Parabola Vertex</div></div>
+  
+  <div class="qs">What is the vertex of the parabola y = (x − 2)² + 5?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(2, 5)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(−2, 5)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(2, −5)</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(−2, −5)</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Parabola Vertex</div></div>
+  
+  <div class="qs">What is the vertex of the parabola y = −3(x + 1)² − 2?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(1, −2)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(−1, 2)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(−1, −2)</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(1, 2)</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Parabola Vertex</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="62.0" y1="286.0" x2="62.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="90.0" y1="286.0" x2="90.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="118.0" y1="286.0" x2="118.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="146.0" y1="286.0" x2="146.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="174.0" y1="286.0" x2="174.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="202.0" y1="286.0" x2="202.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="230.0" y1="286.0" x2="230.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="258.0" y1="286.0" x2="258.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="268.0" x2="286.0" y2="268.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="250.0" x2="286.0" y2="250.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="232.0" x2="286.0" y2="232.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="214.0" x2="286.0" y2="214.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="196.0" x2="286.0" y2="196.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="178.0" x2="286.0" y2="178.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="142.0" x2="286.0" y2="142.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="124.0" x2="286.0" y2="124.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="106.0" x2="286.0" y2="106.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="88.0" x2="286.0" y2="88.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="70.0" x2="286.0" y2="70.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="52.0" x2="286.0" y2="52.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="62.0" y1="286.0" x2="62.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="178.0" x2="286.0" y2="178.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="90.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="118.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="146.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="174.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">4</text>
+<text x="202.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="230.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">6</text>
+<text x="258.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">7</text>
+<text x="286.0" y="190.0" font-size="8" fill="#6B7280" text-anchor="middle">8</text>
+<text x="56.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-6</text>
+<text x="56.0" y="253.0" font-size="8" fill="#6B7280" text-anchor="end">-4</text>
+<text x="56.0" y="217.0" font-size="8" fill="#6B7280" text-anchor="end">-2</text>
+<text x="56.0" y="145.0" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="56.0" y="109.0" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="56.0" y="73.0" font-size="8" fill="#6B7280" text-anchor="end">6</text>
+<text x="56.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">8</text>
+<path d="M 48.0,29.5 L 50.45,40.39 L 52.9,51.0 L 55.35,61.33 L 57.8,71.4 L 60.25,81.18 L 62.7,90.69 L 65.15,99.92 L 67.6,108.88 L 70.05,117.56 L 72.5,125.97 L 74.95,134.1 L 77.4,141.95 L 79.85,149.53 L 82.3,156.84 L 84.75,163.87 L 87.2,170.62 L 89.65,177.1 L 92.1,183.3 L 94.55,189.22 L 97.0,194.88 L 99.45,200.25 L 101.9,205.35 L 104.35,210.17 L 106.8,214.72 L 109.25,218.99 L 111.7,222.99 L 114.15,226.71 L 116.6,230.16 L 119.05,233.32 L 121.5,236.22 L 123.95,238.84 L 126.4,241.18 L 128.85,243.25 L 131.3,245.04 L 133.75,246.55 L 136.2,247.8 L 138.65,248.76 L 141.1,249.45 L 143.55,249.86 L 146.0,250.0 L 148.45,249.86 L 150.9,249.45 L 153.35,248.76 L 155.8,247.8 L 158.25,246.55 L 160.7,245.04 L 163.15,243.25 L 165.6,241.18 L 168.05,238.84 L 170.5,236.22 L 172.95,233.32 L 175.4,230.16 L 177.85,226.71 L 180.3,222.99 L 182.75,218.99 L 185.2,214.72 L 187.65,210.17 L 190.1,205.35 L 192.55,200.25 L 195.0,194.88 L 197.45,189.22 L 199.9,183.3 L 202.35,177.1 L 204.8,170.62 L 207.25,163.87 L 209.7,156.84 L 212.15,149.53 L 214.6,141.95 L 217.05,134.1 L 219.5,125.97 L 221.95,117.56 L 224.4,108.88 L 226.85,99.92 L 229.3,90.69 L 231.75,81.18 L 234.2,71.39 L 236.65,61.33 L 239.1,51.0 L 241.55,40.39 L 244.0,29.5" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+</svg></div>
+  <div class="qs">What is the vertex of the parabola shown in the graph?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(−3, 4)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(3, −4)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(3, 4)</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(−3, −4)</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Axis of Symmetry</div></div>
+  
+  <div class="qs">What is the axis of symmetry of the parabola y = 2(x − 4)² + 7?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>x = −4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>x = 7</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>x = 2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>x = 4</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Projectile Application</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="62.0" y1="286.0" x2="62.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="118.0" y1="286.0" x2="118.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="174.0" y1="286.0" x2="174.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="230.0" y1="286.0" x2="230.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="281.8" x2="286.0" y2="281.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="277.6" x2="286.0" y2="277.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="273.4" x2="286.0" y2="273.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="269.2" x2="286.0" y2="269.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="265.0" x2="286.0" y2="265.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="260.8" x2="286.0" y2="260.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="256.6" x2="286.0" y2="256.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="252.4" x2="286.0" y2="252.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="248.2" x2="286.0" y2="248.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="244.0" x2="286.0" y2="244.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="239.8" x2="286.0" y2="239.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="235.6" x2="286.0" y2="235.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="231.4" x2="286.0" y2="231.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="227.2" x2="286.0" y2="227.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="223.0" x2="286.0" y2="223.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="218.8" x2="286.0" y2="218.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="214.6" x2="286.0" y2="214.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="210.4" x2="286.0" y2="210.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="206.2" x2="286.0" y2="206.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="202.0" x2="286.0" y2="202.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="197.8" x2="286.0" y2="197.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="193.6" x2="286.0" y2="193.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="189.4" x2="286.0" y2="189.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="185.2" x2="286.0" y2="185.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="181.0" x2="286.0" y2="181.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="176.8" x2="286.0" y2="176.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="172.6" x2="286.0" y2="172.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="168.4" x2="286.0" y2="168.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="164.2" x2="286.0" y2="164.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="155.8" x2="286.0" y2="155.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="151.6" x2="286.0" y2="151.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="147.4" x2="286.0" y2="147.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="143.2" x2="286.0" y2="143.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="139.0" x2="286.0" y2="139.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="134.8" x2="286.0" y2="134.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="130.6" x2="286.0" y2="130.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="126.4" x2="286.0" y2="126.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="122.2" x2="286.0" y2="122.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="118.0" x2="286.0" y2="118.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="113.8" x2="286.0" y2="113.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="109.6" x2="286.0" y2="109.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="105.4" x2="286.0" y2="105.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="101.2" x2="286.0" y2="101.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="97.0" x2="286.0" y2="97.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="92.8" x2="286.0" y2="92.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="88.6" x2="286.0" y2="88.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="84.4" x2="286.0" y2="84.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="80.2" x2="286.0" y2="80.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="76.0" x2="286.0" y2="76.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="71.8" x2="286.0" y2="71.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="67.6" x2="286.0" y2="67.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="63.4" x2="286.0" y2="63.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="59.2" x2="286.0" y2="59.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="55.0" x2="286.0" y2="55.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="50.8" x2="286.0" y2="50.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="46.6" x2="286.0" y2="46.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="42.4" x2="286.0" y2="42.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="38.2" x2="286.0" y2="38.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="118.0" y1="286.0" x2="118.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="244.0" x2="286.0" y2="244.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="62.0" y="256.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="174.0" y="256.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="230.0" y="256.0" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="286.0" y="256.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="112.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-10</text>
+<text x="112.0" y="280.6" font-size="8" fill="#6B7280" text-anchor="end">-8</text>
+<text x="112.0" y="272.2" font-size="8" fill="#6B7280" text-anchor="end">-6</text>
+<text x="112.0" y="263.8" font-size="8" fill="#6B7280" text-anchor="end">-4</text>
+<text x="112.0" y="255.4" font-size="8" fill="#6B7280" text-anchor="end">-2</text>
+<text x="112.0" y="238.6" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="112.0" y="230.2" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="112.0" y="221.8" font-size="8" fill="#6B7280" text-anchor="end">6</text>
+<text x="112.0" y="213.4" font-size="8" fill="#6B7280" text-anchor="end">8</text>
+<text x="112.0" y="205.0" font-size="8" fill="#6B7280" text-anchor="end">10</text>
+<text x="112.0" y="196.6" font-size="8" fill="#6B7280" text-anchor="end">12</text>
+<text x="112.0" y="188.2" font-size="8" fill="#6B7280" text-anchor="end">14</text>
+<text x="112.0" y="179.8" font-size="8" fill="#6B7280" text-anchor="end">16</text>
+<text x="112.0" y="171.4" font-size="8" fill="#6B7280" text-anchor="end">18</text>
+<text x="112.0" y="163.0" font-size="8" fill="#6B7280" text-anchor="end">20</text>
+<text x="112.0" y="154.6" font-size="8" fill="#6B7280" text-anchor="end">22</text>
+<text x="112.0" y="146.2" font-size="8" fill="#6B7280" text-anchor="end">24</text>
+<text x="112.0" y="137.8" font-size="8" fill="#6B7280" text-anchor="end">26</text>
+<text x="112.0" y="129.4" font-size="8" fill="#6B7280" text-anchor="end">28</text>
+<text x="112.0" y="121.0" font-size="8" fill="#6B7280" text-anchor="end">30</text>
+<text x="112.0" y="112.6" font-size="8" fill="#6B7280" text-anchor="end">32</text>
+<text x="112.0" y="104.2" font-size="8" fill="#6B7280" text-anchor="end">34</text>
+<text x="112.0" y="95.8" font-size="8" fill="#6B7280" text-anchor="end">36</text>
+<text x="112.0" y="87.4" font-size="8" fill="#6B7280" text-anchor="end">38</text>
+<text x="112.0" y="79.0" font-size="8" fill="#6B7280" text-anchor="end">40</text>
+<text x="112.0" y="70.6" font-size="8" fill="#6B7280" text-anchor="end">42</text>
+<text x="112.0" y="62.2" font-size="8" fill="#6B7280" text-anchor="end">44</text>
+<text x="112.0" y="53.8" font-size="8" fill="#6B7280" text-anchor="end">46</text>
+<text x="112.0" y="45.4" font-size="8" fill="#6B7280" text-anchor="end">48</text>
+<text x="112.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">50</text>
+<path d="M 45.2,320.61 L 48.0,307.0 L 50.8,293.73 L 53.6,280.79 L 56.4,268.19 L 59.2,255.93 L 62.0,244.0 L 64.8,232.41 L 67.6,221.15 L 70.4,210.23 L 73.2,199.65 L 76.0,189.4 L 78.8,179.49 L 81.6,169.91 L 84.4,160.67 L 87.2,151.77 L 90.0,143.2 L 92.8,134.97 L 95.6,127.07 L 98.4,119.51 L 101.2,112.29 L 104.0,105.4 L 106.8,98.85 L 109.6,92.63 L 112.4,86.75 L 115.2,81.21 L 118.0,76.0 L 120.8,71.13 L 123.6,66.59 L 126.4,62.39 L 129.2,58.53 L 132.0,55.0 L 134.8,51.81 L 137.6,48.95 L 140.4,46.43 L 143.2,44.25 L 146.0,42.4 L 148.8,40.89 L 151.6,39.71 L 154.4,38.87 L 157.2,38.37 L 160.0,38.2 L 162.8,38.37 L 165.6,38.87 L 168.4,39.71 L 171.2,40.89 L 174.0,42.4 L 176.8,44.25 L 179.6,46.43 L 182.4,48.95 L 185.2,51.81 L 188.0,55.0 L 190.8,58.53 L 193.6,62.39 L 196.4,66.59 L 199.2,71.13 L 202.0,76.0 L 204.8,81.21 L 207.6,86.75 L 210.4,92.63 L 213.2,98.85 L 216.0,105.4 L 218.8,112.29 L 221.6,119.51 L 224.4,127.07 L 227.2,134.97 L 230.0,143.2 L 232.8,151.77 L 235.6,160.67 L 238.4,169.91 L 241.2,179.49 L 244.0,189.4 L 246.8,199.65 L 249.6,210.23 L 252.4,221.15 L 255.2,232.41 L 258.0,244.0 L 260.8,255.93 L 263.6,268.19 L 266.4,280.79 L 269.2,293.73" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+</svg></div>
+  <div class="qs">Using the graph, a ball's height (in feet) t seconds after being thrown is modeled by h(t) = −16t² + 24t + 40. After how many seconds does the ball hit the ground?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2.5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−1</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>40</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Parabola Width</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="76.0" y1="286.0" x2="76.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="118.0" y1="286.0" x2="118.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="202.0" y1="286.0" x2="202.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="244.0" y1="286.0" x2="244.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="260.8" x2="286.0" y2="260.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="235.6" x2="286.0" y2="235.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="210.4" x2="286.0" y2="210.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="185.2" x2="286.0" y2="185.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="134.8" x2="286.0" y2="134.8" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="109.6" x2="286.0" y2="109.6" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="84.4" x2="286.0" y2="84.4" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="59.2" x2="286.0" y2="59.2" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="260.8" x2="286.0" y2="260.8" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="272.8" font-size="8" fill="#6B7280" text-anchor="middle">-3</text>
+<text x="76.0" y="272.8" font-size="8" fill="#6B7280" text-anchor="middle">-2</text>
+<text x="118.0" y="272.8" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="202.0" y="272.8" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="244.0" y="272.8" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="286.0" y="272.8" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="154.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="154.0" y="238.6" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="154.0" y="213.4" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="154.0" y="188.2" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="154.0" y="163.0" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="154.0" y="137.8" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="154.0" y="112.6" font-size="8" fill="#6B7280" text-anchor="end">6</text>
+<text x="154.0" y="87.4" font-size="8" fill="#6B7280" text-anchor="end">7</text>
+<text x="154.0" y="62.2" font-size="8" fill="#6B7280" text-anchor="end">8</text>
+<text x="154.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">9</text>
+<path d="M 34.0,34.0 L 37.15,45.2 L 40.3,56.11 L 43.45,66.74 L 46.6,77.09 L 49.75,87.16 L 52.9,96.94 L 56.05,106.43 L 59.2,115.65 L 62.35,124.58 L 65.5,133.23 L 68.65,141.59 L 71.8,149.67 L 74.95,157.46 L 78.1,164.98 L 81.25,172.21 L 84.4,179.15 L 87.55,185.81 L 90.7,192.19 L 93.85,198.29 L 97.0,204.1 L 100.15,209.63 L 103.3,214.87 L 106.45,219.83 L 109.6,224.51 L 112.75,228.91 L 115.9,233.02 L 119.05,236.84 L 122.2,240.39 L 125.35,243.65 L 128.5,246.62 L 131.65,249.32 L 134.8,251.73 L 137.95,253.85 L 141.1,255.7 L 144.25,257.26 L 147.4,258.53 L 150.55,259.52 L 153.7,260.23 L 156.85,260.66 L 160.0,260.8 L 163.15,260.66 L 166.3,260.23 L 169.45,259.52 L 172.6,258.53 L 175.75,257.26 L 178.9,255.7 L 182.05,253.85 L 185.2,251.73 L 188.35,249.32 L 191.5,246.62 L 194.65,243.65 L 197.8,240.39 L 200.95,236.84 L 204.1,233.02 L 207.25,228.91 L 210.4,224.51 L 213.55,219.83 L 216.7,214.87 L 219.85,209.63 L 223.0,204.1 L 226.15,198.29 L 229.3,192.19 L 232.45,185.81 L 235.6,179.15 L 238.75,172.21 L 241.9,164.98 L 245.05,157.46 L 248.2,149.67 L 251.35,141.59 L 254.5,133.23 L 257.65,124.58 L 260.8,115.65 L 263.95,106.43 L 267.1,96.94 L 270.25,87.16 L 273.4,77.09 L 276.55,66.74 L 279.7,56.11 L 282.85,45.2 L 286.0,34.0" stroke="#0D1B3E" stroke-width="2.5" fill="none"/>
+<path d="M 88.6,42.32 L 90.38,53.1 L 92.17,63.62 L 93.95,73.86 L 95.74,83.83 L 97.53,93.52 L 99.31,102.95 L 101.1,112.09 L 102.88,120.97 L 104.67,129.57 L 106.45,137.9 L 108.24,145.96 L 110.02,153.74 L 111.81,161.25 L 113.59,168.49 L 115.38,175.45 L 117.16,182.15 L 118.95,188.56 L 120.73,194.71 L 122.52,200.58 L 124.3,206.18 L 126.08,211.5 L 127.87,216.56 L 129.66,221.34 L 131.44,225.84 L 133.22,230.08 L 135.01,234.04 L 136.8,237.72 L 138.58,241.14 L 140.37,244.28 L 142.15,247.14 L 143.94,249.74 L 145.72,252.06 L 147.5,254.11 L 149.29,255.88 L 151.07,257.39 L 152.86,258.62 L 154.64,259.57 L 156.43,260.25 L 158.22,260.66 L 160.0,260.8 L 161.79,260.66 L 163.57,260.25 L 165.35,259.57 L 167.14,258.62 L 168.93,257.39 L 170.71,255.88 L 172.5,254.11 L 174.28,252.06 L 176.07,249.74 L 177.85,247.14 L 179.64,244.28 L 181.42,241.14 L 183.21,237.72 L 184.99,234.04 L 186.78,230.08 L 188.56,225.84 L 190.35,221.34 L 192.13,216.56 L 193.92,211.5 L 195.7,206.18 L 197.49,200.58 L 199.27,194.71 L 201.06,188.56 L 202.84,182.15 L 204.62,175.45 L 206.41,168.49 L 208.2,161.25 L 209.98,153.74 L 211.77,145.96 L 213.55,137.9 L 215.34,129.57 L 217.12,120.97 L 218.91,112.09 L 220.69,102.95 L 222.47,93.52 L 224.26,83.83 L 226.04,73.86 L 227.83,63.62 L 229.62,53.1 L 231.4,42.32" stroke="#C8962E" stroke-width="2.5" fill="none"/>
+<text x="258.4" y="138.83" font-size="10" font-weight="700" fill="#0D1B3E">Curve 1</text>
+<text x="220.6" y="133.04" font-size="10" font-weight="700" fill="#C8962E">Curve 2</text>
+</svg></div>
+  <div class="qs">Using the graph, which curve is narrower — Curve 1 or Curve 2?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Curve 1</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>They are equally wide</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Curve 2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Cannot be determined</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Roots of a Parabola</div></div>
+  
+  <div class="qs">For the parabola y = x² − 6x + 8, what is the sum of its two roots?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>8</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>6</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Discriminant</div></div>
+  
+  <div class="qs">For the parabola y = x² + 4x + 7, how many real roots does it have?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Roots of a Parabola</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="65.5" y1="286.0" x2="65.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="97.0" y1="286.0" x2="97.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="128.5" y1="286.0" x2="128.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="191.5" y1="286.0" x2="191.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="223.0" y1="286.0" x2="223.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="254.5" y1="286.0" x2="254.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="263.09" x2="286.0" y2="263.09" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="240.18" x2="286.0" y2="240.18" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="217.27" x2="286.0" y2="217.27" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="194.36" x2="286.0" y2="194.36" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="171.45" x2="286.0" y2="171.45" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="148.55" x2="286.0" y2="148.55" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="125.64" x2="286.0" y2="125.64" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="102.73" x2="286.0" y2="102.73" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="79.82" x2="286.0" y2="79.82" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="56.91" x2="286.0" y2="56.91" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="97.0" y1="286.0" x2="97.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="263.09" x2="286.0" y2="263.09" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">-2</text>
+<text x="65.5" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="128.5" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="160.0" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="191.5" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="223.0" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">4</text>
+<text x="254.5" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="286.0" y="275.09" font-size="8" fill="#6B7280" text-anchor="middle">6</text>
+<text x="91.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="91.0" y="243.18" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="91.0" y="220.27" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="91.0" y="197.36" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="91.0" y="174.45" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="91.0" y="151.55" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="91.0" y="128.64" font-size="8" fill="#6B7280" text-anchor="end">6</text>
+<text x="91.0" y="105.73" font-size="8" fill="#6B7280" text-anchor="end">7</text>
+<text x="91.0" y="82.82" font-size="8" fill="#6B7280" text-anchor="end">8</text>
+<text x="91.0" y="59.91" font-size="8" fill="#6B7280" text-anchor="end">9</text>
+<text x="91.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">10</text>
+<path d="M 59.2,-40.23 L 61.72,-28.64 L 64.24,-17.35 L 66.76,-6.36 L 69.28,4.35 L 71.8,14.76 L 74.32,24.87 L 76.84,34.7 L 79.36,44.23 L 81.88,53.46 L 84.4,62.41 L 86.92,71.06 L 89.44,79.41 L 91.96,87.48 L 94.48,95.25 L 97.0,102.73 L 99.52,109.91 L 102.04,116.8 L 104.56,123.4 L 107.08,129.71 L 109.6,135.72 L 112.12,141.43 L 114.64,146.86 L 117.16,151.99 L 119.68,156.83 L 122.2,161.37 L 124.72,165.63 L 127.24,169.59 L 129.76,173.25 L 132.28,176.62 L 134.8,179.7 L 137.32,182.49 L 139.84,184.98 L 142.36,187.18 L 144.88,189.09 L 147.4,190.7 L 149.92,192.02 L 152.44,193.04 L 154.96,193.78 L 157.48,194.22 L 160.0,194.36 L 162.52,194.22 L 165.04,193.78 L 167.56,193.04 L 170.08,192.02 L 172.6,190.7 L 175.12,189.09 L 177.64,187.18 L 180.16,184.98 L 182.68,182.49 L 185.2,179.7 L 187.72,176.62 L 190.24,173.25 L 192.76,169.59 L 195.28,165.63 L 197.8,161.37 L 200.32,156.83 L 202.84,151.99 L 205.36,146.86 L 207.88,141.43 L 210.4,135.72 L 212.92,129.71 L 215.44,123.4 L 217.96,116.8 L 220.48,109.91 L 223.0,102.73 L 225.52,95.25 L 228.04,87.48 L 230.56,79.41 L 233.08,71.06 L 235.6,62.41 L 238.12,53.46 L 240.64,44.23 L 243.16,34.7 L 245.68,24.87 L 248.2,14.76 L 250.72,4.35 L 253.24,-6.36 L 255.76,-17.35 L 258.28,-28.64 L 260.8,-40.23" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+</svg></div>
+  <div class="qs">Using the graph, how many real roots (x-intercepts) does the parabola shown have?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Cannot be determined</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="C">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Roots of a Parabola</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="65.5" y1="286.0" x2="65.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="97.0" y1="286.0" x2="97.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="128.5" y1="286.0" x2="128.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="160.0" y1="286.0" x2="160.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="191.5" y1="286.0" x2="191.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="223.0" y1="286.0" x2="223.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="254.5" y1="286.0" x2="254.5" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="258.0" x2="286.0" y2="258.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="230.0" x2="286.0" y2="230.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="202.0" x2="286.0" y2="202.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="174.0" x2="286.0" y2="174.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="146.0" x2="286.0" y2="146.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="118.0" x2="286.0" y2="118.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="90.0" x2="286.0" y2="90.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="62.0" x2="286.0" y2="62.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="65.5" y1="286.0" x2="65.5" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="202.0" x2="286.0" y2="202.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="97.0" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="128.5" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="160.0" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="191.5" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">4</text>
+<text x="223.0" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="254.5" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">6</text>
+<text x="286.0" y="214.0" font-size="8" fill="#6B7280" text-anchor="middle">7</text>
+<text x="59.5" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-3</text>
+<text x="59.5" y="261.0" font-size="8" fill="#6B7280" text-anchor="end">-2</text>
+<text x="59.5" y="233.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="59.5" y="177.0" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="59.5" y="149.0" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="59.5" y="121.0" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="59.5" y="93.0" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="59.5" y="65.0" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="59.5" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">6</text>
+<path d="M 59.2,376.72 L 61.72,362.56 L 64.24,348.76 L 66.76,335.32 L 69.28,322.24 L 71.8,309.52 L 74.32,297.16 L 76.84,285.15 L 79.36,273.5 L 81.88,262.21 L 84.4,251.28 L 86.92,240.71 L 89.44,230.49 L 91.96,220.64 L 94.48,211.14 L 97.0,202.0 L 99.52,193.22 L 102.04,184.8 L 104.56,176.73 L 107.08,169.03 L 109.6,161.68 L 112.12,154.69 L 114.64,148.06 L 117.16,141.79 L 119.68,135.88 L 122.2,130.32 L 124.72,125.12 L 127.24,120.28 L 129.76,115.8 L 132.28,111.68 L 134.8,107.92 L 137.32,104.52 L 139.84,101.47 L 142.36,98.78 L 144.88,96.45 L 147.4,94.48 L 149.92,92.87 L 152.44,91.61 L 154.96,90.72 L 157.48,90.18 L 160.0,90.0 L 162.52,90.18 L 165.04,90.72 L 167.56,91.61 L 170.08,92.87 L 172.6,94.48 L 175.12,96.45 L 177.64,98.78 L 180.16,101.47 L 182.68,104.52 L 185.2,107.92 L 187.72,111.68 L 190.24,115.8 L 192.76,120.28 L 195.28,125.12 L 197.8,130.32 L 200.32,135.88 L 202.84,141.79 L 205.36,148.06 L 207.88,154.69 L 210.4,161.68 L 212.92,169.03 L 215.44,176.73 L 217.96,184.8 L 220.48,193.22 L 223.0,202.0 L 225.52,211.14 L 228.04,220.64 L 230.56,230.49 L 233.08,240.71 L 235.6,251.28 L 238.12,262.21 L 240.64,273.5 L 243.16,285.15 L 245.68,297.16 L 248.2,309.52 L 250.72,322.24 L 253.24,335.32 L 255.76,348.76 L 258.28,362.56 L 260.8,376.72" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+</svg></div>
+  <div class="qs">Using the graph, what are the x-intercepts of the parabola shown?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>x = −1 and x = −5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>x = 3 and x = 4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>x = 1 and x = 5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>x = 1 and x = 3</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Vertex Form</div></div>
+  
+  <div class="qs">Convert y = x² + 8x + 10 to vertex form by completing the square. What is the vertex?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>(4, −6)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>(−4, −6)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>(−4, 6)</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>(8, 10)</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Solving for &#39;a&#39;</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="320" height="320" fill="#FAF8F3"/>
+<line x1="34.0" y1="286.0" x2="34.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="70.0" y1="286.0" x2="70.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="106.0" y1="286.0" x2="106.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="142.0" y1="286.0" x2="142.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="178.0" y1="286.0" x2="178.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="214.0" y1="286.0" x2="214.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="250.0" y1="286.0" x2="250.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="286.0" y1="286.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="286.0" x2="286.0" y2="286.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="265.0" x2="286.0" y2="265.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="244.0" x2="286.0" y2="244.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="223.0" x2="286.0" y2="223.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="202.0" x2="286.0" y2="202.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="181.0" x2="286.0" y2="181.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="160.0" x2="286.0" y2="160.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="139.0" x2="286.0" y2="139.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="118.0" x2="286.0" y2="118.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="97.0" x2="286.0" y2="97.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="76.0" x2="286.0" y2="76.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="55.0" x2="286.0" y2="55.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="34.0" y1="34.0" x2="286.0" y2="34.0" stroke="#D8D0C4" stroke-width="0.75"/>
+<line x1="70.0" y1="286.0" x2="70.0" y2="34.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<line x1="34.0" y1="265.0" x2="286.0" y2="265.0" stroke="#0D1B3E" stroke-width="1.5"/>
+<text x="34.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">-1</text>
+<text x="106.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">1</text>
+<text x="142.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">2</text>
+<text x="178.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">3</text>
+<text x="214.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">4</text>
+<text x="250.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">5</text>
+<text x="286.0" y="277.0" font-size="8" fill="#6B7280" text-anchor="middle">6</text>
+<text x="64.0" y="289.0" font-size="8" fill="#6B7280" text-anchor="end">-1</text>
+<text x="64.0" y="247.0" font-size="8" fill="#6B7280" text-anchor="end">1</text>
+<text x="64.0" y="226.0" font-size="8" fill="#6B7280" text-anchor="end">2</text>
+<text x="64.0" y="205.0" font-size="8" fill="#6B7280" text-anchor="end">3</text>
+<text x="64.0" y="184.0" font-size="8" fill="#6B7280" text-anchor="end">4</text>
+<text x="64.0" y="163.0" font-size="8" fill="#6B7280" text-anchor="end">5</text>
+<text x="64.0" y="142.0" font-size="8" fill="#6B7280" text-anchor="end">6</text>
+<text x="64.0" y="121.0" font-size="8" fill="#6B7280" text-anchor="end">7</text>
+<text x="64.0" y="100.0" font-size="8" fill="#6B7280" text-anchor="end">8</text>
+<text x="64.0" y="79.0" font-size="8" fill="#6B7280" text-anchor="end">9</text>
+<text x="64.0" y="58.0" font-size="8" fill="#6B7280" text-anchor="end">10</text>
+<text x="64.0" y="37.0" font-size="8" fill="#6B7280" text-anchor="end">11</text>
+<path d="M 98.8,183.52 L 100.33,187.73 L 101.86,191.78 L 103.39,195.69 L 104.92,199.44 L 106.45,203.04 L 107.98,206.49 L 109.51,209.79 L 111.04,212.94 L 112.57,215.93 L 114.1,218.77 L 115.63,221.46 L 117.16,224.0 L 118.69,226.39 L 120.22,228.63 L 121.75,230.71 L 123.28,232.64 L 124.81,234.42 L 126.34,236.05 L 127.87,237.53 L 129.4,238.85 L 130.93,240.03 L 132.46,241.05 L 133.99,241.92 L 135.52,242.64 L 137.05,243.21 L 138.58,243.62 L 140.11,243.88 L 141.64,244.0 L 143.17,243.96 L 144.7,243.76 L 146.23,243.42 L 147.76,242.92 L 149.29,242.28 L 150.82,241.48 L 152.35,240.53 L 153.88,239.43 L 155.41,238.17 L 156.94,236.77 L 158.47,235.21 L 160.0,233.5 L 161.53,231.64 L 163.06,229.63 L 164.59,227.46 L 166.12,225.15 L 167.65,222.68 L 169.18,220.06 L 170.71,217.29 L 172.24,214.36 L 173.77,211.29 L 175.3,208.06 L 176.83,204.69 L 178.36,201.16 L 179.89,197.47 L 181.42,193.64 L 182.95,189.66 L 184.48,185.52 L 186.01,181.23 L 187.54,176.79 L 189.07,172.2 L 190.6,167.45 L 192.13,162.56 L 193.66,157.51 L 195.19,152.31 L 196.72,146.96 L 198.25,141.46 L 199.78,135.81 L 201.31,130.0 L 202.84,124.04 L 204.37,117.93 L 205.9,111.67 L 207.43,105.26 L 208.96,98.7 L 210.49,91.98 L 212.02,85.11 L 213.55,78.09 L 215.08,70.92 L 216.61,63.6 L 218.14,56.12 L 219.67,48.5 L 221.2,40.72" stroke="#00A99D" stroke-width="2.5" fill="none"/>
+<circle cx="142.0" cy="244.0" r="4" fill="#0D1B3E"/>
+<text x="72.0" y="262.0" font-size="10.5" font-weight="700" fill="#0D1B3E">Vertex (2, 1)</text>
+<circle cx="214.0" cy="76.0" r="4" fill="#C8962E"/>
+<text x="222.0" y="70.0" font-size="10.5" font-weight="700" fill="#C8962E">(4, 9)</text>
+</svg></div>
+  <div class="qs">Using the graph, a parabola has vertex (2, 1) and passes through the point (4, 9). What is the value of a in y = a(x − 2)² + 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>8</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>0.5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2</button></div>
+</div>
+
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Parabola &amp; Circles</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Parabola &amp; Circles Handout &nbsp;·&nbsp; SAT Math Day 11</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Parabola & Circles (Day 11): '+score+'/'+total+' (needs work)' : 'Parabola & Circles (Day 11): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Trigonometry — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:46pt;font-weight:900;color:#fff;text-align:center;line-height:1.05;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:420px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .diagram-box{width:220px;max-width:100%;margin:0 auto 12px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#FAF8F3;}
+  .diagram-box svg{display:block;width:100%;height:auto;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;text-align:center;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:32pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 17</div>
+  <div class="c-title">TRIGONOMETRY</div>
+  <div class="c-rule"></div>
+  <div class="c-sub">SOH-CAH-TOA, special right triangles, radians &amp; degrees, identities, and real-world elevation problems.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Trigonometry — SAT Reference</h2><p>Core rules you must know cold for the trig unit</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">SOH-CAH-TOA</span><span class="fm-val">sin=opp/hyp, cos=adj/hyp, tan=opp/adj</span></div><div class="fm"><span class="fm-label">45-45-90 triangle</span><span class="fm-val">leg : leg : hypotenuse = 1 : 1 : √2</span></div><div class="fm"><span class="fm-label">30-60-90 triangle</span><span class="fm-val">short leg : long leg : hypotenuse = 1 : √3 : 2</span></div><div class="fm"><span class="fm-label">Degrees ↔ radians</span><span class="fm-val">radians = degrees × (π/180)</span></div><div class="fm"><span class="fm-label">Pythagorean identity</span><span class="fm-val">sin²θ + cos²θ = 1</span></div><div class="fm"><span class="fm-label">Complementary angle identity</span><span class="fm-val">sin(θ) = cos(90° − θ)</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">SOH-CAH-TOA</span><h4>Always identify opposite/adjacent relative to the angle</h4><p>"Opposite" and "adjacent" depend on WHICH angle you're using — the same triangle gives different ratios depending on which acute angle is θ.</p></div>
+<div class="rc"><span class="rc-tag">Special Right Triangles</span><h4>Memorize the exact side ratios</h4><p>45-45-90 and 30-60-90 triangles show up constantly — knowing their side ratios cold saves you from redoing the Pythagorean theorem every time.</p></div>
+<div class="rc"><span class="rc-tag">Angle of Elevation</span><h4>Draw the right triangle first</h4><p>The horizontal distance, the vertical height, and the line of sight form a right triangle — tan(angle) = height ÷ horizontal distance.</p></div>
+<div class="rc"><span class="rc-tag">Trig Values Don't Depend on Triangle Size</span><h4>Only the angle matters, not the side lengths</h4><p>sin(30°), cos(30°), etc. are FIXED values — they don't change based on how big the triangle is. A given hypotenuse length is often irrelevant extra information.</p></div>
+<div class="rc"><span class="rc-tag">Two-Point Elevation Problems</span><h4>Set up a system using both angles</h4><p>When two observation points give two different angles of elevation to the same object, write a tangent equation for each point and solve the resulting system.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Mixing up which side is "opposite" vs. "adjacent" for the angle in question</div><div class="trap">Confusing the 45-45-90 ratio (×√2) with the 30-60-90 ratio (×√3, ×2)</div><div class="trap">Treating irrelevant given values (like a stated hypotenuse) as necessary for a fixed-angle trig calculation</div><div class="trap">Forgetting that sin and cos are both negative in the third quadrant</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 17 — Trigonometry</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Trig Ratios (SOH-CAH-TOA)</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="260" height="220" fill="#FAF8F3"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="50.00" y1="180.00" x2="170.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="50.00" y1="90.00" x2="170.00" y2="180.00" stroke="#00A99D" stroke-width="2.2"/>
+<rect x="50" y="170" width="10" height="10" fill="none" stroke="#0D1B3E" stroke-width="1"/>
+<text x="50.00" y="90.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle"></text>
+<text x="36.00" y="135.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">3</text>
+<text x="110.00" y="196.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">4</text>
+<text x="120.00" y="131.00" font-size="11" font-weight="700" fill="#00A99D" text-anchor="middle">5</text>
+<text x="176.00" y="184.00" font-size="13" font-weight="700" fill="#C8962E" text-anchor="middle">θ</text>
+</svg></div>
+  <div class="qs">Using the figure, a right triangle has legs of length 3 and 4, and a hypotenuse of 5. What is sin(θ)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3/5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>4/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4/3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5/3</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="C">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Trig Ratios (SOH-CAH-TOA)</div></div>
+  
+  <div class="qs">A right triangle has legs of length 8 and 15, and a hypotenuse of 17. If θ is the angle adjacent to the leg of length 8, what is cos(θ)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>15/17</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>8/15</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>8/17</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>17/8</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Trig Ratios (SOH-CAH-TOA)</div></div>
+  
+  <div class="qs">A right triangle has legs of length 5 and 12, and a hypotenuse of 13. If θ is the angle opposite the leg of length 5, what is tan(θ)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5/13</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5/12</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>12/13</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>12/5</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">45-45-90 Triangles</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="240" height="220" fill="#FAF8F3"/>
+<line x1="50.00" y1="36.00" x2="50.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="50.00" y1="180.00" x2="194.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="50.00" y1="36.00" x2="194.00" y2="180.00" stroke="#00A99D" stroke-width="2.2"/>
+<rect x="50" y="170" width="10" height="10" fill="none" stroke="#0D1B3E" stroke-width="1"/>
+<text x="36.00" y="108.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">6</text>
+<text x="122.00" y="196.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">6</text>
+<text x="136.00" y="102.00" font-size="13" font-weight="700" fill="#00A99D" text-anchor="middle">?</text>
+<text x="60.00" y="54.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">45°</text>
+<text x="164.00" y="172.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">45°</text>
+</svg></div>
+  <div class="qs">Using the figure, a 45-45-90 triangle has legs of length 6. What is the length of the hypotenuse?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>12</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>6</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3√2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>6√2</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">30-60-90 Triangles</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="260" height="220" fill="#FAF8F3"/>
+<line x1="50.00" y1="120.00" x2="50.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="50.00" y1="180.00" x2="153.92" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="50.00" y1="120.00" x2="153.92" y2="180.00" stroke="#00A99D" stroke-width="2.2"/>
+<rect x="50" y="170" width="10" height="10" fill="none" stroke="#0D1B3E" stroke-width="1"/>
+<text x="36.00" y="150.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">5</text>
+<text x="60.00" y="136.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">60°</text>
+<text x="121.92" y="170.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">30°</text>
+<text x="115.96" y="144.00" font-size="13" font-weight="700" fill="#00A99D" text-anchor="middle">?</text>
+</svg></div>
+  <div class="qs">Using the figure, in a 30-60-90 triangle, the side opposite the 30° angle (the short leg) measures 5. What is the length of the hypotenuse?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>10</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5√3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>5√2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>15</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Radians &amp; Degrees</div></div>
+  
+  <div class="qs">Convert 90° to radians.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>π/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>π/2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2π</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Radians &amp; Degrees</div></div>
+  
+  <div class="qs">Convert 2π/3 radians to degrees.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>60°</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>120°</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>90°</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>240°</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Pythagorean Theorem + Trig</div></div>
+  
+  <div class="qs">A right triangle has legs of length 9 and 12. What is sin(θ), where θ is the angle opposite the leg of length 9?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>9/12</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>4/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3/5</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Angle of Elevation</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="260" height="180" fill="#FAF8F3"/>
+<line x1="40.00" y1="150.00" x2="168.00" y2="150.00" stroke="#0D1B3E" stroke-width="2" stroke-dasharray="3,3"/>
+<line x1="40.00" y1="54.00" x2="40.00" y2="150.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="40.00" y1="54.00" x2="168.00" y2="150.00" stroke="#00A99D" stroke-width="2.4"/>
+<rect x="40" y="140" width="10" height="10" fill="none" stroke="#0D1B3E" stroke-width="1"/>
+<text x="26.00" y="102.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">3</text>
+<text x="104.00" y="166.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">4</text>
+<text x="148.00" y="142.00" font-size="13" font-weight="700" fill="#C8962E" text-anchor="middle">θ</text>
+</svg></div>
+  <div class="qs">Using the figure, a ramp rises 3 feet over a horizontal distance of 4 feet. What is tan(θ), where θ is the angle of elevation of the ramp?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0.75</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1.33</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>0.6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0.8</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Special Angle Values</div></div>
+  
+  <div class="qs">What is the value of sin(30°) + cos(60°)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0.5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>√3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Complementary Angles</div></div>
+  
+  <div class="qs">If sin(40°) ≈ 0.643, what is cos(50°)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0.357</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>0.643</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1.643</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0.5</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Pythagorean Identity</div></div>
+  
+  <div class="qs">If sin(θ) = 3/5 and 0° &lt; θ &lt; 90°, what is cos(θ)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2/5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4/5</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Unit Circle Quadrants</div></div>
+  
+  <div class="qs">An angle θ has a reference angle of 30° and terminates in the third quadrant. What are the signs of sin(θ) and cos(θ), respectively?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>negative, negative</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>positive, positive</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>positive, negative</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>negative, positive</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Radians &amp; Degrees</div></div>
+  
+  <div class="qs">Convert 5π/6 radians to degrees.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>300°</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>108°</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>150°</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>75°</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Trig Word Problems</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="260" height="220" fill="#FAF8F3"/>
+<line x1="50.00" y1="190.00" x2="120.00" y2="68.76" stroke="#00A99D" stroke-width="2.4"/>
+<line x1="120.00" y1="190.00" x2="120.00" y2="68.76" stroke="#0D1B3E" stroke-width="2" stroke-dasharray="3,3"/>
+<line x1="50.00" y1="190.00" x2="120.00" y2="190.00" stroke="#0D1B3E" stroke-width="2" stroke-dasharray="3,3"/>
+<rect x="110.00000000000001" y="180" width="10" height="10" fill="none" stroke="#0D1B3E" stroke-width="1"/>
+<text x="68.00" y="192.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">60°</text>
+<text x="79.00" y="119.38" font-size="11" font-weight="700" fill="#00A99D" text-anchor="middle">10</text>
+<text x="130.00" y="129.38" font-size="13" font-weight="700" fill="#0D1B3E" text-anchor="middle">?</text>
+</svg></div>
+  <div class="qs">Using the figure, a 10-foot ladder leans against a wall, forming a 60° angle with the ground. How high up the wall does the ladder reach?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5√3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>10</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5√2</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Angle of Elevation</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="280" height="220" fill="#FAF8F3"/>
+<line x1="50.00" y1="190.00" x2="200.00" y2="190.00" stroke="#0D1B3E" stroke-width="2" stroke-dasharray="3,3"/>
+<line x1="200.00" y1="190.00" x2="200.00" y2="84.97" stroke="#0D1B3E" stroke-width="2.4"/>
+<line x1="50.00" y1="190.00" x2="200.00" y2="84.97" stroke="#00A99D" stroke-width="2" stroke-dasharray="4,3"/>
+<text x="76.00" y="184.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">35°</text>
+<text x="125.00" y="206.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">50 ft</text>
+<text x="210.00" y="137.48" font-size="13" font-weight="700" fill="#0D1B3E" text-anchor="middle">?</text>
+<circle cx="50.00" cy="190.00" r="3.5" fill="#0D1B3E"/>
+</svg></div>
+  <div class="qs">Using the figure, from a point 50 feet from the base of a building, the angle of elevation to the top is 35°. Using tan(35°) ≈ 0.700, what is the approximate height of the building, in feet?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>71.4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>50</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>17.5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>35</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Law of Sines</div></div>
+  
+  <div class="qs">In triangle ABC, angle A = 40°, angle B = 60°, and side a (opposite angle A) = 10. Using the Law of Sines, what is the length of side b (opposite angle B), to the nearest whole number?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>13</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>10</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>15</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>8</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="C">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Special Triangles + Identities</div></div>
+  
+  <div class="qs">In a 30-60-90 triangle with a hypotenuse of 8, what is the value of sin(30°) × cos(30°)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>√3/2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>√3/4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/2</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Trig Identities</div></div>
+  
+  <div class="qs">If tan(θ) = 3/4 and 0° &lt; θ &lt; 90°, what is sin(θ) + cos(θ)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0.75</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1.4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1.75</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Multi-Point Elevation</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="340" height="240" fill="#FAF8F3"/>
+<line x1="80.00" y1="200.00" x2="280.00" y2="200.00" stroke="#0D1B3E" stroke-width="2" stroke-dasharray="3,3"/>
+<line x1="280.00" y1="200.00" x2="280.00" y2="84.53" stroke="#0D1B3E" stroke-width="2.4"/>
+<line x1="164.53" y1="200.00" x2="280.00" y2="84.53" stroke="#00A99D" stroke-width="1.8" stroke-dasharray="4,3"/>
+<line x1="80.00" y1="200.00" x2="280.00" y2="84.53" stroke="#C8962E" stroke-width="1.8" stroke-dasharray="4,3"/>
+<circle cx="164.53" cy="200.00" r="3.5" fill="#0D1B3E"/>
+<circle cx="80.00" cy="200.00" r="3.5" fill="#0D1B3E"/>
+<text x="172.53" y="184.00" font-size="10.5" font-weight="700" fill="#00A99D" text-anchor="middle">45°</text>
+<text x="72.00" y="186.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">30°</text>
+<text x="122.26" y="216.00" font-size="10.5" font-weight="700" fill="#0D1B3E" text-anchor="middle">100 ft</text>
+<text x="290.00" y="142.26" font-size="13" font-weight="700" fill="#0D1B3E" text-anchor="middle">?</text>
+</svg></div>
+  <div class="qs">Using the figure, two observers stand in a line with the base of a tower, 100 feet apart. The angle of elevation to the top of the tower is 45° from the closer point and 30° from the farther point. What is the height of the tower, to the nearest foot?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>100</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>50</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>173</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>137</button></div>
+</div>
+
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Trigonometry</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Trigonometry Handout &nbsp;·&nbsp; SAT Math Day 17</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Trigonometry (Day 17): '+score+'/'+total+' (needs work)' : 'Trigonometry (Day 17): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Inequalities &amp; Absolute Value — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:46pt;font-weight:900;color:#fff;text-align:center;line-height:1.05;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:400px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .q-body{display:flex;gap:20px;align-items:flex-start;margin-bottom:10px;}
+  .q-text{flex:1;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+  .q-note{font-size:10pt;font-family:'Source Serif 4',serif;color:var(--text);line-height:1.65;margin-bottom:8px;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:32pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 6</div>
+  <div class="c-title">INEQUALITIES &amp;<br><span>ABSOLUTE VALUE</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Linear inequalities, the flip-the-sign rule, compound inequalities, and absolute value equations &amp; inequalities.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Inequalities &amp; Absolute Value — SAT Reference</h2><p>Core rules you must know cold before moving to the next topic</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">Multiply/divide by negative</span><span class="fm-val">FLIP the inequality sign</span></div><div class="fm"><span class="fm-label">Compound inequality</span><span class="fm-val">apply the same operation to all three parts</span></div><div class="fm"><span class="fm-label">|x| = k (k &gt; 0)</span><span class="fm-val">x = k OR x = −k</span></div><div class="fm"><span class="fm-label">|x| &lt; k (k &gt; 0)</span><span class="fm-val">−k &lt; x &lt; k (a bounded interval)</span></div><div class="fm"><span class="fm-label">|x| &gt; k (k &gt; 0)</span><span class="fm-val">x &lt; −k OR x &gt; k (two separate rays)</span></div><div class="fm"><span class="fm-label">Minimum of |expression|</span><span class="fm-val">0, at the value that zeroes the inside</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">The Flip Rule</span><h4>Negative multiply/divide flips the sign</h4><p>Whenever you multiply or divide both sides of an inequality by a negative number, the direction of the inequality sign reverses.</p></div>
+<div class="rc"><span class="rc-tag">Absolute Value Equations</span><h4>Split into two cases</h4><p>|expression| = k means the expression equals k OR the expression equals −k. Solve both cases separately — don't just drop the absolute value bars.</p></div>
+<div class="rc"><span class="rc-tag">Less-Than vs Greater-Than</span><h4>&lt; gives ONE interval, &gt; gives TWO rays</h4><p>|x| &lt; k describes values BETWEEN −k and k. |x| &gt; k describes values OUTSIDE that range — two disconnected pieces, not one interval.</p></div>
+<div class="rc"><span class="rc-tag">Compound Inequalities</span><h4>Treat it as three parts, all at once</h4><p>To solve a ≤ x − b ≤ c, apply the same operation (add, subtract, multiply) to all three parts simultaneously to isolate x.</p></div>
+<div class="rc"><span class="rc-tag">Minimum of |expression|</span><h4>Absolute value can never be negative</h4><p>The smallest possible value of |anything| is 0, achieved exactly when the expression inside equals 0.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Forgetting to flip the inequality sign when multiplying/dividing by a negative</div><div class="trap">Only solving one case of an absolute value equation instead of both</div><div class="trap">Treating |x| &gt; k as a single bounded interval instead of two separate rays</div><div class="trap">Applying an operation to only part of a compound inequality</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 6 — Inequalities &amp; Absolute Value</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Absolute Value Inequality (Algebraic)</div></div>
+  
+  <div class="qs">Solve |2x − 5| ≤ 9. The solution can be written as a ≤ x ≤ b. What is a + b?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>9</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>14</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−4</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="C">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Compound Inequality (Integer Count)</div></div>
+  
+  <div class="qs">For how many integer values of x is |x − 3| &lt; 5 AND x &gt; 0 true at the same time?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>10</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>7</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>8</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Absolute Value Equation</div></div>
+  <div class="qs">Solve |x| = 7. What is the sum of all solutions?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>14</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>0</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>7</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−7</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Absolute Value Equation</div></div>
+  <div class="qs">Solve |x − 4| = 9. What is the larger solution?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>9</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>13</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Absolute Value Equation</div></div>
+  <div class="qs">Solve |2x − 1| = 9. What is the positive solution?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>9</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Compound Inequality</div></div>
+  <div class="qs">Solve the compound inequality −2 ≤ x − 3 ≤ 5. What is the length of the solution interval (highest value minus lowest value)?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>8</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>7</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Absolute Value Inequality</div></div>
+  <div class="qs">Solve |x| &lt; 5. What is the length of the solution interval?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>10</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>25</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Compound Inequality</div></div>
+  <div class="qs">How many integers satisfy both 3x − 2 ≤ 10 and x ≥ 0?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>6</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Absolute Value Inequality</div></div>
+  <div class="qs">Solve |x + 2| ≤ 6. What is the length of the solution interval?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>12</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>6</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Flip the Sign</div></div>
+  <div class="qs">Solve for x: −5x + 2 &lt; −13. Which of the following values of x satisfies the inequality?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Absolute Value Minimum</div></div>
+  <div class="qs">What is the minimum possible value of |2x − 6| for real numbers x?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>6</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>0</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−6</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Absolute Value Equation</div></div>
+  <div class="qs">Solve |3x + 6| = 0. What is x?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>0</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−2</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Linear Inequality</div></div>
+  <div class="qs">Solve (x − 1)/3 ≥ 4. What is the smallest value x can be?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>13</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>11</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>12</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>15</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Absolute Value Inequality</div></div>
+  <div class="qs">The inequality |x − 7| &lt; 3 can be rewritten as a &lt; x &lt; b. What is a + b?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>6</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>13</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>14</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>20</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Absolute Value Equation</div></div>
+  <div class="qs">The equation |x| = k has two solutions that are 12 units apart on the number line. What is the value of k?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>12</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>6</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>24</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Absolute Value Equation</div></div>
+  <div class="qs">Solve |4 − x| = 10. What is the sum of all solutions?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>20</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−20</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>0</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>8</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Linear Inequality</div></div>
+  <div class="qs">Solve 2(x − 3) + 4 &gt; 3x − 5 for x. Which of the following values of x satisfies the inequality?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>0</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>10</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="C">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Absolute Value Inequality</div></div>
+  <div class="qs">Solve |x − 4| ≥ 6. What is the sum of the two boundary values of x?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>6</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>16</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Compound Inequality</div></div>
+  <div class="qs">How many integers satisfy −2 &lt; x ≤ 5?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>8</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>7</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>9</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Absolute Value Inequality</div></div>
+  <div class="qs">Solve |2x + 3| ≤ 11. What is the length of the solution interval?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>22</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>8</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>14</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>11</button></div>
+</div>
+
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Inequalities &amp; Absolute Value</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Inequalities &amp; Absolute Value Handout &nbsp;·&nbsp; SAT Math Day 6</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Inequalities & Absolute Value (Day 6): '+score+'/'+total+' (needs work)' : 'Inequalities & Absolute Value (Day 6): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Linear &amp; Exponential Functions — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:46pt;font-weight:900;color:#fff;text-align:center;line-height:1.05;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:400px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .q-body{display:flex;gap:20px;align-items:flex-start;margin-bottom:10px;}
+  .q-text{flex:1;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+  .q-note{font-size:10pt;font-family:'Source Serif 4',serif;color:var(--text);line-height:1.65;margin-bottom:8px;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:32pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 9</div>
+  <div class="c-title">LINEAR &amp;<br><span>EXPONENTIAL FUNCTIONS</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Slope, intercepts, exponential growth/decay, common ratios, and comparing the two models.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Linear &amp; Exponential Functions — SAT Reference</h2><p>Core rules you must know cold for the functions unit</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">Slope from two points</span><span class="fm-val">(y₂ − y₁) ÷ (x₂ − x₁)</span></div><div class="fm"><span class="fm-label">Slope-intercept form</span><span class="fm-val">y = mx + b (m = slope, b = y-intercept)</span></div><div class="fm"><span class="fm-label">Exponential model</span><span class="fm-val">y = a(1 + r)ˣ growth, y = a(1 − r)ˣ decay</span></div><div class="fm"><span class="fm-label">Common ratio</span><span class="fm-val">y-value ÷ previous y-value (constant for exponential)</span></div><div class="fm"><span class="fm-label">Parallel lines</span><span class="fm-val">same slope</span></div><div class="fm"><span class="fm-label">Perpendicular lines</span><span class="fm-val">negative reciprocal slopes</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Linear Growth</span><h4>Adds the same amount every step</h4><p>A linear function changes by a constant DIFFERENCE per unit of x — the same amount is added (or subtracted) each time.</p></div>
+<div class="rc"><span class="rc-tag">Exponential Growth</span><h4>Multiplies by the same factor every step</h4><p>An exponential function changes by a constant RATIO per unit of x — the previous value is multiplied by the same factor each time, not added to.</p></div>
+<div class="rc"><span class="rc-tag">Growth/Decay Rate</span><h4>Read the rate straight from the base</h4><p>In y = a(1 + r)ˣ, the growth rate is r as a percent. In y = a(1 − r)ˣ, the decay rate is r as a percent — don't confuse the base itself with the rate.</p></div>
+<div class="rc"><span class="rc-tag">Slope From Standard Form</span><h4>Rearrange to slope-intercept first</h4><p>For Ax + By = C, the slope is −A/B. It's safer to solve for y first than to memorize the shortcut under time pressure.</p></div>
+<div class="rc"><span class="rc-tag">Perpendicular Slopes</span><h4>Flip AND negate</h4><p>A slope perpendicular to m is −1/m — both flip the fraction and change the sign. Forgetting either half of that gives a wrong answer.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Treating exponential growth like linear growth (adding instead of multiplying)</div><div class="trap">Reading the base (1 + r) as the rate itself instead of solving for r</div><div class="trap">Forgetting to both flip and negate the slope for a perpendicular line</div><div class="trap">Mixing up simple growth with compounding across multiple periods</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 9 — Linear &amp; Exponential Functions</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Comparing Linear &amp; Exponential Growth</div></div>
+  
+  <div class="qs">A line is given by y = 3x − 2. An exponential function is given by y = 2ˣ. By how much does the exponential function exceed the linear function at x = 3?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>0</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>7</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="C">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Solving for Compound Interest Rate</div></div>
+  
+  <div class="qs">An investment of $500 grows to $605 after 2 years of annual compounding. What is the annual interest rate?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>21%</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5%</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>10%</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>15%</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Slope-Intercept Form</div></div>
+  <div class="qs">A line passes through (0, 4) with slope 2. What is the value of y when x = 5?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>14</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>20</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>10</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Exponential Growth</div></div>
+  <div class="qs">A quantity grows according to A = 100(1.05)ᵗ. What is A when t = 2?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>110</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>105</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>121</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>110.25</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Exponential Decay</div></div>
+  <div class="qs">A quantity decays according to A = 500(0.8)ᵗ. What is A when t = 2?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>320</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>400</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>300</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>405</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Growth Rate</div></div>
+  <div class="qs">For y = 200(1.15)ˣ, what is the growth rate, as a percent?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1.15%</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>115%</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>15%</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>200%</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Decay Rate</div></div>
+  <div class="qs">For y = 800(0.75)ˣ, what is the decay rate, as a percent?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>75%</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>25%</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>0.75%</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>800%</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Linear Equations</div></div>
+  <div class="qs">If f(x) = 4x + 1, for what value of x does f(x) = 25?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>24</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>26</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>6</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Common Ratio</div></div>
+  <div class="qs">An exponential function passes through (0, 3) and (1, 12). What is the common ratio?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>9</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>12</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Exponential Evaluation</div></div>
+  <div class="qs">If y = 3(4)ˣ, what is y when x = 2?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>24</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>16</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>48</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>96</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Compound Interest</div></div>
+  <div class="qs">$1,000 is invested at 10% annual interest, compounded yearly. What is the value after 2 years?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>$1,200</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>$1,210</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>$1,100</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>$1,331</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Slope from Standard Form</div></div>
+  <div class="qs">What is the slope of the line 2x + 3y = 12?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2/3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−2/3</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Parallel Lines</div></div>
+  <div class="qs">A line has slope 4. What is the slope of a line parallel to it?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−1/4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/4</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Perpendicular Lines</div></div>
+  <div class="qs">A line has slope 2/3. What is the slope of a line perpendicular to it?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3/2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−2/3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−3/2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2/3</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Linear Equations</div></div>
+  <div class="qs">A line has slope 3 and passes through (2, 5). What is its y-intercept?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−1</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>11</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−11</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Exponential Equations</div></div>
+  <div class="qs">Solve 2(3)ˣ = 54 for x.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>9</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>27</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">x-Intercept</div></div>
+  <div class="qs">What is the x-intercept of the line y = 2x − 8?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>−4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>−8</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="C">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Rate of Change</div></div>
+  <div class="qs">If y = 2ˣ, what is the average rate of change from x = 1 to x = 3?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>6</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Exponential Growth</div></div>
+  <div class="qs">A population is modeled by P(t) = 5000(1.02)ᵗ. What is the population at t = 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>5,002</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5,100</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>5,200</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5,010</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Linear vs Exponential</div></div>
+  <div class="qs">The functions y = 2x + 1 and y = 2ˣ intersect at one small integer value of x. What is that value?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>−1</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0</button></div>
+</div>
+
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Linear &amp; Exponential Functions</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Linear &amp; Exponential Functions Handout &nbsp;·&nbsp; SAT Math Day 9</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Linear & Exponential Functions (Day 9): '+score+'/'+total+' (needs work)' : 'Linear & Exponential Functions (Day 9): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Verb Tenses — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Standard English Conventions · SEC 3</div>
+  <div class="c-title">VERB<br><span>TENSES</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Keep the timeline straight — match every verb to when the action actually happened.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">6</span><span class="s-lbl">Tense Patterns</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Verb Tenses — Quick Reference</h2><p>Find the timeline signal in the sentence, then match the verb to it</p></div>
+<div class="rule-cards"><div class="rc"><span class="rc-tag">Rule 1</span><h4>Definite Past Date = Simple Past</h4><p>"In 1969, astronauts WALKED..." — a specific past date always takes simple past, never present perfect.</p></div><div class="rc"><span class="rc-tag">Rule 2</span><h4>"Since / For" = Present Perfect</h4><p>"She HAS LIVED there since 2015" — an action starting in the past and continuing now.</p></div><div class="rc"><span class="rc-tag">Rule 3</span><h4>Past Perfect for the Earlier of Two Past Events</h4><p>"By the time X arrived, Y HAD ALREADY happened" — the earlier action gets "had + past participle."</p></div><div class="rc"><span class="rc-tag">Rule 4</span><h4>Subjunctive "If I WERE"</h4><p>Hypothetical/contrary-to-fact conditions use "were," not "was," regardless of subject.</p></div><div class="rc"><span class="rc-tag">Rule 5</span><h4>Timeless Facts Stay Present — Even in Reported Speech</h4><p>"The textbook explained that the Earth REVOLVES around the Sun" — general truths don't backshift.</p></div><div class="rc"><span class="rc-tag">Rule 6</span><h4>Third Conditional: "Would Have" + Past Participle</h4><p>"If they had practiced more, they WOULD HAVE WON" — for a hypothetical past outcome that didn't happen.</p></div></div>
+<div class="method-box"><h3>Syra's Method</h3><div class="ms"><div class="mn">1</div><div class="mt"><strong>Find the timeline signal word.</strong> "Yesterday," "since," "by the time," "next week" — these tell you exactly which tense is required.</div></div><div class="ms"><div class="mn">2</div><div class="mt"><strong>Check for two past events — which happened first?</strong> The earlier one needs past perfect ("had + verb"); the later one stays simple past.</div></div><div class="ms"><div class="mn">3</div><div class="mt"><strong>Watch for tense that should NOT shift.</strong> General truths and facts that are still true today stay in present tense, even inside a past-tense sentence.</div></div></div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Present perfect used with a definite past date (should be simple past)</div><div class="trap">Both past-tense verbs left as simple past when one action clearly happened before the other (needs past perfect)</div><div class="trap">"Was" used in a hypothetical "if" clause instead of subjunctive "were"</div><div class="trap">A timeless fact incorrectly backshifted to past tense inside reported speech</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SEC 3 — Tenses</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">Yesterday, the museum ___ a new exhibit on ancient Egypt.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>unveiled</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>unveils</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>has unveiled</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>will unveil</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">She ___ in the same apartment since 2015.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>lived</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>has lived</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>was living</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>lives</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="C">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">The committee ___ its decision next week.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>announced</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>has announced</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>will announce</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>announces</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">By the time the fire trucks arrived, the flames ___ the entire roof.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>consumed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>have consumed</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>were consuming</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>had consumed</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">Water ___ at zero degrees Celsius at sea level.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>freezes</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>froze</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>has frozen</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>will freeze</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">Last summer, the team traveled to four countries and ___ over twenty games.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>plays</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>played</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>has played</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>play</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="C">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">This year, the company ___ three new product lines.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>launched</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>launches</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>has launched</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>will launch</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">The engineers had tested the bridge thoroughly before it ___ to the public.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>had opened</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>opens</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>has opened</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>opened</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">If the budget ___ larger, the museum could expand its collection.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>were</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>was</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>is</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>has been</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">After the researchers ___ their data, they published their findings.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>analyzed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>had analyzed</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>have analyzed</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>analyze</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="C">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">The author revised the manuscript three times and ___ it to five publishers before it was accepted.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>submits</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>has submitted</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>submitted</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>was submitting</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">Scientists ___ studying the glacier's retreat for over a decade.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>are</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>had been</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>will be</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>have been</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">By the time the report was published, the new policy ___ costs significantly.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>had reduced</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>reduced</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>has reduced</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>reduces</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">By next December, the construction crew ___ the new terminal for over two years.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>will build</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>will have built</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>built</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>has built</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">The proposal recommends that the city repave the roads, upgrade the lighting, and ___ new bike lanes.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>installs</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>installed</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>install</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>will install</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">In 1969, astronauts ___ on the moon for the first time.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>have walked</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>had walked</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>walk</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>walked</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">Although the negotiators ___ for nearly a year, they had not reached an agreement by the time the deadline passed.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>had been meeting</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>were meeting</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>have been meeting</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>met</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">The textbook explained that the Earth ___ around the Sun.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>revolved</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>revolves</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>had revolved</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>will revolve</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="C">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">If the team had practiced more consistently, they ___ the championship.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>would win</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>had won</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>would have won</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>will have won</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Tenses</div></div>
+  
+  <div class="qs">The historian argued that although earlier accounts had described the treaty as a failure, more recent evidence ___ that it achieved several of its intended goals.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>showed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>had shown</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>will show</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>shows</button></div>
+</div>
+
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Verb Tenses</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Verb Tenses Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'SEC3 Tenses: '+score+'/'+total+' (needs work)' : 'SEC3 Tenses: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

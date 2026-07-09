@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Words in Context — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Information & Ideas</div>
+  <div class="c-title">WORDS IN<br><span>CONTEXT</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Choose the word that fits the passage's logic, tone, and meaning with precision — in both informational prose and literary fiction.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">4</span><span class="s-lbl">Literary Passages</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Words in Context — Quick Reference</h2><p>Three types of vocabulary question the SAT tests — including literary style</p></div>
+<div class="rule-cards"><div class="rc"><span class="rc-tag">Type 1</span><h4>Completing a blank</h4><p>A blank mid-passage must be filled with the word that best fits the surrounding logic — not just any word that sounds good.</p></div><div class="rc"><span class="rc-tag">Type 2</span><h4>Most logical & precise</h4><p>The SAT gives four plausible words. The right one matches both meaning AND tone exactly.</p></div><div class="rc"><span class="rc-tag">Type 3</span><h4>Contrast / Similarity</h4><p>Watch for contrast signals (although, despite, however) and similarity signals (similarly, likewise).</p></div><div class="rc"><span class="rc-tag">Watch for</span><h4>Positive vs. Negative</h4><p>A word can have the right general meaning but the wrong charge.</p></div><div class="rc"><span class="rc-tag">Watch for</span><h4>Register & Precision</h4><p>"Said" vs. "asserted" vs. "conceded" — each implies a different relationship between speaker and claim.</p></div><div class="rc"><span class="rc-tag">Literary Mode</span><h4>Tone Runs Deeper in Fiction</h4><p>In novel excerpts, the blank often carries a character's emotional or psychological state, not just a factual meaning — read for voice, not just logic.</p></div></div>
+<div class="method-box"><h3>Syra's Method</h3><div class="ms"><div class="mn">1</div><div class="mt"><strong>Read the full sentence.</strong> Never read just the blank. The rest of the sentence tells you what the blank must do.</div></div><div class="ms"><div class="mn">2</div><div class="mt"><strong>Predict your own word.</strong> Before looking at choices, decide: positive/negative? action/state? This protects you from attractive wrong answers.</div></div><div class="ms"><div class="mn">3</div><div class="mt"><strong>In literary passages, predict tone as well as meaning.</strong> A novel excerpt's blank often needs a word that matches the character's emotional register, not just a dictionary-correct synonym.</div></div></div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Familiar-sounding word chosen over the precise one</div><div class="trap">Wrong charge (positive/negative) even when the general meaning is close</div><div class="trap">Near-synonyms with different precision or register</div><div class="trap">In literary passages: a word that fits the plot facts but not the character's tone</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">Words in Context (Informational & Literary)</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Fill-in — Contrast</div></div>
+  <div class="passage">The lecture hall was packed, yet the professor spoke in a near whisper — her voice so _______ that students in the back rows strained forward to hear every word.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>hushed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>resonant</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>confident</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>commanding</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Fill-in — Logic</div></div>
+  <div class="passage">Although the construction project had faced repeated delays and budget overruns, city officials remained _______, insisting that the new transit hub would be completed by the following spring.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>alarmed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>optimistic</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>skeptical</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>indifferent</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="C">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Fill-in — Precise Negative</div></div>
+  <div class="passage">The investor's decision to sell his entire portfolio at the market's lowest point was later described by analysts as _______ — a miscalculation so costly that it permanently damaged the fund's reputation.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>premature</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>cautious</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>catastrophic</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>calculated</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Fill-in — Tone</div></div>
+  <div class="passage">Biologist E.O. Wilson's writing about insects is rarely dry or clinical; he _______ even the most obscure species, describing their behavior with wonder.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>dismisses</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>catalogues</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>tolerates</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>celebrates</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Fill-in — Contrast Signal</div></div>
+  <div class="passage">The negotiations had been marked by hostility for months; _______, both parties arrived at this week's session having agreed in advance to pursue a workable compromise.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>however</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>consequently</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>similarly</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>therefore</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Fill-in — Register</div></div>
+  <div class="passage">The editorial board acknowledged that the mayor's infrastructure proposal had _______ merits but argued that the funding mechanism was flawed.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>questionable</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>undeniable</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>modest</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>hidden</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="C">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Fill-in — Precise Action</div></div>
+  <div class="passage">Literary scholar Henry Louis Gates Jr. argues that African American vernacular traditions did not merely survive the Middle Passage but actively _______ into rich literary and oral cultures.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>deteriorated</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>persisted</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>transformed</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>collapsed</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Fill-in — Similarity Signal</div></div>
+  <div class="passage">The new administration's approach to foreign policy closely resembled its predecessor's: both _______ diplomatic engagement over military intervention whenever possible.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>avoided</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>questioned</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>criticized</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>prioritized</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Fill-in — Scientific Context</div></div>
+  <div class="passage">The enzyme functions as a _______ in the chemical reaction — it speeds up the process dramatically without being altered or consumed itself.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>catalyst</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>product</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>reactant</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>inhibitor</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Fill-in — Nuanced Positive</div></div>
+  <div class="passage">Though the debut novel was widely praised, several reviewers noted that its plot was _______ — moving forward without the unexpected turns that distinguish truly memorable fiction.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>engaging</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>predictable</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>original</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>ambitious</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="C">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Fill-in — Academic</div></div>
+  <div class="passage">Historian Joan Scott argued that "experience" cannot be treated as _______ evidence for historical claims; all accounts of experience are shaped by language, culture, and power.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>compelling</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>abundant</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>unmediated</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>relevant</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Fill-in — Context Clue</div></div>
+  <div class="passage">The diplomat's remarks were deliberately _______ — crafted to allow each side to interpret them as favorable, thereby preserving the possibility of continued negotiations.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>combative</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>transparent</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>candid</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>ambiguous</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Fill-in — Negative Precision</div></div>
+  <div class="passage">Critics argued that the documentary's portrayal of the community was _______, reducing complex social dynamics to stereotypes designed to confirm the filmmaker's preexisting assumptions.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>reductive</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>balanced</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>thorough</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>empathetic</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Fill-in — Action Verb</div></div>
+  <div class="passage">Geologist Marie Tharp did not simply collect ocean floor data — she _______ it, creating the first detailed map of the Mid-Atlantic Ridge and changing how scientists understood plate tectonics.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>archived</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>synthesized</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>ignored</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>disputed</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Fill-in — Contrast within sentence</div></div>
+  <div class="passage">Although the team's offensive statistics were impressive, their defensive record was _______, allowing more goals per game than any other team in the league.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>remarkable</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>adequate</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>dismal</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>exceptional</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Fill-in — Tone Match</div></div>
+  <div class="passage">The poet wrote of grief not with dramatic lamentation but with quiet _______ — a restrained acknowledgment of loss that many readers found more affecting than open sorrow.</div>
+  <div class="qs">Which choice completes the text with the most logical and precise word?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>indifference</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>elation</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>confusion</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>acceptance</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Words in Context: Literary</div></div>
+  <div class="passage">The following text is from George Eliot's 1871 novel <em>Middlemarch</em>.
+
+Casaubon had a sense of rectitude that was almost _______ — it required not only that he behave correctly but that the world acknowledge, at every moment, that he was doing so.</div>
+  <div class="qs">Which choice best completes the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>compulsive</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>admirable</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>theatrical</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>fragile</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Words in Context: Literary</div></div>
+  <div class="passage">The following text is from Virginia Woolf's 1925 novel <em>Mrs Dalloway</em>.
+
+She had a horror of _______ emotion, of the kind that makes itself known too readily, that announces its own depth and thereby loses it; her feelings, she had long believed, were real precisely because they were private.</div>
+  <div class="qs">Which choice best completes the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>suppressed</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>ostentatious</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>genuine</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>fleeting</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="C">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Words in Context: Literary</div></div>
+  <div class="passage">The following text is from Willa Cather's 1918 novel <em>My Ántonia</em>.
+
+The prairie was neither beautiful nor forbidding to Jim; it was _______, absorbing him into its silence the way a large body of water absorbs a stone — completely, without comment.</div>
+  <div class="qs">Which choice best completes the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>desolate</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>tranquil</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>indifferent</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>sublime</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Words in Context: Literary</div></div>
+  <div class="passage">The following text is from Charlotte Brontë's 1847 novel <em>Jane Eyre</em>.
+
+Mr. Rochester spoke with a kind of _______ frankness — he said things plainly that other men would have left discreetly unspoken, but Jane suspected that this directness was itself a form of theater, a way of appearing honest while concealing what mattered most.</div>
+  <div class="qs">Which choice best completes the text?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>brutal</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>guileless</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>calculated</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>disarming</button></div>
+</div>
+
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Words in Context</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Words in Context Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Words in Context: '+score+'/'+total+' (needs work)' : 'Words in Context: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

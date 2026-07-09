@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Transitions — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Expression of Ideas</div>
+  <div class="c-title"><span>TRANSITIONS</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Every transition signals a logical relationship. Match the signal to the relationship.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">6</span><span class="s-lbl">Transition Types</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Transitions — Quick Reference</h2><p>The six logical relationships and the signals for each</p></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Type 1</span><h4>Contrast</h4><p>however, although, despite, while, yet, in contrast, on the other hand, nevertheless, nonetheless</p></div>
+<div class="rc"><span class="rc-tag">Type 2</span><h4>Cause & Effect</h4><p>therefore, as a result, consequently, thus, hence, so, for this reason</p></div>
+<div class="rc"><span class="rc-tag">Type 3</span><h4>Example / Illustration</h4><p>for example, for instance, specifically, in particular, to illustrate</p></div>
+<div class="rc"><span class="rc-tag">Type 4</span><h4>Addition</h4><p>furthermore, in addition, moreover, additionally, also, besides</p></div>
+<div class="rc"><span class="rc-tag">Type 5</span><h4>Similarity</h4><p>similarly, likewise, in the same way, just as</p></div>
+<div class="rc"><span class="rc-tag">Type 6</span><h4>Concession / Qualification</h4><p>admittedly, granted, to be sure, of course, it is true that — used before a point you acknowledge before rebutting</p></div>
+</div>
+<div class="method-box"><h3>Syra's Method</h3>
+<div class="ms"><div class="mn">1</div><div class="mt"><strong>Read both sentences fully before choosing.</strong> The transition connects two complete ideas. You cannot choose the right signal if you only read one sentence.</div></div>
+<div class="ms"><div class="mn">2</div><div class="mt"><strong>State the relationship in your own words.</strong> "The first sentence says X. The second says Y. The relationship is: Y contrasts with X / Y results from X / Y is an example of X." Match your relationship to a transition type.</div></div>
+<div class="ms"><div class="mn">3</div><div class="mt"><strong>Eliminate by logic, not familiarity.</strong> "However" is not always the answer to a contrast question — "despite," "nevertheless," or "yet" might be equally correct. Eliminate any transition that signals the wrong relationship type first.</div></div>
+</div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">"However" as default answer</div><div class="trap">Confusing concession with contrast</div><div class="trap">Confusing addition with cause-effect</div><div class="trap">Reading only the second sentence</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">Transitions</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+<div class="qb" data-q="1" data-ans="C">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Transitions</div></div>
+  <div class="passage">The team had been preparing for the championship match for six months. _______ they lost in the opening round to a team ranked far below them.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Similarly,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Therefore,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Nevertheless,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Furthermore,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 2</div></div>
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Transitions</div></div>
+  <div class="passage">Studies have shown that regular aerobic exercise reduces the risk of cardiovascular disease. _______ it has been shown to improve cognitive function and lower the risk of depression.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>However,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>In addition,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Consequently,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For instance,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 3</div></div>
+<div class="qb" data-q="3" data-ans="C">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Transitions</div></div>
+  <div class="passage">The city's new rapid transit line dramatically reduced commute times for residents in the eastern districts. _______ bus ridership in those neighborhoods increased by 40 percent within the first six months of operation.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Nevertheless,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By contrast,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>As a result,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For example,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 4</div></div>
+<div class="qb" data-q="4" data-ans="B">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Transitions</div></div>
+  <div class="passage">Novelist Kazuo Ishiguro is known for his precise, restrained prose and his exploration of memory and loss. _______ his 2005 novel <em>Never Let Me Go</em> uses the framework of speculative fiction to examine questions of human dignity and moral complicity.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>However,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>For instance,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Consequently,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Likewise,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 5</div></div>
+<div class="qb" data-q="5" data-ans="C">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Transitions</div></div>
+  <div class="passage">Critics initially dismissed abstract expressionism as self-indulgent and inaccessible. _______ the movement came to define American cultural prestige in the postwar decades and transformed the global center of gravity in contemporary art from Paris to New York.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Similarly,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Therefore,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Nonetheless,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For example,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 6</div></div>
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Transitions</div></div>
+  <div class="passage">Scientists have long known that sleep is essential for memory consolidation. _______ research has now shown that sleep also plays a critical role in emotional regulation, with sleep-deprived individuals showing significantly stronger reactivity to negative stimuli.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>However,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>More recently,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Therefore,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For instance,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 7</div></div>
+<div class="qb" data-q="7" data-ans="D">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Transitions</div></div>
+  <div class="passage">The new medication showed remarkable efficacy in clinical trials, reducing symptoms in 87 percent of patients. _______ its approval was delayed by concerns about rare but serious side effects that emerged during the extended safety review.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Furthermore,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Similarly,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Consequently,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Nevertheless,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 8</div></div>
+<div class="qb" data-q="8" data-ans="C">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Transitions</div></div>
+  <div class="passage">Urban heat islands — areas within cities that are significantly warmer than surrounding rural areas — are primarily caused by the replacement of natural vegetation with heat-absorbing concrete and asphalt. _______ cities with more tree canopy and green space consistently record lower summer temperatures than those dominated by impervious surfaces.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By contrast,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>In other words,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Consequently,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Despite this,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 9</div></div>
+<div class="qb" data-q="9" data-ans="D">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Transitions</div></div>
+  <div class="passage">The historian acknowledged that primary sources from the period are limited and often biased. _______ the overall pattern they reveal is consistent enough to support a reliable reconstruction of the major events.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Therefore,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Similarly,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>As a result,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Nevertheless,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 10</div></div>
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Transitions</div></div>
+  <div class="passage">Both the Roman Empire and the Han Dynasty of China reached their territorial peaks in the first century CE. _______ both began experiencing significant military pressure on their northern frontiers from nomadic peoples around the same period.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>However,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Consequently,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Similarly,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For instance,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 11</div></div>
+<div class="qb" data-q="11" data-ans="D">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Transitions</div></div>
+  <div class="passage">The documentary filmmaker approached her subject with evident sympathy. _______ her final film was praised precisely for not letting that sympathy distort the complexity of what she documented.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>As a result,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Similarly,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Admittedly,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Nonetheless,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 12</div></div>
+<div class="qb" data-q="12" data-ans="A">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Transitions</div></div>
+  <div class="passage">The population of the city's historic downtown had been declining for three decades as residents moved to suburban areas. _______ the development of new mixed-use buildings and the arrival of young professionals reversed this trend beginning in the mid-2000s.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>However,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Therefore,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Moreover,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For instance,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 13</div></div>
+<div class="qb" data-q="13" data-ans="D">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Transitions</div></div>
+  <div class="passage">Linguist Noam Chomsky argued that all human languages share a deep structural similarity — a "universal grammar" that reflects the innate architecture of the human mind. _______ anthropologist Daniel Everett's study of the Pirahã language of the Amazon has challenged this view by claiming to have found a language that lacks several of the features Chomsky considered universal.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>As a result,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Similarly,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Furthermore,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>However,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 14</div></div>
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Transitions</div></div>
+  <div class="passage">Researchers found that the antibiotic was effective at eliminating the targeted bacteria in laboratory conditions. _______ in clinical trials it was found to be far less effective, largely because the real-world bacterial environment is significantly more complex than any lab model can replicate.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Consequently,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Moreover,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>However,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For example,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 15</div></div>
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Transitions</div></div>
+  <div class="passage">The new tax policy significantly increased government revenue during its first year of implementation. _______ it also generated considerable political opposition from businesses that argued the added burden reduced their capacity to invest and hire.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Consequently,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Similarly,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>However,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Therefore,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 16</div></div>
+<div class="qb" data-q="16" data-ans="B">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Transitions</div></div>
+  <div class="passage">Architect Zaha Hadid's buildings are characterized by their sweeping, non-rectilinear forms that challenge conventional notions of architectural stability. _______ her 2004 Rosenthal Center for Contemporary Art in Cincinnati, with its interlocking volumes cantilevered over a narrow sidewalk, seems to defy gravity entirely.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>However,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>For instance,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Therefore,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>In contrast,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 17</div></div>
+<div class="qb" data-q="17" data-ans="B">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Transitions</div></div>
+  <div class="passage">The journalist had spent months building trust with her sources before conducting the interviews. _______ the resulting article was far more candid and revealing than anything the subjects had previously said on the record.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Nevertheless,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>As a result,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By contrast,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>For example,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 18</div></div>
+<div class="qb" data-q="18" data-ans="D">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Transitions</div></div>
+  <div class="passage">Some philosophers argue that free will requires the ability to have done otherwise — that a choice is free only if, in the exact same circumstances, the agent could have chosen differently. _______ others define free will more modestly as the ability to act in accordance with one's own desires and values without external coercion, regardless of whether those desires were themselves determined.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Consequently,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>For instance,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Similarly,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By contrast,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 19</div></div>
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Transitions</div></div>
+  <div class="passage">The vaccine was shown to be 94 percent effective in preventing severe illness in clinical trials. _______ public health officials urged continued caution because the trials could not assess the vaccine's effectiveness against new variants that had not yet emerged at the time of the study.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Therefore,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Nevertheless,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Similarly,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>In addition,</button></div>
+</div>
+</div>
+<div class="ph-r">Question 20</div></div>
+<div class="qb" data-q="20" data-ans="C">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Transitions</div></div>
+  <div class="passage">The novel's narrator is deeply unreliable — she repeatedly misremembers events, contradicts herself, and appears unaware of her own biases. _______ the novel's central mystery can only be solved by reading between the lines of her account, reconstructing what actually happened from the gaps and distortions in her narration.</div>
+  <div class="qs">Which choice completes the text with the most logical transition?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Similarly,</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By contrast,</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Consequently,</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Nevertheless,</button></div>
+</div>
+<div style="display:flex;justify-content:center;padding:20px 0 32px;">
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Transitions</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">C</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Transitions Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+'
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Transitions: '+score+'/'+total+' (needs work)' : 'Transitions: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

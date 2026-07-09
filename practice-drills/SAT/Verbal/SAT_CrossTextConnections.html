@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Cross-Text Connections — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Craft & Structure</div>
+  <div class="c-title">CROSS-TEXT<br><span>CONNECTIONS</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Two texts, one question. How does Author 2 respond to Author 1's claim?</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">2</span><span class="s-lbl">Passages</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Cross-Text Connections — Quick Reference</h2><p>The SAT dual-text question: structure and traps</p></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">The Pattern</span><h4>Always the same structure</h4><p>Text 1 makes a claim or argument. Text 2 responds to it — agreeing, disagreeing, complicating, or qualifying. The question asks how Author 2 would respond to Author 1.</p></div>
+<div class="rc"><span class="rc-tag">Type 1</span><h4>Disagreement</h4><p>Author 2 directly contradicts or challenges the central claim of Author 1. Look for evidence that directly refutes or complicates the main point.</p></div>
+<div class="rc"><span class="rc-tag">Type 2</span><h4>Partial Agreement / Qualification</h4><p>Author 2 accepts part of Author 1's claim but adds a condition, limitation, or complication. "Yes, but..." structure.</p></div>
+<div class="rc"><span class="rc-tag">Type 3</span><h4>Support / Extension</h4><p>Author 2 provides evidence or argument that strengthens or extends Author 1's claim.</p></div>
+<div class="rc"><span class="rc-tag">Trap 1</span><h4>Answering the wrong question</h4><p>The question asks how Author 2 responds to Author 1 — not what Author 2 says in isolation.</p></div>
+<div class="rc"><span class="rc-tag">Trap 2</span><h4>Too strong / too weak</h4><p>Wrong answers often exaggerate the agreement or disagreement. The correct answer matches the actual relationship.</p></div>
+</div>
+<div class="method-box"><h3>Syra's Method</h3>
+<div class="ms"><div class="mn">1</div><div class="mt"><strong>Summarize Text 1 in one sentence.</strong> What is Author 1's central claim? Write it down or underline it. This is what you're looking for a response to.</div></div>
+<div class="ms"><div class="mn">2</div><div class="mt"><strong>Summarize Text 2 in one sentence.</strong> What is Author 2's main point? How does it relate to what Author 1 said? Agree? Disagree? Complicate?</div></div>
+<div class="ms"><div class="mn">3</div><div class="mt"><strong>Select the answer that describes the relationship accurately.</strong> Wrong answers will misstate the direction (support vs. challenge), misstate the strength, or confuse topic with argument. Match the relationship, not just the topic.</div></div>
+</div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Wrong direction (support vs. challenge)</div><div class="trap">Too strong or too weak</div><div class="trap">About a related topic but not the specific claim</div><div class="trap">Confuses what Author 2 says with how Author 2 responds to Author 1</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">CrossTextConnections</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+<div class="qb" data-q="1" data-ans="B">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Artificial intelligence systems can now generate text that is indistinguishable from human writing in many contexts. Several leading technology companies have deployed AI writing tools that help users draft emails, reports, and creative content. Proponents argue that this democratizes writing ability — giving everyone access to high-quality written expression regardless of their baseline skill level.</div>
+  <div class="tl">Text 2</div><div class="passage">The widespread adoption of AI writing tools risks impoverishing the very skill it claims to democratize. Writing is not merely output — it is thinking made visible. When students and professionals outsource the cognitive labor of composition to an AI, they are not simply saving time; they are forgoing the mental work through which ideas are clarified, revised, and genuinely owned. The polished sentences an AI produces may look like thought without actually being any.</div>
+  <div class="qs">How would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By arguing that AI writing tools are technically inferior and cannot produce high-quality text.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By acknowledging that AI makes writing accessible while arguing that this accessibility comes at the cost of the cognitive development that the writing process itself produces.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By agreeing that democratizing writing is valuable and supporting the broader adoption of AI writing tools.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By claiming that only professional writers should use AI writing tools, not students.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 2</div></div>
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Economists who study minimum wage policy have consistently found that modest increases in the minimum wage do not cause significant unemployment, contrary to traditional economic models that predict job losses when labor costs rise. Recent research using neighboring counties as control groups has found that employment in low-wage sectors is largely unaffected by minimum wage increases within the range most states have implemented.</div>
+  <div class="tl">Text 2</div><div class="passage">The claim that minimum wage increases do not cause unemployment must be interpreted carefully. While studies show limited effects on total employment numbers, they sometimes obscure important distributional effects: hours worked per employee may decrease even when headcount stays stable, and small businesses in low-margin industries may absorb wage increases through reduced investment or slower hiring rather than layoffs.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to Text 1's central finding?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By rejecting the research methodology used in the employment studies cited by Text 1.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that total employment may not fall while pointing out that the finding conceals other negative effects on workers and businesses that employment numbers alone do not capture.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that minimum wage increases always lead to significant job losses.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing fully with Text 1's conclusion and supporting further minimum wage increases.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 3</div></div>
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Urban agriculture — the practice of growing food within city limits — has attracted growing interest as a strategy for improving food security in low-income urban neighborhoods. Community gardens and urban farms provide residents with access to fresh produce, reduce food miles, and can strengthen social bonds among participants. Several cities have invested in urban agriculture programs as part of broader food justice initiatives.</div>
+  <div class="tl">Text 2</div><div class="passage">Urban agriculture, while appealing in theory, is often oversold as a solution to urban food insecurity. The amount of food a typical community garden produces is far too small to meaningfully supplement the diet of a neighborhood, let alone address systemic food access problems rooted in economic inequality and inadequate grocery infrastructure. Resources devoted to urban gardens might be better spent on subsidizing fresh food retail in underserved areas.</div>
+  <div class="qs">How would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By arguing that urban agriculture is a complete failure and should be abandoned entirely.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By questioning whether urban agriculture can meaningfully address food insecurity at scale, and suggesting that other interventions may be more effective.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By supporting urban agriculture while proposing that it be combined with subsidized grocery stores.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing that urban agriculture strengthens social bonds even if it does not solve food insecurity.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 4</div></div>
+<div class="qb" data-q="4" data-ans="B">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">The case for standardized testing in college admissions rests on its ability to provide a uniform, objective measure of academic preparedness that transcends the significant variation in grading standards across high schools. A student earning an A in an underfunded rural school and a student earning an A in a well-resourced suburban school may have very different levels of preparation; test scores provide a common benchmark.</div>
+  <div class="tl">Text 2</div><div class="passage">The claim that standardized tests offer an objective benchmark of academic preparedness has been undermined by decades of research demonstrating that SAT and ACT scores correlate more strongly with family income than with any measure of academic potential. Students from high-income families have greater access to test preparation resources, private tutoring, and repeated test-taking opportunities. What the tests reliably measure, critics argue, is access to resources — not academic merit.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to Text 1's central argument?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By arguing that grading standards across high schools are in fact consistent, making standardized tests unnecessary.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that grade variation is a real problem but challenging the claim that standardized tests solve it, since scores primarily reflect socioeconomic advantage rather than academic preparedness.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By agreeing that standardized tests are the best available tool for measuring college readiness.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By proposing that standardized tests be replaced with portfolio-based admissions assessment.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 5</div></div>
+<div class="qb" data-q="5" data-ans="B">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">The human brain's capacity for language is often cited as evidence of human uniqueness — a cognitive capability that sets our species apart from all others. The neurological infrastructure for language, including Broca's area and Wernicke's area, has no clear analogue in other species, and the complexity of human grammar has no equivalent in animal communication systems.</div>
+  <div class="tl">Text 2</div><div class="passage">Recent research in comparative cognition has begun to challenge the assumption that language capacity is uniquely human. Studies of great ape communication, bird song acquisition, and cetacean vocalization patterns have revealed sophisticated communicative systems with some structural properties once considered exclusive to human language — including displacement (the ability to refer to things not present), recursion, and learned rather than purely instinctive communication.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By agreeing that human language is unique while arguing that animal communication is nonetheless sophisticated.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By challenging the claim that language capacity is uniquely human, citing evidence that other species exhibit some of the structural properties once thought exclusive to human language.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that Broca's area and Wernicke's area exist in some non-human species.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By rejecting the study of animal communication as irrelevant to understanding human language.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 6</div></div>
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">The "broken windows" theory of policing, introduced by James Q. Wilson and George Kelling in 1982, argues that visible signs of disorder — graffiti, broken windows, loitering — signal that a community does not care about its environment and invite further crime. The theory became the basis for zero-tolerance policing strategies in American cities in the 1990s, which many officials credited with dramatic drops in crime rates.</div>
+  <div class="tl">Text 2</div><div class="passage">The broken windows theory has been criticized both empirically and on civil liberties grounds. Studies examining cities that adopted zero-tolerance policies have found that crime reductions coincided with broader economic improvements and demographic changes, making it impossible to isolate the effect of policing style. More troublingly, the policies were disproportionately applied to communities of color, resulting in mass stops, arrests, and prosecutions for minor violations — with significant collateral damage to community trust in law enforcement.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the claim made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By agreeing that broken windows policing reduced crime but arguing that the methods used were disproportionately effective.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By challenging the causal claim that zero-tolerance policing caused crime reductions, while also raising the policy's civil liberties costs.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that the broken windows theory is based on sound logic and should be expanded.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By claiming that crime rates did not actually fall in cities that adopted zero-tolerance policies.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 7</div></div>
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Social media platforms have transformed political communication by enabling citizens, activists, and movements to organize and amplify their voices without relying on traditional media gatekeepers. The Arab Spring, #MeToo, and Black Lives Matter are frequently cited as examples of social media's power to mobilize collective action and bring previously ignored issues to global attention.</div>
+  <div class="tl">Text 2</div><div class="passage">The same properties that make social media effective for mobilization — speed, scale, and the absence of editorial filters — also make it a powerful vector for misinformation, radicalization, and the collapse of shared factual ground. Algorithmic amplification systematically favors emotionally charged content, meaning that outrage and falsehood travel faster than nuance and correction. The movements that succeed through social media often do so despite these properties, not because of them.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By denying that social media has ever successfully mobilized political movements.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By acknowledging social media's mobilizing power while arguing that the same structural features produce significant costs — misinformation, radicalization, and erosion of shared factual ground.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that social media should be more heavily regulated to prevent political organizing.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing fully that social media is a transformative force for democratic participation.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 8</div></div>
+<div class="qb" data-q="8" data-ans="B">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Sleep research has consistently shown that teenagers require approximately 8–10 hours of sleep per night for optimal health and cognitive performance, yet most American high school students get significantly less, with school start times before 8 AM being a primary driver of sleep deprivation. Studies of districts that shifted start times to 8:30 AM or later found improvements in attendance, academic performance, and mental health outcomes.</div>
+  <div class="tl">Text 2</div><div class="passage">While later school start times may benefit students, the policy involves significant logistical trade-offs that proponents sometimes understate. Shifting start times reverses bus schedules that are designed around getting older students to school first, requiring costly restructuring of transportation systems. It also creates challenges for working parents whose childcare and employment arrangements are built around existing schedules — costs that fall disproportionately on lower-income families.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By rejecting the research showing that later start times benefit students.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that later start times may benefit students while raising logistical and equity concerns that the academic case does not address.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that start times are irrelevant to student performance.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By fully supporting later school start times and urging immediate policy change.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 9</div></div>
+<div class="qb" data-q="9" data-ans="B">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">The spread of remote work following the COVID-19 pandemic has had significant environmental benefits. With fewer commuters on roads and rails, major cities recorded measurable improvements in air quality during periods of peak remote work adoption. Studies also found reductions in per-worker carbon emissions in sectors that successfully transitioned to remote operations.</div>
+  <div class="tl">Text 2</div><div class="passage">The environmental case for remote work is more complicated than initial data suggested. While commuting emissions fell, home energy consumption rose as workers heated, cooled, and powered individual home offices rather than shared commercial spaces. Research from the UK Energy Research Centre found that in colder climates, the net carbon savings from remote work were minimal or in some cases negative when full household energy use was accounted for.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By arguing that remote work has no environmental benefits whatsoever.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By acknowledging the commuting emissions reduction while pointing out that rising home energy consumption offsets or eliminates net carbon savings in many contexts.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By agreeing that remote work is environmentally beneficial and should be permanently adopted.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By claiming that air quality improvements in cities have been overstated.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 10</div></div>
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Proponents of rewilding — the large-scale restoration of ecosystems by reintroducing apex predators — argue that the presence of wolves, bears, and other top predators creates "trophic cascades" that restructure entire ecosystems. The reintroduction of wolves to Yellowstone in 1995 is frequently cited: wolves reduced elk overgrazing, which allowed riverside vegetation to recover, which stabilized streambanks and changed river morphology.</div>
+  <div class="tl">Text 2</div><div class="passage">The Yellowstone wolf reintroduction, while ecologically significant, has been somewhat mythologized in public discourse. Ecologist Arthur Middleton's field research found that the trophic cascade effects were more limited and geographically variable than early accounts suggested, and that elk populations in many parts of the park showed limited behavioral change in response to wolf predation. The story of wolves "changing rivers" is real, but it is more complicated and localized than the popular narrative implies.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By arguing that the reintroduction of wolves to Yellowstone was a failure and should be reversed.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that wolf reintroduction had real ecological effects while challenging the scale and universality of the trophic cascade narrative as it is usually presented.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By agreeing that apex predator reintroduction always produces significant trophic cascades.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By arguing that the Yellowstone example is irrelevant to the broader rewilding debate.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 11</div></div>
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Critics of pharmaceutical industry marketing argue that the widespread prescription of opioid painkillers in the 1990s and 2000s was driven not by clinical need but by aggressive sales tactics from companies like Purdue Pharma, which promoted OxyContin as non-addictive despite internal evidence to the contrary. They argue this constitutes one of the most egregious cases of corporate malfeasance in American medical history.</div>
+  <div class="tl">Text 2</div><div class="passage">While pharmaceutical companies bear significant responsibility for the opioid crisis, assigning blame solely to industry marketing oversimplifies a multifactorial public health failure. Regulatory agencies approved and inadequately monitored opioid prescribing practices. Medical training emphasized under-treatment of pain, creating clinical demand for more powerful analgesics. And policymakers failed to adequately fund addiction treatment infrastructure when the crisis became apparent. A full accounting requires examining all these actors, not just the pharmaceutical industry.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By defending the pharmaceutical industry against the accusation of misconduct.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that pharmaceutical companies bear responsibility while arguing that the opioid crisis resulted from failures by multiple actors — regulators, medical educators, and policymakers — not industry alone.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that the opioid crisis is primarily a regulatory failure with no connection to pharmaceutical marketing.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By fully agreeing with Text 1's critique of the pharmaceutical industry.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 12</div></div>
+<div class="qb" data-q="12" data-ans="B">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Neuroscientist David Eagleman argues that the conscious mind receives only a small fraction of the information processed by the brain — most of what shapes perception, decision-making, and behavior occurs below the threshold of awareness. This has profound implications for the concept of free will: if most of our mental activity is unconscious, our sense of consciously choosing our actions may be largely illusory.</div>
+  <div class="tl">Text 2</div><div class="passage">The inference from unconscious neural processing to the absence of free will involves a significant philosophical leap. Even if many cognitive processes are unconscious, this does not entail that no deliberative decision-making is genuinely volitional. Neuroscientist Uri Maoz and philosopher Alfred Mele have argued that the experimental paradigms used to challenge free will — particularly Libet's readiness potential studies — do not actually test the kinds of complex, sustained deliberative choices that constitute the free will most people care about.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By denying that any neural processing occurs below the threshold of conscious awareness.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that much neural processing is unconscious while challenging the inferential leap from unconscious processing to the absence of genuine volitional decision-making.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that free will is entirely compatible with deterministic neuroscience.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing that free will is illusory and that consciousness plays no role in behavior.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 13</div></div>
+<div class="qb" data-q="13" data-ans="B">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Behavioral economists Richard Thaler and Cass Sunstein introduced the concept of the "nudge" — small changes to the choice architecture of decisions that steer people toward better outcomes without restricting freedom of choice. Automatic enrollment in retirement savings plans, placing healthier foods at eye level in cafeterias, and organ donation opt-out systems are all examples of nudges that have been shown to significantly improve outcomes with minimal coercion.</div>
+  <div class="tl">Text 2</div><div class="passage">Critics of nudge theory argue that the concept, while superficially appealing, carries embedded paternalism. Every nudge encodes a judgment about what constitutes a "better" outcome — a judgment made by policymakers or designers rather than by the individuals being nudged. This is particularly problematic in domains where preferences are legitimately diverse, and where designating one option as the default implicitly delegitimizes other choices. Transparency about nudge design, critics argue, partially undermines its effectiveness.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By rejecting the evidence that nudges improve outcomes such as retirement savings or organ donation rates.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By acknowledging that nudges may be effective while raising concerns about their implicit paternalism and the embedded value judgments made by designers about what constitutes a "better" outcome.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By fully agreeing with Thaler and Sunstein that nudges are a superior policy tool.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By arguing that opt-out systems are unconstitutional forms of coercion.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 14</div></div>
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Contemporary architectural theory has moved away from the modernist ideal of the universal solution — the single rational design that could serve all people in all contexts — toward an understanding of architecture as inherently contextual. Buildings should respond to their geographic climate, local materials, cultural traditions of use, and the specific needs of their communities rather than imposing a globally standardized aesthetic.</div>
+  <div class="tl">Text 2</div><div class="passage">The emphasis on local context in architectural theory, while valuable as a corrective to high modernism's excesses, can become an obstacle to innovation. Many of the most successful contemporary buildings have combined deep contextual sensitivity with the bold use of new materials, technologies, and formal vocabularies that have no precedent in local tradition. Insisting too strictly on contextual responsiveness risks producing architecture that is historically informed but spatially timid.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By rejecting the importance of contextual sensitivity in architecture entirely.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that architecture should be contextually responsive while arguing that this sensitivity should not preclude formal innovation or the use of new materials and technologies.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By agreeing that contextual architecture is always superior to modernist universalism.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By arguing that historic preservation should take precedence over new construction in all urban settings.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 15</div></div>
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Research on bilingual education suggests that students who receive instruction in both their home language and the dominant language of their community outperform those in English-only immersion programs on a range of long-term academic measures. Students in bilingual programs develop stronger reading comprehension, are more likely to graduate, and show greater academic achievement in secondary school.</div>
+  <div class="tl">Text 2</div><div class="passage">The research on bilingual education is promising but context-dependent. Studies that show positive outcomes tend to cluster in communities with stable bilingual teacher pipelines, high-quality curriculum materials in both languages, and strong administrative commitment to the model. In school districts lacking these conditions, bilingual programs have sometimes produced worse outcomes than well-implemented English immersion, suggesting the research cannot simply be universalized without attention to implementation quality.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By arguing that English-only immersion is always superior to bilingual education.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that bilingual education can produce strong outcomes while arguing that the research cannot be universalized without accounting for the specific conditions that allow programs to succeed.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By rejecting the studies showing bilingual education improves graduation rates.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing fully with Text 1 and calling for universal bilingual education.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 16</div></div>
+<div class="qb" data-q="16" data-ans="B">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">The declining cost of solar and wind energy has transformed the economics of electricity generation. In many regions of the world, new solar and wind capacity is now cheaper to build and operate than new coal or gas power plants. Analysts at organizations including the International Energy Agency have concluded that investment in new fossil fuel infrastructure is no longer economically rational in most markets.</div>
+  <div class="tl">Text 2</div><div class="passage">The levelized cost of energy calculations that favor renewables compare the cost of generating a unit of electricity but do not capture the full system cost of integrating intermittent generation into an electricity grid. Solar panels produce power only when the sun shines, and wind turbines only when the wind blows. Storing or balancing this intermittent supply requires significant investment in grid infrastructure, storage technologies, or backup generation — costs that are not reflected in the headline price comparisons.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By denying that the cost of renewable energy has fallen significantly.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that generation costs favor renewables while arguing that the comparison omits the system-level costs of integrating intermittent supply into the grid.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that fossil fuels are still cheaper than renewables in all markets.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By fully agreeing with Text 1 and calling for an immediate end to fossil fuel investment.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 17</div></div>
+<div class="qb" data-q="17" data-ans="B">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">There is a compelling public health case for sugar taxes. Studies from Mexico, the United Kingdom, and the city of Berkeley, California, have found that taxes on sugary beverages consistently reduce consumption, particularly among lower-income consumers who are most price-sensitive. Given that excessive sugar consumption is a major driver of obesity, type 2 diabetes, and cardiovascular disease, the policy appears to be a cost-effective public health intervention.</div>
+  <div class="tl">Text 2</div><div class="passage">The public health argument for sugar taxes treats low-income consumers as both the primary targets of the policy and as incapable of making informed dietary choices without fiscal coercion. This is a form of paternalism with a regressive incidence: by design, sugar taxes extract a larger share of income from lower-income households. A more equitable approach would invest equivalent resources in improving access to healthy food, food literacy education, and economic conditions that reduce the structural drivers of poor diet.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By denying that sugar taxes reduce consumption.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By acknowledging the public health evidence while arguing that the policy is regressive and paternalistic, and that more equitable alternatives exist.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that sugar taxes should be applied to all food, not just beverages.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing that sugar taxes are the most effective public health intervention available.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 18</div></div>
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Philosopher Peter Singer's "effective altruism" movement argues that individuals in wealthy countries have a moral obligation to donate a significant portion of their income to the most effective charitable interventions — those that can be demonstrated through rigorous evidence to save the most lives per dollar. Singer's utilitarian framework holds that geography is morally irrelevant: allowing a distant person to die when you could prevent it at modest personal cost is morally equivalent to allowing someone in front of you to drown.</div>
+  <div class="tl">Text 2</div><div class="passage">Critics of effective altruism argue that the movement's emphasis on measurable, scalable interventions systematically disadvantages the complex, long-term work of structural change — advocacy, organizing, and policy reform — which is harder to quantify but may address the root causes of poverty and disease rather than their symptoms. A world in which wealthy individuals choose which global problems deserve resources, based on metrics that favor tractable near-term interventions, may perpetuate the global power imbalances that generate those problems in the first place.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By rejecting Singer's utilitarian framework entirely and arguing that morality is exclusively local.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that individual donors should engage with global poverty while challenging the framework's emphasis on measurable short-term interventions, which may crowd out structural work that addresses the root causes of inequality.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By agreeing with Singer that measurable interventions should be the sole criterion for charitable giving.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By arguing that individuals have no moral obligation to donate to any causes outside their own communities.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 19</div></div>
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">Research in the field of positive psychology, pioneered by Martin Seligman, has demonstrated that practices such as gratitude journaling, mindfulness meditation, and deliberate acts of kindness reliably increase self-reported wellbeing across diverse populations. This has led to widespread adoption of positive psychology interventions in schools, workplaces, and therapeutic settings.</div>
+  <div class="tl">Text 2</div><div class="passage">The science of positive psychology has come under methodological scrutiny in recent years. Critics have noted that many landmark studies in the field relied on self-reported wellbeing measures, small samples, and designs that did not adequately control for expectation effects — the tendency of participants who know they are in a wellbeing intervention to report improvement simply because they expect to feel better. Several high-profile replication attempts have failed to reproduce the original findings at the reported effect sizes.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By denying that positive psychology interventions have any effect on wellbeing.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By accepting that positive psychology has been widely and influentially adopted while raising concerns about the methodological quality of the research on which it is based.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that mindfulness meditation is the only positive psychology intervention with robust evidence.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By fully endorsing the positive psychology research and calling for broader adoption of its interventions.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 20</div></div>
+<div class="qb" data-q="20" data-ans="B">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Cross-Text Connections</div></div>
+  <div class="tl">Text 1</div><div class="passage">The history of medicine is largely a history of specialization. As biomedical knowledge expanded through the 19th and 20th centuries, physicians increasingly focused on narrower and narrower domains of the body. Specialization enabled the deep expertise that made modern surgery, oncology, and cardiology possible — procedures and treatments unimaginable without a physician devoting a career to mastering one area.</div>
+  <div class="tl">Text 2</div><div class="passage">Medical specialization, while enabling technical mastery, has produced a fragmented system that struggles to address the full complexity of patients whose conditions cross specialty boundaries. Patients with multiple chronic conditions — increasingly the norm in aging populations — must navigate networks of specialists who rarely communicate with each other. The patient who sees a cardiologist, an endocrinologist, and a nephrologist may receive treatments optimized within each specialty that interact adversely with each other — a coordination failure that specialization itself creates.</div>
+  <div class="qs">Based on the texts, how would the author of Text 2 most likely respond to the argument made in Text 1?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>By denying that medical specialization has produced any advances in treatment.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>By acknowledging that specialization enabled important technical advances while arguing that it has created system-level coordination failures that are increasingly costly for patients with complex, multi-system conditions.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>By arguing that all medical specialties should be abolished in favor of generalist care.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>By agreeing fully that specialization has improved patient outcomes across all disease categories.</button></div>
+</div>
+<div style="display:flex;justify-content:center;padding:20px 0 32px;">
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Cross-Text Connections</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">B</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Cross-Text Connections Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+'
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Cross-Text Connections: '+score+'/'+total+' (needs work)' : 'Cross-Text Connections: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

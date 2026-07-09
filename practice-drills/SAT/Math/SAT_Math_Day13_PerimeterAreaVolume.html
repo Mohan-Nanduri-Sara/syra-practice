@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Perimeter, Area &amp; Volume — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:38pt;font-weight:900;color:#fff;text-align:center;line-height:1.1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:420px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .diagram-box{width:220px;max-width:100%;margin:0 auto 12px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#FAF8F3;}
+  .diagram-box svg{display:block;width:100%;height:auto;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;text-align:center;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:26pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 16</div>
+  <div class="c-title">PERIMETER, AREA<br><span>&amp; VOLUME</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Rectangles, triangles, circles, composite figures, 3D solids, and unit conversion — including squared &amp; cubed scaling.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Perimeter, Area &amp; Volume — SAT Reference</h2><p>Core rules you must know cold for the measurement unit</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">Rectangle</span><span class="fm-val">P = 2(l+w), A = lw</span></div><div class="fm"><span class="fm-label">Triangle</span><span class="fm-val">A = ½ × base × height</span></div><div class="fm"><span class="fm-label">Circle</span><span class="fm-val">C = 2πr, A = πr²</span></div><div class="fm"><span class="fm-label">Rectangular prism</span><span class="fm-val">V = lwh, SA = 2(lw+lh+wh)</span></div><div class="fm"><span class="fm-label">Cylinder / Cone</span><span class="fm-val">V = πr²h (cylinder), V = ⅓πr²h (cone)</span></div><div class="fm"><span class="fm-label">Unit conversion scaling</span><span class="fm-val">length ×k, area ×k², volume ×k³</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">The Scaling Rule</span><h4>Length, area, and volume scale differently</h4><p>If every length dimension is multiplied by k, area scales by k² and volume scales by k³ — this applies to unit conversions (1 m = 100 cm, but 1 m² = 10,000 cm²) just as much as to resizing a shape.</p></div>
+<div class="rc"><span class="rc-tag">Composite Figures</span><h4>Break it into shapes you already know</h4><p>Split an irregular figure into rectangles, triangles, and circular pieces, find each area separately, then add or subtract as the figure requires.</p></div>
+<div class="rc"><span class="rc-tag">Notched Rectangles</span><h4>A clean shortcut for perimeter</h4><p>Cutting a rectangular notch out of a rectangle's corner doesn't change the total perimeter — the sides you add exactly replace the sides you remove. The perimeter always equals the bounding rectangle's perimeter.</p></div>
+<div class="rc"><span class="rc-tag">Cone &amp; Pyramid Volume</span><h4>Always ⅓ of the matching prism/cylinder</h4><p>A cone's volume is exactly one-third of a cylinder with the same base and height — don't forget this factor when the formula isn't given.</p></div>
+<div class="rc"><span class="rc-tag">Working Backward</span><h4>Solve for an unknown dimension by isolating it</h4><p>If you're given the volume and some dimensions, plug into the formula and solve algebraically for the missing piece rather than guessing and checking.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Using the linear conversion factor for an area or volume conversion instead of squaring/cubing it</div><div class="trap">Forgetting the ⅓ factor in the cone (or pyramid) volume formula</div><div class="trap">Mixing up the circumference and area formulas for a circle</div><div class="trap">Confusing perimeter with area, or volume with surface area</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 16 — Perimeter, Area &amp; Volume</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Perimeter</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="300" height="200" fill="#FAF8F3"/>
+<line x1="40.00" y1="150.00" x2="208.00" y2="150.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="208.00" y1="150.00" x2="208.00" y2="52.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="208.00" y1="52.00" x2="40.00" y2="52.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="40.00" y1="52.00" x2="40.00" y2="150.00" stroke="#0D1B3E" stroke-width="2"/>
+<text x="124.00" y="166.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">12</text>
+<text x="24.00" y="101.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">7</text>
+</svg></div>
+  <div class="qs">Using the figure, a rectangle has length 12 and width 7. What is its perimeter?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>38</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>84</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>19</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>25</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="C">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Area</div></div>
+  
+  <div class="qs">A rectangle has length 9 and width 6. What is its area?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>30</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>15</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>54</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>45</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Area</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="300" height="200" fill="#FAF8F3"/>
+<line x1="40.00" y1="160.00" x2="200.00" y2="160.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="40.00" y1="160.00" x2="104.00" y2="32.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="200.00" y1="160.00" x2="104.00" y2="32.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="104.00" y1="32.00" x2="104.00" y2="160.00" stroke="#C8962E" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="120.00" y="176.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">10</text>
+<text x="118.00" y="96.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">8</text>
+</svg></div>
+  <div class="qs">Using the figure, a triangle has a base of 10 and a height of 8. What is its area?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>80</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>40</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>18</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>36</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Circumference</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="260" height="260" fill="#FAF8F3"/>
+<circle cx="130" cy="130" r="90" fill="none" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="130.00" y1="130.00" x2="220.00" y2="130.00" stroke="#C8962E" stroke-width="1.8"/>
+<circle cx="130.00" cy="130.00" r="3" fill="#0D1B3E"/>
+<text x="175.00" y="122.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">7</text>
+</svg></div>
+  <div class="qs">Using the figure, a circle has a radius of 7. What is its circumference, in terms of π?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>49π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>7π</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>21π</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>14π</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Area of a Circle</div></div>
+  
+  <div class="qs">A circle has a radius of 5. What is its area, in terms of π?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>25π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>10π</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>100π</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5π</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Volume</div></div>
+  
+  <div class="qs">A rectangular prism has length 4, width 3, and height 5. What is its volume?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>24</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>47</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>60</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>120</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Unit Conversion</div></div>
+  
+  <div class="qs">Convert 3.5 meters to centimeters.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>35</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>350</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3500</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>0.35</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Composite Perimeter</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="300" height="220" fill="#FAF8F3"/>
+<line x1="40.00" y1="180.00" x2="190.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="190.00" y1="180.00" x2="190.00" y2="105.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="190.00" y1="105.00" x2="130.00" y2="105.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="130.00" y1="105.00" x2="130.00" y2="60.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="130.00" y1="60.00" x2="40.00" y2="60.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="40.00" y1="60.00" x2="40.00" y2="180.00" stroke="#0D1B3E" stroke-width="2"/>
+<text x="115.00" y="196.00" font-size="10.5" font-weight="700" fill="#0D1B3E" text-anchor="middle">10</text>
+<text x="24.00" y="120.00" font-size="10.5" font-weight="700" fill="#0D1B3E" text-anchor="middle">8</text>
+<text x="160.00" y="97.00" font-size="10.5" font-weight="700" fill="#0D1B3E" text-anchor="middle">4</text>
+<text x="116.00" y="82.50" font-size="10.5" font-weight="700" fill="#0D1B3E" text-anchor="middle">3</text>
+</svg></div>
+  <div class="qs">Using the figure, an L-shaped figure fits exactly inside a 10-by-8 bounding rectangle, with a rectangular notch cut from one corner. What is the perimeter of the L-shaped figure?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>18</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>80</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>28</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>36</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Area of a Trapezoid</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="300" height="180" fill="#FAF8F3"/>
+<line x1="40.00" y1="150.00" x2="208.00" y2="150.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="208.00" y1="150.00" x2="180.00" y2="66.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="180.00" y1="66.00" x2="68.00" y2="66.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="68.00" y1="66.00" x2="40.00" y2="150.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="68.00" y1="150.00" x2="68.00" y2="66.00" stroke="#C8962E" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="124.00" y="166.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">12</text>
+<text x="124.00" y="58.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">8</text>
+<text x="52.00" y="108.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">6</text>
+</svg></div>
+  <div class="qs">Using the figure, a trapezoid has parallel bases of 12 and 8, and a height of 6. What is its area?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>60</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>120</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>20</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>40</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="C">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Volume of a Cylinder</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="240" height="260" fill="#FAF8F3"/>
+<ellipse cx="120" cy="50" rx="60" ry="18" fill="none" stroke="#0D1B3E" stroke-width="2"/>
+<path d="M 60 200 A 60 18 0 0 0 180 200" fill="none" stroke="#0D1B3E" stroke-width="2"/>
+<path d="M 60 200 A 60 18 0 0 1 180 200" fill="none" stroke="#0D1B3E" stroke-width="1.3" stroke-dasharray="3,3"/>
+<line x1="60.00" y1="50.00" x2="60.00" y2="200.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="180.00" y1="50.00" x2="180.00" y2="200.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="120.00" y1="50.00" x2="180.00" y2="50.00" stroke="#C8962E" stroke-width="1.8"/>
+<line x1="60.00" y1="50.00" x2="60.00" y2="200.00" stroke="#00A99D" stroke-width="1.8"/>
+<text x="150.00" y="42.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">3</text>
+<text x="46.00" y="125.00" font-size="11" font-weight="700" fill="#00A99D" text-anchor="middle">10</text>
+</svg></div>
+  <div class="qs">Using the figure, a cylinder has a radius of 3 and a height of 10. What is its volume, in terms of π?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>30π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>60π</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>90π</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>9π</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Surface Area</div></div>
+  
+  <div class="qs">A rectangular prism has length 5, width 4, and height 3. What is its total surface area?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>47</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>94</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>60</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>120</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Unit Conversion</div></div>
+  
+  <div class="qs">Convert 5 square meters to square centimeters.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>500</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5000</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>500000</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>50000</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Unit Conversion</div></div>
+  
+  <div class="qs">Convert 2 cubic meters to cubic centimeters.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2000000</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>200</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>20000</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>20000000</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Volume of a Cone</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="240" height="260" fill="#FAF8F3"/>
+<path d="M 50 200 A 70 18 0 0 0 190 200" fill="none" stroke="#0D1B3E" stroke-width="2"/>
+<path d="M 50 200 A 70 18 0 0 1 190 200" fill="none" stroke="#0D1B3E" stroke-width="1.3" stroke-dasharray="3,3"/>
+<line x1="50.00" y1="200.00" x2="120.00" y2="50.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="190.00" y1="200.00" x2="120.00" y2="50.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="120.00" y1="200.00" x2="190.00" y2="200.00" stroke="#C8962E" stroke-width="1.8"/>
+<line x1="120.00" y1="50.00" x2="120.00" y2="200.00" stroke="#00A99D" stroke-width="1.6" stroke-dasharray="4,3"/>
+<text x="155.00" y="216.00" font-size="11" font-weight="700" fill="#C8962E" text-anchor="middle">6</text>
+<text x="134.00" y="125.00" font-size="11" font-weight="700" fill="#00A99D" text-anchor="middle">10</text>
+</svg></div>
+  <div class="qs">Using the figure, a cone has a radius of 6 and a height of 10. What is its volume, in terms of π?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>360π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>40π</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>120π</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>60π</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Circle Relationships</div></div>
+  
+  <div class="qs">A circle has a circumference of 18π. What is its area, in terms of π?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>18π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>81π</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>9π</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>324π</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Composite Area</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="260" height="260" fill="#FAF8F3"/>
+<line x1="40.00" y1="220.00" x2="220.00" y2="220.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="220.00" y1="220.00" x2="220.00" y2="40.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="220.00" y1="40.00" x2="40.00" y2="40.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="40.00" y1="40.00" x2="40.00" y2="220.00" stroke="#0D1B3E" stroke-width="2"/>
+<circle cx="130.0" cy="130.0" r="27" fill="#FAF8F3" stroke="#C8962E" stroke-width="2"/>
+<text x="130.00" y="236.00" font-size="11" font-weight="700" fill="#0D1B3E" text-anchor="middle">10</text>
+<line x1="130.00" y1="130.00" x2="157.00" y2="130.00" stroke="#C8962E" stroke-width="1.5"/>
+<text x="143.50" y="122.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">3</text>
+</svg></div>
+  <div class="qs">Using the figure, a square plate has side length 10. A circular hole of radius 3 is cut from its center. What is the remaining area, rounded to the nearest whole number?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>100</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>91</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>28</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>72</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Volume &amp; Conversion</div></div>
+  
+  <div class="qs">A rectangular tank measures 2 meters by 1.5 meters by 1 meter. What is its volume in liters? (1 cubic meter = 1,000 liters)</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3000</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>3</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>300</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>30000</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="C">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Scaling Volume</div></div>
+  
+  <div class="qs">A cube has a volume of 64 cubic units. If each side length is scaled by a factor of 1.5, what is the new volume?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>96</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>144</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>216</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>81</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="B">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Volume of a Cylinder</div></div>
+  
+  <div class="qs">A cylinder has a volume of 250π cubic units and a radius of 5. What is its height?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>50</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>10</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>25</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>5</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Composite Volume</div></div>
+  <div class="diagram-box"><svg viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+<rect x="0" y="0" width="240" height="300" fill="#FAF8F3"/>
+<path d="M 65 110 A 55 15 0 0 0 175 110" fill="none" stroke="#0D1B3E" stroke-width="1.3" stroke-dasharray="3,3"/>
+<line x1="65.00" y1="110.00" x2="120.00" y2="50.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="175.00" y1="110.00" x2="120.00" y2="50.00" stroke="#0D1B3E" stroke-width="2"/>
+<path d="M 65 240 A 55 15 0 0 0 175 240" fill="none" stroke="#0D1B3E" stroke-width="2"/>
+<path d="M 65 240 A 55 15 0 0 1 175 240" fill="none" stroke="#0D1B3E" stroke-width="1.3" stroke-dasharray="3,3"/>
+<line x1="65.00" y1="110.00" x2="65.00" y2="240.00" stroke="#0D1B3E" stroke-width="2"/>
+<line x1="175.00" y1="110.00" x2="175.00" y2="240.00" stroke="#0D1B3E" stroke-width="2"/>
+<ellipse cx="120" cy="110" rx="55" ry="15" fill="none" stroke="#0D1B3E" stroke-width="1.6" stroke-dasharray="3,3" opacity="0.5"/>
+<line x1="120.00" y1="110.00" x2="175.00" y2="110.00" stroke="#C8962E" stroke-width="1.8"/>
+<text x="147.50" y="102.00" font-size="10.5" font-weight="700" fill="#C8962E" text-anchor="middle">4</text>
+<line x1="61.00" y1="110.00" x2="61.00" y2="240.00" stroke="#00A99D" stroke-width="1.6" stroke-dasharray="4,3"/>
+<text x="47.00" y="175.00" font-size="10.5" font-weight="700" fill="#00A99D" text-anchor="middle">6</text>
+<line x1="179.00" y1="50.00" x2="179.00" y2="110.00" stroke="#1a6b3c" stroke-width="1.6" stroke-dasharray="4,3"/>
+<text x="193.00" y="80.00" font-size="10.5" font-weight="700" fill="#1a6b3c" text-anchor="middle">3</text>
+</svg></div>
+  <div class="qs">Using the figure, a solid consists of a cylinder with radius 4 and height 6, topped with a cone of the same radius and a height of 3. What is the total volume of the solid, in terms of π?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>96π</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>16π</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>144π</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>112π</button></div>
+</div>
+
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Perimeter, Area &amp; Volume</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Perimeter, Area &amp; Volume Handout &nbsp;·&nbsp; SAT Math Day 16</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Perimeter, Area & Volume (Day 16): '+score+'/'+total+' (needs work)' : 'Perimeter, Area & Volume (Day 16): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

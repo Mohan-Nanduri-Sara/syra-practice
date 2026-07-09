@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Command of Evidence: Quantitative — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Information & Ideas</div>
+  <div class="c-title">COMMAND OF<br><span>EVIDENCE</span><br><span style="font-size:28pt;">Quantitative</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Use data from tables and graphs to support, complete, or evaluate a claim.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">Tables</span><span class="s-lbl">& Graphs</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Command of Evidence: Quantitative — Quick Reference</h2><p>Three tasks the SAT asks you to do with data</p></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Task 1</span><h4>Complete a claim</h4><p>A passage makes a claim with a blank at the end. Use the data table to fill it with specific numbers that prove the point.</p></div>
+<div class="rc"><span class="rc-tag">Task 2</span><h4>Support a finding</h4><p>Which row, column, or comparison in the data best supports what the researcher claims?</p></div>
+<div class="rc"><span class="rc-tag">Task 3</span><h4>Evaluate a hypothesis</h4><p>The researcher proposes a pattern. Which data point is the best evidence for that pattern — and which answers just mention numbers without proving it?</p></div>
+<div class="rc"><span class="rc-tag">Trap 1</span><h4>True but irrelevant</h4><p>A choice may accurately describe data that is not relevant to the specific claim. The answer must support the claim, not just be accurate.</p></div>
+<div class="rc"><span class="rc-tag">Trap 2</span><h4>Partially correct</h4><p>A choice may cite real data but omit the comparison that makes the point. Complete evidence makes the comparison explicit.</p></div>
+<div class="rc"><span class="rc-tag">Trap 3</span><h4>Wrong direction</h4><p>A choice may show the opposite trend to what the claim requires. Always check the direction of the comparison.</p></div>
+</div>
+<div class="method-box"><h3>Syra's Method</h3>
+<div class="ms"><div class="mn">1</div><div class="mt"><strong>Read the claim first, then the table.</strong> Identify exactly what the claim says — which variable, which direction, which comparison. Only then go to the table.</div></div>
+<div class="ms"><div class="mn">2</div><div class="mt"><strong>Find the specific cells that prove the claim.</strong> The correct answer will cite specific numbers. Wrong answers either omit numbers, cite wrong numbers, or make a true but irrelevant comparison.</div></div>
+<div class="ms"><div class="mn">3</div><div class="mt"><strong>State the comparison yourself.</strong> Before reading choices, say: "The data shows X > Y" or "Group A increased from X to Y." Then find the choice that says that explicitly.</div></div>
+</div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">True but irrelevant to the claim</div><div class="trap">Partially correct (missing the comparison)</div><div class="trap">Wrong direction</div><div class="trap">Accurate but about a different variable</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">CommandOfEvidence Quantitative</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Reading Test Score (out of 100) by Daily Reading Time — Middle School Students</div>
+  <table class="tbl"><thead><tr><th>Daily Reading Time</th><th>Grade 6</th><th>Grade 7</th><th>Grade 8</th></tr></thead><tbody><tr><td>Less than 15 min</td><td>58</td><td>61</td><td>63</td></tr><tr><td>15–30 min</td><td>67</td><td>69</td><td>72</td></tr><tr><td>30–60 min</td><td>76</td><td>79</td><td>81</td></tr><tr><td>More than 60 min</td><td>82</td><td>85</td><td>88</td></tr></tbody></table>
+  <div class="passage">Researchers studying independent reading habits found that reading time was positively correlated with test performance at every grade level. The researchers noted that the effect was most pronounced for 8th graders, because</div>
+  <div class="qs">Which choice most effectively uses data from the table to complete the passage?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>8th graders who read more than 60 minutes per day scored 88, the highest single score in the dataset, compared to 63 for those reading less than 15 minutes — a 25-point gap larger than the corresponding gaps for grades 6 and 7.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>8th grade students who read 15–30 minutes per day scored 72, higher than 6th graders in the same category.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Reading time improved scores for all three grade levels tested.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The lowest-scoring students in every grade were those who read less than 15 minutes per day.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 2</div></div>
+<div class="qb" data-q="2" data-ans="A">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Unemployment Rate (%) by Education Level — United States, 2010–2022</div>
+  <table class="tbl"><thead><tr><th>Year</th><th>No High School Diploma</th><th>High School Diploma</th><th>Bachelor's Degree or Higher</th></tr></thead><tbody><tr><td>2010</td><td>14.9</td><td>10.3</td><td>5.0</td></tr><tr><td>2014</td><td>9.0</td><td>6.5</td><td>3.5</td></tr><tr><td>2018</td><td>5.6</td><td>4.1</td><td>2.2</td></tr><tr><td>2022</td><td>5.1</td><td>3.9</td><td>2.1</td></tr></tbody></table>
+  <div class="passage">Labor economists tracking the relationship between education and employment security concluded that higher education levels consistently conferred greater protection against unemployment across all years measured. The data support this conclusion because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>In every year measured, the unemployment rate for workers without a high school diploma was higher than for those with a diploma, which was in turn higher than for college graduates — in 2022, the rates were 5.1%, 3.9%, and 2.1% respectively.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Unemployment fell for all education groups between 2010 and 2022.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Workers with a bachelor's degree had an unemployment rate below 3% in 2022.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The unemployment rate for workers with no diploma fell more steeply than for any other group.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 3</div></div>
+<div class="qb" data-q="3" data-ans="A">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Carbon Emissions (metric tons CO₂ per capita) — Selected Countries, 2000–2020</div>
+  <table class="tbl"><thead><tr><th>Country</th><th>2000</th><th>2010</th><th>2020</th></tr></thead><tbody><tr><td>United States</td><td>20.0</td><td>17.4</td><td>14.2</td></tr><tr><td>China</td><td>2.7</td><td>5.8</td><td>7.4</td></tr><tr><td>Germany</td><td>10.9</td><td>9.5</td><td>7.9</td></tr><tr><td>India</td><td>1.1</td><td>1.5</td><td>1.9</td></tr><tr><td>Brazil</td><td>2.0</td><td>2.3</td><td>2.1</td></tr></tbody></table>
+  <div class="passage">Analysts studying global emissions trends noted that while wealthy industrialized nations generally reduced their per capita emissions between 2000 and 2020, rapidly developing economies showed the opposite pattern, suggesting that</div>
+  <div class="qs">Which choice most logically uses data to complete this claim?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>economic development is associated with rising per capita emissions, as seen in China's increase from 2.7 to 7.4 metric tons and India's from 1.1 to 1.9, while the United States fell from 20.0 to 14.2 and Germany from 10.9 to 7.9.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>China emitted more per capita than the United States by 2020.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Brazil's emissions remained nearly flat between 2000 and 2020.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The United States had the highest per capita emissions in 2000 at 20.0 metric tons.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 4</div></div>
+<div class="qb" data-q="4" data-ans="A">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Social Media Usage and Self-Reported Wellbeing Score (1–10) by Age Group</div>
+  <table class="tbl"><thead><tr><th>Age Group</th><th>No Social Media Use</th><th>Moderate Use (1–2 hrs/day)</th><th>Heavy Use (3+ hrs/day)</th></tr></thead><tbody><tr><td>13–17</td><td>7.2</td><td>6.8</td><td>5.4</td></tr><tr><td>18–24</td><td>7.0</td><td>7.1</td><td>6.0</td></tr><tr><td>25–34</td><td>7.3</td><td>7.2</td><td>6.8</td></tr><tr><td>35–49</td><td>7.5</td><td>7.4</td><td>7.3</td></tr></tbody></table>
+  <div class="passage">Researchers found that heavy social media use was associated with lower wellbeing across all age groups, but that the effect was disproportionately large for teenagers. The data support this finding because</div>
+  <div class="qs">Which choice most effectively uses data to support this finding?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>teenagers aged 13–17 showed the largest drop: from 7.2 (no use) to 5.4 (heavy use), a decline of 1.8 points — far greater than the 0.2-point drop for adults aged 35–49 under the same conditions.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>the 18–24 group showed almost no difference between no use and moderate use.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>adults aged 35–49 had the highest wellbeing scores in every usage category.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>heavy social media use was associated with lower scores for every age group in the dataset.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 5</div></div>
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Commute Time (minutes) Before and After Remote Work Policy — Company X</div>
+  <table class="tbl"><thead><tr><th>Department</th><th>Pre-Policy Avg. Commute</th><th>Post-Policy Avg. Commute</th><th>% of Employees Now Remote</th></tr></thead><tbody><tr><td>Engineering</td><td>48</td><td>12</td><td>75%</td></tr><tr><td>Marketing</td><td>42</td><td>18</td><td>60%</td></tr><tr><td>Finance</td><td>39</td><td>28</td><td>35%</td></tr><tr><td>HR</td><td>37</td><td>30</td><td>30%</td></tr></tbody></table>
+  <div class="passage">Company executives who implemented a remote work policy predicted that the policy would reduce average commute times most significantly in departments with the highest rates of remote adoption. The data</div>
+  <div class="qs">Which choice most effectively uses data to evaluate the executives' prediction?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>support the prediction: Engineering, with the highest remote adoption at 75%, showed the largest commute reduction from 48 to 12 minutes, while HR, at 30% remote, showed the smallest reduction from 37 to 30 minutes.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>show that commute times fell across all departments after the policy was introduced.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>show that Finance had a lower pre-policy commute than Engineering.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>suggest that the policy had no impact on average commute times for most departments.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 6</div></div>
+<div class="qb" data-q="6" data-ans="A">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Species Richness (number of species observed) by Habitat Type and Disturbance Level</div>
+  <table class="tbl"><thead><tr><th>Habitat Type</th><th>Low Disturbance</th><th>Moderate Disturbance</th><th>High Disturbance</th></tr></thead><tbody><tr><td>Old-Growth Forest</td><td>142</td><td>98</td><td>41</td></tr><tr><td>Wetland</td><td>117</td><td>84</td><td>38</td></tr><tr><td>Grassland</td><td>89</td><td>76</td><td>62</td></tr><tr><td>Urban Green Space</td><td>34</td><td>32</td><td>27</td></tr></tbody></table>
+  <div class="passage">Ecologists studying biodiversity found that habitat type and disturbance level both significantly affect species richness, but that the impact of disturbance was most severe in the most biodiverse habitats. The data support this conclusion because</div>
+  <div class="qs">Which choice most effectively uses data to support this conclusion?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>old-growth forests lost 101 species from low to high disturbance (from 142 to 41), representing a 71% decline — the largest proportional and absolute loss — while urban green space lost only 7 species, a 21% decline.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>high-disturbance habitats had lower species richness than low-disturbance habitats in every category tested.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>grasslands showed the smallest absolute decline in species richness from low to high disturbance.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>wetlands had 117 species under low disturbance, higher than both grasslands and urban green spaces.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 7</div></div>
+<div class="qb" data-q="7" data-ans="A">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Voter Turnout (%) by Age Group — National Elections, 2012–2022</div>
+  <table class="tbl"><thead><tr><th>Age Group</th><th>2012</th><th>2016</th><th>2020</th><th>2022</th></tr></thead><tbody><tr><td>18–29</td><td>45</td><td>43</td><td>51</td><td>28</td></tr><tr><td>30–44</td><td>58</td><td>54</td><td>62</td><td>41</td></tr><tr><td>45–64</td><td>72</td><td>70</td><td>74</td><td>58</td></tr><tr><td>65+</td><td>78</td><td>76</td><td>80</td><td>66</td></tr></tbody></table>
+  <div class="passage">Political scientists studying generational voting patterns noted that while turnout among older voters has remained comparatively stable, the gap between younger and older voters has actually widened in midterm elections compared to presidential elections. The 2022 data support this conclusion because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>in 2022, the gap between voters aged 18–29 (28%) and voters aged 65+ (66%) was 38 percentage points — larger than the 33-point gap in the 2020 presidential election, where those groups were at 51% and 80% respectively.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>turnout among voters aged 65+ was 66% in 2022, lower than in any presidential election year in the dataset.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>every age group had lower turnout in 2022 than in 2020, which was expected in a midterm election.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>voters aged 18–29 had the lowest turnout of any group in the dataset in 2022.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 8</div></div>
+<div class="qb" data-q="8" data-ans="A">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Monthly Salary (USD) for Software Engineers by Years of Experience — 2023</div>
+  <table class="tbl"><thead><tr><th>Region</th><th>0–2 years</th><th>3–5 years</th><th>6–10 years</th><th>10+ years</th></tr></thead><tbody><tr><td>San Francisco</td><td>9,500</td><td>14,200</td><td>19,800</td><td>28,400</td></tr><tr><td>New York</td><td>8,800</td><td>12,600</td><td>17,400</td><td>24,500</td></tr><tr><td>Austin</td><td>7,200</td><td>10,400</td><td>14,100</td><td>19,600</td></tr><tr><td>Remote (nationwide)</td><td>7,800</td><td>11,200</td><td>15,600</td><td>21,800</td></tr></tbody></table>
+  <div class="passage">A career counselor advising early-career software engineers argued that geographic location matters less than experience in determining long-term salary outcomes, because the salary premium for experience is large in every market. The data most directly support this argument because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>in every region, moving from 0–2 years to 10+ years of experience more than tripled the average salary — for example, from $7,200 to $19,600 in Austin and $9,500 to $28,400 in San Francisco — a larger multiplier than the premium of any one location over another at the same experience level.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>San Francisco has the highest salaries at every experience level.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>remote workers earn more than Austin-based engineers at every experience level.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>the salary gap between San Francisco and Austin narrows slightly as experience increases.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 9</div></div>
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Number of Sick Days Per Year by Workplace Wellness Program Participation</div>
+  <table class="tbl"><thead><tr><th>Company Size</th><th>No Wellness Program</th><th>Basic Program (gym subsidy)</th><th>Comprehensive Program (mental health + nutrition + fitness)</th></tr></thead><tbody><tr><td>Small (<50 employees)</td><td>8.2</td><td>7.4</td><td>5.9</td></tr><tr><td>Medium (50–500 employees)</td><td>9.1</td><td>7.8</td><td>5.4</td></tr><tr><td>Large (>500 employees)</td><td>10.3</td><td>8.6</td><td>5.1</td></tr></tbody></table>
+  <div class="passage">Occupational health researchers found that comprehensive wellness programs reduced sick days more than basic programs, and that this effect was most pronounced in larger companies. The data support the finding about company size because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>large companies with comprehensive programs reduced sick days from 10.3 to 5.1 — a reduction of 5.2 days — compared to a reduction of only 2.3 days in small companies, from 8.2 to 5.9.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>comprehensive programs reduced sick days in every company size category tested.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>large companies had more sick days on average than small companies across all program types.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>the basic program reduced sick days by about 1 day in every company size category.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 10</div></div>
+<div class="qb" data-q="10" data-ans="A">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Percentage of Students Reporting High Academic Stress by School Year and Support Service Availability</div>
+  <table class="tbl"><thead><tr><th>School Year</th><th>No Counseling Services</th><th>Limited Counseling (1 counselor per 500+ students)</th><th>Adequate Counseling (1 per 250 or fewer)</th></tr></thead><tbody><tr><td>Year 1</td><td>62%</td><td>54%</td><td>38%</td></tr><tr><td>Year 2</td><td>65%</td><td>55%</td><td>36%</td></tr><tr><td>Year 3</td><td>64%</td><td>53%</td><td>33%</td></tr></tbody></table>
+  <div class="passage">Education researchers tracking student stress found that adequate counseling services were associated with meaningfully lower stress rates, and that this advantage grew over time. The data support the claim about growing advantage because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>the gap between "no counseling" and "adequate counseling" grew from 24 percentage points in Year 1 (62% vs 38%) to 31 points in Year 3 (64% vs 33%), while stress in both the no-counseling and limited groups remained nearly flat.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>student stress rates in schools with adequate counseling fell from 38% in Year 1 to 33% in Year 3.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>student stress rates in schools with no counseling were higher than in those with limited or adequate counseling in every year.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>limited counseling reduced stress compared to no counseling in every year of the study.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 11</div></div>
+<div class="qb" data-q="11" data-ans="A">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Time to Complete a Task (minutes) — Human vs. AI-Assisted Workers</div>
+  <table class="tbl"><thead><tr><th>Task Type</th><th>Human Only</th><th>AI-Assisted</th><th>Time Saved (min)</th></tr></thead><tbody><tr><td>Data Entry</td><td>42</td><td>14</td><td>28</td></tr><tr><td>Legal Document Review</td><td>180</td><td>65</td><td>115</td></tr><tr><td>Customer Email Response</td><td>8</td><td>3</td><td>5</td></tr><tr><td>Code Debugging</td><td>95</td><td>38</td><td>57</td></tr><tr><td>Medical Image Analysis</td><td>22</td><td>9</td><td>13</td></tr></tbody></table>
+  <div class="passage">Technology analysts studying AI assistance in the workplace found that the time savings from AI assistance were not uniform across task types — tasks requiring expert judgment showed the greatest absolute savings. The data best support this observation because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>legal document review showed the largest absolute time saving at 115 minutes, followed by code debugging at 57 minutes — both tasks requiring specialized expertise — while the simpler task of customer email response saved only 5 minutes.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>AI assistance reduced completion time in every task category tested.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>medical image analysis was completed in 9 minutes with AI assistance, compared to 22 minutes without.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>data entry showed a larger percentage reduction than legal document review when AI was introduced.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 12</div></div>
+<div class="qb" data-q="12" data-ans="A">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Percentage of Adults Meeting Physical Activity Guidelines by Income Quartile — 2019 & 2023</div>
+  <table class="tbl"><thead><tr><th>Income Quartile</th><th>2019</th><th>2023</th><th>Change</th></tr></thead><tbody><tr><td>Bottom 25%</td><td>18%</td><td>20%</td><td>+2%</td></tr><tr><td>Second 25%</td><td>28%</td><td>31%</td><td>+3%</td></tr><tr><td>Third 25%</td><td>41%</td><td>46%</td><td>+5%</td></tr><tr><td>Top 25%</td><td>58%</td><td>65%</td><td>+7%</td></tr></tbody></table>
+  <div class="passage">Public health researchers tracking physical activity levels found that while activity improved across all income groups between 2019 and 2023, the gains were larger among higher-income groups — a pattern suggesting that</div>
+  <div class="qs">Which choice most effectively uses data from the table to complete the passage?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>existing inequalities in physical activity may be widening rather than narrowing: the top income quartile improved by 7 percentage points while the bottom quartile improved by only 2 points, increasing the gap from 40 to 45 percentage points.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>physical activity rates improved across all income groups between 2019 and 2023.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>the top income quartile had the highest physical activity rate in both years.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>the absolute physical activity rate of the top quartile was more than three times that of the bottom quartile in 2023.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 13</div></div>
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Percentage of Adults Who Correctly Identified a News Story as True or False — by Media Literacy Training</div>
+  <table class="tbl"><thead><tr><th>Story Type</th><th>No Training</th><th>One-Session Training</th><th>Multi-Session Training</th></tr></thead><tbody><tr><td>True Stories</td><td>68%</td><td>79%</td><td>91%</td></tr><tr><td>False Stories (misinformation)</td><td>42%</td><td>61%</td><td>83%</td></tr><tr><td>Satirical Content</td><td>31%</td><td>48%</td><td>79%</td></tr></tbody></table>
+  <div class="passage">Media literacy educators found that multi-session training was far more effective than single-session training, and that the greatest absolute gains appeared for the most challenging content type. The data support both claims because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>multi-session training outperformed single-session training across all content types, and satirical content showed the largest absolute gain — from 31% with no training to 79% with multi-session training, a 48-point improvement, compared to a 23-point gain for true stories.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>satirical content was the most difficult content type for participants without training.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>multi-session training produced accuracy rates above 79% for every content type.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>single-session training improved performance on identifying misinformation from 42% to 61%.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 14</div></div>
+<div class="qb" data-q="14" data-ans="A">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Annual Yield (tons per hectare) — Organic vs. Conventional Farming by Crop Type</div>
+  <table class="tbl"><thead><tr><th>Crop</th><th>Organic</th><th>Conventional</th><th>Organic as % of Conventional</th></tr></thead><tbody><tr><td>Wheat</td><td>2.8</td><td>4.2</td><td>67%</td></tr><tr><td>Soybeans</td><td>2.4</td><td>2.9</td><td>83%</td></tr><tr><td>Corn</td><td>6.1</td><td>9.4</td><td>65%</td></tr><tr><td>Tomatoes</td><td>42.0</td><td>47.0</td><td>89%</td></tr><tr><td>Apples</td><td>18.0</td><td>22.0</td><td>82%</td></tr></tbody></table>
+  <div class="passage">Agricultural researchers found that the yield gap between organic and conventional farming varies significantly by crop, and that organic farming performs relatively best for crops with high market value per unit. The data partially support this hypothesis because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>tomatoes and apples, typically high-value crops, show the smallest yield gaps at 89% and 82% of conventional yields respectively, while corn and wheat — typically lower-value bulk commodities — show the largest gaps at 65% and 67%.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>organic farming produces lower yields than conventional farming for every crop in the dataset.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>organic corn yields 6.1 tons per hectare compared to 9.4 for conventional, the largest absolute gap in the dataset.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>soybeans show a smaller yield gap than wheat, suggesting legumes are better suited to organic production.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 15</div></div>
+<div class="qb" data-q="15" data-ans="A">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Annual Revenue Per Customer (USD) by Customer Tenure and Subscription Tier</div>
+  <table class="tbl"><thead><tr><th>Customer Tenure</th><th>Basic Plan</th><th>Standard Plan</th><th>Premium Plan</th></tr></thead><tbody><tr><td><1 year</td><td>480</td><td>720</td><td>1,200</td></tr><tr><td>1–3 years</td><td>510</td><td>810</td><td>1,450</td></tr><tr><td>3–5 years</td><td>560</td><td>940</td><td>1,720</td></tr><tr><td>5+ years</td><td>620</td><td>1,080</td><td>2,100</td></tr></tbody></table>
+  <div class="passage">A business analyst arguing for customer retention investment found that long-tenure customers generate substantially more revenue, and that this effect is amplified at higher subscription tiers. The data most directly support this argument because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Premium Plan customers with 5+ years of tenure generate $2,100 annually — 75% more than new Premium customers at $1,200 — while Basic Plan customers with 5+ years generate only $620, just 29% more than new Basic customers, showing the tenure premium is largest at the highest tier.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>customers on the Premium Plan generate more revenue than Standard or Basic customers at every tenure level.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>revenue increases with tenure for every subscription tier in the dataset.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Basic Plan customers with 5+ years generate more revenue than Basic customers in their first year.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 16</div></div>
+<div class="qb" data-q="16" data-ans="A">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Hospital Readmission Rates (%) Within 30 Days — by Discharge Process</div>
+  <table class="tbl"><thead><tr><th>Patient Condition</th><th>Standard Discharge</th><th>Enhanced Discharge (written plan + follow-up call)</th><th>Intensive Transition (care coordinator + home visit)</th></tr></thead><tbody><tr><td>Heart Failure</td><td>24%</td><td>17%</td><td>9%</td></tr><tr><td>Pneumonia</td><td>19%</td><td>13%</td><td>8%</td></tr><tr><td>COPD</td><td>22%</td><td>15%</td><td>10%</td></tr><tr><td>Hip Replacement</td><td>12%</td><td>8%</td><td>4%</td></tr><tr><td>Diabetes Management</td><td>18%</td><td>12%</td><td>7%</td></tr></tbody></table>
+  <div class="passage">Hospital administrators studying readmission rates found that intensive transition care was significantly more effective than enhanced discharge, and that the benefit was greatest for patients with cardiac conditions. The data support this finding because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>heart failure patients under intensive transition had a 9% readmission rate — 15 points lower than the 24% for standard discharge and 8 points lower than the 17% for enhanced discharge — the largest absolute reduction from enhanced to intensive of any condition in the dataset.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>intensive transition produced lower readmission rates than standard discharge for every condition tested.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>hip replacement had the lowest absolute readmission rates across all discharge types.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>enhanced discharge reduced readmission rates compared to standard discharge for every condition.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 17</div></div>
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Mean Score on Standardized Science Assessment — by Teaching Method and School Type</div>
+  <table class="tbl"><thead><tr><th>Teaching Method</th><th>Urban Public</th><th>Suburban Public</th><th>Private</th></tr></thead><tbody><tr><td>Traditional Lecture</td><td>61</td><td>72</td><td>79</td></tr><tr><td>Project-Based Learning</td><td>68</td><td>76</td><td>82</td></tr><tr><td>Inquiry-Based Learning</td><td>74</td><td>80</td><td>86</td></tr><tr><td>Combined (Inquiry + Project)</td><td>79</td><td>84</td><td>89</td></tr></tbody></table>
+  <div class="passage">Education researchers found that inquiry-based and combined methods outperformed traditional lecture across all school types, and that the advantage of the combined method over lecture was consistent regardless of school context. The data support this finding because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>the combined method outperformed traditional lecture by 18 points in urban public schools (79 vs 61), 12 points in suburban public (84 vs 72), and 10 points in private schools (89 vs 79) — a consistent and substantial advantage across all three contexts.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>private schools outperformed public schools in every teaching method category.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>inquiry-based learning produced higher scores than project-based learning in every school type.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>the combined method produced the highest scores in every school type category.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 18</div></div>
+<div class="qb" data-q="18" data-ans="A">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Average Energy Bill Reduction (%) After Home Efficiency Upgrades by Region and Upgrade Type</div>
+  <table class="tbl"><thead><tr><th>Region</th><th>Insulation Only</th><th>Windows Only</th><th>Insulation + Windows</th><th>Full Upgrade (HVAC + insulation + windows)</th></tr></thead><tbody><tr><td>Northeast</td><td>12%</td><td>8%</td><td>18%</td><td>34%</td></tr><tr><td>Southeast</td><td>7%</td><td>5%</td><td>11%</td><td>26%</td></tr><tr><td>Midwest</td><td>14%</td><td>9%</td><td>21%</td><td>38%</td></tr><tr><td>Southwest</td><td>6%</td><td>4%</td><td>9%</td><td>22%</td></tr><tr><td>Northwest</td><td>11%</td><td>7%</td><td>16%</td><td>29%</td></tr></tbody></table>
+  <div class="passage">Energy policy researchers studying home efficiency upgrades found that full upgrades consistently produced the greatest savings, and that climate conditions — specifically colder climates — amplified the benefit of all upgrade types. The data support the climate finding because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>the Midwest, with the coldest winters of the regions listed, showed the highest reduction in every upgrade category — 14% for insulation alone, 9% for windows, 21% for combined, and 38% for full upgrade — while the Southwest, with milder winters, consistently showed the lowest reductions.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>full upgrades produced the highest savings in every region tested.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>the Northeast had higher savings from full upgrades than the Southeast or Southwest.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>insulation-only upgrades outperformed window-only upgrades in every region.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 19</div></div>
+<div class="qb" data-q="19" data-ans="A">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Percentage of Adults Reporting Excellent or Good Health by Sleep Duration and Exercise Frequency</div>
+  <table class="tbl"><thead><tr><th>Exercise Frequency</th><th><6 hrs sleep</th><th>6–7 hrs sleep</th><th>7–8 hrs sleep</th><th>>8 hrs sleep</th></tr></thead><tbody><tr><td>Never</td><td>28%</td><td>35%</td><td>44%</td><td>39%</td></tr><tr><td>1–2x/week</td><td>38%</td><td>46%</td><td>58%</td><td>52%</td></tr><tr><td>3–4x/week</td><td>45%</td><td>55%</td><td>71%</td><td>62%</td></tr><tr><td>5+ days/week</td><td>50%</td><td>60%</td><td>78%</td><td>68%</td></tr></tbody></table>
+  <div class="passage">Health researchers found that sleeping 7–8 hours per night was consistently associated with the best self-reported health outcomes regardless of exercise frequency, and that combining adequate sleep with regular exercise produced multiplicative rather than merely additive benefits. The data best support the claim about combination benefits because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>adults who exercised 5+ days per week and slept 7–8 hours reported excellent or good health at 78% — substantially higher than would be expected by simply adding the benefits of exercise alone (50% with less sleep) or adequate sleep alone (44% with no exercise), suggesting the two factors interact positively.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>adults who exercised 5+ days per week and slept 7–8 hours had the highest self-reported health rate in the dataset at 78%.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>sleeping 7–8 hours was associated with the best outcomes in every exercise frequency category.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>adults who never exercised reported better health with 7–8 hours of sleep than with less sleep.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 20</div></div>
+<div class="qb" data-q="20" data-ans="A">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Command of Evidence: Quantitative</div></div>
+  <div class="tbl-t">Mean Income ($000s) by Degree Type and Years Since Graduation</div>
+  <table class="tbl"><thead><tr><th>Degree Type</th><th>1–5 years</th><th>6–10 years</th><th>11–20 years</th><th>20+ years</th></tr></thead><tbody><tr><td>High School Diploma</td><td>32</td><td>37</td><td>41</td><td>44</td></tr><tr><td>Associate's Degree</td><td>36</td><td>43</td><td>49</td><td>53</td></tr><tr><td>Bachelor's Degree</td><td>46</td><td>58</td><td>72</td><td>84</td></tr><tr><td>Graduate Degree</td><td>58</td><td>76</td><td>98</td><td>121</td></tr></tbody></table>
+  <div class="passage">Economists studying lifetime returns on education found that the income premium associated with higher education grows substantially over time, and that the advantage of a graduate degree over a bachelor's degree widens most dramatically after the first decade of employment. The data support the second claim because</div>
+  <div class="qs">Which choice most effectively uses data from the table?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>the income gap between graduate and bachelor's degree holders grows from $12,000 in the first five years to $18,000 in years 6–10, then jumps to $26,000 in years 11–20 and $37,000 for those 20+ years out, showing an accelerating advantage over time.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>graduate degree holders earn more than bachelor's degree holders at every stage of their careers.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>bachelor's degree holders earn substantially more than high school graduates across all career stages.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>income increases with years of experience for every degree type in the dataset.</button></div>
+</div>
+<div style="display:flex;justify-content:center;padding:20px 0 32px;">
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Command of Evidence: Quantitative</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">A</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Command of Evidence: Quantitative Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+'
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Command of Evidence (Quantitative): '+score+'/'+total+' (needs work)' : 'Command of Evidence (Quantitative): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

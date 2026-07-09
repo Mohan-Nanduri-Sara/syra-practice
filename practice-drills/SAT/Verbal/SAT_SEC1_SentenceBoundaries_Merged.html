@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Sentence Boundaries & Conjunctions — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Standard English Conventions · SEC 1</div>
+  <div class="c-title">SENTENCE<br><span>BOUNDARIES</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Run-ons, fragments, comma splices — plus choosing the right conjunction to fix or connect clauses.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">2</span><span class="s-lbl">Skill Areas</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Sentence Boundaries & Conjunctions — Quick Reference</h2><p>Three ways sentences break, and how coordinating/subordinating conjunctions fix or connect them</p></div>
+<div class="rule-cards"><div class="rc"><span class="rc-tag">Error 1</span><h4>Run-On</h4><p>Two independent clauses joined with no punctuation at all. Fix: add a period, semicolon, or coordinating conjunction + comma.</p></div><div class="rc"><span class="rc-tag">Error 2</span><h4>Comma Splice</h4><p>Two independent clauses joined with only a comma. Fix: replace the comma with a period, semicolon, or add a conjunction after it.</p></div><div class="rc"><span class="rc-tag">Error 3</span><h4>Fragment</h4><p>A group of words punctuated as a sentence but missing a subject, verb, or both — or a dependent clause standing alone.</p></div><div class="rc"><span class="rc-tag">Coordinating</span><h4>FANBOYS</h4><p>For, And, Nor, But, Or, Yet, So — join two independent clauses with a comma before the conjunction.</p></div><div class="rc"><span class="rc-tag">Subordinating</span><h4>Dependent Clause Words</h4><p>Although, because, since, while, when, after, before — create a dependent clause that cannot stand alone.</p></div><div class="rc"><span class="rc-tag">Logic Check</span><h4>Match the Relationship</h4><p>Contrast needs although/but/yet. Cause needs because/since. Don't just pick a grammatically legal word — pick the one that matches the actual logic.</p></div></div>
+<div class="method-box"><h3>Syra's Method</h3><div class="ms"><div class="mn">1</div><div class="mt"><strong>Read each clause separately.</strong> Cover the first clause and read only the second — is it a complete sentence? Both complete = you need more than a comma.</div></div><div class="ms"><div class="mn">2</div><div class="mt"><strong>Name the error before choosing a fix.</strong> "This is a comma splice" → eliminate any answer that leaves two independent clauses joined by only a comma.</div></div><div class="ms"><div class="mn">3</div><div class="mt"><strong>For conjunction questions, find the logical relationship first.</strong> Contrast, cause, or addition? Then pick the conjunction that matches — don't just pick one that sounds fine.</div></div></div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Comma splice mistaken for correct (comma feels natural)</div><div class="trap">Fragment after a long noun phrase that sounds complete</div><div class="trap">A grammatically legal conjunction that reverses the actual logic (e.g. "although" where the sentence needs "because")</div><div class="trap">Semicolon placed before a subordinating conjunction (wrong — semicolons only join independent clauses)</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SEC 1 — Sentence Boundaries</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The researchers collected data from over two thousand participants the results were published in three peer-reviewed journals.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The researchers collected data from over two thousand participants; the results were published in three peer-reviewed journals.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The researchers collected data from over two thousand participants, the results were published in three peer-reviewed journals.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The researchers collected data from over two thousand participants however the results were published in three peer-reviewed journals.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The researchers collected data from over two thousand participants the results, were published in three peer-reviewed journals.</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">Because the bridge had been under construction for three years. The commute times for residents of the eastern district were significantly longer than usual.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Because the bridge had been under construction for three years; commute times for residents of the eastern district were significantly longer than usual.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Because the bridge had been under construction for three years, commute times for residents of the eastern district were significantly longer than usual.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Because the bridge had been under construction for three years and commute times for residents of the eastern district were significantly longer than usual.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The bridge had been under construction for three years. Because commute times for residents of the eastern district were significantly longer than usual.</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="C">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The sculptor worked with industrial materials such as steel and concrete, she transformed them into objects of unexpected delicacy.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The sculptor worked with industrial materials such as steel and concrete she transformed them into objects of unexpected delicacy.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The sculptor worked with industrial materials such as steel and concrete, transforming unexpected delicacy she found in them.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The sculptor worked with industrial materials such as steel and concrete; she transformed them into objects of unexpected delicacy.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The sculptor worked with industrial materials, such as steel and concrete, she transformed them into objects of unexpected delicacy.</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The policy was controversial from the beginning many city council members refused to endorse it.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The policy was controversial from the beginning, many city council members refused to endorse it.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The policy was controversial from the beginning many, city council members refused to endorse it.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The policy was controversial from the beginning many city council members; refused to endorse it.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The policy was controversial from the beginning. Many city council members refused to endorse it.</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The playwright revised the script more than twenty times, each revision brought the dialogue closer to the naturalistic style she was striving for.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The playwright revised the script more than twenty times, with each revision bringing the dialogue closer to the naturalistic style she was striving for.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The playwright revised the script more than twenty times each revision brought the dialogue closer to the naturalistic style she was striving for.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The playwright revised the script more than twenty times, each revision, brought the dialogue closer to the naturalistic style she was striving for.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The playwright revised the script more than twenty times. Each revision, brought the dialogue closer to the naturalistic style she was striving for.</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The marine biologist had devoted thirty years to studying coral reef ecosystems, her most significant discovery was that reefs could recover from bleaching events if water temperatures dropped within a critical window.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The marine biologist had devoted thirty years to studying coral reef ecosystems her most significant discovery was that reefs could recover from bleaching events if water temperatures dropped within a critical window.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The marine biologist had devoted thirty years to studying coral reef ecosystems. Her most significant discovery was that reefs could recover from bleaching events if water temperatures dropped within a critical window.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The marine biologist had devoted thirty years to studying coral reef ecosystems, her most significant discovery: reefs could recover from bleaching events if water temperatures dropped within a critical window.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The marine biologist, who had devoted thirty years to studying coral reef ecosystems, her most significant discovery was that reefs could recover from bleaching events if water temperatures dropped within a critical window.</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="C">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">Which was the first national park in the world. Yellowstone was established by the US Congress in 1872.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Which was the first national park in the world, Yellowstone was established by the US Congress in 1872.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Which was the first national park in the world; Yellowstone was established by the US Congress in 1872.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Yellowstone, which was the first national park in the world, was established by the US Congress in 1872.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Yellowstone was established by the US Congress in 1872. Which was the first national park in the world.</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">Although the evidence for the new treatment was compelling. The FDA required additional clinical trials before approving it for widespread use.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Although the evidence for the new treatment was compelling; the FDA required additional clinical trials before approving it for widespread use.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The evidence for the new treatment was compelling. Although the FDA required additional clinical trials before approving it for widespread use.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Although the evidence for the new treatment was compelling. And the FDA required additional clinical trials before approving it for widespread use.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Although the evidence for the new treatment was compelling, the FDA required additional clinical trials before approving it for widespread use.</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The new traffic regulation reduced accidents at the intersection by 34 percent, it also increased average commute times by approximately four minutes.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The new traffic regulation reduced accidents at the intersection by 34 percent, but it also increased average commute times by approximately four minutes.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The new traffic regulation reduced accidents at the intersection by 34 percent it also increased average commute times by approximately four minutes.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The new traffic regulation reduced accidents at the intersection by 34 percent, it also, increased average commute times by approximately four minutes.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The new traffic regulation reduced accidents at the intersection by 34 percent. It also increased average commute times. By approximately four minutes.</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Sentence Boundaries</div></div>
+  <div class="passage">The software update was designed to improve security and performance, users reported that it caused new compatibility issues with older devices.</div>
+  <div class="qs">Which choice best corrects the sentence boundary error?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The software update was designed to improve security and performance users reported that it caused new compatibility issues with older devices.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The software update was designed to improve security and performance; however, users reported that it caused new compatibility issues with older devices.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The software update was designed to improve security and performance, users, reported that it caused new compatibility issues with older devices.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The software update was designed to improve security and performance. Users reported; that it caused new compatibility issues with older devices.</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="C">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">The expedition had access to state-of-the-art equipment, _______ the team still faced conditions that no technology could fully prepare them for.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>so</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>because</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>yet</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>nor</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">_______ the new public transit line would increase commute costs for some residents, the city council argued that the long-term environmental benefits outweighed the short-term financial burden.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Since</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Because</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>So</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Although</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">_______ the director had worked with the lead actor on three previous films, she expected the production to proceed smoothly — an expectation the actor's erratic behavior quickly undermined.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Because</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Although</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Unless</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>While</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">_______ the company's marketing campaign was successful in raising brand awareness, sales figures for the quarter remained disappointing.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Because</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Although</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Since</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>So</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">The composer wrote the symphony in under three weeks, _______ most critics agreed that it showed no sign of the haste with which it was produced.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>so</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>because</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>yet</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>nor</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">The proposed dam would generate significant hydroelectric power, _______ it would also flood over a thousand acres of ecologically sensitive wetland.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>so</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>nor</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>for</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>but</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">The journalist refused to reveal her source, _______ the editor explicitly assured her that doing so would not be required.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>unless</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>because</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>although</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>so</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">_______ both candidates claimed to support environmental protection, their proposed policies differed sharply in scope and funding mechanisms.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Because</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>While</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>So</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Since</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="C">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">_______ the study's sample size was relatively small, the researchers were careful not to generalize their findings beyond the specific population they had examined.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Although</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>So</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Because</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Unless</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Subordination & Coordination</div></div>
+  <div class="passage">_______ the senator had publicly opposed the bill for months, she reversed her position after new economic data suggested it would benefit her constituents.</div>
+  <div class="qs">Which conjunction most logically and precisely completes the sentence?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Because</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>So</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Since</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Although</button></div>
+</div>
+
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Sentence Boundaries & Conjunctions</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Sentence Boundaries & Conjunctions Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'SEC1 Sentence Boundaries: '+score+'/'+total+' (needs work)' : 'SEC1 Sentence Boundaries: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

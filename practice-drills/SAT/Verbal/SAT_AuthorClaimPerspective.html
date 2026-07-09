@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Author's Claim & Perspective — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Craft & Structure</div>
+  <div class="c-title">AUTHOR'S CLAIM<br><span>& PERSPECTIVE</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">What does the author actually believe? Find the stance beneath the prose.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">3</span><span class="s-lbl">Question Types</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Author's Claim & Perspective — Quick Reference</h2><p>What the SAT tests: stance, attitude, and belief</p></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Type 1</span><h4>What is the author's claim?</h4><p>What position does the author take? Not what the text mentions, but what the author argues, defends, or contends.</p></div>
+<div class="rc"><span class="rc-tag">Type 2</span><h4>Author's attitude / perspective</h4><p>How does the author feel about the subject? Look for word choice, tone, framing, and what the author emphasizes or omits.</p></div>
+<div class="rc"><span class="rc-tag">Type 3</span><h4>Which statement would the author agree with?</h4><p>Identify the author's position; then find the answer choice that is consistent with it. Wrong answers often capture the opposite view or a view the author explicitly critiques.</p></div>
+<div class="rc"><span class="rc-tag">Trap 1</span><h4>The view described vs. the view endorsed</h4><p>An author can describe a position without endorsing it. Skeptical presentation of a view ≠ endorsement.</p></div>
+<div class="rc"><span class="rc-tag">Trap 2</span><h4>Too strong</h4><p>If the author says "may suggest," the correct answer will not say "proves" or "demonstrates conclusively."</p></div>
+<div class="rc"><span class="rc-tag">Trap 3</span><h4>Confuses topic with stance</h4><p>The author's topic and their stance are different things. Two authors can write about the same topic from opposite perspectives.</p></div>
+</div>
+<div class="method-box"><h3>Syra's Method</h3>
+<div class="ms"><div class="mn">1</div><div class="mt"><strong>Find the author's key verbs and evaluative words.</strong> "argues," "believes," "contends," "unfortunately," "remarkably" — these signal where the author stands. Neutral description uses none of these.</div></div>
+<div class="ms"><div class="mn">2</div><div class="mt"><strong>Distinguish description from endorsement.</strong> Does the author describe a view or hold it? Clues: first-person markers, direct evaluation, the structure of the argument.</div></div>
+<div class="ms"><div class="mn">3</div><div class="mt"><strong>Match the strength of the answer to the strength of the claim.</strong> If the author hedges, the answer must hedge. If the author is confident, the answer can be strong.</div></div>
+</div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Opposite position (author critiques, not endorses)</div><div class="trap">Too strong / overclaims</div><div class="trap">Neutral description confused with endorsement</div><div class="trap">Partially correct but wrong emphasis</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">AuthorClaimPerspective</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+<div class="qb" data-q="1" data-ans="B">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The assumption that economic growth and environmental sustainability are fundamentally incompatible has long been used to justify inaction on climate policy. This framing serves the interests of those who benefit from the status quo. A growing body of evidence — from the renewable energy sector's job creation to the cost savings of efficiency upgrades — suggests not only that sustainability and growth can coexist but that the transition to a clean economy may itself drive the next phase of economic expansion.</div>
+  <div class="qs">Which choice best describes the author's perspective?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author is uncertain about whether the economy can grow while addressing climate change.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author believes the framing of growth vs. sustainability as a binary choice is a politically motivated false dichotomy, and that the evidence points toward compatibility.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author argues that environmental sustainability should take priority over economic growth in all policy decisions.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author endorses the traditional view that economic growth and environmental protection are in fundamental tension.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 2</div></div>
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">Frederick Douglass's 1845 <em>Narrative</em> is sometimes discussed primarily as a historical document — evidence of slavery's brutality, a primary source for historians of the antebellum South. This framing, however sympathetic, does Douglass a disservice. The <em>Narrative</em> is also a work of extraordinary literary craft: its rhetorical structure, its use of irony and dramatic scene-setting, and its manipulation of readerly sympathy make it as sophisticated a piece of prose as any American memoir of the 19th century.</div>
+  <div class="qs">Which choice best describes the author's claim?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author argues that the Narrative should be read primarily as a historical document rather than a literary work.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author contends that framing the Narrative mainly as historical evidence diminishes its status as a work of deliberate literary artistry.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author believes the Narrative's historical importance exceeds its literary merit.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author argues that historians have correctly identified the most important aspects of the Narrative.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 3</div></div>
+<div class="qb" data-q="3" data-ans="B">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">Proponents of "grit" as the key to academic and professional success often cite Angela Duckworth's research in support of their position. What they less often acknowledge is that Duckworth herself has noted the limits of her framework. Grit, she has clarified, does not operate independently of circumstance: it predicts achievement most strongly when basic conditions — adequate nutrition, stable housing, freedom from acute trauma — are in place. Treating grit as a universal solution to inequality thus asks individuals to supply, through sheer perseverance, what society has failed to provide.</div>
+  <div class="qs">Which choice best describes the author's perspective?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author fully endorses the grit framework as the most important predictor of academic success.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author argues that invoking grit as a solution to inequality misuses the original research and shifts responsibility from structural conditions to individuals.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author believes grit is irrelevant to academic and professional achievement.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author agrees with popular interpretations of Duckworth's research.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 4</div></div>
+<div class="qb" data-q="4" data-ans="B">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">In the decades since Roe v. Wade was decided, advocates on both sides of the abortion debate have treated the Supreme Court as the primary arena for resolving the question. This has had an impoverishing effect on democratic deliberation. When fundamental moral questions are decided by judicial fiat — however well-reasoned — the political community loses the opportunity to work through disagreement in legislative bodies where compromise and accountability are possible. Whatever one thinks of the underlying moral question, there is something troubling about a democracy that outsources its hardest decisions to nine unelected judges.</div>
+  <div class="qs">Which choice best captures the author's argument?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author argues that the Supreme Court should not have the power of judicial review.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author argues that relying on the Supreme Court to resolve the abortion debate has undermined the democratic process, regardless of one's position on the underlying issue.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author believes that abortion rights should be protected by the legislature rather than the courts.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author endorses the overturning of Roe v. Wade on democratic grounds.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 5</div></div>
+<div class="qb" data-q="5" data-ans="B">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">Contemporary food writing has a tendency to aestheticize poverty. Farm-to-table cuisine, artisanal fermentation, and foraged ingredients are presented as progressive choices when in fact they reflect the tastes of an affluent minority. For most of history, eating locally, simply, and seasonally was not a lifestyle preference but a material constraint. When wealth allows us to choose what deprivation once imposed, the choice is a luxury — and calling it a virtue is a form of nostalgia that mistakes the aesthetics of scarcity for its reality.</div>
+  <div class="qs">Which choice best describes the author's claim?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author argues that local and seasonal food is nutritionally superior to industrially produced food.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author contends that presenting affluent food choices as virtuous progressivism misrepresents the historical reality of the constraints those choices aestheticize.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author believes that farm-to-table cuisine is a genuine solution to environmental problems.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author endorses industrial food production as more equitable than artisanal alternatives.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 6</div></div>
+<div class="qb" data-q="6" data-ans="C">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">Scholars of the Harlem Renaissance have long debated whether the movement represented a genuine cultural revolution or a performance of Black culture for white audiences and patrons. This debate can be taken too far. The fact that white publishers, gallery owners, and audiences played a role in shaping what the Renaissance produced does not negate the authenticity or importance of what Black artists created. Art has always been produced within, and sometimes constrained by, the conditions of its patronage — this does not make it less real.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The Harlem Renaissance was inauthentic because it was shaped by white patronage.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The influence of white patrons and audiences on the Harlem Renaissance undermines its status as a Black cultural movement.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The conditions under which art is produced do not determine whether it is authentic or significant.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The Harlem Renaissance was entirely free from the influence of white cultural gatekeepers.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 7</div></div>
+<div class="qb" data-q="7" data-ans="B">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The argument that social media platforms are neutral tools — mere conduits for whatever their users choose to express — has become increasingly difficult to sustain. The algorithms that govern what content is amplified, what is suppressed, and what appears in whose feed are not neutral mechanisms; they are design decisions with ideological consequences. Neutrality is not an option for a platform whose architecture necessarily shapes what millions of people see and believe.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Social media platforms should be banned from using algorithms to curate content.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The design of platform algorithms constitutes a form of editorial choice with real effects on public discourse.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Social media platforms are genuinely neutral and should be treated as common carriers.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Users, not platforms, bear primary responsibility for the spread of misinformation.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 8</div></div>
+<div class="qb" data-q="8" data-ans="B">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The phrase "nature vs. nurture" suggests a binary that most contemporary researchers in genetics and developmental psychology have moved beyond. Genes do not simply express fixed traits; they are activated or suppressed by environmental conditions. Conversely, environmental influences do not operate on a blank slate — they interact with genetic predispositions in ways that are complex and bidirectional. The most accurate way to understand human development is not as the victory of one factor over the other but as the continuous, dynamic interaction of both.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Genes are the primary determinant of human traits; the environment plays a secondary role.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The "nature vs. nurture" framing is outdated because human development is better understood as the ongoing interaction of genetic and environmental factors.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Environment is the primary determinant of human traits; genetic factors are less important than researchers once believed.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The debate between nature and nurture remains unresolved and is unlikely to be settled by current research.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 9</div></div>
+<div class="qb" data-q="9" data-ans="B">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">Critics who argue that contemporary literary fiction has abandoned the political in favor of the personal miss the ways in which the personal has always been political. When a novelist traces the interior life of a character navigating racial bias, immigration, or economic precarity, the novel is not retreating from society — it is doing what fiction does best: making the systemic visible through the individual, the abstract tangible through the particular. The charge that such fiction is "merely personal" reflects a narrow understanding of how literature actually generates political insight.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Novels about individual experience are less politically significant than novels about public institutions and events.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Depicting personal experience through the lens of race, immigration, or economic precarity can be a more effective form of political engagement than direct political argument.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Contemporary literary fiction has retreated from its responsibility to engage with social issues.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Novelists should focus on public rather than private life to produce genuine political literature.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 10</div></div>
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The assumption that more information always leads to better decision-making underlies much of the digital information economy. It is, however, empirically questionable. Research in cognitive psychology consistently finds that beyond a certain threshold, additional information degrades decision quality: it increases cognitive load, introduces irrelevant noise, and produces the illusion of understanding without its substance. The ideal informational environment for good decision-making is not necessarily a maximally rich one.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The internet should be restricted to reduce the amount of information available to decision-makers.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The assumption that more information improves decisions is not supported by cognitive research, which suggests that informational abundance beyond a threshold harms rather than helps decision quality.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Decision-makers consistently benefit from having access to as much information as possible.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The digital information economy has had an unambiguously positive effect on public discourse.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 11</div></div>
+<div class="qb" data-q="11" data-ans="B">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The tendency to treat scientific consensus as merely one opinion among many is not an example of intellectual open-mindedness — it is a category error. Scientific consensus is not formed by majority vote among individual opinions; it is the provisional conclusion of an ongoing collective process of evidence, replication, and peer review. Treating it as equivalent to lay opinion misunderstands the epistemic structure of science and creates a false symmetry between expertise and ignorance.</div>
+  <div class="qs">Which choice best describes the author's perspective?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author believes that scientific consensus is infallible and should never be questioned.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author argues that treating scientific consensus as equivalent to lay opinion reflects a misunderstanding of how scientific knowledge is established.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author contends that scientific consensus is just one of many equally valid ways of knowing.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author endorses the view that all knowledge claims should be treated with equal skepticism.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 12</div></div>
+<div class="qb" data-q="12" data-ans="B">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">Much debate about artificial intelligence focuses on questions of capability: can a machine pass the Turing test, write a convincing essay, diagnose disease? Fewer conversations focus on questions of accountability: when an AI system causes harm, who is responsible — the developer, the deployer, the user, or no one? The governance gap between what AI can do and our frameworks for managing the consequences of what it does represents one of the most significant unaddressed challenges of our technological moment.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The capabilities of AI systems should be restricted until clearer accountability frameworks are in place.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The question of who bears responsibility when AI causes harm is at least as important as questions of AI capability, and current governance frameworks are inadequate.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Developers of AI systems cannot be held accountable for how those systems are used by others.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The Turing test is the most important benchmark for evaluating AI systems.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 13</div></div>
+<div class="qb" data-q="13" data-ans="B">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">It has become fashionable in some quarters to dismiss the study of history as irrelevant to contemporary problems — a luxury for those with the time to look backward when urgent crises demand we look forward. This view mistakes the purpose of historical understanding. We do not study history to reproduce the past but to understand the conditions under which change is and is not possible. Without that understanding, even the most urgent contemporary activism operates in the dark.</div>
+  <div class="qs">Which choice best describes the author's argument?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author believes that historical study is more important than addressing contemporary crises.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author argues that historical understanding is a precondition for effective contemporary action, not an alternative to it.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author contends that contemporary problems are best understood without reference to historical context.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author dismisses the urgency of contemporary crises in favor of long-term historical perspective.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 14</div></div>
+<div class="qb" data-q="14" data-ans="C">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The widespread belief that the human brain is divided into a rational, controlled "prefrontal" system and an impulsive, emotional "limbic" system — and that good decision-making means the former overriding the latter — has been substantially revised by contemporary neuroscience. Emotion is not the enemy of reason; it is, as Antonio Damasio's work on patients with prefrontal damage shows, a necessary input to practical reasoning. People who lose the capacity for emotional response do not become more rational — they become unable to decide at all.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The prefrontal cortex is the sole seat of rational decision-making, and its dominance over the limbic system produces good outcomes.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Emotions are obstacles to good decision-making and should be controlled by rational analysis.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Emotion and reason are not opposed; emotional capacity is a necessary component of effective practical reasoning.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Damasio's research has shown that purely rational decision-making is superior to emotionally informed decision-making.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 15</div></div>
+<div class="qb" data-q="15" data-ans="B">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The popular image of the lone genius — the isolated individual whose singular vision transforms a field — distorts the actual sociology of scientific and artistic breakthroughs. Innovation is almost never solo work: it depends on networks of collaboration, access to prior knowledge, and the right institutional conditions. Newton's apple fell in a particular cultural and intellectual moment that made the insight possible. Attributing transformative achievements primarily to individual genius erases the collaborative and contextual conditions that enable them.</div>
+  <div class="qs">Which choice best captures the author's claim?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Individual talent and vision are irrelevant to major breakthroughs in science and art.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The "lone genius" narrative distorts the reality that innovation emerges from collaborative networks and contextual conditions, not isolated individual vision alone.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Institutional conditions always matter more than individual talent in determining who makes major discoveries.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Newton's discoveries would have been made by someone else if Newton had not existed.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 16</div></div>
+<div class="qb" data-q="16" data-ans="B">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">When we describe the market as "deciding" what gets produced, or the algorithm as "choosing" what content to show us, we use the language of agency to describe processes that have no agency in any morally relevant sense. This linguistic habit matters: it displaces responsibility from the human beings who designed, own, and benefit from these systems onto the systems themselves. The market didn't decide to underpay workers — people made that decision, and they can make different ones.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Markets and algorithms are genuinely autonomous agents capable of moral responsibility.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Describing markets and algorithms as agents obscures the human decisions behind those systems and shields decision-makers from accountability.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The language of market agency is harmless and does not affect how we assign moral responsibility.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Algorithmic systems should be granted legal personhood so they can be held accountable for their decisions.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 17</div></div>
+<div class="qb" data-q="17" data-ans="B">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The rise of "impact investing" — directing capital toward companies with measurable social or environmental benefits — has attracted both enthusiasm and skepticism. Skeptics argue that profit-seeking capital cannot be reliably aligned with social good, and that impact metrics are too easily manipulated to provide meaningful accountability. Enthusiasts counter that even imperfect alignment is better than none. Both sides miss the more fundamental question: whether market mechanisms are the appropriate instrument for solving problems that markets created.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Impact investing is a reliable solution to social and environmental problems.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The debate between skeptics and enthusiasts of impact investing overlooks the deeper question of whether market mechanisms are appropriate tools for addressing market-generated problems.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author fully endorses the skeptics' position that impact investing cannot work.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Profit-seeking and social good are always aligned in well-functioning markets.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 18</div></div>
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">There is a paradox at the heart of meritocracy: the more faithfully a society implements it, the more entrenched inequality becomes. In a genuine meritocracy, position and reward follow talent and effort — but talent is not distributed equally across circumstances, and effort is not equally available to those facing different levels of hardship. A meritocracy that ignores the conditions that produce unequal starting points does not neutralize inherited advantage; it legitimizes it, clothing structural inequality in the moral language of individual desert.</div>
+  <div class="qs">Which choice best describes the author's argument?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The author argues that meritocracy is a worthy ideal that has simply not been implemented correctly.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The author contends that meritocracy, as typically practiced, does not eliminate structural advantage but instead provides moral cover for it by attributing unequal outcomes to individual merit.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The author believes that talent and effort are equally distributed across all socioeconomic backgrounds.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author endorses meritocracy as the fairest possible system for allocating social reward.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 19</div></div>
+<div class="qb" data-q="19" data-ans="C">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The claim that the United States has experienced steady moral progress — from abolition to suffrage to civil rights — is both true and incomplete. It is true as a narrative of formal legal change. It is incomplete because it obscures the persistence of informal systems of exclusion, the backlash movements that have followed every advance, and the ways in which formal equality has coexisted with substantive inequality for most of the people it nominally protects. Progress is real; so is its partiality and its reversibility.</div>
+  <div class="qs">Which choice best captures the author's perspective?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The narrative of American moral progress is entirely false and should be abandoned.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The narrative of American moral progress accurately reflects the full scope of social change since the country's founding.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The narrative of moral progress captures real legal advances while obscuring the persistence of informal exclusion, backlash, and ongoing substantive inequality.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The author believes that formal legal equality is sufficient to guarantee substantive equality for all citizens.</button></div>
+</div>
+</div>
+<div class="ph-r">Question 20</div></div>
+<div class="qb" data-q="20" data-ans="B">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Author's Claim & Perspective</div></div>
+  <div class="passage">The idea that art should be evaluated purely on aesthetic grounds — divorced from the biography of its creator, the historical context of its production, or the ethical record of its author — has a seductive simplicity. It also has significant costs. When we refuse to allow the circumstances of a work's creation to inform its evaluation, we risk separating aesthetic pleasure from ethical responsibility in ways that are ultimately untenable. The question is not whether context matters but how much weight to give it — and that is a question aesthetics alone cannot answer.</div>
+  <div class="qs">Which statement would the author most likely agree with?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The biography of an artist is irrelevant to the evaluation of their work.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Context — including the biography of the creator and the ethics of production — cannot be entirely excluded from the evaluation of art, though the appropriate weight of context is genuinely debatable.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>All art should be judged primarily by the ethical record of its creator.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Pure aesthetic evaluation is the most rigorous and appropriate method for assessing artistic quality.</button></div>
+</div>
+<div style="display:flex;justify-content:center;padding:20px 0 32px;">
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Author's Claim & Perspective</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">B</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Author's Claim & Perspective Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+'
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Author Claim & Perspective: '+score+'/'+total+' (needs work)' : 'Author Claim & Perspective: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

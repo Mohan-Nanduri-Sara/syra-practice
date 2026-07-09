@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Fractions, Ratios &amp; Proportionality — Syra SAT Math Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:70px;}
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:46pt;font-weight:900;color:#fff;text-align:center;line-height:1.05;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:400px;line-height:1.6;margin-bottom:40px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .inst{width:100%;padding:36px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:20px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;}
+  .rc h4{font-size:10.5pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:9.5pt;color:var(--soft);line-height:1.45;}
+  .formula-box{background:var(--navy);border-radius:8px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .formula-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;grid-column:1/-1;}
+  .fm{background:rgba(255,255,255,0.07);border-radius:5px;padding:7px 12px;}
+  .fm-label{font-size:8pt;color:rgba(255,255,255,0.4);display:block;}
+  .fm-val{font-size:11pt;color:var(--gold);font-family:'Source Serif 4',serif;font-weight:600;}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+  .q-section{padding:24px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:18px;}
+  .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{opacity:0.85;}
+  .qb{margin-bottom:20px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .diff{font-size:7.5pt;font-weight:700;padding:2px 10px;border-radius:20px;}
+  .diff-easy{color:#1a6b3c;background:rgba(26,107,60,0.08);border:1px solid rgba(26,107,60,0.25);}
+  .diff-med{color:#b45309;background:rgba(180,83,9,0.08);border:1px solid rgba(180,83,9,0.25);}
+  .diff-hard{color:#e8645a;background:rgba(232,100,90,0.08);border:1px solid rgba(232,100,90,0.25);}
+  .q-body{display:flex;gap:20px;align-items:flex-start;margin-bottom:10px;}
+  .q-text{flex:1;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+  .q-note{font-size:10pt;font-family:'Source Serif 4',serif;color:var(--text);line-height:1.65;margin-bottom:8px;}
+  .choices{display:flex;flex-direction:column;gap:5px;}
+  .choice-btn{display:flex;gap:10px;padding:7px 13px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:20px;}
+  .ak-page{width:100%;padding:36px 50px;background:var(--navy);display:none;}
+  .ak-h{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:#fff;margin-bottom:20px;border-bottom:2px solid var(--gold);padding-bottom:8px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:18pt;font-weight:700;color:var(--gold);}
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:10px 0;margin-bottom:8px;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:36px 30px;}
+    .c-title{font-size:32pt;}
+    .inst,.q-section{padding-left:30px;padding-right:30px;}
+    .ak-page{display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Math · Day 2</div>
+  <div class="c-title">FRACTIONS, RATIOS<br><span>&amp; PROPORTIONALITY</span></div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Part-to-whole vs. part-to-part, combining ratios, direct/inverse variation, and alligation.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Math</span></div></div>
+  <div class="c-foot"><span>SYRA · QUANT INTELLIGENCE</span><span>Math Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Fractions, Ratios &amp; Proportionality — SAT Reference</h2><p>Core rules you must know cold before moving to the next topic</p></div>
+<div class="formula-box"><h3>Key Facts</h3><div class="fm"><span class="fm-label">Fraction (part-to-whole)</span><span class="fm-val">part ÷ total</span></div><div class="fm"><span class="fm-label">Ratio part of the whole</span><span class="fm-val">that part ÷ (sum of ALL parts)</span></div><div class="fm"><span class="fm-label">Direct variation</span><span class="fm-val">y = kx (y/x constant)</span></div><div class="fm"><span class="fm-label">Inverse variation</span><span class="fm-val">y = k/x (xy constant)</span></div><div class="fm"><span class="fm-label">Combining ratios</span><span class="fm-val">scale both so the shared term matches</span></div><div class="fm"><span class="fm-label">Alligation share</span><span class="fm-val">closer value gets the BIGGER share (cross-wise)</span></div></div>
+<div class="rule-cards">
+<div class="rc"><span class="rc-tag">Fraction of Remaining</span><h4>The whole shrinks every step</h4><p>In a sequential problem, each step's "whole" is what's LEFT from the previous step — not the original total. Redraw the whole at every step.</p></div>
+<div class="rc"><span class="rc-tag">Ratio Type</span><h4>Part-to-part vs. part-to-whole</h4><p>a:b as a fraction of EACH OTHER is a/b directly. As a fraction of the TOTAL, it's a/(a+b). These give completely different numbers.</p></div>
+<div class="rc"><span class="rc-tag">Combining Ratios</span><h4>Match the shared term first</h4><p>To combine A:B and B:C into A:B:C, scale BOTH ratios so the shared term (B) is identical in both before reading off the combined ratio.</p></div>
+<div class="rc"><span class="rc-tag">Direct vs Inverse</span><h4>Read the exact wording</h4><p>"Varies directly" / "directly proportional" → y=kx. "Varies inversely" / "inversely proportional" → y=k/x. Always solve for k from the given pair first — never assume.</p></div>
+<div class="rc"><span class="rc-tag">Power Variation</span><h4>Scaling isn't 1-to-1</h4><p>If y ∝ x², doubling x QUADRUPLES y — not doubles it. If y ∝ 1/x², tripling x shrinks y to 1/9 of its value.</p></div>
+<div class="rc"><span class="rc-tag">Alligation</span><h4>Closer gets more, cross-wise</h4><p>When mixing two values to hit a target, the ratio of amounts is the CROSSED distances — the component closer to the target gets the bigger share.</p></div>
+</div>
+<div style="margin-bottom:4px;"><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Watch Out For</div><div class="trap-row"><div class="trap">Applying a fraction to the ORIGINAL total instead of what's left</div><div class="trap">Reading a part:part ratio as a fraction of the total (or vice versa)</div><div class="trap">Confusing direct and inverse variation from the wording</div><div class="trap">Inverting the alligation ratio (giving the farther value the bigger share)</div></div></div>
+</div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SAT Math Day 2 — Fractions, Ratios &amp; Proportionality</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Number Fundamentals</div></div>
+  <div class="qs">Simplify the ratio 18 : 24 to lowest terms.</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3 : 4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>6 : 8</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2 : 3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4 : 3</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Fraction Fundamentals</div></div>
+  <div class="qs">A class has 12 boys and 18 girls. What fraction of the class is boys?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>12/18</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>2/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2/3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3/5</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="C">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Ratio Basics</div></div>
+  <div class="qs">If a : b = 3 : 5 and a = 12, what is b?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>7.2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>15</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>20</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>36</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Direct Variation</div></div>
+  <div class="qs">y varies directly with x. If y = 15 when x = 3, what is y when x = 7?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>21</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>15</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>10.5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>35</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Inverse Variation</div></div>
+  <div class="qs">y varies inversely with x. If y = 8 when x = 5, what is y when x = 10?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>16</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>40</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Fraction of Remaining</div></div>
+  <div class="qs">A tank is 3/4 full. If 1/3 of the water currently in the tank is used, what fraction of the tank's total capacity remains?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>5/12</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2/3</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="C">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Fraction of Remaining</div></div>
+  <div class="qs">A library donated 2/7 of its books in January, then donated 1/5 of the remaining books in February. What fraction of the original books remain?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>18/35</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>4/5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4/7</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3/7</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Ratio to Fraction</div></div>
+  <div class="qs">In a fruit basket, apples, oranges, and bananas are in the ratio 4 : 3 : 2. What fraction of the basket is oranges?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>3/4</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>2/9</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/3</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Combining Ratios</div></div>
+  <div class="qs">If A : B = 2 : 5 and B : C = 3 : 4, what is A : B : C?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>6 : 15 : 20</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>2 : 5 : 4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>6 : 9 : 20</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>10 : 15 : 20</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Direct Variation (Power)</div></div>
+  <div class="qs">The distance d an object falls varies directly with the square of the time t. If d = 20 meters when t = 2 seconds, how far does it fall when t = 5 seconds?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>50</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>125</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>312.5</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>25</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="C">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Inverse Variation (Power)</div></div>
+  <div class="qs">The intensity I of light varies inversely with the square of the distance r from the source. If I = 36 when r = 2, what is I when r = 6?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>12</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>324</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/4</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Alligation</div></div>
+  <div class="qs">A shop mixes tea worth $18/kg with tea worth $30/kg to produce a blend worth $22/kg. What is the ratio of the amount of $18 tea to $30 tea used?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1 : 2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>3 : 1</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>1 : 1</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>2 : 1</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Ratio + Percent Change</div></div>
+  <div class="qs">The ratio of boys to girls in a school is 5 : 7. After the number of boys increases by 20% and the number of girls increases by 10%, the new total number of students is 274. What was the original number of boys?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>100</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>140</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>120</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>90</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Combining Ratios (Chained)</div></div>
+  <div class="qs">A : B = 3 : 4, B : C = 5 : 6, and C : D = 2 : 3. What is A : D in simplest form?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>15 : 24</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>5 : 12</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3 : 6</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4 : 9</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Alligation</div></div>
+  <div class="qs">A wholesaler blends rice costing $40/kg with rice costing $55/kg to create a blend costing $46/kg, needing 45 kg of blend total. How many kg of the $40 rice are needed?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>18</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>25</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>27</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>20</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Inverse Variation (Power)</div></div>
+  <div class="qs">If y is inversely proportional to x², and x is tripled, by what factor does y change?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>9</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/9</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Direct Variation (Power)</div></div>
+  <div class="qs">If y is directly proportional to the cube of x, and x is halved, by what factor does y change?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/8</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/2</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>3</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Fraction of Remaining</div></div>
+  <div class="qs">A charity spent 1/4 of its fund on food, then 1/3 of the remaining fund on shelter, then half of what was left after that on medicine. What fraction of the original fund remains?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>1/2</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>1/4</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>3/8</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>1/6</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="C">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Ratio + Proportionality</div></div>
+  <div class="qs">The ratio of the radius of circle A to circle B is 2 : 3. If the area of a circle varies directly with the square of its radius, what is the ratio of the area of circle A to circle B?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>2 : 3</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>8 : 27</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>4 : 9</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>4 : 3</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Comprehensive Review</div></div>
+  <div class="qs">A school has students in Grade 9 and Grade 10 in the ratio 3 : 5. Grade 9's average score is 72, and Grade 10's average score is 84. What is the average score of all students combined?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>78</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>76.5</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>81</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>79.5</button></div>
+</div>
+
+<div style="display:flex;justify-content:center;padding:20px 0 32px;">
+  <button class="check-btn" id="check-all-bottom" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Fractions, Ratios &amp; Proportionality</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · QUANT INTELLIGENCE &nbsp;·&nbsp; Fractions, Ratios &amp; Proportionality Handout &nbsp;·&nbsp; SAT Math Day 2</div>
+</div>
+</div>
+
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+
+  function runCheck(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+
+    // ── Syra → Google Sheets submission ──────────────────────
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'Fractions, Ratios & Proportionality (Day 2): '+score+'/'+total+' (needs work)' : 'Fractions, Ratios & Proportionality (Day 2): '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+    // ─────────────────────────────────────────────────────────
+  }
+
+  document.getElementById('check-all-bottom').addEventListener('click', runCheck);
+
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>

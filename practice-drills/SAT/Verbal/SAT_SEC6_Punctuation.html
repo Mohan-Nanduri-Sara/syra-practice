@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Punctuation — Syra SAT Handout</title><style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{--navy:#0D1B3E;--gold:#C8962E;--teal:#00A99D;--cream:#FAF8F3;--rule:#D8D0C4;--text:#1A1A2E;--soft:#6B7280;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{padding-bottom:60px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);line-height:1.7;padding-bottom:60px;}
+
+  /* ── COVER ── */
+  .cover{width:100%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+  .c-tag{font-size:9pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .c-title{font-family:'Playfair Display',serif;font-size:52pt;font-weight:900;color:#fff;text-align:center;line-height:1;margin-bottom:8px;}
+  .c-title span{color:var(--gold);}
+  .c-rule{width:70px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:16px auto 20px;}
+  .c-sub{font-family:'Source Serif 4',serif;font-size:12pt;color:rgba(255,255,255,0.5);text-align:center;max-width:360px;line-height:1.6;margin-bottom:44px;}
+  .c-stats{display:flex;gap:48px;}
+  .s-num{font-family:'Playfair Display',serif;font-size:34pt;font-weight:700;color:var(--gold);display:block;line-height:1;}
+  .s-lbl{font-size:8pt;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+  .c-foot{position:absolute;bottom:26px;display:flex;justify-content:space-between;width:calc(100% - 100px);font-size:8pt;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+  /* ── INSTRUCTION PAGE ── */
+  .inst{width:100%;padding:44px 52px 24px;background:var(--cream);}
+  .i-hdr{border-left:5px solid var(--gold);padding-left:15px;margin-bottom:24px;}
+  .i-hdr h2{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:var(--navy);}
+  .i-hdr p{font-size:11pt;color:var(--soft);margin-top:3px;}
+  .rule-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .rc{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;padding:13px 15px;}
+  .rc-tag{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;}
+  .rc h4{font-size:11pt;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .rc p{font-size:10pt;color:var(--soft);line-height:1.45;}
+  .method-box{background:var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:16px;}
+  .method-box h3{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:11px;}
+  .ms{display:flex;gap:12px;margin-bottom:9px;}
+  .ms:last-child{margin-bottom:0;}
+  .mn{width:22px;height:22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:10pt;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mt{font-size:10pt;color:rgba(255,255,255,0.82);line-height:1.5;}
+  .mt strong{color:var(--gold);}
+  .trap-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;}
+  .trap{background:rgba(200,150,46,0.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-size:9pt;color:var(--navy);font-weight:600;}
+
+  /* ── QUESTIONS SECTION (continuous) ── */
+  .q-section{padding:28px 50px 0;}
+  .q-section-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px;}
+  .q-section-hdr .ph-l{font-size:8pt;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--soft);}
+
+  /* Check All button */
+  .check-btn{background:var(--navy);color:#fff;border:none;padding:8px 22px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:10pt;font-weight:600;cursor:pointer;letter-spacing:1px;}
+  .check-btn:hover{background:#1a2f5a;}
+
+  /* ── QUESTION BLOCK ── */
+  .qb{margin-bottom:22px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:#fff;transition:border-color 0.2s;}
+  .qb:hover{border-color:#b0a898;}
+  .qnr{display:flex;align-items:center;gap:11px;margin-bottom:10px;flex-wrap:wrap;}
+  .qn{width:30px;height:30px;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:13pt;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qt{font-size:7.5pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);background:rgba(0,169,157,0.08);border:1px solid rgba(0,169,157,0.22);padding:2px 10px;border-radius:20px;}
+  .src{font-size:7pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(200,150,46,0.1);border:1px solid rgba(200,150,46,0.28);padding:2px 9px;border-radius:20px;}
+  .passage{font-family:'Source Serif 4',serif;font-size:11pt;line-height:1.78;color:var(--text);margin-bottom:12px;border-left:3px solid var(--rule);padding-left:14px;}
+  .passage em{font-style:italic;}
+  .blank{display:inline-block;width:75px;border-bottom:2px solid var(--navy);vertical-align:bottom;margin:0 2px;}
+  .qs{font-size:11pt;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.5;}
+
+  /* ── INTERACTIVE CHOICES ── */
+  .choices{list-style:none;padding:0;}
+  .choice-btn{display:flex;gap:10px;padding:8px 13px;margin-bottom:6px;border:1.5px solid var(--rule);border-radius:6px;font-size:11pt;font-family:'Source Serif 4',serif;line-height:1.5;color:var(--text);background:#fff;cursor:pointer;width:100%;text-align:left;transition:border-color 0.15s,background 0.15s;}
+  .choice-btn:hover{border-color:var(--gold);background:rgba(200,150,46,0.04);}
+  .choice-btn.selected{border-color:var(--gold);background:rgba(200,150,46,0.10);}
+  .choice-btn.correct-ans{border-color:#1a6b3c!important;background:rgba(26,107,60,0.10)!important;}
+  .choice-btn.wrong-ans{border-color:#e8645a!important;background:rgba(232,100,90,0.10)!important;}
+  .choice-btn.correct-ans::after{content:'\2713';margin-left:auto;padding-left:10px;color:#1a6b3c;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .choice-btn.wrong-ans::after{content:'\2717';margin-left:auto;padding-left:10px;color:#e8645a;font-weight:700;font-size:13pt;flex-shrink:0;}
+  .qb.checked .choice-btn{cursor:default;}
+  .cl{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--navy);flex-shrink:0;width:18px;}
+
+  /* ── TABLE QUESTIONS ── */
+  .tl{font-size:9pt;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px;margin-top:10px;}
+  .tbl-t{font-size:9.5pt;font-weight:700;text-align:center;margin-bottom:5px;}
+  .tbl{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:10px;}
+  .tbl th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-size:8.5pt;}
+  .tbl td{padding:4px 8px;border-bottom:1px solid var(--rule);font-family:'Source Serif 4',serif;}
+  .tbl tr:nth-child(even) td{background:#f5f5f5;}
+
+  /* ── ANSWER KEY ── */
+  .ak-page{width:100%;padding:38px 50px;background:var(--navy);display:none;} /* hidden on screen — Check Answers already reveals correct/wrong inline; this stays for print */
+  .ak-h{font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#fff;margin-bottom:22px;border-bottom:2px solid var(--gold);padding-bottom:9px;}
+  .ak-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:24px;}
+  .ak-c{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px;text-align:center;}
+  .ak-q{font-size:7.5pt;color:rgba(255,255,255,0.3);letter-spacing:1px;display:block;margin-bottom:3px;}
+  .ak-a{font-family:'Playfair Display',serif;font-size:19pt;font-weight:700;color:var(--gold);}
+  .bn{font-family:'Source Serif 4',serif;font-size:11pt;padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65;}
+  .bn::before{content:'•';position:absolute;left:0;color:var(--teal);}
+
+  /* ── PRINT STYLES ── */
+  @media print{
+    body{padding-bottom:0;}
+    #score-bar,#check-all,#reset-all,.check-btn{display:none!important;}
+    .qb{break-inside:avoid;border:none;border-bottom:1px solid #ddd;border-radius:0;padding:12px 0;margin-bottom:10px;}
+    .qb:hover{border-color:#ddd;}
+    .choice-btn{border:1px solid #ccc;cursor:default;background:#fff!important;border-color:#ccc!important;}
+    .choice-btn.selected,.choice-btn.correct-ans,.choice-btn.wrong-ans{background:#fff!important;border-color:#ccc!important;}
+    .cover{padding:40px 30px;}
+    .c-title{font-size:36pt;}
+    .inst{padding:24px 30px 16px;}
+    .q-section{padding:16px 30px 0;}
+    .ak-page{padding:24px 30px;display:block;}
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+</style></head><body>
+<div class="cover">
+  <div class="c-tag">Digital SAT · Standard English Conventions · SEC 6</div>
+  <div class="c-title">PUNCTUATION</div>
+  <div class="c-rule"></div>
+  <div class="c-sub">Commas, semicolons, colons, dashes, and apostrophes — the marks that hold a sentence together.</div>
+  <div class="c-stats"><div><span class="s-num">20</span><span class="s-lbl">Questions</span></div><div><span class="s-num">5</span><span class="s-lbl">Punctuation Marks</span></div><div><span class="s-num">SAT</span><span class="s-lbl">Level</span></div></div>
+  <div class="c-foot"><span>SYRA · VERBAL INTELLIGENCE</span><span>Student Handout</span></div>
+</div>
+<div class="inst"><div class="i-hdr"><h2>Punctuation — Quick Reference</h2><p>Five marks, five clear jobs — know which one the sentence actually needs</p></div>
+<div class="rule-cards"><div class="rc"><span class="rc-tag">Commas</span><h4>Nonessential = Commas, Essential = No Commas</h4><p>"Yellowstone, WHICH WAS ESTABLISHED IN 1872, is..." (nonessential, set off). "The book THAT EVERYONE RECOMMENDED was..." (essential, no commas).</p></div><div class="rc"><span class="rc-tag">Semicolons</span><h4>Join Two Independent Clauses</h4><p>"The museum was closed; the tour was rescheduled." Both sides must be able to stand alone as complete sentences.</p></div><div class="rc"><span class="rc-tag">Colons</span><h4>Only After a Complete Independent Clause</h4><p>"The chef needed three ingredients: flour, eggs, and butter." Never right after a linking verb like "were" or "is."</p></div><div class="rc"><span class="rc-tag">Dashes</span><h4>Must Come in Matching Pairs</h4><p>"The results—remarkably consistent—convinced the skeptics." Never mix one dash with one comma to bracket the same phrase.</p></div><div class="rc"><span class="rc-tag">Apostrophes</span><h4>Possessive vs Contraction</h4><p>ITS vs IT'S, WHOSE vs WHO'S, THEIR vs THERE'S — these sound identical but mean completely different things.</p></div><div class="rc"><span class="rc-tag">Plural Possessives</span><h4>Add ' After the S</h4><p>Regular plural: researchers' (the researchers own it). Irregular plural: men's, women's, children's (add 's, not just ').</p></div></div>
+<div class="method-box"><h3>Syra's Method</h3><div class="ms"><div class="mn">1</div><div class="mt"><strong>Identify what's on both sides of the punctuation mark.</strong> Two complete sentences? Semicolon or period. One complete + one fragment? Comma or colon, depending on the relationship.</div></div><div class="ms"><div class="mn">2</div><div class="mt"><strong>For colons, check that what comes before is a complete independent clause.</strong> If you could put a period there instead, a colon works. If not, the colon is wrong.</div></div><div class="ms"><div class="mn">3</div><div class="mt"><strong>For apostrophes, say the sentence out loud replacing the word.</strong> "Who's" = "who is" — if that doesn't make sense, you need "whose" instead.</div></div></div>
+<div><div style="font-size:8pt;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;">Top Traps</div><div class="trap-row"><div class="trap">Commas added around an essential (restrictive) clause that should have none</div><div class="trap">A colon placed directly after a linking verb like "were" or "is"</div><div class="trap">Mismatched dash-and-comma pair instead of two matching dashes</div><div class="trap">Regular vs. irregular plural possessives confused (researchers' vs. men's)</div></div></div>
+</div>
+<div class="ph-r">Question 1</div></div>
+<div class="q-section">
+<div class="q-section-hdr">
+  <div class="ph-l">SEC 6 — Punctuation</div>
+</div>
+<button id="reset-all" style="display:none"></button>
+
+<div class="qb" data-q="1" data-ans="A">
+  <div class="qnr"><div class="qn">1</div><div class="qt">Apostrophes & Possessives</div></div>
+  <div class="passage">The committee released it's final report after three months of deliberation.</div>
+  <div class="qs">Which choice correctly uses the apostrophe?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The committee released its final report after three months of deliberation.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The committee released its' final report after three months of deliberation.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The committees' released its final report after three months of deliberation.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The committee released it's final report after three months of deliberation (no change needed).</button></div>
+</div>
+
+<div class="qb" data-q="2" data-ans="B">
+  <div class="qnr"><div class="qn">2</div><div class="qt">Apostrophes & Possessives</div></div>
+  <div class="passage">The three researcher's conclusions differed significantly from those of the original study.</div>
+  <div class="qs">Which choice correctly uses the apostrophe?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The three researcher's conclusions differed significantly from those of the original study (no change needed).</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The three researchers' conclusions differed significantly from those of the original study.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The three researchers conclusions differed significantly from those of the original study.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The three researcherses' conclusions differed significantly from those of the original study.</button></div>
+</div>
+
+<div class="qb" data-q="3" data-ans="C">
+  <div class="qnr"><div class="qn">3</div><div class="qt">Commas</div></div>
+  <div class="passage">After the long meeting the team finally reached a decision.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>After the long meeting the team finally reached a decision. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>After the long, meeting the team finally reached a decision.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>After the long meeting, the team finally reached a decision.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>After the long meeting, the team, finally reached a decision.</button></div>
+</div>
+
+<div class="qb" data-q="4" data-ans="D">
+  <div class="qnr"><div class="qn">4</div><div class="qt">Commas</div></div>
+  <div class="passage">Yellowstone which was established in 1872 is the oldest national park.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Yellowstone which was established in 1872 is the oldest national park. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Yellowstone, which was established in 1872 is the oldest national park.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Yellowstone which was established in 1872, is the oldest national park.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Yellowstone, which was established in 1872, is the oldest national park.</button></div>
+</div>
+
+<div class="qb" data-q="5" data-ans="A">
+  <div class="qnr"><div class="qn">5</div><div class="qt">Commas</div></div>
+  <div class="passage">The book, that everyone recommended, was sold out.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The book that everyone recommended was sold out.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The book, that everyone recommended, was sold out. (no change needed)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The book that everyone recommended, was sold out.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The book, that everyone recommended was sold out.</button></div>
+</div>
+
+<div class="qb" data-q="6" data-ans="B">
+  <div class="qnr"><div class="qn">6</div><div class="qt">Commas</div></div>
+  <div class="passage">The recipe calls for flour sugar and butter.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The recipe calls for flour sugar and butter. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The recipe calls for flour, sugar, and butter.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The recipe calls for flour, sugar and, butter.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The recipe calls for flour; sugar; and butter.</button></div>
+</div>
+
+<div class="qb" data-q="7" data-ans="C">
+  <div class="qnr"><div class="qn">7</div><div class="qt">Commas</div></div>
+  <div class="passage">The rain stopped and the sun came out.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The rain stopped and the sun came out. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The rain stopped, and, the sun came out.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The rain stopped, and the sun came out.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The rain stopped and, the sun came out.</button></div>
+</div>
+
+<div class="qb" data-q="8" data-ans="D">
+  <div class="qnr"><div class="qn">8</div><div class="qt">Apostrophes & Possessives</div></div>
+  <div class="passage">The two companies' merger was approved by regulators after an eighteen-month review process.</div>
+  <div class="qs">Which choice correctly uses the apostrophe?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The two company's merger was approved by regulators after an eighteen-month review process.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The two companies merger was approved by regulators after an eighteen-month review process.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The two companie's merger was approved by regulators after an eighteen-month review process.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The two companies' merger was approved by regulators after an eighteen-month review process (no change needed).</button></div>
+</div>
+
+<div class="qb" data-q="9" data-ans="A">
+  <div class="qnr"><div class="qn">9</div><div class="qt">Apostrophes & Possessives</div></div>
+  <div class="passage">The mens' basketball team won the regional championship for the third consecutive year.</div>
+  <div class="qs">Which choice correctly uses the apostrophe?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The men's basketball team won the regional championship for the third consecutive year.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The mens basketball team won the regional championship for the third consecutive year.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The mens' basketball team won the regional championship for the third consecutive year (no change needed).</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The men basketball's team won the regional championship for the third consecutive year.</button></div>
+</div>
+
+<div class="qb" data-q="10" data-ans="B">
+  <div class="qnr"><div class="qn">10</div><div class="qt">Apostrophes & Possessives</div></div>
+  <div class="passage">Who's responsible for overseeing the implementation of the new safety protocols?</div>
+  <div class="qs">Which choice is correct in context?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>Whose responsible for overseeing the implementation of the new safety protocols?</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Who's responsible for overseeing the implementation of the new safety protocols? (no change needed)</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>Who is's responsible for overseeing the implementation of the new safety protocols?</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Who responsible for overseeing the implementation of the new safety protocols?</button></div>
+</div>
+
+<div class="qb" data-q="11" data-ans="C">
+  <div class="qnr"><div class="qn">11</div><div class="qt">Commas</div></div>
+  <div class="passage">The scientists who studied the reef, discovered a new species.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The scientists who studied the reef, discovered a new species. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The scientists, who studied the reef, discovered a new species, too.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The scientists who studied the reef discovered a new species.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The scientists who studied the reef discovered, a new species.</button></div>
+</div>
+
+<div class="qb" data-q="12" data-ans="D">
+  <div class="qnr"><div class="qn">12</div><div class="qt">Commas</div></div>
+  <div class="passage">My favorite author Toni Morrison won the Nobel Prize.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>My favorite author Toni Morrison won the Nobel Prize. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>My favorite author, Toni Morrison won the Nobel Prize.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>My favorite author Toni Morrison, won the Nobel Prize.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>My favorite author, Toni Morrison, won the Nobel Prize.</button></div>
+</div>
+
+<div class="qb" data-q="13" data-ans="A">
+  <div class="qnr"><div class="qn">13</div><div class="qt">Semicolons</div></div>
+  <div class="passage">The museum was closed for renovations the tour was rescheduled.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The museum was closed for renovations; the tour was rescheduled.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The museum was closed for renovations, the tour was rescheduled.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The museum was closed for renovations: the tour was rescheduled.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The museum was closed for renovations the tour was rescheduled. (no change needed)</button></div>
+</div>
+
+<div class="qb" data-q="14" data-ans="B">
+  <div class="qnr"><div class="qn">14</div><div class="qt">Semicolons</div></div>
+  <div class="passage">The forecast predicted rain, however the game continued as scheduled.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The forecast predicted rain, however the game continued as scheduled. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The forecast predicted rain; however, the game continued as scheduled.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The forecast predicted rain; however the game continued as scheduled.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The forecast predicted rain, however, the game continued as scheduled.</button></div>
+</div>
+
+<div class="qb" data-q="15" data-ans="C">
+  <div class="qnr"><div class="qn">15</div><div class="qt">Colons</div></div>
+  <div class="passage">The chef needed three ingredients flour, eggs, and butter.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The chef needed three ingredients flour, eggs, and butter. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The chef needed three ingredients; flour, eggs, and butter.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The chef needed three ingredients: flour, eggs, and butter.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The chef needed three ingredients, flour, eggs, and butter.</button></div>
+</div>
+
+<div class="qb" data-q="16" data-ans="D">
+  <div class="qnr"><div class="qn">16</div><div class="qt">Colons</div></div>
+  <div class="passage">The ingredients she needed were: flour, eggs, and butter.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The ingredients she needed were: flour, eggs, and butter. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The ingredients she needed were; flour, eggs, and butter.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The ingredients, she needed were flour, eggs, and butter.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The ingredients she needed were flour, eggs, and butter.</button></div>
+</div>
+
+<div class="qb" data-q="17" data-ans="A">
+  <div class="qnr"><div class="qn">17</div><div class="qt">Apostrophes & Possessives</div></div>
+  <div class="passage">Theirs no simple solution to the problem of plastic waste in the world's oceans.</div>
+  <div class="qs">Which choice correctly uses the apostrophe or pronoun?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>There's no simple solution to the problem of plastic waste in the world's oceans.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>Their's no simple solution to the problem of plastic waste in the world's oceans.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>They're no simple solution to the problem of plastic waste in the world's oceans.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>Theirs no simple solution to the problem of plastic waste in the world's oceans (no change needed).</button></div>
+</div>
+
+<div class="qb" data-q="18" data-ans="B">
+  <div class="qnr"><div class="qn">18</div><div class="qt">Semicolons</div></div>
+  <div class="passage">The conference included speakers from Austin, Texas Portland, Oregon and Denver, Colorado.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The conference included speakers from Austin, Texas, Portland, Oregon, and Denver, Colorado.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The conference included speakers from Austin, Texas; Portland, Oregon; and Denver, Colorado.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The conference included speakers from Austin, Texas: Portland, Oregon: and Denver, Colorado.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The conference included speakers from Austin, Texas Portland, Oregon and Denver, Colorado. (no change needed)</button></div>
+</div>
+
+<div class="qb" data-q="19" data-ans="C">
+  <div class="qnr"><div class="qn">19</div><div class="qt">Dashes</div></div>
+  <div class="passage">The results—remarkably consistent across every trial, convinced the skeptics.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The results—remarkably consistent across every trial, convinced the skeptics. (no change needed)</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The results, remarkably consistent across every trial—convinced the skeptics.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The results—remarkably consistent across every trial—convinced the skeptics.</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The results remarkably consistent across every trial—convinced the skeptics.</button></div>
+</div>
+
+<div class="qb" data-q="20" data-ans="D">
+  <div class="qnr"><div class="qn">20</div><div class="qt">Colons</div></div>
+  <div class="passage">The report identified the main problem an outdated distribution system.</div>
+  <div class="qs">Which choice is punctuated correctly?</div>
+  <div class="choices"><button class="choice-btn" data-lbl="A"><span class="cl">A</span>The report identified the main problem; an outdated distribution system.</button><button class="choice-btn" data-lbl="B"><span class="cl">B</span>The report identified the main problem, an outdated distribution system.</button><button class="choice-btn" data-lbl="C"><span class="cl">C</span>The report identified the main problem an outdated distribution system. (no change needed)</button><button class="choice-btn" data-lbl="D"><span class="cl">D</span>The report identified the main problem: an outdated distribution system.</button></div>
+</div>
+
+  <button class="check-btn" id="check-all" style="padding:13px 40px;font-size:11pt;">Check Answers</button>
+</div>
+<div class="ak-page">
+  <div class="ak-h">Answer Key · Punctuation</div>
+  <div class="ak-grid"><div class="ak-c"><span class="ak-q">Q 01</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 02</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 03</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 04</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 05</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 06</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 07</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 08</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 09</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 10</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 11</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 12</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 13</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 14</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 15</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 16</span><span class="ak-a">D</span></div><div class="ak-c"><span class="ak-q">Q 17</span><span class="ak-a">A</span></div><div class="ak-c"><span class="ak-q">Q 18</span><span class="ak-a">B</span></div><div class="ak-c"><span class="ak-q">Q 19</span><span class="ak-a">C</span></div><div class="ak-c"><span class="ak-q">Q 20</span><span class="ak-a">D</span></div></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:8pt;letter-spacing:1px;text-align:center;margin-top:10px;">SYRA · VERBAL INTELLIGENCE &nbsp;·&nbsp; Punctuation Handout &nbsp;·&nbsp; SAT Preparation</div>
+</div>
+<div id="score-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 24px;z-index:100;align-items:center;justify-content:space-between;gap:16px;border-top:3px solid var(--gold);">
+  <span id="score-display" style="font-family:'Playfair Display',serif;font-size:16pt;color:var(--gold);font-weight:700;"></span>
+  <button onclick="document.getElementById('reset-all').click()" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">Reset</button>
+</div>
+
+<script>
+(function(){
+  var correct = {};
+  document.querySelectorAll('.qb').forEach(function(qb){
+    var num = qb.getAttribute('data-q');
+    var ans = qb.getAttribute('data-ans');
+    if(ans) correct[num] = ans;
+    qb.querySelectorAll('.choice-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(qb.classList.contains('checked')) return;
+        qb.querySelectorAll('.choice-btn').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+      });
+    });
+  });
+  document.getElementById('check-all').addEventListener('click', function(){
+    var score=0, total=0;
+    document.querySelectorAll('.qb[data-ans]').forEach(function(qb){
+      if(qb.classList.contains('checked')) return;
+      var num = qb.getAttribute('data-q');
+      var ans = correct[num];
+      var sel = qb.querySelector('.choice-btn.selected');
+      qb.classList.add('checked');
+      total++;
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        var lbl = btn.getAttribute('data-lbl');
+        if(lbl === ans){ btn.classList.add('correct-ans'); }
+        if(btn.classList.contains('selected') && lbl !== ans){ btn.classList.add('wrong-ans'); }
+      });
+      if(sel && sel.getAttribute('data-lbl') === ans) score++;
+    });
+    document.getElementById('score-display').textContent = 'Score: ' + score + ' / ' + total;
+    document.getElementById('score-bar').style.display='flex';
+    (function(){
+      try {
+        var sName = localStorage.getItem('syra_student_name') || '';
+        if(!sName){
+          sName = prompt('Enter your name for the results record:') || 'Anonymous';
+          if(sName !== 'Anonymous') localStorage.setItem('syra_student_name', sName);
+        }
+        var today = new Date();
+        var dateStr = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        var weakFlag = (score/total < 0.6) ? 'SEC6 Punctuation: '+score+'/'+total+' (needs work)' : 'SEC6 Punctuation: '+score+'/'+total+' (strong)';
+        var body = new URLSearchParams({
+          'entry.2020134311': sName,
+          'entry.596818200':  'Practice',
+          'entry.1385257217': String(score),
+          'entry.1082196700': String(total),
+          'entry.967537875':  String(score)+'/'+String(total),
+          'entry.1294352295': weakFlag,
+          'entry.1010465348': dateStr,
+          'entry.398063087':  '0'
+        });
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfP1NY92T_CPpVbapAykMWP6zUQKJpX-zjIedmiCEKWNEmETQ/formResponse', {method:'POST', mode:'no-cors', body:body}).catch(function(){});
+      } catch(e){}
+    })();
+  });
+  document.getElementById('reset-all').addEventListener('click', function(){
+    document.querySelectorAll('.qb').forEach(function(qb){
+      qb.classList.remove('checked');
+      qb.querySelectorAll('.choice-btn').forEach(function(btn){
+        btn.classList.remove('selected','correct-ans','wrong-ans');
+      });
+    });
+    document.getElementById('score-bar').style.display='none';
+  });
+})();
+</script>
+
+</body></html>
