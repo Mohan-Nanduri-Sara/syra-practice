@@ -201,8 +201,8 @@
   <div id="calcResult" class="calc-result"></div>
 
   <div class="calc-mode">
-    <button id="degBtn" class="active" onclick="setCalcMode('DEG')">DEG</button>
-    <button id="radBtn" onclick="setCalcMode('RAD')">RAD</button>
+    <button id="degBtn" onclick="setCalcMode('DEG')">DEG</button>
+    <button id="radBtn" class="active" onclick="setCalcMode('RAD')">RAD</button>
   </div>
 
   <div class="calc-grid">
@@ -268,7 +268,7 @@ let scale = 55;       // pixels per unit
 // parseEquation() now reads this on every draw(), including the very
 // first draw() triggered by the seed equations below — it must exist
 // before that first call, not just before the calculator code runs.
-let calcMode = 'DEG';
+let calcMode = 'RAD';
 let ox = 0, oy = 0;   // graph origin in pixels
 let dragging = false, lastX = 0, lastY = 0;
 
@@ -514,6 +514,26 @@ function intersections(){
   for(let i=0;i<valid.length;i++){
     for(let j=i+1;j<valid.length;j++){
       const A=valid[i], B=valid[j];
+
+      // Detect coincident/identical curves FIRST -- see the main
+      // calculator file for the full explanation of this fix.
+      let sameCount=0, sampleCount=0;
+      for(let t=-20;t<=20;t+=2){
+        let fa,fb;
+        try{ fa=A.p.f(t); fb=B.p.f(t); }catch(_){ continue; }
+        if(!Number.isFinite(fa) || !Number.isFinite(fb)) continue;
+        sampleCount++;
+        if(Math.abs(fa-fb)<1e-6) sameCount++;
+      }
+      if(sampleCount>=10 && sameCount===sampleCount){
+        for(let t=-20;t<=20;t+=2){
+          let ft;
+          try{ ft=A.p.f(t); }catch(_){ continue; }
+          if(Number.isFinite(ft)) out.push({x:t,y:ft,eq1:A.i,eq2:B.i,label:'coincident'});
+        }
+        continue;
+      }
+
       const lo=-50, hi=50, n=5000, step=(hi-lo)/n;
       let px=lo, py;
       try{py=A.p.f(px)-B.p.f(px);}catch(_){py=NaN;}
@@ -669,7 +689,7 @@ function showPoint(px,py){
 
   pointDot.style.left=screenX+'px';
   pointDot.style.top=screenY+'px';
-  pointDot.style.background=best.label==='intersection' ? '#7c3aed' : '#172a46';
+  pointDot.style.background=best.label==='intersection' ? '#7c3aed' : best.label==='coincident' ? '#0891b2' : '#172a46';
   pointDot.style.display='block';
 
   let content='';
@@ -680,6 +700,11 @@ function showPoint(px,py){
     content += `${equationName(best.eq1)}: ${escapeHtml(equations[best.eq1].value)}<br>`;
     content += `${equationName(best.eq2)}: ${escapeHtml(equations[best.eq2].value)}<br><br>`;
     content += `<b>Solution:</b> x = ${fmt(x)}, y = ${fmt(y)}`;
+  }else if(best.label==='coincident'){
+    content += `<div class="title">Same Line — Infinite Solutions</div>`;
+    content += `${equationName(best.eq1)}: ${escapeHtml(equations[best.eq1].value)}<br>`;
+    content += `${equationName(best.eq2)}: ${escapeHtml(equations[best.eq2].value)}<br><br>`;
+    content += `These two equations describe the exact same line — every point on it is a solution, not just this one. (${fmt(x)}, ${fmt(y)}) is just one example.`;
   }else{
     content += `<div class="title">${best.label[0].toUpperCase()+best.label.slice(1)}</div>`;
     content += `<b>(${fmt(x)}, ${fmt(y)})</b><br><br>`;
