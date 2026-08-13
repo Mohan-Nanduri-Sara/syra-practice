@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMSED — Syra Graphing Calculator Prototype</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, sans-serif; background:#f5f7fb; color:#1d2433; }
+  header { background:#172a46; color:white; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; }
+  header h1 { margin:0; font-size:22px; letter-spacing:.5px; }
+  header span { font-size:12px; opacity:.8; }
+  .app { display:flex; height:calc(100vh - 54px); min-height:600px; }
+  .panel { width:330px; background:white; border-right:1px solid #d9dee8; padding:16px; overflow:auto; }
+  .graph-wrap { flex:1; position:relative; background:white; overflow:hidden; }
+  #graph { width:100%; height:100%; display:block; cursor:crosshair; }
+  .row { display:flex; gap:8px; margin-bottom:9px; }
+  .eq { flex:1; height:42px; border:1px solid #cbd2df; border-radius:8px; padding:0 10px; font-size:16px; outline:none; }
+  .eq:focus { border-color:#536dfe; }
+  button { border:0; border-radius:8px; padding:9px 12px; cursor:pointer; background:#e9edf5; color:#172a46; font-weight:600; }
+  button:hover { filter:brightness(.97); }
+  .add { width:100%; margin:4px 0 14px; background:#172a46; color:white; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+  .controls button { width:100%; }
+  .info { background:#f5f7fb; border-radius:9px; padding:11px; margin-top:12px; font-size:13px; line-height:1.45; }
+  .info b { color:#172a46; }
+  .hint { font-size:12px; color:#667085; margin-top:7px; }
+  .result { border-left:4px solid #536dfe; padding:8px 10px; margin:8px 0; background:#f7f8ff; font-size:13px; }
+  .legend { position:absolute; top:12px; right:12px; background:rgba(255,255,255,.92); border:1px solid #d9dee8; border-radius:8px; padding:8px 10px; font-size:12px; }
+  .point-card { position:absolute; right:14px; top:56px; width:250px; max-width:calc(100% - 28px); background:rgba(255,255,255,.97); border:1px solid #d9dee8; border-radius:10px; padding:12px; box-shadow:0 4px 18px rgba(0,0,0,.12); font-size:13px; line-height:1.45; display:none; z-index:3; }
+  .point-card .title { font-weight:700; font-size:15px; margin-bottom:7px; color:#172a46; }
+  .point-card .close { float:right; border:0; background:transparent; padding:0 2px; font-size:20px; line-height:18px; cursor:pointer; color:#667085; }
+  .point-dot { position:absolute; width:12px; height:12px; border-radius:50%; border:2px solid white; box-shadow:0 1px 5px rgba(0,0,0,.3); transform:translate(-50%,-50%); display:none; z-index:2; pointer-events:none; }
+  @media(max-width:800px){ .panel{width:270px;} }
+  @media(max-width:600px){ .app{flex-direction:column;} .panel{width:100%; height:270px; border-right:0; border-bottom:1px solid #d9dee8;} .graph-wrap{min-height:400px;} }
+
+/* ===== SOMSED Calculator v3.1 — compact phone layout ===== */
+.calc-panel{
+  margin:8px 12px 10px;
+  padding:10px;
+  background:#f5f7fb;
+  border:1px solid #e3e7ef;
+  border-radius:14px;
+}
+.calc-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+.calc-display{
+  width:100%;
+  box-sizing:border-box;
+  min-height:48px;
+  max-height:56px;
+  padding:7px 10px;
+  border:1px solid #cfd6e2;
+  border-radius:10px;
+  background:#fff;
+  font-size:22px;
+  text-align:right;
+  color:#172a46;
+  outline:none;
+}
+.calc-result{
+  min-height:19px;
+  padding:2px 4px 3px;
+  text-align:right;
+  font-size:14px;
+  color:#64748b;
+}
+.calc-mode{display:flex;gap:6px;margin:5px 0 7px}
+.calc-mode button{
+  flex:1;border:1px solid #cfd6e2;border-radius:8px;padding:6px;
+  background:#fff;font-weight:700;font-size:14px
+}
+.calc-mode button.active{background:#172a46;color:#fff}
+.calc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.calc-grid button{
+  min-height:39px;border:0;border-radius:8px;background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.07);font-size:15px;font-weight:600;color:#172a46
+}
+.calc-grid button:active{transform:scale(.97)}
+.calc-grid .op{background:#e9eef6}
+.calc-grid .equals{background:#172a46;color:#fff}
+.calc-grid .danger{background:#f1e8e8}
+.calc-hint{margin-top:5px;font-size:10px;color:#64748b;text-align:center}
+@media (max-width:430px){
+  .calc-panel{margin:6px 8px 8px;padding:8px}
+  .calc-grid{gap:4px}
+  .calc-grid button{min-height:36px;font-size:14px}
+  .calc-display{min-height:44px;font-size:20px}
+}
+
+
+/* ===== SOMSED v3.3 — graph above calculator, page-level mobile scroll ===== */
+@media (max-width:600px){
+  html, body{
+    height:auto !important;
+    min-height:100%;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+  }
+  .app{
+    height:auto !important;
+    min-height:0 !important;
+    display:flex;
+    flex-direction:column;
+    overflow:visible !important;
+  }
+  .panel{
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+    border-right:0 !important;
+    border-bottom:1px solid #d9dee8;
+  }
+  .graph-wrap{
+    width:100% !important;
+    height:480px !important;
+    min-height:480px !important;
+    flex:none !important;
+    overflow:hidden !important;
+    position:relative;
+  }
+  #graph{
+    width:100% !important;
+    height:100% !important;
+    touch-action:pan-y !important;
+  }
+  .calc-panel{
+    flex:none !important;
+    width:auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<header>
+  <h1>SOMSED</h1>
+  <span>Syra teaches with Somsed · Algebra: Discriminant, Maximum Area</span>
+</header>
+
+<div id="teachBanner" style="background:#0d1b3e;color:#fff;padding:12px 18px;font-size:14px;line-height:1.5;display:flex;align-items:center;gap:10px;">
+  <span id="teachBannerIcon" style="font-size:18px;">👀</span>
+  <span id="teachBannerText">We solved A = 100 by hand — let's see it on the graph...</span>
+</div>
+
+<div class="app">
+  <aside class="panel">
+    <div id="equations"></div>
+    <button class="add" onclick="addEquation()">＋ Add equation</button>
+
+    <div class="controls">
+      <button onclick="zoom(1.25)">＋ Zoom in</button>
+      <button onclick="zoom(0.8)">− Zoom out</button>
+      <button onclick="resetView()">Reset view</button>
+      <button onclick="clearAll()">Clear all</button>
+    </div>
+
+    <div class="hint">
+      <b>SAT Advanced Algebra</b><br>
+      Linear · Quadratic · Absolute value · Exponential · Polynomial · Rational · Radical
+      <br><br>
+      Try: <b>y = |x - 2| + 1</b> or <b>y = 2^x</b>
+    </div>
+
+    <div id="analysis" class="info">
+      <b>Graph analysis</b><br>
+      Enter a supported linear or quadratic equation.
+    </div>
+
+    <div class="info">
+      <b>Mouse controls</b><br>
+      Drag the graph to pan.<br>
+      Use the wheel to zoom.
+    </div>
+  </aside>
+
+  <main class="graph-wrap">
+    <canvas id="graph"></canvas>
+    <div id="pointDot" class="point-dot"></div>
+    <div id="pointCard" class="point-card">
+      <button class="close" onclick="hidePoint()">×</button>
+      <div id="pointContent"></div>
+    </div>
+    <div class="legend">Tap a solution / key point</div>
+  </main>
+
+  <section class="calc-panel">
+  <div class="calc-title">
+    <div style="font-weight:800;color:#172a46;font-size:17px;">SOMSED Calculator</div>
+    <button id="calcCollapseBtn" onclick="toggleCalculator()" style="border:1px solid #cfd6e2;background:#fff;border-radius:8px;padding:4px 9px;font-weight:700;color:#172a46;">Hide</button>
+  </div>
+  <div id="calcBody">
+
+  <input id="calcDisplay" class="calc-display" value="" inputmode="decimal"
+         aria-label="Calculator expression" autocomplete="off" spellcheck="false">
+  <div id="calcResult" class="calc-result"></div>
+
+  <div class="calc-mode">
+    <button id="degBtn" class="active" onclick="setCalcMode('DEG')">DEG</button>
+    <button id="radBtn" onclick="setCalcMode('RAD')">RAD</button>
+  </div>
+
+  <div class="calc-grid">
+    <button class="danger" onclick="calcClear()">AC</button>
+    <button onclick="calcBack()">⌫</button>
+    <button class="op" onclick="calcInsert('(')">(</button>
+    <button class="op" onclick="calcInsert(')')">)</button>
+
+    <button onclick="calcInsert('sin(')">sin</button>
+    <button onclick="calcInsert('cos(')">cos</button>
+    <button onclick="calcInsert('tan(')">tan</button>
+    <button class="op" onclick="calcInsert('÷')">÷</button>
+
+    <button onclick="calcInsert('log(')">log</button>
+    <button onclick="calcInsert('ln(')">ln</button>
+    <button onclick="calcInsert('√(')">√</button>
+    <button class="op" onclick="calcInsert('×')">×</button>
+
+    <button onclick="calcInsert('7')">7</button>
+    <button onclick="calcInsert('8')">8</button>
+    <button onclick="calcInsert('9')">9</button>
+    <button class="op" onclick="calcInsert('−')">−</button>
+
+    <button onclick="calcInsert('4')">4</button>
+    <button onclick="calcInsert('5')">5</button>
+    <button onclick="calcInsert('6')">6</button>
+    <button class="op" onclick="calcInsert('+')">+</button>
+
+    <button onclick="calcInsert('1')">1</button>
+    <button onclick="calcInsert('2')">2</button>
+    <button onclick="calcInsert('3')">3</button>
+    <button class="equals" onclick="calcEquals()">=</button>
+
+    <button onclick="calcInsert('0')">0</button>
+    <button onclick="calcInsert('.')">.</button>
+    <button onclick="calcInsert('π')">π</button>
+    <button onclick="calcInsert('e')">e</button>
+
+    <button onclick="calcInsert('^')">xʸ</button>
+    <button onclick="calcInsert('%')">%</button>
+    <button onclick="calcInsert('Ans')">Ans</button>
+    <button onclick="calcToggleSign()">±</button>
+  </div>
+
+  <div class="calc-hint">SAT calculator · DEG/RAD · keyboard input</div>
+  </div>
+</section>
+</div>
+
+<script>
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+const equationsEl = document.getElementById('equations');
+const analysisEl = document.getElementById('analysis');
+const pointCard = document.getElementById('pointCard');
+const pointContent = document.getElementById('pointContent');
+const pointDot = document.getElementById('pointDot');
+
+let equations = [];
+let nextId = 1;
+let scale = 55;       // pixels per unit
+// Declared here (not further down near the calculator UI code) because
+// parseEquation() now reads this on every draw(), including the very
+// first draw() triggered by the seed equations below — it must exist
+// before that first call, not just before the calculator code runs.
+let calcMode = 'DEG';
+let ox = 0, oy = 0;   // graph origin in pixels
+let dragging = false, lastX = 0, lastY = 0;
+
+function resize(){
+  const r = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.max(300, Math.floor(r.width * dpr));
+  canvas.height = Math.max(300, Math.floor(r.height * dpr));
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  if (!ox && !oy) { ox = r.width/2; oy = r.height/2; }
+  draw();
+}
+window.addEventListener('resize', resize);
+
+function addEquation(value=''){
+  const id = nextId++;
+  equations.push({id, value});
+  renderInputs();
+  draw();
+}
+
+function removeEquation(id){
+  equations = equations.filter(e=>e.id!==id);
+  renderInputs(); draw();
+}
+
+function renderInputs(){
+  equationsEl.innerHTML='';
+  equations.forEach((e,i)=>{
+    const row=document.createElement('div');
+    row.className='row';
+    const input=document.createElement('input');
+    input.className='eq';
+    input.value=e.value;
+    input.placeholder = i===0 ? 'y = 2x + 3' : 'y = x^2 - 4x + 3';
+    input.oninput=()=>{ e.value=input.value; draw(); };
+    const del=document.createElement('button');
+    del.textContent='×';
+    del.title='Remove equation';
+    del.onclick=()=>removeEquation(e.id);
+    row.appendChild(input); row.appendChild(del);
+    equationsEl.appendChild(row);
+  });
+  if(!equations.length) addEquation();
+}
+
+function normalizeMath(raw){
+  let s=raw.toLowerCase().replace(/\s+/g,'').replace(/^y=/,'');
+  s=s.replace(/²/g,'^2').replace(/³/g,'^3').replace(/π/g,'pi');
+
+  // Convert |...| to abs(...)
+  let out='', openAbs=false;
+  for(const ch of s){
+    if(ch==='|'){
+      out += openAbs ? ')' : 'abs(';
+      openAbs=!openAbs;
+    }else out += ch;
+  }
+
+  s=out.replace(/\^/g,'**');
+
+  // Basic implicit multiplication: 2x, 2(x+1), x(x+1), etc.
+  s=s.replace(/(\d|x|\))(?=(x|\(|abs|sqrt|log|ln|e))/g,'$1*');
+
+  // Fix: unary minus directly before ** is invalid JS syntax and would
+  // also be mathematically wrong if naively parenthesized the other way.
+  // See SOMSED_Advanced_Algebra_Calculator_v3_3.html for full explanation.
+  s=s.replace(/(^|[+\-*\/(,])-(x|\d+(?:\.\d+)?|\([^()]*\))\*\*(\d+)/g, '$1-($2**$3)');
+
+  return s;
+}
+
+function parseEquation(raw){
+  if(!raw) return null;
+  const expr=normalizeMath(raw);
+  if(!expr) return null;
+
+  if(!/^[0-9x+\-*/().,_a-z*]+$/.test(expr)) return null;
+
+  const names=expr.match(/[a-z]+/g) || [];
+  const allowed=new Set(['x','pi','e','abs','sqrt','log','ln','sin','cos','tan']);
+  if(names.some(n=>!allowed.has(n))) return null;
+
+  // Angle mode: mirror the exact conversion calcPrepare() already applies
+  // for the calculator keypad, using the same shared `calcMode` variable —
+  // so DEG/RAD means the same thing whether you type into an equation box
+  // or the calculator keypad. Previously this parser always used radians
+  // regardless of the toggle (confirmed bug, Mohan testing 2026-08-12:
+  // y=sin(30) plotted at y≈-0.988, the radians value, even in DEG mode).
+  const angle = calcMode==='DEG' ? '(Math.PI/180)*' : '';
+  const js=expr
+    .replace(/\bpi\b/g,'Math.PI')
+    .replace(/\be\b/g,'Math.E')
+    .replace(/\babs\(/g,'Math.abs(')
+    .replace(/\bsqrt\(/g,'Math.sqrt(')
+    .replace(/\blog\(/g,'Math.log10(')
+    .replace(/\bln\(/g,'Math.log(')
+    .replace(/\bsin\(/g,`Math.sin(${angle}`)
+    .replace(/\bcos\(/g,`Math.cos(${angle}`)
+    .replace(/\btan\(/g,`Math.tan(${angle}`);
+
+  try{
+    const f=new Function('x','return '+js);
+    // Sample a wide spread, not just [-2,0,1,2] — a domain-restricted
+    // function (e.g. sqrt(x-3), valid only from x=3 on) can have its
+    // entire domain fall outside a narrow fixed window, which wrongly
+    // rejected the equation as unparseable even though it parsed fine.
+    // Confirmed bug, Mohan testing 2026-08-12: sqrt(x-3) was refused
+    // outright with "Enter a supported SAT Advanced Math function."
+    const test=[-100,-50,-10,-5,-2,-1,-0.5,0,0.5,1,2,5,10,50,100].map(v=>f(v));
+    if(!test.some(Number.isFinite)) return null;
+    return {f,expr,raw};
+  }catch(e){ return null; }
+}
+
+function classify(expr){
+  if(/\b(sin|cos|tan)\(/.test(expr)) return 'trigonometric';
+  if(/abs\(/.test(expr)) return 'absolute value';
+  if(/sqrt\(/.test(expr)) return 'radical';
+  if(/\/(x|\(|abs|sqrt)/.test(expr)) return 'rational';
+  if(/\*\*3/.test(expr)) return 'polynomial';
+  if(/\*\*/.test(expr) && !/\*\*2/.test(expr)) return 'exponential';
+  if(/\*\*2/.test(expr)) return 'quadratic';
+  return 'linear';
+}
+
+function polynomialCoefficients(expr){
+  let s=expr.replace(/\*\*/g,'^');
+  if(/[a-z]/i.test(s.replace(/x/g,''))) return null;
+
+  s=s.replace(/-/g,'+-');
+  if(s.startsWith('+')) s=s.slice(1);
+
+  let a=0,b=0,c=0;
+  for(const term of s.split('+')){
+    if(!term) continue;
+    if(term.includes('x^2')){
+      const k=term.split('x^2')[0];
+      a += k===''?1:k==='-'?-1:parseFloat(k);
+    }else if(term.includes('x')){
+      const k=term.split('x')[0];
+      b += k===''?1:k==='-'?-1:parseFloat(k);
+    }else{
+      const n=parseFloat(term);
+      if(Number.isFinite(n)) c+=n;
+    }
+  }
+  return {a,b,c};
+}
+
+function coefficients(expr){
+  return polynomialCoefficients(expr) || {a:0,b:0,c:0};
+}
+
+function numericRoots(p){
+  const roots=[];
+  const lo=-50, hi=50, n=5000, step=(hi-lo)/n;
+  let px=lo, py;
+  try{py=p.f(px);}catch(_){py=NaN;}
+
+  for(let k=1;k<=n;k++){
+    const x=lo+k*step;
+    let y; try{y=p.f(x);}catch(_){y=NaN;}
+
+    if(Number.isFinite(py) && Number.isFinite(y)){
+      if(Math.abs(py)<1e-7) roots.push(px);
+
+      if(py*y<0){
+        let l=px,r=x;
+        for(let q=0;q<45;q++){
+          const m=(l+r)/2;
+          let fm,fl;
+          try{fm=p.f(m);fl=p.f(l);}catch(_){fm=NaN;fl=NaN;}
+          if(fl*fm<=0) r=m; else l=m;
+        }
+        roots.push((l+r)/2);
+      }
+    }
+    px=x; py=y;
+  }
+
+  return roots
+    .sort((a,b)=>a-b)
+    .filter((x,i,a)=>i===0 || Math.abs(x-a[i-1])>1e-3)
+    .slice(0,8);
+}
+
+function specialPoints(p){
+  const pts=[];
+  const type=classify(p.expr);
+
+  // y-intercept is a meaningful SAT point when the function is defined at x=0.
+  let y0;
+  try{ y0=p.f(0); }catch(_){ y0=NaN; }
+  if(Number.isFinite(y0))
+    pts.push({x:0,y:y0,label:'y-intercept'});
+
+  // Linear x-intercept.
+  if(type==='linear'){
+    const {b,c}=coefficients(p.expr);
+    if(Math.abs(b)>1e-12)
+      pts.push({x:-c/b,y:0,label:'x-intercept'});
+  }
+
+  // Quadratic vertex + roots.
+  if(type==='quadratic'){
+    // Numeric derivation from the real function, not the fragile
+    // string-based coefficients() parser -- confirmed bug, Mohan
+    // testing 2026-08-12: broke on any quadratic containing parentheses.
+    const c0=p.f(0), b0=(p.f(1)-p.f(-1))/2, a0=(p.f(1)+p.f(-1))/2-c0;
+    if(Math.abs(a0)>1e-9){
+      const x=-b0/(2*a0);
+      const y=a0*x*x+b0*x+c0;
+      pts.push({x,y,label:'vertex'});
+    }
+  }
+
+  // Absolute-value corner/vertex.
+  if(type==='absolute value'){
+    // Common SAT form: |x-h|+k.
+    const m=p.expr.match(/abs\(x([+-][0-9.]+)?\)([+-][0-9.]+)?/);
+    if(m){
+      const h=m[1] ? -parseFloat(m[1]) : 0;
+      const k=m[2] ? parseFloat(m[2]) : 0;
+      pts.push({x:h,y:k,label:'vertex'});
+    }
+  }
+
+  // x-intercepts for nonlinear functions.
+  numericRoots(p).forEach(x=>{
+    let y;
+    try{y=p.f(x);}catch(_){y=NaN;}
+    if(Math.abs(y)<1e-5) pts.push({x,y:0,label:'x-intercept'});
+  });
+
+  return pts;
+}
+
+function intersections(){
+  const valid=equations.map((e,i)=>({e,i,p:parseEquation(e.value)})).filter(z=>z.p);
+  const out=[];
+
+  for(let i=0;i<valid.length;i++){
+    for(let j=i+1;j<valid.length;j++){
+      const A=valid[i], B=valid[j];
+      const lo=-50, hi=50, n=5000, step=(hi-lo)/n;
+      let px=lo, py;
+      try{py=A.p.f(px)-B.p.f(px);}catch(_){py=NaN;}
+
+      for(let k=1;k<=n;k++){
+        const x=lo+k*step;
+        let y;
+        try{y=A.p.f(x)-B.p.f(x);}catch(_){y=NaN;}
+
+        if(Number.isFinite(py) && Number.isFinite(y) && (Math.abs(y)<1e-7 || py*y<0)){
+          let l=px,r=x;
+          for(let q=0;q<45;q++){
+            const m=(l+r)/2;
+            let fm,fl;
+            try{fm=A.p.f(m)-B.p.f(m); fl=A.p.f(l)-B.p.f(l);}
+            catch(_){fm=NaN;fl=NaN;}
+            if(fl*fm<=0) r=m; else l=m;
+          }
+          const ix=(l+r)/2;
+          let iy;
+          try{iy=A.p.f(ix);}catch(_){iy=NaN;}
+          if(Number.isFinite(iy) &&
+             !out.some(t=>Math.abs(t.x-ix)<1e-4 && Math.abs(t.y-iy)<1e-4))
+            out.push({x:ix,y:iy,eq1:A.i,eq2:B.i,label:'intersection'});
+        }
+        px=x; py=y;
+      }
+    }
+  }
+  return out;
+}
+
+function analyze(){
+  let html='<b>Advanced Algebra analysis</b>', count=0;
+
+  equations.forEach((e,i)=>{
+    const p=parseEquation(e.value);
+    if(!p) return;
+
+    count++;
+    const type=classify(p.expr);
+    html += `<div class="result"><b>${type[0].toUpperCase()+type.slice(1)} ${i+1}</b><br>`;
+
+    if(type==='linear'){
+      // Compute numerically from the real function, not the string-based
+      // coefficients() parser below — that parser only understands plain
+      // "ax+b" text and silently gives wrong values for anything with
+      // parentheses or division (e.g. "(10-4x)/6"). Confirmed bug, Mohan
+      // testing 2026-08-12, found while building the teaching-demo variant
+      // of this same file.
+      const yAt0 = p.f(0), yAt1 = p.f(1);
+      const slope = yAt1 - yAt0;
+      if(Math.abs(slope)>1e-9)
+        html += `Slope: ${fmt(slope)}<br>Y-intercept: ${fmt(yAt0)}<br>X-intercept: ${fmt(-yAt0/slope)}`;
+    }else if(type==='quadratic'){
+      // Numeric derivation from the real function -- same fix as above.
+      const c0=p.f(0), b0=(p.f(1)-p.f(-1))/2, a0=(p.f(1)+p.f(-1))/2-c0;
+      if(Math.abs(a0)>1e-9){
+        const d=b0*b0-4*a0*c0;
+        const x=-b0/(2*a0), y=a0*x*x+b0*x+c0;
+        html += `Vertex: (${fmt(x)}, ${fmt(y)})<br>Axis: x = ${fmt(x)}<br>Discriminant: ${fmt(d)}<br>`;
+        html += d>0?'2 real x-intercepts':Math.abs(d)<1e-10?'1 real x-intercept':'No real x-intercepts';
+      }
+    }else if(type==='absolute value'){
+      html += `Roots: ${numericRoots(p).map(fmt).join(', ') || 'none'}<br>Tap a key point to inspect it.`;
+    }else if(type==='exponential'){
+      html += `Y-intercept: ${fmt(p.f(0))}<br>Tap the graph to inspect coordinates.`;
+    }else if(type==='rational'){
+      html += `Possible domain restriction where the denominator is 0.<br>Tap the graph to inspect points.`;
+    }else if(type==='radical'){
+      html += `Domain begins where the radicand is nonnegative.<br>Tap the graph to inspect points.`;
+    }else if(type==='trigonometric'){
+      html += `Y-intercept: ${fmt(p.f(0))}<br>Angle mode: ${calcMode}<br>Tap the graph to inspect points.`;
+    }else{
+      html += `Polynomial function.<br>Tap intercepts and key points.`;
+    }
+
+    html+='</div>';
+  });
+
+  if(!count) html+='<br>Enter a supported SAT Advanced Math function.';
+  analysisEl.innerHTML=html;
+}
+
+function fmt(n){ return Number.isFinite(n) ? (Math.abs(n)<1e-10?'0':Number(n.toFixed(4)).toString()) : '—'; }
+
+function graphToScreen(x,y){
+  return [ox+x*scale, oy-y*scale];
+}
+function screenToGraph(px,py){
+  return [(px-ox)/scale, (oy-py)/scale];
+}
+
+function niceStep(){
+  const target=75/scale;
+  const p=10**Math.floor(Math.log10(target));
+  const n=target/p;
+  return (n<1.5?1:n<3?2:n<7?5:10)*p;
+}
+
+
+function equationName(index){
+  return `Equation ${index+1}`;
+}
+
+function rootsForQuadratic(a,b,c){
+  const d=b*b-4*a*c;
+  if(Math.abs(a)<1e-12) return Math.abs(b)<1e-12 ? [] : [-c/b];
+  if(d < -1e-10) return [];
+  if(Math.abs(d) < 1e-10) return [-b/(2*a)];
+  const sd=Math.sqrt(d);
+  return [(-b-sd)/(2*a),(-b+sd)/(2*a)].sort((u,v)=>u-v);
+}
+
+function showPoint(px,py){
+  const r=canvas.getBoundingClientRect();
+
+  // Only SAT-relevant points are selectable:
+  // intercepts, vertices/corners, and intersections.
+  const candidates=[];
+
+  equations.forEach((e,i)=>{
+    const p=parseEquation(e.value);
+    if(!p) return;
+    specialPoints(p).forEach(pt=>candidates.push({...pt,eq:i}));
+  });
+
+  intersections().forEach(pt=>candidates.push(pt));
+
+  let best=null;
+  let bestDist=Infinity;
+
+  candidates.forEach(pt=>{
+    const sx=ox+pt.x*scale;
+    const sy=oy-pt.y*scale;
+    const d=Math.hypot(sx-px,sy-py);
+
+    // A deliberately forgiving but finite tap target.
+    if(d<=30 && d<bestDist){
+      best={...pt};
+      bestDist=d;
+    }
+  });
+
+  if(!best){
+    hidePoint();
+    return;
+  }
+
+  const x=best.x, y=best.y;
+  const screenX=ox+x*scale, screenY=oy-y*scale;
+
+  pointDot.style.left=screenX+'px';
+  pointDot.style.top=screenY+'px';
+  pointDot.style.background=best.label==='intersection' ? '#7c3aed' : '#172a46';
+  pointDot.style.display='block';
+
+  let content='';
+
+  if(best.label==='intersection'){
+    content += `<div class="title">Intersection</div>`;
+    content += `<b>(${fmt(x)}, ${fmt(y)})</b><br><br>`;
+    content += `${equationName(best.eq1)}: ${escapeHtml(equations[best.eq1].value)}<br>`;
+    content += `${equationName(best.eq2)}: ${escapeHtml(equations[best.eq2].value)}<br><br>`;
+    content += `<b>Solution:</b> x = ${fmt(x)}, y = ${fmt(y)}`;
+  }else{
+    content += `<div class="title">${best.label[0].toUpperCase()+best.label.slice(1)}</div>`;
+    content += `<b>(${fmt(x)}, ${fmt(y)})</b><br><br>`;
+    content += `${equationName(best.eq)}: ${escapeHtml(equations[best.eq].value)}`;
+
+    const p=parseEquation(equations[best.eq].value);
+
+    if(best.label==='vertex' && classify(p.expr)==='quadratic'){
+      const {a}=coefficients(p.expr);
+      content += `<br><br>${a>0 ? 'Parabola opens upward.' : 'Parabola opens downward.'}`;
+    }
+
+    if(best.label==='vertex' && classify(p.expr)==='absolute value'){
+      content += `<br><br>This is the corner/vertex of the absolute-value graph.`;
+    }
+
+    if(best.label==='x-intercept'){
+      content += `<br><br><b>Solution when y = 0:</b> x = ${fmt(x)}`;
+    }
+
+    if(best.label==='y-intercept'){
+      content += `<br><br><b>When x = 0:</b> y = ${fmt(y)}`;
+    }
+  }
+
+  pointContent.innerHTML=content;
+
+  const cardWidth=Math.min(250,r.width-28);
+  let left=Math.min(Math.max(screenX+14,14),r.width-cardWidth-14);
+  let top=Math.min(Math.max(screenY+14,56),r.height-190);
+
+  pointCard.style.left=left+'px';
+  pointCard.style.right='auto';
+  pointCard.style.top=top+'px';
+  pointCard.style.display='block';
+}
+
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+function hidePoint(){
+  pointCard.style.display='none';
+  pointDot.style.display='none';
+}
+
+function draw(){
+  hidePoint();
+  const r=canvas.getBoundingClientRect();
+  ctx.clearRect(0,0,r.width,r.height);
+  ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,r.width,r.height);
+
+  const step=niceStep();
+  ctx.lineWidth=1;
+  ctx.strokeStyle='#e7eaf0';
+  ctx.fillStyle='#667085';
+  ctx.font='11px Arial';
+
+  const [x0,y0]=screenToGraph(0,r.height);
+  const [x1,y1]=screenToGraph(r.width,0);
+
+  for(let x=Math.ceil(x0/step)*step; x<=x1; x+=step){
+    const [sx]=graphToScreen(x,0);
+    ctx.beginPath(); ctx.moveTo(sx,0); ctx.lineTo(sx,r.height); ctx.stroke();
+    if(Math.abs(x)>step/1000) ctx.fillText(fmt(x),sx+3,oy+13);
+  }
+  for(let y=Math.ceil(y0/step)*step; y<=y1; y+=step){
+    const [,sy]=graphToScreen(0,y);
+    ctx.beginPath(); ctx.moveTo(0,sy); ctx.lineTo(r.width,sy); ctx.stroke();
+    if(Math.abs(y)>step/1000) ctx.fillText(fmt(y),ox+5,sy-3);
+  }
+
+  // axes
+  ctx.strokeStyle='#344054'; ctx.lineWidth=1.5;
+  if(oy>=0 && oy<=r.height){ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(r.width,oy);ctx.stroke();}
+  if(ox>=0 && ox<=r.width){ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,r.height);ctx.stroke();}
+
+  const samples=equations.length;
+  const lineStyles=['#536dfe','#e25555','#20a77a','#a855f7','#f59e0b'];
+  equations.forEach((e,idx)=>{
+    const p=parseEquation(e.value); if(!p) return;
+    ctx.strokeStyle=lineStyles[idx%lineStyles.length];
+    ctx.lineWidth=2.7;
+    ctx.beginPath();
+    let started=false;
+    for(let px=0;px<=r.width;px+=1){
+      const x=(px-ox)/scale;
+      let y;
+      try{ y=p.f(x); }catch(_){ y=NaN; }
+      if(!Number.isFinite(y) || Math.abs(y)>1e8){started=false;continue;}
+      const py=oy-y*scale;
+      if(py<-r.height*20 || py>r.height*21){started=false;continue;}
+      if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  });
+  analyze();
+}
+
+function zoom(f){
+  const r=canvas.getBoundingClientRect();
+  const cx=r.width/2, cy=r.height/2;
+  const [gx,gy]=screenToGraph(cx,cy);
+  scale=Math.max(10,Math.min(500,scale*f));
+  ox=cx-gx*scale; oy=cy+gy*scale;
+  draw();
+}
+function resetView(){
+  const r=canvas.getBoundingClientRect();
+  scale=55; ox=r.width/2; oy=r.height/2; draw();
+}
+function clearAll(){ equations=[]; renderInputs(); draw(); }
+
+canvas.addEventListener('wheel',e=>{e.preventDefault(); zoom(e.deltaY<0?1.15:0.87);},{passive:false});
+
+canvas.addEventListener('wheel',e=>{
+  e.preventDefault();
+  zoom(e.deltaY<0?1.15:0.87);
+},{passive:false});
+
+let pointerDragging=false;
+let pointerMoved=false;
+let pointerStartX=0, pointerStartY=0;
+let lastPointerX=0, lastPointerY=0;
+
+canvas.style.touchAction='pan-y';
+
+canvas.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse' && e.button!==0) return;
+
+  pointerDragging=true;
+  pointerMoved=false;
+  pointerStartX=e.clientX;
+  pointerStartY=e.clientY;
+  lastPointerX=e.clientX;
+  lastPointerY=e.clientY;
+
+  try{canvas.setPointerCapture(e.pointerId);}catch(_){}
+});
+
+canvas.addEventListener('pointermove',e=>{
+  if(!pointerDragging) return;
+
+  const dx=e.clientX-lastPointerX;
+  const dy=e.clientY-lastPointerY;
+
+  if(Math.hypot(e.clientX-pointerStartX,e.clientY-pointerStartY)>6)
+    pointerMoved=true;
+
+  if(pointerMoved){
+    // On phones, reserve vertical swipes for page scrolling.
+    // Horizontal drags still pan the graph.
+    if(Math.abs(dx) > Math.abs(dy)){
+      ox+=dx;
+      lastPointerX=e.clientX;
+      lastPointerY=e.clientY;
+      draw();
+    }
+  }
+});
+
+canvas.addEventListener('pointerup',e=>{
+  if(!pointerDragging) return;
+
+  const r=canvas.getBoundingClientRect();
+
+  if(!pointerMoved)
+    showPoint(e.clientX-r.left,e.clientY-r.top);
+
+  pointerDragging=false;
+
+  try{canvas.releasePointerCapture(e.pointerId);}catch(_){}
+});
+
+canvas.addEventListener('pointercancel',e=>{
+  pointerDragging=false;
+  try{canvas.releasePointerCapture(e.pointerId);}catch(_){}
+});
+
+// ===== Somsed Teach Mode — Discriminant, One Root (Mohan, 2026-08-12) =====
+// Same engine as the interactive calculator, scripted input. Original
+// narration described dragging a Desmos slider until the parabola just
+// touches the x-axis — Somsed has no slider yet, so this types the solved
+// equation directly and shows the vertex sitting exactly at the maximum,
+// which is the visual meaning of "exactly one width satisfies this area."
+//
+// Scenario rebuilt 2026-08-12 (Suresa cross-check): the original bare
+// "x^2-4x+k=0, find k" version matched Suresa's own worked example and
+// worksheet question too closely (same setup, same technique, just
+// different numbers). This version derives the quadratic from a real
+// geometry constraint instead — perimeter fixed, area as a function of
+// width — a genuinely different task shape, not a relabeled equation.
+
+async function typeIntoEquation(idx, fullText, charDelay){
+  for(let i=1;i<=fullText.length;i++){
+    equations[idx].value = fullText.slice(0,i);
+    renderInputs();
+    draw();
+    await new Promise(r=>setTimeout(r, charDelay));
+  }
+}
+
+function setTeachBanner(text, icon){
+  document.getElementById('teachBannerText').textContent = text;
+  if(icon) document.getElementById('teachBannerIcon').textContent = icon;
+}
+
+async function runTeachSequence(){
+  addEquation('');
+  await new Promise(r=>setTimeout(r,500));
+
+  setTeachBanner('Area as a function of width: -x squared plus 20x...', '👀');
+  await typeIntoEquation(0, '-x^2+20x', 90);
+  await new Promise(r=>setTimeout(r,1000));
+
+  setTeachBanner('Watch the vertex — it sits at the maximum possible area.', '👀');
+  await new Promise(r=>setTimeout(r,2200));
+
+  setTeachBanner('Vertex at (10, 100) — max area 100, at width 10. A square!', '✅');
+  await new Promise(r=>setTimeout(r,2600));
+
+  setTeachBanner("Now it's your turn — try it yourself. Change the numbers, type your own equation, see what moves. I'll be right here.", '✋');
+  await new Promise(r=>setTimeout(r,2800));
+
+  document.getElementById('teachBanner').style.opacity = '0.6';
+}
+
+resize();
+runTeachSequence();
+
+
+
+function toggleCalculator(){
+  const body=document.getElementById('calcBody');
+  const btn=document.getElementById('calcCollapseBtn');
+  const hidden=body.style.display==='none';
+  body.style.display=hidden?'block':'none';
+  btn.textContent=hidden?'Hide':'Show';
+}
+
+/* ===== SOMSED Calculator v3 ===== */
+// calcMode itself is declared near the top of the script now (shared with
+// the graph parser) — this section only sets/reads it from here on.
+let calcAns=0;
+
+function setCalcMode(mode){
+  calcMode=mode;
+  document.getElementById('degBtn').classList.toggle('active',mode==='DEG');
+  document.getElementById('radBtn').classList.toggle('active',mode==='RAD');
+  calcUpdatePreview();
+}
+function calcInsert(text){
+  const d=document.getElementById('calcDisplay');
+  const start=d.selectionStart ?? d.value.length;
+  const end=d.selectionEnd ?? d.value.length;
+  d.value=d.value.slice(0,start)+text+d.value.slice(end);
+  d.focus();
+  const pos=start+text.length;
+  d.setSelectionRange(pos,pos);
+  calcUpdatePreview();
+}
+function calcClear(){
+  document.getElementById('calcDisplay').value='';
+  document.getElementById('calcResult').textContent='';
+}
+function calcBack(){
+  const d=document.getElementById('calcDisplay');
+  const start=d.selectionStart ?? d.value.length;
+  const end=d.selectionEnd ?? d.value.length;
+  if(start!==end){
+    d.value=d.value.slice(0,start)+d.value.slice(end);
+    d.setSelectionRange(start,start);
+  }else if(start>0){
+    d.value=d.value.slice(0,start-1)+d.value.slice(start);
+    d.setSelectionRange(start-1,start-1);
+  }
+  d.focus(); calcUpdatePreview();
+}
+function calcToggleSign(){
+  const d=document.getElementById('calcDisplay');
+  if(d.value.startsWith('−(') && d.value.endsWith(')'))
+    d.value=d.value.slice(2,-1);
+  else
+    d.value='−('+d.value+')';
+  d.focus(); d.setSelectionRange(d.value.length,d.value.length);
+  calcUpdatePreview();
+}
+function calcPrepare(s){
+  s=s.replace(/\s+/g,'').replace(/×/g,'*').replace(/÷/g,'/')
+    .replace(/−/g,'-').replace(/π/g,'Math.PI')
+    .replace(/\bAns\b/g,'ANS').replace(/\be\b/g,'Math.E')
+    .replace(/√\(/g,'sqrt(').replace(/\^/g,'**');
+
+  s=s.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');
+  const angle=calcMode==='DEG'?'(Math.PI/180)*':'';
+  s=s.replace(/\bsin\(/g,`Math.sin(${angle}`)
+     .replace(/\bcos\(/g,`Math.cos(${angle}`)
+     .replace(/\btan\(/g,`Math.tan(${angle}`)
+     .replace(/\blog\(/g,'Math.log10(')
+     .replace(/\bln\(/g,'Math.log(')
+     .replace(/\bsqrt\(/g,'Math.sqrt(');
+  return s;
+}
+function calcEvaluate(raw){
+  let s=calcPrepare(raw);
+  if(!s) return null;
+  if(!/^[0-9+\-*/()._a-zA-Z]+$/.test(s)) return null;
+  s=s.replace(/\bANS\b/g,String(calcAns));
+  try{
+    const value=Function('"use strict";return ('+s+')')();
+    return typeof value==='number' && Number.isFinite(value) ? value : null;
+  }catch(_){return null}
+}
+function calcFormat(v){
+  if(v===0 || Math.abs(v)<1e-12) return '0';
+  if(Math.abs(v)>=1e10 || Math.abs(v)<1e-8)
+    return v.toExponential(8).replace(/\.?0+e/,'e');
+  return Number(v.toPrecision(12)).toString();
+}
+function calcEquals(){
+  const d=document.getElementById('calcDisplay');
+  const out=document.getElementById('calcResult');
+  const value=calcEvaluate(d.value);
+  if(value===null){out.textContent='Invalid expression';return}
+  calcAns=value; out.textContent='= '+calcFormat(value);
+}
+function calcUpdatePreview(){
+  const d=document.getElementById('calcDisplay');
+  const out=document.getElementById('calcResult');
+  if(!d.value.trim()){out.textContent='';return}
+  const value=calcEvaluate(d.value);
+  out.textContent=value===null?'':'= '+calcFormat(value);
+}
+document.getElementById('calcDisplay').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){e.preventDefault();calcEquals()}
+  else if(e.key==='Escape'){calcClear()}
+});
+document.getElementById('calcDisplay').addEventListener('input',calcUpdatePreview);
+
+</script>
+</body>
+</html>
