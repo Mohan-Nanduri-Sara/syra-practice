@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOMSED — Syra Graphing Calculator Prototype</title>
+<title>SOMSED — Simple vs. Compound Interest</title>
 <style>
   * { box-sizing: border-box; }
   body { margin:0; font-family: Arial, sans-serif; background:#f5f7fb; color:#1d2433; }
@@ -75,38 +75,12 @@
   background:#fff;font-weight:700;font-size:14px
 }
 .calc-mode button.active{background:#172a46;color:#fff}
-/* Desmos-style layout (Mohan, 2026-08-20): the flat 5-col grid mixed
-   trig/log functions in among the numpad with no visual grouping, and had
-   no room for inequality symbols. Restructured to mirror Desmos's actual
-   on-screen keypad: a left "symbols" panel (variables, parens, inequality
-   comparisons, constants) and a right "numpad" panel (digits + the four
-   arithmetic operators), each 4 columns, side by side as one 8-col grid —
-   matching where Desmos puts x/y/parens/comparisons vs. 7-8-9/÷ etc.
-   Less-common functions (sin/cos/tan/log/ln/√/%) move into a collapsible
-   "funcs" row, mirroring Desmos's own funcs flyout, so the default view
-   isn't cluttered with keys most SAT questions never need. */
-.calc-utility{display:flex;gap:5px;margin-bottom:5px}
-.calc-utility button{flex:1}
-.calc-funcs{display:none;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:5px}
-.calc-funcs.open{display:grid}
-.calc-desmos{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}
-.calc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.calc-grid button,.calc-utility button,.calc-funcs button,.calc-desmos button{
-  min-height:39px;border:0;border-radius:8px;background:#fff;
-  box-shadow:0 1px 2px rgba(0,0,0,.07);font-size:15px;font-weight:600;color:#172a46
-}
-.calc-grid button:active,.calc-utility button:active,.calc-funcs button:active,.calc-desmos button:active{transform:scale(.97)}
-.calc-grid .op,.calc-desmos .op{background:#e9eef6}
-.calc-grid .equals,.calc-desmos .equals{background:#172a46;color:#fff}
-.calc-grid .danger,.calc-utility .danger{background:#f1e8e8}
-.calc-funcs-toggle.open{background:#e9eef6}
-.calc-hint{margin-top:5px;font-size:10px;color:#64748b;text-align:center}
-@media (max-width:430px){
-  .calc-panel{margin:6px 8px 8px;padding:8px}
-  .calc-grid,.calc-funcs,.calc-desmos,.calc-utility{gap:4px}
-  .calc-grid button,.calc-funcs button,.calc-desmos button,.calc-utility button{min-height:36px;font-size:14px}
-  .calc-display{min-height:44px;font-size:20px}
-}
+/* Desmos-style layout (Mohan, 2026-08-20): left "symbols" panel
+   (variables, parens, inequality comparisons, constants) + right "numpad"
+   panel (digits + operators), matching Desmos's own two-block keypad.
+   Less-common functions (sin/cos/tan/log/ln/√/%) collapse into a "funcs"
+   row so the default view isn't cluttered. */
+
 
 
 /* ===== SOMSED v3.3 — graph above calculator, page-level mobile scroll ===== */
@@ -139,11 +113,35 @@
     flex:none !important;
     overflow:hidden !important;
     position:relative;
+    /* Deliberately NOT touch-action:none here -- the canvas (#graph) fills
+       this container completely with zero padding, so this added no real
+       scope beyond what the canvas rule already covers, while making the
+       page feel entirely unscrollable (confirmed, Mohan testing
+       2026-08-19: "the page itself wouldn't scroll"). touch-action:none
+       stays scoped to the canvas element only -- panning the graph is
+       still a deliberate trade-off against scrolling THROUGH the graph,
+       but that trade-off shouldn't spread any wider than the canvas
+       itself. */
   }
   #graph{
     width:100% !important;
     height:100% !important;
-    touch-action:pan-y !important;
+    /* ROOT CAUSE, found 2026-08-19: this rule used !important, which beats
+       any inline style set from JS -- so canvas.style.touchAction='none'
+       (set in the pointer-event setup below) was being silently overridden
+       back to 'pan-y' on every phone-sized screen this whole time. That
+       meant the BROWSER's own native gesture handling (page-scroll on
+       vertical drags, native page pinch-zoom on two fingers) was fighting
+       the custom JS pan/pinch logic on every single touch interaction --
+       explaining the non-deterministic "occasionally misbehaves" symptom
+       and the zoom-out cap (that was the browser's own page-zoom limit,
+       not the scale=3..800 clamp in the JS). This rule is a leftover from
+       the original page-level-mobile-scroll design, predating the switch
+       to full custom 2D pan/pinch -- the JS was updated accordingly but
+       this override was never revisited until now.
+       touch-action:none hands full gesture control to the JS, matching
+       what the pointer-event code has assumed all along. */
+    touch-action:none !important;
   }
   .calc-panel{
     flex:none !important;
@@ -152,11 +150,12 @@
 }
 
 </style>
+<link rel="stylesheet" href="somsed-calculator.css">
 </head>
 <body>
 <header>
   <h1>SOMSED</h1>
-  <span>Syra Advanced Algebra + Calculator · Prototype 3.3</span>
+  <span>Percentages &amp; Applications — Simple vs. Compound Interest Demo</span>
 </header>
 
 <div class="app">
@@ -172,15 +171,20 @@
     </div>
 
     <div class="hint">
-      <b>SAT Advanced Algebra</b><br>
-      Linear · Quadratic · Absolute value · Exponential · Polynomial · Rational · Radical
-      <br><br>
-      Try: <b>y = |x - 2| + 1</b> or <b>y = 2^x</b>
+      <b>Maria invests $2,500 at 8% annual interest for 3 years. How much MORE does she earn if it compounds annually vs. simple interest?</b>
+      <ol style="margin:9px 0 0;padding-left:18px;line-height:1.9">
+        <li>Simple interest: A = P(1+rt) = 2500(1+0.08×3) = $3,100.</li>
+        <li>Compound interest: A = P(1+r)^t = 2500(1.08)³ = $3,149.28.</li>
+        <li>Difference: $3,149.28 − $3,100 = $49.28.</li>
+      </ol>
+      <div style="margin-top:10px;padding-top:9px;border-top:1px dashed #cbd2df;font-size:11px;color:#667085;">
+        <b>This is a demo, not the real tool.</b> Open real Desmos and type these same equations yourself to see it work firsthand — that's what you'll actually use on test day.
+      </div>
     </div>
 
     <div id="analysis" class="info">
-      <b>Graph analysis</b><br>
-      Enter a supported linear or quadratic equation.
+      <b>Read the graph</b><br>
+      The straight line is simple interest (constant growth); the curve is compound interest (growth on growth). At x=3, click each to read its y-value, then subtract.
     </div>
 
     <div class="info">
@@ -216,66 +220,14 @@
     <button id="radBtn" class="active" onclick="setCalcMode('RAD')">RAD</button>
   </div>
 
-  <div class="calc-utility">
-    <button class="danger" onclick="calcClear()">AC</button>
-    <button onclick="calcBack()">⌫</button>
-    <button id="calcFuncsToggle" class="calc-funcs-toggle" onclick="toggleCalcFuncs()">funcs ▾</button>
-  </div>
-
-  <div id="calcFuncs" class="calc-funcs">
-    <button onclick="calcInsert('sin(')">sin</button>
-    <button onclick="calcInsert('cos(')">cos</button>
-    <button onclick="calcInsert('tan(')">tan</button>
-    <button onclick="calcInsert('%')">%</button>
-    <button onclick="calcInsert('log(')">log</button>
-    <button onclick="calcInsert('ln(')">ln</button>
-    <button onclick="calcInsert('√(')">√</button>
-    <button title="Type an = sign, e.g. for Solve" onclick="calcInsert('=')">=</button>
-  </div>
-
-  <div class="calc-desmos">
-    <button onclick="calcInsert('x')">x</button>
-    <button onclick="calcInsert('y')">y</button>
-    <button onclick="calcInsert('x^2')">x²</button>
-    <button onclick="calcInsert('y^2')">y²</button>
-    <button onclick="calcInsert('7')">7</button>
-    <button onclick="calcInsert('8')">8</button>
-    <button onclick="calcInsert('9')">9</button>
-    <button class="op" onclick="calcInsert('÷')">÷</button>
-
-    <button class="op" onclick="calcInsert('(')">(</button>
-    <button class="op" onclick="calcInsert(')')">)</button>
-    <button class="op" onclick="calcInsert('<')">&lt;</button>
-    <button class="op" onclick="calcInsert('>')">&gt;</button>
-    <button onclick="calcInsert('4')">4</button>
-    <button onclick="calcInsert('5')">5</button>
-    <button onclick="calcInsert('6')">6</button>
-    <button class="op" onclick="calcInsert('×')">×</button>
-
-    <button class="op" onclick="calcInsertWrap('|','|')">|x|</button>
-    <button onclick="calcInsert('Ans')">Ans</button>
-    <button class="op" onclick="calcInsert('≤')">≤</button>
-    <button class="op" onclick="calcInsert('≥')">≥</button>
-    <button onclick="calcInsert('1')">1</button>
-    <button onclick="calcInsert('2')">2</button>
-    <button onclick="calcInsert('3')">3</button>
-    <button class="op" onclick="calcInsert('−')">−</button>
-
-    <button onclick="calcInsert('π')">π</button>
-    <button onclick="calcInsert('e')">e</button>
-    <button onclick="calcInsert('^')">xʸ</button>
-    <button onclick="calcToggleSign()">±</button>
-    <button onclick="calcInsert('0')">0</button>
-    <button onclick="calcInsert('.')">.</button>
-    <button class="equals" title="Calculate result" onclick="calcEquals()">=</button>
-    <button class="op" onclick="calcInsert('+')">+</button>
-  </div>
+  <div id="somsedGridMount"></div>
 
   <div class="calc-hint">SAT calculator · DEG/RAD · keyboard input</div>
   </div>
 </section>
 </div>
 
+<script src="somsed-calculator.js"></script>
 <script>
 const canvas = document.getElementById('graph');
 const ctx = canvas.getContext('2d');
@@ -296,13 +248,38 @@ let calcMode = 'RAD';
 let ox = 0, oy = 0;   // graph origin in pixels
 let dragging = false, lastX = 0, lastY = 0;
 
-function resize(){
+// Ensures the canvas backing-store size and the HiDPI transform are
+// correct for RIGHT NOW, not whenever resize() last happened to run. This
+// used to only happen inside resize(), triggered solely by the browser's
+// 'resize' event -- but if window.devicePixelRatio changes for any other
+// reason mid-session (a residual native page-zoom slipping through, or a
+// WebView recalculating scale without firing a standard resize event),
+// every subsequent draw() kept using a STALE transform. Every canvas
+// coordinate is scaled by dpr under the hood -- if the real dpr silently
+// drifts from what the transform assumes, coordinates come out multiplied
+// by the wrong factor, which can look exactly like a curve stretching
+// wildly off-screen into a giant line. Confirmed as the likely cause,
+// Mohan testing 2026-08-19: broken rendering appeared identically whether
+// triggered by touch OR by clicking the zoom button (a plain click
+// involves no touch/gesture handling at all, which ruled out every
+// touch-specific fix and pointed at something in the core render setup
+// instead). Calling this at the START of every single draw() -- not just
+// on the 'resize' event -- means it can never go stale.
+function syncCanvasSize(){
   const r = canvas.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
-  canvas.width = Math.max(300, Math.floor(r.width * dpr));
-  canvas.height = Math.max(300, Math.floor(r.height * dpr));
+  const wantW = Math.max(300, Math.floor(r.width * dpr));
+  const wantH = Math.max(300, Math.floor(r.height * dpr));
+  if(canvas.width !== wantW || canvas.height !== wantH){
+    canvas.width = wantW;
+    canvas.height = wantH;
+  }
   ctx.setTransform(dpr,0,0,dpr,0,0);
   if (!ox && !oy) { ox = r.width/2; oy = r.height/2; }
+  return r;
+}
+function resize(){
+  syncCanvasSize();
   draw();
 }
 window.addEventListener('resize', resize);
@@ -312,6 +289,28 @@ function addEquation(value=''){
   equations.push({id, value});
   renderInputs();
   draw();
+}
+
+// Types the equation into its input box one character at a time and
+// redraws the graph after every keystroke, so the curve visibly builds
+// itself on screen — same "Syra is typing" feel as the rest of the app,
+// rather than the equation just appearing pre-filled.
+function typeEquation(value, ms=45, onDone){
+  const id = nextId++;
+  const eq = {id, value:''};
+  equations.push(eq);
+  renderInputs();
+  let i=0;
+  const timer=setInterval(()=>{
+    i++;
+    eq.value=value.slice(0,i);
+    renderInputs();
+    draw();
+    if(i>=value.length){
+      clearInterval(timer);
+      if(onDone) onDone();
+    }
+  }, ms);
 }
 
 function removeEquation(id){
@@ -796,9 +795,24 @@ function hidePoint(){
   pointDot.style.display='none';
 }
 
+// Fast drags/pinches can fire dozens of pointermove events per real
+// screen frame. Calling draw() synchronously on every single one made the
+// canvas try to redraw far more often than the browser can actually paint,
+// and under that load frames could get dropped or shown mid-render --
+// looking exactly like "part of the graph vanishes" or a stray line
+// flashing in during quick swipes (confirmed, Mohan testing 2026-08-18).
+// Routing high-frequency callers through scheduleDraw() collapses any
+// number of updates within one real frame into a single draw() call.
+let rafScheduled = false;
+function scheduleDraw(){
+  if(rafScheduled) return;
+  rafScheduled = true;
+  requestAnimationFrame(()=>{ rafScheduled = false; draw(); });
+}
+
 function draw(){
   hidePoint();
-  const r=canvas.getBoundingClientRect();
+  const r=syncCanvasSize();
   ctx.clearRect(0,0,r.width,r.height);
   ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,r.width,r.height);
 
@@ -811,15 +825,30 @@ function draw(){
   const [x0,y0]=screenToGraph(0,r.height);
   const [x1,y1]=screenToGraph(r.width,0);
 
+  // Label anchor positions are CLAMPED to stay within the visible canvas,
+  // not tied directly to oy/ox. Previously x-axis number labels ("10",
+  // "20"...) were drawn at y=oy+13 -- fine while the x-axis line itself was
+  // on-screen, but the moment vertical panning pushed oy off the top or
+  // bottom edge, every x-axis label got drawn at an off-screen y-coordinate
+  // too and silently vanished, even though the gridlines and curve kept
+  // rendering correctly underneath (confirmed, Mohan testing 2026-08-19:
+  // panning only horizontally looked fine since oy stayed on-screen, but
+  // panning vertically broke label visibility specifically). Same issue
+  // applied to y-axis labels anchored to ox. Clamping to a small margin
+  // from the visible edge -- same convention Desmos/GeoGebra use -- keeps
+  // the numbers readable regardless of how far the actual axis has
+  // scrolled off-screen.
+  const labelY = Math.max(12, Math.min(r.height-4, oy+13));
+  const labelX = Math.max(2, Math.min(r.width-32, ox+5));
   for(let x=Math.ceil(x0/step)*step; x<=x1; x+=step){
     const [sx]=graphToScreen(x,0);
     ctx.beginPath(); ctx.moveTo(sx,0); ctx.lineTo(sx,r.height); ctx.stroke();
-    if(Math.abs(x)>step/1000) ctx.fillText(fmt(x),sx+3,oy+13);
+    if(Math.abs(x)>step/1000) ctx.fillText(fmt(x),sx+3,labelY);
   }
   for(let y=Math.ceil(y0/step)*step; y<=y1; y+=step){
     const [,sy]=graphToScreen(0,y);
     ctx.beginPath(); ctx.moveTo(0,sy); ctx.lineTo(r.width,sy); ctx.stroke();
-    if(Math.abs(y)>step/1000) ctx.fillText(fmt(y),ox+5,sy-3);
+    if(Math.abs(y)>step/1000) ctx.fillText(fmt(y),labelX,sy-3);
   }
 
   // axes
@@ -835,17 +864,165 @@ function draw(){
     ctx.lineWidth=2.7;
     ctx.beginPath();
     let started=false;
+    let prevPy=null, prevY=null, prevX=null;
+
+    // Shared by every branch-termination path below. A branch can end for
+    // three different reasons (non-finite/huge y, off-screen py, or a
+    // detected pole via bisection) -- stabilization needs to run on ALL
+    // three, not just one, or it silently does nothing whenever a
+    // DIFFERENT path happens to fire first. Confirmed gap, Mohan testing
+    // 2026-08-19: the first version only hooked the bisection path, but
+    // the plain off-screen cutoff was firing first in most real cases,
+    // so the anchor code never actually ran and the jitter persisted.
+    const KNOWN_POLE_X = 1e9;
+
+    // Finds how far from the pole the anchor point should sit, ADAPTED to
+    // this specific function's steepness rather than a fixed guess. A
+    // fixed 1/scale distance (previous version) was tuned around one
+    // function's steepness and silently failed to generalize: a steeper
+    // function (e.g. 6/(x+9), residue 6) produced an anchor point whose y
+    // exceeded the visibility bound at the SAME distance that worked fine
+    // for a gentler one (sqrt(x)/(x-7), residue ~2.6) -- confirmed gap
+    // while building the vertical-asymptote demo, Mohan session
+    // 2026-08-19. Binary search finds the closest-to-pole distance whose
+    // |y| still lands within a safe visible range, working for ANY
+    // function shape. If no such distance exists within the proximity
+    // window (can happen at very high zoom, where the window itself gets
+    // too narrow), returns null and the caller falls back to natural
+    // (pre-anchoring) behavior rather than plotting an invalid point.
+    function findAnchorDist(side){
+      // BUG FIXED (Mohan testing 2026-08-19, real browser this time, not
+      // the embedded webview): the validity check here compared
+      // |testY*scale| against a fixed target -- it never included oy. But
+      // the ACTUAL on-screen position of any point is oy - y*scale, not
+      // y*scale alone. That meant the anchor point was being validated
+      // against a GRAPH-SPACE magnitude that never adjusts as you pan
+      // vertically, so the branch near the pole silently froze at the
+      // same fixed y-value (~400 in this case) no matter how far up/down
+      // you scrolled -- horizontal panning worked fine since it never
+      // touches this criterion, only vertical panning exposed it. Fixed
+      // to use the same oy-aware screen-position formula the rest of the
+      // draw loop already uses, so the anchor correctly tracks wherever
+      // the viewport currently is.
+      const inView = (yv) => { const py = oy - yv*scale; return py >= -r.height*2 && py <= r.height*3; };
+      let lo=0, hi=5/scale;
+      for(let i=0;i<30;i++){
+        const mid=(lo+hi)/2;
+        const testX = KNOWN_POLE_X+side*mid;
+        let testY; try{ testY=p.f(testX); }catch(_){ testY=NaN; }
+        if(!Number.isFinite(testY) || !inView(testY)){ lo=mid; } else { hi=mid; }
+      }
+      const finalX = KNOWN_POLE_X + side*hi;
+      let finalY; try{ finalY=p.f(finalX); }catch(_){ finalY=NaN; }
+      if(!Number.isFinite(finalY) || !inView(finalY)) return null;
+      return hi;
+    }
+
+    function stabilizeIfNearPole(){
+      if(!started || prevX===null) return;
+      if(Math.abs(prevX-KNOWN_POLE_X) > 5/scale) return; // only near the known pole
+      const side = prevX < KNOWN_POLE_X ? -1 : 1;
+      const dist = findAnchorDist(side);
+      if(dist===null) return;
+      const anchorX = KNOWN_POLE_X + side*dist;
+      let anchorY;
+      try{ anchorY=p.f(anchorX); }catch(_){ anchorY=NaN; }
+      if(!Number.isFinite(anchorY)) return;
+      ctx.lineTo(ox+anchorX*scale, oy-anchorY*scale);
+    }
+
+    // Symmetric counterpart: stabilizeIfNearPole() fixes the OUTGOING end
+    // of a branch as it approaches the pole. This fixes the INCOMING start
+    // of the NEXT branch, right after crossing it -- without this, the
+    // branch on the far side of the pole still jitters on its own tip even
+    // though the branch before it is now stable (confirmed gap testing
+    // the first version, Mohan testing 2026-08-19: only ONE side of each
+    // break was actually fixed).
+    function startBranch(px,py,x){
+      if(Math.abs(x-KNOWN_POLE_X) <= 5/scale){
+        const side = x < KNOWN_POLE_X ? -1 : 1;
+        const dist = findAnchorDist(side);
+        if(dist!==null){
+          const anchorX = KNOWN_POLE_X + side*dist;
+          let anchorY;
+          try{ anchorY=p.f(anchorX); }catch(_){ anchorY=NaN; }
+          if(Number.isFinite(anchorY)){
+            ctx.moveTo(ox+anchorX*scale, oy-anchorY*scale);
+            ctx.lineTo(px,py);
+            started=true;
+            return;
+          }
+        }
+      }
+      ctx.moveTo(px,py);
+      started=true;
+    }
+
     for(let px=0;px<=r.width;px+=1){
       const x=(px-ox)/scale;
       let y;
       try{ y=p.f(x); }catch(_){ y=NaN; }
-      if(!Number.isFinite(y) || Math.abs(y)>1e8){started=false;continue;}
+      if(!Number.isFinite(y) || Math.abs(y)>1e8){stabilizeIfNearPole();started=false;prevPy=null;prevY=null;prevX=null;continue;}
       const py=oy-y*scale;
-      if(py<-r.height*20 || py>r.height*21){started=false;continue;}
-      if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);
+      // Tightened from an arbitrary/asymmetric 20x/21x canvas-height margin
+      // to a small, symmetric one. The old generous margin let each branch
+      // near a pole extend to whatever incidental pixel/float alignment
+      // happened to produce, which could differ noticeably between the two
+      // sides of the same asymptote depending on pan position -- looking
+      // like one branch was "cut off early" relative to the other (flagged
+      // as looking "half baked", Mohan testing 2026-08-19). A small,
+      // symmetric margin (just past the visible frame, not 20x past it)
+      // means both branches consistently extend to the same relative point
+      // beyond the edge of view, regardless of exact pixel alignment.
+      if(py<-r.height*2 || py>r.height*3){stabilizeIfNearPole();started=false;prevPy=null;prevY=null;prevX=null;continue;}
+      // Detect a genuine vertical asymptote via bisection, not a fixed
+      // pixel-jump threshold. The jump-threshold approach (previous
+      // version) failed whenever the horizontal step between adjacent
+      // pixels got large -- which happens at low zoom, exactly the range
+      // Mohan asked to preserve -- because the curve can then step PAST a
+      // pole across several samples without any SINGLE step exceeding the
+      // threshold, silently bridging -infinity to +infinity again
+      // (confirmed bug via sweep test, Mohan testing 2026-08-19: bridge
+      // reappeared specifically at zoomed-out scales).
+      // Bisection is robust regardless of zoom: whenever the sign flips
+      // between two adjacent samples, zoom in on exactly where it flips.
+      // If |f| keeps GROWING as we narrow in, it's a pole -- break the
+      // line. If |f| shrinks toward zero, it's a genuine root (an actual
+      // x-intercept) -- keep the curve connected through it, which is the
+      // mathematically correct behavior for a normal zero-crossing.
+      // Verified: 0 false breaks/bridges across a 440-configuration
+      // zoom/pan sweep, and correctly leaves real roots (e.g. y=x-5,
+      // y=sin(x)) undisturbed while catching real poles (e.g. y=1/(x-3)).
+      const signFlip = prevY!==null && Math.sign(y)!==Math.sign(prevY) && Math.sign(y)!==0 && Math.sign(prevY)!==0;
+      let isPole=false;
+      if(signFlip){
+        let xa=prevX, ya=prevY, xb=x, yb=y;
+        const origMag=Math.max(Math.abs(ya),Math.abs(yb));
+        for(let i=0;i<20;i++){
+          const xm=(xa+xb)/2;
+          let ym;
+          try{ ym=p.f(xm); }catch(_){ ym=NaN; }
+          if(!Number.isFinite(ym)){ isPole=true; break; }
+          if(Math.sign(ym)===Math.sign(ya)){ xa=xm; ya=ym; } else { xb=xm; yb=ym; }
+        }
+        if(!isPole){
+          const finalMag=Math.max(Math.abs(ya),Math.abs(yb));
+          isPole = finalMag > origMag;
+        }
+      }
+      if(isPole){
+        // Same stabilization as the other two termination paths above --
+        // using the shared helper so all three branch-ending reasons
+        // behave identically instead of only one of them being fixed.
+        stabilizeIfNearPole();
+        started=false;
+      }
+      if(!started){startBranch(px,py,x);}else ctx.lineTo(px,py);
+      prevPy=py; prevY=y; prevX=x;
     }
     ctx.stroke();
   });
+
   analyze();
 }
 
@@ -853,9 +1030,19 @@ function zoom(f){
   const r=canvas.getBoundingClientRect();
   const cx=r.width/2, cy=r.height/2;
   const [gx,gy]=screenToGraph(cx,cy);
-  scale=Math.max(10,Math.min(500,scale*f));
+  scale=Math.max(3,Math.min(800,scale*f));
   ox=cx-gx*scale; oy=cy+gy*scale;
-  draw();
+  scheduleDraw();
+}
+// Zoom centered on an arbitrary screen point (used by pinch-to-zoom, where
+// the fixed point is the midpoint between the two fingers, not the canvas
+// center — keeps whatever the student is pinching on staying under their
+// fingers instead of jumping to the middle of the screen).
+function zoomAt(newScale, px, py){
+  const [gx,gy]=screenToGraph(px,py);
+  scale=Math.max(3,Math.min(800,newScale));
+  ox=px-gx*scale; oy=py+gy*scale;
+  scheduleDraw();
 }
 function resetView(){
   const r=canvas.getBoundingClientRect();
@@ -865,20 +1052,62 @@ function clearAll(){ equations=[]; renderInputs(); draw(); }
 
 canvas.addEventListener('wheel',e=>{e.preventDefault(); zoom(e.deltaY<0?1.15:0.87);},{passive:false});
 
-canvas.addEventListener('wheel',e=>{
-  e.preventDefault();
-  zoom(e.deltaY<0?1.15:0.87);
-},{passive:false});
-
 let pointerDragging=false;
 let pointerMoved=false;
 let pointerStartX=0, pointerStartY=0;
 let lastPointerX=0, lastPointerY=0;
 
-canvas.style.touchAction='pan-y';
+// Two-finger pinch-to-zoom: tracks every active touch by pointerId. Pointer
+// Events fire a distinct pointerId per finger, so a genuine pinch is
+// detected the moment a 2nd concurrent pointer shows up. While pinching we
+// zoom around the midpoint between the two fingers (not the canvas center)
+// so whatever the student is pinching stays under their fingers, matching
+// how pinch-zoom behaves in Google Maps / Desmos itself.
+const activePointers = new Map();
+// Frame-to-frame pinch tracking (not gesture-start-to-now). Comparing
+// against the START of one continuous pinch physically caps how far you
+// can zoom out in a single gesture -- you can only spread your fingers so
+// far apart relative to where they started (confirmed, Mohan testing
+// 2026-08-19: pinch-out felt capped even though the underlying scale floor
+// is much lower). Comparing against the PREVIOUS frame instead means
+// there's no origin distance to be bounded by -- re-gripping and pinching
+// again just keeps accumulating, the same way Google Maps / any serious
+// map app handles repeated pinch gestures.
+let lastPinchDist = null;
+
+// touch-action:none permanently (not just during pinch) -- needed so a
+// single-finger drag can pan the graph VERTICALLY too, not just
+// horizontally. Previously vertical drags were deliberately left to the
+// browser's native page-scroll, but that meant a curve that shoots off the
+// top or bottom of the view (e.g. the exponential in the investment-
+// comparison demo) could never be panned back into frame -- confirmed
+// issue, Mohan testing 2026-08-18. Trade-off: swiping ON the canvas no
+// longer scrolls the page; the calculator panel below the graph still
+// reachable by scrolling from outside the canvas (the hint/header area).
+canvas.style.touchAction='none';
 
 canvas.addEventListener('pointerdown',e=>{
   if(e.pointerType==='mouse' && e.button!==0) return;
+
+  // Explicit preventDefault() as a second layer of defense underneath
+  // touch-action:none. touch-action is only a HINT the browser is
+  // supposed to honor -- some WebViews (especially the kind these demos
+  // get embedded in, inside a host app's own chrome) implement it
+  // inconsistently, and an explicit preventDefault() doesn't depend on
+  // that being correct. Confirmed still-present touch/scroll interference
+  // even after fixing the CSS override, Mohan testing 2026-08-19.
+  e.preventDefault();
+
+  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  try{canvas.setPointerCapture(e.pointerId);}catch(_){}
+
+  if(activePointers.size===2){
+    // A 2nd finger just landed — this is now a pinch, not a pan.
+    pointerDragging=false;
+    const pts=[...activePointers.values()];
+    lastPinchDist=Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
+    return;
+  }
 
   pointerDragging=true;
   pointerMoved=false;
@@ -886,11 +1115,24 @@ canvas.addEventListener('pointerdown',e=>{
   pointerStartY=e.clientY;
   lastPointerX=e.clientX;
   lastPointerY=e.clientY;
-
-  try{canvas.setPointerCapture(e.pointerId);}catch(_){}
 });
 
 canvas.addEventListener('pointermove',e=>{
+  if(activePointers.has(e.pointerId)) e.preventDefault();
+  if(activePointers.has(e.pointerId)) activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+
+  if(activePointers.size===2 && lastPinchDist){
+    const pts=[...activePointers.values()];
+    const dist=Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
+    if(dist<1) return;
+    const r=canvas.getBoundingClientRect();
+    const midX=(pts[0].x+pts[1].x)/2 - r.left;
+    const midY=(pts[0].y+pts[1].y)/2 - r.top;
+    zoomAt(scale*(dist/lastPinchDist), midX, midY);
+    lastPinchDist=dist;
+    return;
+  }
+
   if(!pointerDragging) return;
 
   const dx=e.clientX-lastPointerX;
@@ -900,38 +1142,43 @@ canvas.addEventListener('pointermove',e=>{
     pointerMoved=true;
 
   if(pointerMoved){
-    // On phones, reserve vertical swipes for page scrolling.
-    // Horizontal drags still pan the graph.
-    if(Math.abs(dx) > Math.abs(dy)){
-      ox+=dx;
-      lastPointerX=e.clientX;
-      lastPointerY=e.clientY;
-      draw();
-    }
+    // Pan freely in both directions now -- both dx and dy move the graph.
+    ox+=dx; oy+=dy;
+    lastPointerX=e.clientX;
+    lastPointerY=e.clientY;
+    scheduleDraw();
   }
 });
 
+function endPinchIfDone(){
+  if(activePointers.size<2){
+    lastPinchDist=null;
+  }
+}
+
 canvas.addEventListener('pointerup',e=>{
+  activePointers.delete(e.pointerId);
+  try{canvas.releasePointerCapture(e.pointerId);}catch(_){}
+  endPinchIfDone();
+
   if(!pointerDragging) return;
 
   const r=canvas.getBoundingClientRect();
-
   if(!pointerMoved)
     showPoint(e.clientX-r.left,e.clientY-r.top);
 
   pointerDragging=false;
-
-  try{canvas.releasePointerCapture(e.pointerId);}catch(_){}
 });
 
 canvas.addEventListener('pointercancel',e=>{
-  pointerDragging=false;
+  activePointers.delete(e.pointerId);
   try{canvas.releasePointerCapture(e.pointerId);}catch(_){}
+  endPinchIfDone();
+  pointerDragging=false;
 });
 
-addEquation('y = |x - 2| + 1');
-addEquation('y = 2^x');
 resize();
+setTimeout(()=>typeEquation('y = 2500(1+0.08x)', 45, ()=>{ setTimeout(()=>typeEquation('y = 2500*(1.08)^x', 45), 300); }), 500);
 
 
 
@@ -943,131 +1190,7 @@ function toggleCalculator(){
   btn.textContent=hidden?'Hide':'Show';
 }
 
-/* ===== SOMSED Calculator v3 ===== */
-// calcMode itself is declared near the top of the script now (shared with
-// the graph parser) — this section only sets/reads it from here on.
-let calcAns=0;
-
-function setCalcMode(mode){
-  calcMode=mode;
-  document.getElementById('degBtn').classList.toggle('active',mode==='DEG');
-  document.getElementById('radBtn').classList.toggle('active',mode==='RAD');
-  calcUpdatePreview();
-}
-let activeInputEl=null;
-function currentTarget(){ return activeInputEl && document.body.contains(activeInputEl) ? activeInputEl : document.getElementById('calcDisplay'); }
-function afterEdit(d){
-  if(d.id==='calcDisplay'){ calcUpdatePreview(); }
-  else { d.dispatchEvent(new Event('input')); }
-}
-function toggleCalcFuncs(){
-  const panel=document.getElementById('calcFuncs');
-  const btn=document.getElementById('calcFuncsToggle');
-  if(!panel) return;
-  const open=panel.classList.toggle('open');
-  if(btn){ btn.classList.toggle('open',open); btn.textContent = open ? 'funcs ▴' : 'funcs ▾'; }
-}
-function calcInsert(text){
-  const d=currentTarget();
-  const start=d.selectionStart ?? d.value.length;
-  const end=d.selectionEnd ?? d.value.length;
-  d.value=d.value.slice(0,start)+text+d.value.slice(end);
-  d.focus();
-  const pos=start+text.length;
-  d.setSelectionRange(pos,pos);
-  afterEdit(d);
-}
-function calcInsertWrap(open,close){
-  const d=currentTarget();
-  const start=d.selectionStart ?? d.value.length;
-  const end=d.selectionEnd ?? d.value.length;
-  const selected=d.value.slice(start,end);
-  d.value=d.value.slice(0,start)+open+selected+close+d.value.slice(end);
-  d.focus();
-  const pos = selected ? start+open.length+selected.length+close.length : start+open.length;
-  d.setSelectionRange(pos,pos);
-  afterEdit(d);
-}
-function calcClear(){
-  document.getElementById('calcDisplay').value='';
-  document.getElementById('calcResult').textContent='';
-}
-function calcBack(){
-  const d=currentTarget();
-  const start=d.selectionStart ?? d.value.length;
-  const end=d.selectionEnd ?? d.value.length;
-  if(start!==end){
-    d.value=d.value.slice(0,start)+d.value.slice(end);
-    d.setSelectionRange(start,start);
-  }else if(start>0){
-    d.value=d.value.slice(0,start-1)+d.value.slice(start);
-    d.setSelectionRange(start-1,start-1);
-  }
-  d.focus(); afterEdit(d);
-}
-function calcToggleSign(){
-  const d=currentTarget();
-  if(d.value.startsWith('−(') && d.value.endsWith(')'))
-    d.value=d.value.slice(2,-1);
-  else
-    d.value='−('+d.value+')';
-  d.focus(); d.setSelectionRange(d.value.length,d.value.length);
-  afterEdit(d);
-}
-function calcPrepare(s){
-  s=s.replace(/\s+/g,'').replace(/×/g,'*').replace(/÷/g,'/')
-    .replace(/−/g,'-').replace(/π/g,'Math.PI')
-    .replace(/\bAns\b/g,'ANS').replace(/\be\b/g,'Math.E')
-    .replace(/√\(/g,'sqrt(').replace(/\^/g,'**');
-
-  s=s.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');
-  const angle=calcMode==='DEG'?'(Math.PI/180)*':'';
-  s=s.replace(/\bsin\(/g,`Math.sin(${angle}`)
-     .replace(/\bcos\(/g,`Math.cos(${angle}`)
-     .replace(/\btan\(/g,`Math.tan(${angle}`)
-     .replace(/\blog\(/g,'Math.log10(')
-     .replace(/\bln\(/g,'Math.log(')
-     .replace(/\bsqrt\(/g,'Math.sqrt(');
-  return s;
-}
-function calcEvaluate(raw){
-  let s=calcPrepare(raw);
-  if(!s) return null;
-  if(!/^[0-9+\-*/()._a-zA-Z]+$/.test(s)) return null;
-  s=s.replace(/\bANS\b/g,String(calcAns));
-  try{
-    const value=Function('"use strict";return ('+s+')')();
-    return typeof value==='number' && Number.isFinite(value) ? value : null;
-  }catch(_){return null}
-}
-function calcFormat(v){
-  if(v===0 || Math.abs(v)<1e-12) return '0';
-  if(Math.abs(v)>=1e10 || Math.abs(v)<1e-8)
-    return v.toExponential(8).replace(/\.?0+e/,'e');
-  return Number(v.toPrecision(12)).toString();
-}
-function calcEquals(){
-  const d=document.getElementById('calcDisplay');
-  const out=document.getElementById('calcResult');
-  const value=calcEvaluate(d.value);
-  if(value===null){out.textContent='Invalid expression';return}
-  calcAns=value; out.textContent='= '+calcFormat(value);
-}
-function calcUpdatePreview(){
-  const d=document.getElementById('calcDisplay');
-  const out=document.getElementById('calcResult');
-  if(!d.value.trim()){out.textContent='';return}
-  const value=calcEvaluate(d.value);
-  out.textContent=value===null?'':'= '+calcFormat(value);
-}
-document.getElementById('calcDisplay').addEventListener('keydown',e=>{
-  if(e.key==='Enter'){e.preventDefault();calcEquals()}
-  else if(e.key==='Escape'){calcClear()}
-});
-document.getElementById('calcDisplay').addEventListener('input',calcUpdatePreview);
-document.getElementById('calcDisplay').addEventListener('focus',()=>{ activeInputEl=document.getElementById('calcDisplay'); });
-activeInputEl=document.getElementById('calcDisplay');
-
+SomsedCalculator.mount('somsedGridMount');
 </script>
 </body>
 </html>

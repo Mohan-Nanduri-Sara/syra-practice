@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMSED — Dynamic Function Analysis v18</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, sans-serif; background:#f5f7fb; color:#1d2433; }
+  header { background:#172a46; color:white; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; }
+  header h1 { margin:0; font-size:22px; letter-spacing:.5px; }
+  header span { font-size:12px; opacity:.8; }
+  .app { display:flex; height:calc(100vh - 54px); min-height:600px; }
+  .panel { width:330px; background:white; border-right:1px solid #d9dee8; padding:16px; overflow:auto; }
+  .graph-wrap { flex:1; position:relative; background:white; overflow:hidden; }
+  #graph { width:100%; height:100%; display:block; cursor:crosshair; }
+  .row { display:flex; gap:8px; margin-bottom:9px; }
+  .eq { flex:1; height:42px; border:1px solid #cbd2df; border-radius:8px; padding:0 10px; font-size:16px; outline:none; }
+  .eq:focus { border-color:#536dfe; }
+  button { border:0; border-radius:8px; padding:9px 12px; cursor:pointer; background:#e9edf5; color:#172a46; font-weight:600; }
+  button:hover { filter:brightness(.97); }
+  .add { width:100%; margin:4px 0 14px; background:#172a46; color:white; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+  .controls button { width:100%; }
+  .info { background:#f5f7fb; border-radius:9px; padding:11px; margin-top:12px; font-size:13px; line-height:1.45; }
+  .info b { color:#172a46; }
+  .hint { font-size:12px; color:#667085; margin-top:7px; }
+  .result { border-left:4px solid #536dfe; padding:8px 10px; margin:8px 0; background:#f7f8ff; font-size:13px; }
+  .legend { position:absolute; top:12px; right:12px; background:rgba(255,255,255,.92); border:1px solid #d9dee8; border-radius:8px; padding:8px 10px; font-size:12px; }
+  .point-card { position:absolute; right:14px; top:56px; width:250px; max-width:calc(100% - 28px); background:rgba(255,255,255,.97); border:1px solid #d9dee8; border-radius:10px; padding:12px; box-shadow:0 4px 18px rgba(0,0,0,.12); font-size:13px; line-height:1.45; display:none; z-index:3; }
+  .point-card .title { font-weight:700; font-size:15px; margin-bottom:7px; color:#172a46; }
+  .point-card .close { float:right; border:0; background:transparent; padding:0 2px; font-size:20px; line-height:18px; cursor:pointer; color:#667085; }
+  .point-dot { position:absolute; width:12px; height:12px; border-radius:50%; border:2px solid white; box-shadow:0 1px 5px rgba(0,0,0,.3); transform:translate(-50%,-50%); display:none; z-index:2; pointer-events:none; }
+  @media(max-width:800px){ .panel{width:270px;} }
+  @media(max-width:600px){ .app{flex-direction:column;} .panel{width:100%; height:270px; border-right:0; border-bottom:1px solid #d9dee8;} .graph-wrap{min-height:400px;} }
+
+/* ===== SOMSED Calculator v3.1 — compact phone layout ===== */
+.calc-panel{
+  margin:8px 12px 10px;
+  padding:10px;
+  background:#f5f7fb;
+  border:1px solid #e3e7ef;
+  border-radius:14px;
+}
+.calc-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+.calc-display{
+  width:100%;
+  box-sizing:border-box;
+  min-height:48px;
+  max-height:56px;
+  padding:7px 10px;
+  border:1px solid #cfd6e2;
+  border-radius:10px;
+  background:#fff;
+  font-size:22px;
+  text-align:right;
+  color:#172a46;
+  outline:none;
+}
+.calc-result{
+  min-height:19px;
+  padding:2px 4px 3px;
+  text-align:right;
+  font-size:14px;
+  color:#64748b;
+}
+.calc-mode{display:flex;gap:6px;margin:5px 0 7px}
+.calc-mode button{
+  flex:1;border:1px solid #cfd6e2;border-radius:8px;padding:6px;
+  background:#fff;font-weight:700;font-size:14px
+}
+.calc-mode button.active{background:#172a46;color:#fff}
+.calc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.calc-grid button{
+  min-height:39px;border:0;border-radius:8px;background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.07);font-size:15px;font-weight:600;color:#172a46
+}
+.calc-grid button:active{transform:scale(.97)}
+.calc-grid .op{background:#e9eef6}
+.calc-grid .equals{background:#172a46;color:#fff}
+.calc-grid .danger{background:#f1e8e8}
+.calc-hint{margin-top:5px;font-size:10px;color:#64748b;text-align:center}
+@media (max-width:430px){
+  .calc-panel{margin:6px 8px 8px;padding:8px}
+  .calc-grid{gap:4px}
+  .calc-grid button{min-height:36px;font-size:14px}
+  .calc-display{min-height:44px;font-size:20px}
+}
+
+
+/* ===== SOMSED v3.3 — graph above calculator, page-level mobile scroll ===== */
+@media (max-width:600px){
+  html, body{
+    height:auto !important;
+    min-height:100%;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+  }
+  .app{
+    height:auto !important;
+    min-height:0 !important;
+    display:flex;
+    flex-direction:column;
+    overflow:visible !important;
+  }
+  .panel{
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+    border-right:0 !important;
+    border-bottom:1px solid #d9dee8;
+  }
+  .graph-wrap{
+    width:100% !important;
+    height:480px !important;
+    min-height:480px !important;
+    flex:none !important;
+    overflow:hidden !important;
+    position:relative;
+  }
+  #graph{
+    width:100% !important;
+    height:100% !important;
+    touch-action:pan-y !important;
+  }
+  .calc-panel{
+    flex:none !important;
+    width:auto !important;
+  }
+}
+
+
+/* ===== SOMSED v14 — prioritized graph learning tools ===== */
+.table-panel,.slider-panel,.intersection-panel{
+  background:#f5f7fb;border:1px solid #dfe4ec;border-radius:10px;padding:10px;margin-top:12px;font-size:12px;
+}
+.tool-title{font-weight:800;color:#172a46;margin-bottom:7px;font-size:13px;}
+.table-controls{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:7px;}
+.table-controls input{width:100%;height:34px;border:1px solid #cbd2df;border-radius:7px;padding:0 8px;background:#fff;color:#172a46;}
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid #e1e5ec;border-radius:7px;}
+.sat-table{width:100%;border-collapse:collapse;color:#172a46;font-size:12px;}
+.sat-table th,.sat-table td{padding:6px 7px;border-bottom:1px solid #edf0f4;text-align:right;white-space:nowrap;}
+.sat-table th{background:#f8f9fc;font-weight:800;}
+.sat-table tr:last-child td{border-bottom:0;}
+.sat-table tr.table-row-active{background:#eef2ff;font-weight:700;}
+.table-hint{margin-top:6px;color:#667085;font-size:10px;text-align:center;}
+.slider-row{margin:9px 0 10px;}
+.slider-label{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;color:#344054;}
+.slider-label b{color:#172a46;}
+.slider-row input[type=range]{width:100%;accent-color:#536dfe;}
+.slider-note{color:#667085;font-size:10px;line-height:1.35;margin-top:4px;}
+.trace-panel{background:#f5f7fb;border:1px solid #dfe4ec;border-radius:10px;padding:10px;margin-top:12px;font-size:12px;}
+.trace-controls{display:grid;grid-template-columns:1fr auto;gap:6px;}
+.trace-controls input{width:100%;height:34px;border:1px solid #cbd2df;border-radius:7px;padding:0 8px;background:#fff;color:#172a46;}
+.trace-result{margin-top:7px;background:#fff;border:1px solid #e1e5ec;border-radius:7px;padding:7px;color:#344054;line-height:1.4;}
+.calc-history{margin-top:7px;background:#fff;border:1px solid #e1e5ec;border-radius:7px;overflow:hidden;display:none;}
+.calc-history-title{padding:6px 8px;background:#f8f9fc;font-weight:800;color:#172a46;font-size:11px;}
+.calc-history-item{padding:7px 8px;border-top:1px solid #edf0f4;font-size:12px;color:#344054;cursor:pointer;}
+.calc-history-item:hover{background:#f7f8ff;}
+.calc-solve{background:#e8eefb !important;font-weight:800 !important;}
+@media(max-width:600px){
+  .table-panel,.slider-panel,.intersection-panel{margin-top:10px;}
+}
+
+/* ===== SOMSED v18 — transformations, intersections & asymptotes — parent reference ===== */
+.result b{color:#172a46;}
+.slider-note{line-height:1.45;}
+.point-card{line-height:1.42;}
+.point-card .title{margin-bottom:5px;}
+@media(max-width:600px){
+  .result{line-height:1.48;}
+  .point-card{max-width:calc(100vw - 28px);}
+}
+
+.asymptote-panel{background:#f5f7fb;border:1px solid #dfe4ec;border-radius:10px;padding:10px;margin-top:12px;font-size:12px;}
+.transform-row{margin:9px 0 10px;}
+.transform-label{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;color:#344054;}
+.transform-label b{color:#172a46;}
+.transform-row input[type=range]{width:100%;accent-color:#536dfe;}
+.transform-note{color:#667085;font-size:10px;line-height:1.4;margin-top:4px;}
+.intersection-item{margin:5px 0;padding:7px 8px;background:#fff;border:1px solid #e1e5ec;border-radius:7px;cursor:pointer;}
+.intersection-item:hover{background:#f7f8ff;}
+.asymptote-item{margin:5px 0;padding:6px 8px;background:#fff;border:1px solid #e1e5ec;border-radius:7px;}
+
+.transform-practice{background:#f5f7fb;border:1px solid #dfe4ec;border-radius:10px;padding:10px;margin-top:12px;font-size:12px;}
+.practice-meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:7px;color:#667085;font-size:10px;}
+.practice-question{background:#fff;border:1px solid #e1e5ec;border-radius:8px;padding:9px;line-height:1.45;color:#344054;}
+.practice-equation{font-size:16px;font-weight:800;color:#172a46;margin:4px 0;}
+.practice-options{display:grid;gap:6px;margin-top:8px;}
+.practice-option{width:100%;text-align:left;border:1px solid #d7dce5;border-radius:8px;background:#fff;padding:8px 9px;color:#172a46;font-size:12px;cursor:pointer;}
+.practice-option:hover{background:#f7f8ff;}
+.practice-option.correct{border-color:#4b9b6a;background:#edf8f0;}
+.practice-option.wrong{border-color:#d96c6c;background:#fff1f1;}
+.practice-feedback{margin-top:8px;background:#fff;border:1px solid #e1e5ec;border-radius:8px;padding:8px;line-height:1.45;display:none;}
+.practice-actions{display:flex;gap:6px;margin-top:8px;}
+.practice-actions button{flex:1;border:0;border-radius:8px;padding:8px;background:#172a46;color:#fff;font-weight:800;cursor:pointer;}
+.practice-actions button.secondary{background:#e9eef6;color:#172a46;}
+.practice-graph{width:100%;height:180px;display:block;background:#fff;border:1px solid #e1e5ec;border-radius:8px;margin-top:8px;}
+.practice-hint{color:#667085;font-size:10px;margin-top:6px;}
+
+.transform-legend{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:4px 0 8px;color:#475467;font-size:10px;}
+.transform-legend span{display:inline-flex;align-items:center;gap:5px;}
+.transform-swatch{width:22px;height:3px;border-radius:2px;display:inline-block;}
+.transform-swatch.parent{background:#98a2b3;border-top:2px dashed #98a2b3;height:0;}
+.transform-swatch.transformed{background:#536dfe;}
+.transform-equations{margin:6px 0 9px;padding:7px 8px;background:#fff;border:1px solid #e1e5ec;border-radius:7px;line-height:1.5;color:#344054;font-size:11px;}
+.transform-equations b{color:#172a46;}
+</style>
+</head>
+<body>
+<header>
+  <h1>SOMSED</h1>
+  <span>Day 8 · Working with Functions — Dynamic Analysis v18 — Transformations, Intersections & Asymptotes — Transformation View</span>
+</header>
+
+<div class="app">
+  <aside class="panel">
+    <div id="equations"></div>
+    <button class="add" onclick="addEquation()">＋ Add equation</button>
+
+    <div class="controls">
+      <button onclick="zoom(1.25)">＋ Zoom in</button>
+      <button onclick="zoom(0.8)">− Zoom out</button>
+      <button onclick="resetView()">Reset view</button>
+      <button onclick="clearAll()">Clear all</button>
+    </div>
+
+    <div style="margin-bottom:10px;padding:8px 10px;border:1px solid #d9dee8;border-radius:8px;background:#f8fafc;font-size:11px;color:#475467;"><b>Graph inequalities:</b> type <code>y &gt; x+2</code>, <code>y ≤ x²</code>, <code>x &gt; 3</code>, etc. Solid boundary = included; dashed boundary = not included.</div>
+
+    <section id="sliderPanel" class="slider-panel" style="display:none"></section>
+
+    <section id="transformPractice" class="transform-practice">
+      <div class="tool-title">Transformation Practice</div>
+      <div id="practiceContent"></div>
+    </section>
+
+    
+    <section id="asymptotePanel" class="asymptote-panel" style="display:none">
+      <div class="tool-title">Asymptotes</div>
+      <div id="asymptoteContent"></div>
+    </section>
+
+    <section id="tablePanel" class="table-panel">
+      <div class="tool-title">Table of values</div>
+      <div class="table-controls">
+        <input id="tableStart" type="number" value="-5" step="1" aria-label="Table start x">
+        <input id="tableStep" type="number" value="1" step="0.5" aria-label="Table step">
+      </div>
+      <div id="tableWrap" class="table-wrap"></div>
+      <div class="table-hint">Uses the first equation. Tap a row to highlight its point on the graph.</div>
+    </section>
+
+    <section id="intersectionPanel" class="intersection-panel">
+      <div class="tool-title">Intersections</div>
+      <div id="intersectionContent">Add two equations to compare them.</div>
+    </section>
+
+    <section class="trace-panel">
+      <div class="tool-title">Trace a function</div>
+      <div class="trace-controls">
+        <input id="traceX" type="number" step="any" placeholder="Enter x-value" aria-label="Trace x-value">
+        <button onclick="traceFunction()">Trace</button>
+      </div>
+      <div id="traceResult" class="trace-result">Enter an x-value to inspect the first function.</div>
+    </section>
+
+    <div id="analysis" class="info">
+      <b>Advanced Algebra analysis</b><br>
+      Enter a supported SAT Advanced Math function.
+    </div>
+
+    <div class="info">
+      <b>Mouse controls</b><br>
+      Drag the graph to pan.<br>
+      Use the wheel to zoom.
+    </div>
+  </aside>
+
+  <main class="graph-wrap">
+    <canvas id="graph"></canvas>
+    <div id="pointDot" class="point-dot"></div>
+    <div id="pointCard" class="point-card">
+      <button class="close" onclick="hidePoint()">×</button>
+      <div id="pointContent"></div>
+    </div>
+    <div class="legend">Tap a solution / key point</div>
+  </main>
+
+  <section class="calc-panel">
+  <div class="calc-title">
+    <div style="font-weight:800;color:#172a46;font-size:17px;">SOMSED Calculator</div>
+    <button id="calcCollapseBtn" onclick="toggleCalculator()" style="border:1px solid #cfd6e2;background:#fff;border-radius:8px;padding:4px 9px;font-weight:700;color:#172a46;">Hide</button>
+  </div>
+  <div id="calcBody">
+
+  <input id="calcDisplay" class="calc-display" value="" inputmode="decimal"
+         aria-label="Calculator expression" autocomplete="off" spellcheck="false">
+  <div id="calcResult" class="calc-result"></div>
+
+  <div class="calc-mode">
+    <button id="degBtn" onclick="setCalcMode('DEG')">DEG</button>
+    <button id="radBtn" class="active" onclick="setCalcMode('RAD')">RAD</button>
+  </div>
+
+  <div class="calc-grid">
+    <button class="danger" onclick="calcClear()">AC</button>
+    <button onclick="calcBack()">⌫</button>
+    <button class="op" onclick="calcInsert('(')">(</button>
+    <button class="op" onclick="calcInsert(')')">)</button>
+
+    <button onclick="calcInsert('sin(')">sin</button>
+    <button onclick="calcInsert('cos(')">cos</button>
+    <button onclick="calcInsert('tan(')">tan</button>
+    <button class="op" onclick="calcInsert('÷')">÷</button>
+
+    <button onclick="calcInsert('log(')">log</button>
+    <button onclick="calcInsert('ln(')">ln</button>
+    <button onclick="calcInsert('√(')">√</button>
+    <button class="op" onclick="calcInsert('×')">×</button>
+
+    <button onclick="calcInsert('7')">7</button>
+    <button onclick="calcInsert('8')">8</button>
+    <button onclick="calcInsert('9')">9</button>
+    <button class="op" onclick="calcInsert('−')">−</button>
+
+    <button onclick="calcInsert('4')">4</button>
+    <button onclick="calcInsert('5')">5</button>
+    <button onclick="calcInsert('6')">6</button>
+    <button class="op" onclick="calcInsert('+')">+</button>
+
+    <button onclick="calcInsert('1')">1</button>
+    <button onclick="calcInsert('2')">2</button>
+    <button onclick="calcInsert('3')">3</button>
+    <button class="equals" onclick="calcEquals()">=</button>
+
+    <button onclick="calcInsert('0')">0</button>
+    <button onclick="calcInsert('.')">.</button>
+    <button onclick="calcInsert('π')">π</button>
+    <button onclick="calcInsert('e')">e</button>
+
+    <button onclick="calcInsert('^')">xʸ</button>
+    <button onclick="calcInsert('%')">%</button>
+    <button onclick="calcInsert('Ans')">Ans</button>
+    <button onclick="calcToggleSign()">±</button>
+    <button class="calc-solve" onclick="calcSolveEquation()">Solve</button>
+    <button onclick="toggleCalcHistory()">History</button>
+  </div>
+
+  <div id="calcHistory" class="calc-history"></div>
+  <div class="calc-hint">SAT calculator · DEG/RAD · Solve linear/quadratic equations · keyboard input</div>
+  </div>
+</section>
+</div>
+
+<script>
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+const equationsEl = document.getElementById('equations');
+const analysisEl = document.getElementById('analysis');
+const pointCard = document.getElementById('pointCard');
+const pointContent = document.getElementById('pointContent');
+const pointDot = document.getElementById('pointDot');
+
+let equations = [];
+let nextId = 1;
+let scale = 55;       // pixels per unit
+// Declared here (not further down near the calculator UI code) because
+// parseEquation() now reads this on every draw(), including the very
+// first draw() triggered by the seed equations below — it must exist
+// before that first call, not just before the calculator code runs.
+let calcMode = 'RAD';
+let ox = 0, oy = 0;   // graph origin in pixels
+let dragging = false, lastX = 0, lastY = 0;
+let calcHistory=[];
+
+function resize(){
+  const r = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.max(300, Math.floor(r.width * dpr));
+  canvas.height = Math.max(300, Math.floor(r.height * dpr));
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  if (!ox && !oy) { ox = r.width/2; oy = r.height/2; }
+  draw();
+}
+window.addEventListener('resize', resize);
+
+function addEquation(value=''){
+  const id = nextId++;
+  equations.push({id, value});
+  renderInputs();
+  draw();
+  updateTable(); updateIntersectionsPanel(); updateSliders(); updateAsymptotes();
+}
+
+// Types the equation into its input box one character at a time and
+// redraws the graph after every keystroke, so the curve visibly builds
+// itself on screen — same "Syra is typing" feel as the rest of the app,
+// rather than the equation just appearing pre-filled.
+function typeEquation(value, ms=45, onDone){
+  const id = nextId++;
+  const eq = {id, value:''};
+  equations.push(eq);
+  renderInputs();
+  let i=0;
+  const timer=setInterval(()=>{
+    i++;
+    eq.value=value.slice(0,i);
+    renderInputs();
+    draw();
+    if(i>=value.length){
+      clearInterval(timer);
+      if(onDone) onDone();
+    }
+  }, ms);
+}
+
+function removeEquation(id){
+  equations = equations.filter(e=>e.id!==id);
+  renderInputs(); draw(); updateTable(); updateIntersectionsPanel(); updateSliders(); updateAsymptotes();
+}
+
+function renderInputs(){
+  equationsEl.innerHTML='';
+  equations.forEach((e,i)=>{
+    const row=document.createElement('div');
+    row.className='row';
+    const input=document.createElement('input');
+    input.className='eq';
+    input.value=e.value;
+    input.placeholder = i===0 ? 'y = 2x + 3' : 'y = x^2 - 4x + 3';
+    input.oninput=()=>{ e.value=input.value; draw(); analyze(); updateTable(); updateIntersectionsPanel(); updateSliders(); updateAsymptotes(); };
+    const del=document.createElement('button');
+    del.textContent='×';
+    del.title='Remove equation';
+    del.onclick=()=>removeEquation(e.id);
+    row.appendChild(input); row.appendChild(del);
+    equationsEl.appendChild(row);
+  });
+  if(!equations.length) addEquation();
+  // Analysis belongs to the current input, not to the drawing lifecycle.
+  // Updating it here guarantees that changing an equation immediately changes
+  // the explanation even when the graph is being redrawn or panned.
+  setTimeout(analyze, 0);
+}
+
+function normalizeMath(raw){
+  let s=raw.toLowerCase().replace(/\s+/g,'').replace(/^y=/,'');
+  s=s.replace(/²/g,'^2').replace(/³/g,'^3').replace(/π/g,'pi');
+
+  // Convert |...| to abs(...)
+  let out='', openAbs=false;
+  for(const ch of s){
+    if(ch==='|'){
+      out += openAbs ? ')' : 'abs(';
+      openAbs=!openAbs;
+    }else out += ch;
+  }
+
+  s=out.replace(/\^/g,'**');
+
+  // Basic implicit multiplication: 2x, 2(x+1), x(x+1), etc.
+  s=s.replace(/(\d|x|\))(?=(x|\(|abs|sqrt|log|ln|e))/g,'$1*');
+
+  // Fix: "-x**2" is invalid JS syntax (unary minus directly adjacent to
+  // ** is disallowed — the engine throws and silently rejects the whole
+  // equation). Naively parenthesizing as "(-x)**2" would also be
+  // mathematically WRONG for even exponents: (-x)^2 = x^2, not -(x^2).
+  // The correct fix wraps just the power expression, keeping the minus
+  // outside: "-(x**2)". Only fires on a genuine unary minus sitting
+  // directly against the base — "5-x**2" and "-2*x**2" are already
+  // valid JS as-is (the minus isn't directly adjacent to **'s base) and
+  // are deliberately left untouched. Confirmed bug, Mohan testing
+  // 2026-08-12: y=-x^2+20x silently failed to parse at all.
+  s=s.replace(/(^|[+\-*/(,])-(x|\d+(?:\.\d+)?|\([^()]*\))\*\*(\d+)/g, '$1-($2**$3)');
+
+  return s;
+}
+
+// v7 parser fix: restore JavaScript word-boundary regexes used by named functions.
+// The previous build contained literal backspace characters here, so sqrt/sin/cos/etc.
+// were never converted to Math.* and those graphs silently failed.
+function parseCircle(raw){
+  if(!raw) return null;
+  const s=raw.trim().toLowerCase().replace(/\s+/g,'');
+  // Supports the SAT-friendly circle forms:
+  // x^2+y^2=r^2, (x-h)^2+(y-k)^2=r^2, and their inequalities.
+  const termX='(?:\\(x([+-]\\d+(?:\\.\\d+)?)\\)|x)(?:\\^2|\\*\\*2)';
+  const termY='(?:\\(y([+-]\\d+(?:\\.\\d+)?)\\)|y)(?:\\^2|\\*\\*2)';
+  let m=s.match(new RegExp('^'+termX+'\\+'+termY+'(=|<=|>=|<|>)([0-9]+(?:\\.[0-9]+)?)$'));
+  let swap=false;
+  if(!m) {
+    m=s.match(new RegExp('^'+termY+'\\+'+termX+'(=|<=|>=|<|>)([0-9]+(?:\\.[0-9]+)?)$'));
+    swap=true;
+  }
+  if(!m) return null;
+  const xOffset=swap ? m[2] : m[1];
+  const yOffset=swap ? m[1] : m[2];
+  const op=swap ? m[3] : m[3];
+  const rhs=swap ? m[4] : m[4];
+  const h=xOffset ? -Number(xOffset) : 0;
+  const k=yOffset ? -Number(yOffset) : 0;
+  const radius=Math.sqrt(Number(rhs));
+  if(!Number.isFinite(radius) || radius<=0) return null;
+  return {kind:'circle', raw, center:{x:h,y:k}, radius, relation:op};
+}
+
+function parseEquation(raw){
+  if(!raw) return null;
+  const original=raw.trim();
+  const circle=parseCircle(original);
+  if(circle) return circle;
+
+  // Inequality support. Accept both y < f(x) and f(x) > y forms.
+  let inequality=null;
+  let core=original;
+  const m=original.match(/^(.+?)(<=|>=|<|>)(.+)$/);
+  if(m){
+    let L=m[1].trim(), op=m[2], R=m[3].trim();
+    if(/^y$/i.test(L)) inequality={op,side:'y',boundary:R};
+    else if(/^y$/i.test(R)) {
+      const rev={'<':'>','>':'<','<=':'>=','>=':'<='};
+      inequality={op:rev[op],side:'y',boundary:L};
+    } else if(/^x$/i.test(L)) inequality={op,side:'x',boundary:R};
+    else if(/^x$/i.test(R)) {
+      const rev={'<':'>','>':'<','<=':'>=','>=':'<='};
+      inequality={op:rev[op],side:'x',boundary:L};
+    }
+    if(inequality) core = inequality.side==='y' ? `y=${inequality.boundary}` : `y=${inequality.boundary}`;
+  }
+
+  let expr=normalizeMath(core);
+  if(!expr) return null;
+  if(!/^[0-9x+\-*/().,_a-z*]+$/.test(expr)) return null;
+  const names=expr.match(/[a-z]+/g) || [];
+  const allowed=new Set(['x','pi','e','abs','sqrt','log','ln','sin','cos','tan']);
+  if(names.some(n=>!allowed.has(n))) return null;
+
+  const angle = calcMode==='DEG' ? '(Math.PI/180)*' : '';
+  const js=expr.replace(/\bpi\b/g,'Math.PI').replace(/\be\b/g,'Math.E')
+    .replace(/\babs\(/g,'Math.abs(').replace(/\bsqrt\(/g,'Math.sqrt(')
+    .replace(/\blog\(/g,'Math.log10(').replace(/\bln\(/g,'Math.log(')
+    .replace(/\bsin\(/g,`Math.sin(${angle}`).replace(/\bcos\(/g,`Math.cos(${angle}`)
+    .replace(/\btan\(/g,`Math.tan(${angle}`);
+  try{
+    const f=new Function('x','return '+js);
+    const test=[-100,-50,-10,-5,-2,-1,-0.5,0,0.5,1,2,5,10,50,100].map(v=>f(v));
+    if(!test.some(Number.isFinite)) return null;
+
+    // Find a radical/domain transition so rendering can place the endpoint
+    // exactly instead of waiting for a pixel sample to land on it.
+    let domainStart=null;
+    if(/sqrt\(/.test(expr)){
+      const xs=[]; for(let i=-100;i<=100;i+=1) xs.push(i);
+      let prevX=xs[0], prevFinite=Number.isFinite(f(prevX));
+      for(let i=1;i<xs.length;i++){
+        const x=xs[i], finite=Number.isFinite(f(x));
+        if(finite!==prevFinite){
+          let lo=prevX,hi=x;
+          for(let q=0;q<45;q++){
+            const mid=(lo+hi)/2, ok=Number.isFinite(f(mid));
+            if(ok===finite) hi=mid; else lo=mid;
+          }
+          if(finite) domainStart=hi; else domainStart=lo;
+          break;
+        }
+        prevX=x; prevFinite=finite;
+      }
+    }
+    return {f,expr,raw,inequality,domainStart};
+  }catch(e){ return null; }
+}
+
+function classify(expr){
+  if(expr && expr.kind==='circle') return 'circle';
+  if(expr && typeof expr==='object') expr=expr.expr || '';
+  if(/\b(sin|cos|tan)\(/.test(expr)) return 'trigonometric';
+  if(/abs\(/.test(expr)) return 'absolute value';
+  if(/sqrt\(/.test(expr)) return 'radical';
+  if(/\/(x|\(|abs|sqrt)/.test(expr)) return 'rational';
+  if(/\*\*3/.test(expr)) return 'polynomial';
+  if(/\*\*/.test(expr) && !/\*\*2/.test(expr)) return 'exponential';
+  if(/\*\*2/.test(expr)) return 'quadratic';
+  return 'linear';
+}
+
+function polynomialCoefficients(expr){
+  let s=expr.replace(/\*\*/g,'^');
+  if(/[a-z]/i.test(s.replace(/x/g,''))) return null;
+
+  s=s.replace(/-/g,'+-');
+  if(s.startsWith('+')) s=s.slice(1);
+
+  let a=0,b=0,c=0;
+  for(const term of s.split('+')){
+    if(!term) continue;
+    if(term.includes('x^2')){
+      const k=term.split('x^2')[0];
+      a += k===''?1:k==='-'?-1:parseFloat(k);
+    }else if(term.includes('x')){
+      const k=term.split('x')[0];
+      b += k===''?1:k==='-'?-1:parseFloat(k);
+    }else{
+      const n=parseFloat(term);
+      if(Number.isFinite(n)) c+=n;
+    }
+  }
+  return {a,b,c};
+}
+
+function coefficients(expr){
+  return polynomialCoefficients(expr) || {a:0,b:0,c:0};
+}
+
+function numericRoots(p){
+  const roots=[];
+  const lo=-50, hi=50, n=5000, step=(hi-lo)/n;
+  let px=lo, py;
+  try{py=p.f(px);}catch(_){py=NaN;}
+
+  for(let k=1;k<=n;k++){
+    const x=lo+k*step;
+    let y; try{y=p.f(x);}catch(_){y=NaN;}
+
+    if(Number.isFinite(py) && Number.isFinite(y)){
+      if(Math.abs(py)<1e-7) roots.push(px);
+
+      if(py*y<0){
+        let l=px,r=x;
+        for(let q=0;q<45;q++){
+          const m=(l+r)/2;
+          let fm,fl;
+          try{fm=p.f(m);fl=p.f(l);}catch(_){fm=NaN;fl=NaN;}
+          if(fl*fm<=0) r=m; else l=m;
+        }
+        roots.push((l+r)/2);
+      }
+    }
+    px=x; py=y;
+  }
+
+  return roots
+    .sort((a,b)=>a-b)
+    .filter((x,i,a)=>i===0 || Math.abs(x-a[i-1])>1e-3)
+    .slice(0,8);
+}
+
+function specialPoints(p){
+  const pts=[];
+  if(p && p.kind==='circle'){
+    const {x:h,y:k}=p.center, r=p.radius;
+    pts.push({x:h,y:k,label:'center'});
+    pts.push({x:h+r,y:k,label:'circle-point'});
+    pts.push({x:h-r,y:k,label:'circle-point'});
+    pts.push({x:h,y:k+r,label:'circle-point'});
+    pts.push({x:h,y:k-r,label:'circle-point'});
+    return pts;
+  }
+  const type=classify(p.expr);
+
+  // Vertical inequalities (x < c, x <= c, x > c, x >= c) do NOT have a
+  // y-intercept. Offer the boundary point on the x-axis instead.
+  if(p.inequality && p.inequality.side==='x'){
+    let c=NaN;
+    try{ c=p.f(0); }catch(_){ }
+    if(Number.isFinite(c)) pts.push({x:c,y:0,label:'boundary'});
+    return pts;
+  }
+
+  // y-intercept is meaningful only when the function is defined at x=0.
+  let y0;
+  try{ y0=p.f(0); }catch(_){ y0=NaN; }
+  if(Number.isFinite(y0)) pts.push({x:0,y:y0,label:'y-intercept'});
+
+  if(type==='linear'){
+    const {b,c}=coefficients(p.expr);
+    if(Math.abs(b)>1e-12) pts.push({x:-c/b,y:0,label:'x-intercept'});
+  }
+
+  if(type==='quadratic'){
+    const c0=p.f(0), b0=(p.f(1)-p.f(-1))/2, a0=(p.f(1)+p.f(-1))/2-c0;
+    if(Math.abs(a0)>1e-9){
+      const x=-b0/(2*a0), y=a0*x*x+b0*x+c0;
+      pts.push({x,y,label:'vertex'});
+    }
+  }
+
+  if(type==='absolute value'){
+    const m=p.expr.match(/abs\(x([+-][0-9.]+)?\)([+-][0-9.]+)?/);
+    if(m){
+      const h=m[1] ? -parseFloat(m[1]) : 0;
+      const k=m[2] ? parseFloat(m[2]) : 0;
+      pts.push({x:h,y:k,label:'vertex'});
+    }
+  }
+
+  numericRoots(p).forEach(x=>{
+    let y;
+    try{y=p.f(x);}catch(_){y=NaN;}
+    if(Math.abs(y)<1e-5) pts.push({x,y:0,label:'x-intercept'});
+  });
+  return pts;
+}
+
+function intersections(){
+  const valid=equations.map((e,i)=>({e,i,p:parseEquation(e.value)})).filter(z=>z.p && z.p.kind!=='circle');
+  const out=[];
+
+  for(let i=0;i<valid.length;i++){
+    for(let j=i+1;j<valid.length;j++){
+      const A=valid[i], B=valid[j];
+
+      // Detect coincident/identical curves FIRST. Without this check, two
+      // identical lines (a genuine "infinite solutions" system) make
+      // f(x)-g(x)~=0 at nearly every sampled x below, not just one true
+      // crossing -- producing thousands of false "intersection" points
+      // spaced every ~0.02 units along the whole shared line. Tapping
+      // anywhere near the line then just finds whichever fake point
+      // happens to be nearest, reported with full decimal precision as
+      // if it were a real computed solution. Confirmed bug, Mohan testing
+      // 2026-08-13: tapping anywhere on two coincident lines returned
+      // that tap location's own coordinates labeled "Intersection."
+      let sameCount=0, sampleCount=0;
+      for(let t=-20;t<=20;t+=2){
+        let fa,fb;
+        try{ fa=A.p.f(t); fb=B.p.f(t); }catch(_){ continue; }
+        if(!Number.isFinite(fa) || !Number.isFinite(fb)) continue;
+        sampleCount++;
+        if(Math.abs(fa-fb)<1e-6) sameCount++;
+      }
+      if(sampleCount>=10 && sameCount===sampleCount){
+        // Push a marker every couple of units along the shared line so
+        // a tap anywhere near it finds SOME candidate, correctly labeled
+        // -- not one fake precise point pretending to be "the" answer.
+        for(let t=-20;t<=20;t+=2){
+          let ft;
+          try{ ft=A.p.f(t); }catch(_){ continue; }
+          if(Number.isFinite(ft)) out.push({x:t,y:ft,eq1:A.i,eq2:B.i,label:'coincident'});
+        }
+        continue;
+      }
+
+      const lo=-50, hi=50, n=5000, step=(hi-lo)/n;
+      let px=lo, py;
+      try{py=A.p.f(px)-B.p.f(px);}catch(_){py=NaN;}
+
+      for(let k=1;k<=n;k++){
+        const x=lo+k*step;
+        let y;
+        try{y=A.p.f(x)-B.p.f(x);}catch(_){y=NaN;}
+
+        if(Number.isFinite(py) && Number.isFinite(y) && (Math.abs(y)<1e-7 || py*y<0)){
+          let l=px,r=x;
+          for(let q=0;q<45;q++){
+            const m=(l+r)/2;
+            let fm,fl;
+            try{fm=A.p.f(m)-B.p.f(m); fl=A.p.f(l)-B.p.f(l);}
+            catch(_){fm=NaN;fl=NaN;}
+            if(fl*fm<=0) r=m; else l=m;
+          }
+          const ix=(l+r)/2;
+          let iy;
+          try{iy=A.p.f(ix);}catch(_){iy=NaN;}
+          if(Number.isFinite(iy) &&
+             !out.some(t=>Math.abs(t.x-ix)<1e-4 && Math.abs(t.y-iy)<1e-4))
+            out.push({x:ix,y:iy,eq1:A.i,eq2:B.i,label:'intersection'});
+        }
+        px=x; py=y;
+      }
+    }
+  }
+  return out;
+}
+
+
+function updateTable(){
+  const wrap=document.getElementById('tableWrap');
+  if(!wrap) return;
+  const p=equations.length ? parseEquation(equations[0].value) : null;
+  if(!p || p.kind==='circle' || !p.f){
+    wrap.innerHTML='<div style="padding:9px;color:#667085">Enter a function in the first equation.</div>';
+    return;
+  }
+  let start=Number(document.getElementById('tableStart').value);
+  let step=Number(document.getElementById('tableStep').value);
+  if(!Number.isFinite(start)) start=-5;
+  if(!Number.isFinite(step) || step===0) step=1;
+  const rows=[];
+  for(let i=0;i<11;i++){
+    const x=start+i*step;
+    let y=NaN; try{y=p.f(x);}catch(_){ }
+    rows.push({x,y});
+  }
+  let html='<table class="sat-table"><thead><tr><th>x</th><th>y</th></tr></thead><tbody>';
+  rows.forEach((r,i)=>{
+    html+=`<tr data-x="${r.x}" class="table-point-row"><td>${fmt(r.x)}</td><td>${Number.isFinite(r.y)?fmt(r.y):'undefined'}</td></tr>`;
+  });
+  html+='</tbody></table>'; wrap.innerHTML=html;
+  wrap.querySelectorAll('.table-point-row').forEach(row=>row.addEventListener('click',()=>{
+    wrap.querySelectorAll('.table-point-row').forEach(r=>r.classList.remove('table-row-active'));
+    row.classList.add('table-row-active');
+    const x=Number(row.dataset.x), y=p.f(x);
+    if(Number.isFinite(y)) showPointAtGraphCoordinate(x,y,'Table point');
+  }));
+}
+
+function updateIntersectionsPanel(){
+  const el=document.getElementById('intersectionContent');
+  if(!el) return;
+  const pts=intersections().filter(p=>p.label==='intersection');
+  if(equations.filter(e=>e.value.trim()).length<2){
+    el.textContent='Add two equations to compare them.'; return;
+  }
+  if(!pts.length){
+    el.textContent='No intersection found in the current search window.'; return;
+  }
+  el.innerHTML=pts.slice(0,8).map((p,i)=>`<div class="intersection-item" data-x="${p.x}" data-y="${p.y}"><b>${i+1}. (${fmt(p.x)}, ${fmt(p.y)})</b><br><span style="color:#667085">Equation ${p.eq1+1} = Equation ${p.eq2+1}</span></div>`).join('');
+  el.querySelectorAll('.intersection-item').forEach(item=>item.addEventListener('click',()=>{
+    const x=Number(item.dataset.x), y=Number(item.dataset.y);
+    showIntersectionPoint(x,y);
+  }));
+}
+
+function showIntersectionPoint(x,y){
+  const r=canvas.getBoundingClientRect();
+  const [sx,sy]=graphToScreen(x,y);
+  if(sx<0||sx>r.width||sy<0||sy>r.height) return;
+  pointDot.style.left=sx+'px'; pointDot.style.top=sy+'px'; pointDot.style.background='#7c3aed'; pointDot.style.display='block';
+  const pts=intersections().filter(p=>p.label==='intersection' && Math.abs(p.x-x)<1e-4 && Math.abs(p.y-y)<1e-4);
+  const p=pts[0];
+  pointContent.innerHTML=`<div class="title">Intersection</div><b>(${fmt(x)}, ${fmt(y)})</b><br><br>${p?`${equationName(p.eq1)}: ${escapeHtml(equations[p.eq1].value)}<br>${equationName(p.eq2)}: ${escapeHtml(equations[p.eq2].value)}<br><br>`:''}<b>Solution:</b> x = ${fmt(x)}, y = ${fmt(y)}`;
+  const cardWidth=Math.min(250,r.width-28);
+  pointCard.style.left=Math.min(Math.max(sx+14,14),r.width-cardWidth-14)+'px'; pointCard.style.right='auto'; pointCard.style.top=Math.min(Math.max(sy+14,56),r.height-190)+'px'; pointCard.style.display='block';
+}
+
+function transformationData(p){
+  if(!p || p.kind==='circle' || !p.expr) return null;
+  const type=classify(p);
+  if(type==='quadratic'){
+    const c=p.f(0), b=(p.f(1)-p.f(-1))/2, a=(p.f(1)+p.f(-1))/2-c;
+    if(![a,b,c].every(Number.isFinite) || Math.abs(a)<1e-12) return null;
+    const h=-b/(2*a), k=a*h*h+b*h+c;
+    return {type,parent:'y = x²',a,h,k};
+  }
+  if(type==='absolute value'){
+    const m=p.expr.match(/^([+-]?[0-9.]+)?\*?abs\(x([+-][0-9.]+)?\)([+-][0-9.]+)?$/);
+    if(m){
+      const a=m[1] ? Number(m[1]) : 1;
+      const h=m[2] ? -Number(m[2]) : 0;
+      const k=m[3] ? Number(m[3]) : 0;
+      if([a,h,k].every(Number.isFinite)) return {type,parent:'y = |x|',a,h,k};
+    }
+  }
+  return null;
+}
+
+function transformationEquation(type,a,h,k){
+  const f=type==='absolute value' ? `|x ${h>=0?'-':'+'} ${fmt(Math.abs(h))}|` : `(x ${h>=0?'-':'+'} ${fmt(Math.abs(h))})²`;
+  return `y = ${fmt(a)}${f} ${k>=0?'+':'−'} ${fmt(Math.abs(k))}`;
+}
+
+// ===== Transformation Practice =====
+const transformationPracticeBank=[
+  {base:{a:1,h:0,k:0}, transform:{dh:3,dk:2,scale:1}, label:'Shift 3 units right and 2 units up.'},
+  {base:{a:2,h:1,k:3}, transform:{dh:0,dk:-4,scale:1}, label:'Shift 4 units down.'},
+  {base:{a:-1,h:-2,k:5}, transform:{dh:3,dk:0,scale:1}, label:'Shift 3 units right.'},
+  {base:{a:1,h:0,k:0,type:'abs'}, transform:{dh:-2,dk:1,scale:-1}, label:'Reflect across the x-axis, shift 2 units left, and 1 unit up.'},
+  {base:{a:.5,h:4,k:-2}, transform:{dh:0,dk:3,scale:2}, label:'Vertically stretch by a factor of 2 and shift 3 units up.'},
+  {base:{a:-2,h:-1,k:4}, transform:{dh:2,dk:-5,scale:1}, label:'Shift 2 units right and 5 units down.'},
+  {base:{a:1,h:3,k:-1}, transform:{dh:-5,dk:4,scale:-1}, label:'Reflect across the x-axis, shift 5 units left, and 4 units up.'},
+  {base:{a:3,h:-2,k:1}, transform:{dh:0,dk:0,scale:-1}, label:'Reflect across the x-axis.'}
+];
+let practiceIndex=0, practiceAnswered=false;
+function practiceEquation(d){
+  const a=d.a,h=d.h,k=d.k;
+  if(d.type==='abs') return `f(x) = ${fmt(a)}|x ${h>=0?'-':'+'} ${fmt(Math.abs(h))}| ${k>=0?'+':'−'} ${fmt(Math.abs(k))}`;
+  return `f(x) = ${fmt(a)}(x ${h>=0?'-':'+'} ${fmt(Math.abs(h))})² ${k>=0?'+':'−'} ${fmt(Math.abs(k))}`;
+}
+function practiceGEquation(base,tr){
+  const a=base.a*tr.scale, h=base.h+tr.dh, k=base.k+tr.dk;
+  return practiceEquation({a,h,k,type:base.type});
+}
+function practiceParts(eq){
+  return eq.replace('f(x)','g(x)');
+}
+function makePracticeQuestion(item){
+  const correct=practiceGEquation(item.base,item.transform);
+  const b=item.base, tr=item.transform;
+  // Wide candidate pool of plausible student-error transforms, richest-first.
+  const candidates=[
+    {dh:-tr.dh, dk:tr.dk, scale:tr.scale},              // wrong horizontal direction
+    {dh:tr.dh, dk:-tr.dk, scale:tr.scale},              // wrong vertical direction
+    {dh:-tr.dh, dk:-tr.dk, scale:tr.scale},             // both directions wrong
+    {dh:tr.dh, dk:tr.dk, scale:1},                      // forgot the reflection/scale
+    {dh:-tr.dh, dk:tr.dk, scale: tr.scale===0?-1:-tr.scale},
+    {dh:tr.dh, dk:-tr.dk, scale: tr.scale===0?-1:-tr.scale},
+    {dh:tr.dk, dk:tr.dh, scale:tr.scale},               // swapped h/k shift amounts
+    {dh:-tr.dk, dk:-tr.dh, scale:tr.scale}
+  ];
+  // Guaranteed-unique numeric nudges as a final fallback so we never run dry.
+  for(let bump=1; bump<=6; bump++){
+    candidates.push({dh:tr.dh+bump, dk:tr.dk, scale:tr.scale});
+    candidates.push({dh:tr.dh, dk:tr.dk+bump, scale:tr.scale});
+  }
+  const seen=new Set([correct]);
+  const options=[correct];
+  for(const c of candidates){
+    if(options.length>=4) break;
+    const eq=practiceGEquation(b,c);
+    if(!seen.has(eq)){ seen.add(eq); options.push(eq); }
+  }
+  // Deterministic rotation so the correct answer is not always A.
+  const shift=(practiceIndex*3)%options.length;
+  const rotated=options.slice(shift).concat(options.slice(0,shift));
+  return {correct,options:rotated,correctIndex:rotated.indexOf(correct)};
+}
+function drawPracticeGraph(item,chosen){
+  const c=document.getElementById('practiceGraph'); if(!c)return;
+  const ctx=c.getContext('2d'), w=c.clientWidth||320, h=c.clientHeight||180, dpr=window.devicePixelRatio||1;
+  c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+  const xMin=-7,xMax=7,yMin=-6,yMax=7;
+  const sx=x=>(x-xMin)/(xMax-xMin)*w, sy=y=>h-(y-yMin)/(yMax-yMin)*h;
+  ctx.strokeStyle='#e7eaf0';ctx.lineWidth=1;
+  for(let x=Math.ceil(xMin);x<=xMax;x++){ctx.beginPath();ctx.moveTo(sx(x),0);ctx.lineTo(sx(x),h);ctx.stroke();}
+  for(let y=Math.ceil(yMin);y<=yMax;y++){ctx.beginPath();ctx.moveTo(0,sy(y));ctx.lineTo(w,sy(y));ctx.stroke();}
+  ctx.strokeStyle='#344054';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(sx(0),0);ctx.lineTo(sx(0),h);ctx.stroke();ctx.beginPath();ctx.moveTo(0,sy(0));ctx.lineTo(w,sy(0));ctx.stroke();
+  const base=item.base; const tr=item.transform; const target={a:base.a*tr.scale,h:base.h+tr.dh,k:base.k+tr.dk,type:base.type};
+  const drawFn=(d,dashed)=>{ctx.strokeStyle=dashed?'#98a2b3':'#536dfe';ctx.lineWidth=2.5;ctx.setLineDash(dashed?[7,6]:[]);ctx.beginPath();let started=false;
+    for(let px=0;px<=w;px+=2){const x=xMin+(px/w)*(xMax-xMin);let y;
+      if(d.type==='abs') y=d.a*Math.abs(x-d.h)+d.k; else y=d.a*(x-d.h)*(x-d.h)+d.k;
+      if(!Number.isFinite(y)||y<yMin-2||y>yMax+2){started=false;continue;}
+      const py=sy(y); if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);
+    }ctx.stroke();ctx.setLineDash([]);};
+  drawFn(base,true); drawFn(target,false);
+}
+function renderTransformationPractice(){
+  const el=document.getElementById('practiceContent'); if(!el)return;
+  const item=transformationPracticeBank[practiceIndex%transformationPracticeBank.length], q=makePracticeQuestion(item);
+  const letters=['A','B','C','D'];
+  el.innerHTML=`<div class="practice-meta"><span>Question ${practiceIndex+1}</span><span>SAT-style transformation</span></div>
+    <div class="practice-question"><b>Given:</b><div class="practice-equation">${practiceEquation(item.base)}</div>
+    <b>Transformation:</b> ${item.label}<br><br><b>Which equation represents the transformed function g(x)?</b>
+    <div class="practice-options">${q.options.map((o,i)=>`<button class="practice-option" data-i="${i}"><b>${letters[i]}.</b> ${practiceParts(o)}</button>`).join('')}</div>
+    <div id="practiceFeedback" class="practice-feedback"></div>
+    <canvas id="practiceGraph" class="practice-graph" aria-label="Parent and transformed function comparison"></canvas>
+    <div class="practice-hint">Dashed = original function &nbsp; • &nbsp; Solid = transformed function</div>
+    <div class="practice-actions"><button id="practiceNext">Next question</button><button id="practiceGraphBtn" class="secondary">Show in main graph</button></div></div>`;
+  drawPracticeGraph(item,false);
+  el.querySelectorAll('.practice-option').forEach(btn=>btn.addEventListener('click',()=>{
+    if(practiceAnswered)return; practiceAnswered=true;
+    const i=Number(btn.dataset.i), fb=document.getElementById('practiceFeedback');
+    el.querySelectorAll('.practice-option').forEach(b=>b.disabled=true);
+    el.querySelectorAll('.practice-option')[q.correctIndex].classList.add('correct');
+    if(i!==q.correctIndex)btn.classList.add('wrong');
+    const tr=item.transform, parts=[];
+    if(tr.scale!==1) parts.push(tr.scale===-1?'Reflection across the x-axis.':`Vertical scale by ${Math.abs(tr.scale)}.`);
+    if(tr.dh) parts.push(`${Math.abs(tr.dh)} units ${tr.dh>0?'right':'left'}.`);
+    if(tr.dk) parts.push(`${Math.abs(tr.dk)} units ${tr.dk>0?'up':'down'}.`);
+    fb.style.display='block';fb.innerHTML=`<b>${i===q.correctIndex?'Correct!':'Not quite.'}</b><br>Correct answer: <b>${practiceParts(q.correct)}</b><br>${parts.join(' ')}`;
+  }));
+  document.getElementById('practiceNext').addEventListener('click',()=>{practiceIndex++;practiceAnswered=false;renderTransformationPractice();});
+  document.getElementById('practiceGraphBtn').addEventListener('click',()=>loadPracticeIntoMainGraph(item));
+}
+function loadPracticeIntoMainGraph(item){
+  const tr=item.transform, target={a:item.base.a*tr.scale,h:item.base.h+tr.dh,k:item.base.k+tr.dk,type:item.base.type};
+  const f=d=>d.type==='abs'?`y = ${fmt(d.a)}|x ${d.h>=0?'-':'+'} ${fmt(Math.abs(d.h))}| ${d.k>=0?'+':'−'} ${fmt(Math.abs(d.k))}`:`y = ${fmt(d.a)}(x ${d.h>=0?'-':'+'} ${fmt(Math.abs(d.h))})² ${d.k>=0?'+':'−'} ${fmt(Math.abs(d.k))}`;
+  equations.length=0; addEquation(f(item.base)); addEquation(f(target));
+  renderInputs(); draw(); analyze(); updateTable(); updateIntersectionsPanel(); updateAsymptotes(); updateTransformations();
+}
+
+function updateTransformations(){
+  const panel=document.getElementById('sliderPanel');
+  if(!panel) return;
+  const idx=equations.findIndex(e=>{const p=parseEquation(e.value); return p && transformationData(p);});
+  if(idx<0){ panel.style.display='none'; panel.innerHTML=''; return; }
+  const p=parseEquation(equations[idx].value), d=transformationData(p);
+  panel.style.display='block';
+  panel.innerHTML=`<div class="tool-title">Function transformations</div>
+    <div class="transform-equations">
+      <div><b>Parent:</b> ${d.parent}</div>
+      <div><b>Transformed:</b> ${escapeHtml(transformationEquation(d.type,d.a,d.h,d.k))}</div>
+    </div>
+    <div class="transform-legend">
+      <span><i class="transform-swatch parent"></i> Parent function</span>
+      <span><i class="transform-swatch transformed"></i> Transformed function</span>
+    </div>
+    <div class="transform-row"><div class="transform-label"><span>Vertical scale / reflection <b>a</b></span><b id="tvA">${fmt(d.a)}</b></div><input id="tlA" type="range" min="-5" max="5" step="0.1" value="${d.a}"></div>
+    <div class="transform-row"><div class="transform-label"><span>Horizontal shift <b>h</b></span><b id="tvH">${fmt(d.h)}</b></div><input id="tlH" type="range" min="-10" max="10" step="0.5" value="${d.h}"></div>
+    <div class="transform-row"><div class="transform-label"><span>Vertical shift <b>k</b></span><b id="tvK">${fmt(d.k)}</b></div><input id="tlK" type="range" min="-10" max="10" step="0.5" value="${d.k}"></div>
+    <div class="transform-note">Standard form: <b>y = a·f(x − h) + k</b>. The parent stays fixed as a reference while the transformed function moves.</div>`;
+  const apply=()=>{
+    const a=Number(document.getElementById('tlA').value), h=Number(document.getElementById('tlH').value), k=Number(document.getElementById('tlK').value);
+    document.getElementById('tvA').textContent=fmt(a); document.getElementById('tvH').textContent=fmt(h); document.getElementById('tvK').textContent=fmt(k);
+    equations[idx].value=transformationEquation(d.type,a,h,k);
+    renderInputs(); draw(); analyze(); updateTable(); updateIntersectionsPanel(); updateAsymptotes();
+    updateTransformations();
+  };
+  ['tlA','tlH','tlK'].forEach(id=>document.getElementById(id).addEventListener('input',apply));
+}
+
+// Backward-compatible name used by the existing render/update lifecycle.
+function updateSliders(){ updateTransformations(); }
+
+function findVerticalAsymptotes(p){
+  if(!p || classify(p)!=='rational') return [];
+  const found=[]; const lo=-100, hi=100, n=4000, step=(hi-lo)/n;
+  let prevX=lo, prevY; try{prevY=p.f(prevX);}catch(_){prevY=NaN;}
+  for(let i=1;i<=n;i++){
+    const x=lo+i*step; let y; try{y=p.f(x);}catch(_){y=NaN;}
+    const prevFinite=Number.isFinite(prevY), curFinite=Number.isFinite(y);
+    if(prevFinite!==curFinite){
+      let l=prevX,r=x;
+      for(let q=0;q<45;q++){ const m=(l+r)/2; let fm; try{fm=p.f(m);}catch(_){fm=NaN;} if(Number.isFinite(fm)===curFinite) r=m; else l=m; }
+      const a=curFinite?r:l;
+      if(!found.some(v=>Math.abs(v-a)<1e-3)) found.push(a);
+    }
+    prevX=x; prevY=y;
+  }
+  return found;
+}
+
+function findHorizontalAsymptote(p){
+  if(!p || classify(p)!=='rational') return [];
+
+  // Estimate the same horizontal limit from both ends. Using the mean of
+  // large positive/negative x-values removes the tiny floating-point drift
+  // that can otherwise produce false asymptotes such as y = 3.0001 and
+  // y = 2.9999 for the same mathematical asymptote y = 3.
+  const samples=[1e5,2e5,-1e5,-2e5];
+  const vals=samples.map(x=>{let y;try{y=p.f(x);}catch(_){y=NaN;} return {x,y};})
+    .filter(v=>Number.isFinite(v.y));
+  if(vals.length<2) return [];
+
+  const pos=vals.filter(v=>v.x>0).map(v=>v.y);
+  const neg=vals.filter(v=>v.x<0).map(v=>v.y);
+  const mean=a=>a.reduce((sum,v)=>sum+v,0)/a.length;
+  const spread=a=>a.length<2 ? 0 : Math.max(...a)-Math.min(...a);
+  const candidates=[];
+
+  if(pos.length && spread(pos)<Math.max(1e-5,Math.abs(mean(pos))*1e-5))
+    candidates.push(mean(pos));
+  if(neg.length && spread(neg)<Math.max(1e-5,Math.abs(mean(neg))*1e-5))
+    candidates.push(mean(neg));
+
+  if(!candidates.length) return [];
+
+  // A rational function has the same horizontal asymptote at +∞ and −∞.
+  // Merge numerically equivalent estimates into one clean value.
+  const h=mean(candidates);
+  if(candidates.every(v=>Math.abs(v-h)<Math.max(1e-4,Math.abs(h)*1e-4)))
+    return [h];
+
+  // If only one side gives a stable estimate, retain it.
+  return [candidates[0]];
+}
+
+function asymptotesFor(p){
+  if(!p || classify(p)!=='rational') return {vertical:[],horizontal:[]};
+  return {vertical:findVerticalAsymptotes(p),horizontal:findHorizontalAsymptote(p)};
+}
+
+function updateAsymptotes(){
+  const panel=document.getElementById('asymptotePanel'), el=document.getElementById('asymptoteContent');
+  if(!panel||!el) return;
+  const items=[];
+  equations.forEach((e,i)=>{ const p=parseEquation(e.value); if(!p) return; const a=asymptotesFor(p); if(a.vertical.length||a.horizontal.length) items.push({i,a}); });
+  if(!items.length){panel.style.display='none';el.innerHTML='';return;}
+  panel.style.display='block';
+  el.innerHTML=items.map(o=>`<div class="asymptote-item"><b>Equation ${o.i+1}</b>${o.a.vertical.map(v=>`<br>Vertical: <b>x = ${fmt(v)}</b>`).join('')}${o.a.horizontal.map(v=>`<br>Horizontal: <b>y = ${fmt(v)}</b>`).join('')}</div>`).join('');
+}
+
+function showPointAtGraphCoordinate(x,y,label){
+  const r=canvas.getBoundingClientRect();
+  const [sx,sy]=graphToScreen(x,y);
+  if(sx<0||sx>r.width||sy<0||sy>r.height) return;
+  pointDot.style.left=sx+'px'; pointDot.style.top=sy+'px'; pointDot.style.background='#172a46'; pointDot.style.display='block';
+  pointContent.innerHTML=`<div class="title">${escapeHtml(label)}</div><b>(${fmt(x)}, ${fmt(y)})</b><br><br>For this x-value, the function gives y = ${fmt(y)}.`;
+  const cardWidth=Math.min(250,r.width-28);
+  pointCard.style.left=Math.min(Math.max(sx+14,14),r.width-cardWidth-14)+'px';
+  pointCard.style.right='auto'; pointCard.style.top=Math.min(Math.max(sy+14,56),r.height-190)+'px'; pointCard.style.display='block';
+}
+
+function traceFunction(){
+  const input=document.getElementById('traceX');
+  const out=document.getElementById('traceResult');
+  const x=Number(input.value);
+  const first=equations.map(e=>parseEquation(e.value)).find(Boolean);
+  if(!Number.isFinite(x) || !first){ out.textContent='Enter a valid x-value and a function first.'; hidePoint(); return; }
+  let y; try{y=first.f(x);}catch(_){y=NaN;}
+  if(!Number.isFinite(y)){ out.textContent=`The function is not defined at x = ${fmt(x)}.`; hidePoint(); return; }
+  out.innerHTML=`<b>x = ${fmt(x)}</b> → <b>y = ${fmt(y)}</b><br>Point: (${fmt(x)}, ${fmt(y)})`;
+  showPointAtGraphCoordinate(x,y,'Trace point');
+}
+document.getElementById('traceX').addEventListener('keydown',e=>{if(e.key==='Enter') traceFunction();});
+
+function analyze(){
+  let html='<b>Advanced Algebra analysis</b>', count=0;
+
+  equations.forEach((e,i)=>{
+    const raw=(e.value||'').trim();
+    const p=parseEquation(raw);
+    if(!p) return;
+    count++;
+
+    const type=classify(p);
+    if(!type){
+      html += `<div class="result"><b>Function ${i+1}</b><br>Analysis unavailable for this expression.</div>`;
+      return;
+    }
+    html += `<div class="result"><b>${p.inequality ? 'Inequality' : type[0].toUpperCase()+type.slice(1)} ${i+1}</b><br>`;
+
+    if(type==='circle'){
+      const {x:h,y:k}=p.center, r=p.radius;
+      const relation=p.relation;
+      const relationText=relation==='=' ? 'Circle boundary.' : (relation==='<'||relation==='<=' ? 'Region inside the circle.' : 'Region outside the circle.');
+      const boundaryText=relation==='=' ? 'solid' : (relation==='<'||relation==='>' ? 'dashed' : 'solid');
+      html += `Center: (${fmt(h)}, ${fmt(k)})<br>Radius: ${fmt(r)}<br>${relationText}<br>`;
+      if(relation!=='=') html += `${boundaryText[0].toUpperCase()+boundaryText.slice(1)} boundary: ${relation==='<'||relation==='>' ? 'not included' : 'included'}<br>`;
+      html += `Tap the center or a key point to inspect it.`;
+    } else if(p.inequality){
+      const q=p.inequality, boundaryText=escapeHtml(q.boundary);
+      const included=(q.op==='<'||q.op==='>') ? 'not included' : 'included';
+      html += `Boundary: ${q.side} ${q.op} ${boundaryText}<br>`;
+      html += `${q.op==='<'||q.op==='>'?'Dashed boundary (not included)':'Solid boundary (included)'}<br>`;
+      html += q.side==='x'
+        ? `The solution is shaded ${q.op==='<'||q.op==='<='?'to the left':'to the right'} of the boundary.`
+        : `The solution is shaded ${q.op==='>'||q.op==='>='?'above':'below'} the boundary curve.`;
+    } else if(type==='linear'){
+      const y0=p.f(0), slope=p.f(1)-y0;
+      html += `Slope: ${fmt(slope)}<br>Y-intercept: ${fmt(y0)}`;
+      if(Math.abs(slope)>1e-9) html += `<br>X-intercept: ${fmt(-y0/slope)}`;
+    } else if(type==='quadratic'){
+      const c=p.f(0), b=(p.f(1)-p.f(-1))/2, a=(p.f(1)+p.f(-1))/2-c;
+      if(Math.abs(a)>1e-9){
+        const d=b*b-4*a*c, x=-b/(2*a), y=a*x*x+b*x+c;
+        const opensUp=a>0;
+        html += `Vertex: (${fmt(x)}, ${fmt(y)})<br>Axis of symmetry: x = ${fmt(x)}<br>`;
+        html += `Opens: <b>${opensUp?'upward':'downward'}</b><br>`;
+        html += `${opensUp?'Minimum':'Maximum'} value: <b>${fmt(y)}</b><br>`;
+        html += `Discriminant: ${fmt(d)}<br>`;
+        html += d>0?'2 real x-intercepts':Math.abs(d)<1e-10?'1 real x-intercept':'No real x-intercepts';
+      }
+    } else if(type==='absolute value'){
+      html += `Domain: all real numbers.<br>Roots: ${numericRoots(p).map(fmt).join(', ') || 'none'}<br>Tap a key point to inspect it.`;
+    } else if(type==='exponential'){
+      html += `Domain: all real numbers.<br>Y-intercept: ${fmt(p.f(0))}<br>Tap the graph to inspect coordinates.`;
+    } else if(type==='rational'){
+      html += rationalExplanation(p.expr);
+    } else if(type==='radical'){
+      html += radicalExplanation(p.expr);
+    } else if(type==='trigonometric'){
+      html += trigExplanation(p.expr);
+    } else {
+      html += `Function type: ${escapeHtml(type)}.<br>Tap the graph to inspect coordinates.`;
+    }
+    html+='</div>';
+  });
+
+  const ips=intersections().filter(p=>p.label==='intersection');
+  if(ips.length){
+    html += `<div class="result"><b>Intersections</b><br>${ips.slice(0,8).map(p=>`(${fmt(p.x)}, ${fmt(p.y)})`).join('<br>')}</div>`;
+  }
+
+  if(!count){
+    html += '<br>Enter a supported SAT Advanced Math function.';
+  }
+  analysisEl.innerHTML=html;
+  updateIntersectionsPanel();
+  updateSliders();
+}
+
+function rationalExplanation(expr){
+  // Find simple linear denominator restrictions, including squared powers.
+  const denomMatch=expr.match(/\/\((x([+\-]\d+(?:\.\d+)?)?)\)(?:\*\*(\d+))?/);
+  if(denomMatch){
+    const d=denomMatch[1];
+    const power=denomMatch[3] ? Number(denomMatch[3]) : 1;
+    const offset=denomMatch[2] ? Number(denomMatch[2]) : 0;
+    const excluded=offset===0 ? 0 : -offset;
+    let out=`Denominator: ${escapeHtml(d)}${power!==1?'^'+power:''}<br>`;
+    out += `Set the denominator equal to 0: ${escapeHtml(d)} = 0<br>`;
+    out += `<b>Excluded value: x = ${fmt(excluded)}</b><br>`;
+    out += `Domain: x ≠ ${fmt(excluded)}.<br>`;
+    out += `Vertical asymptote: <b>x = ${fmt(excluded)}</b>.`;
+    const p=parseEquation(expr);
+    const ha=p ? findHorizontalAsymptote(p) : [];
+    if(ha.length) out += `<br>Horizontal asymptote: <b>y = ${fmt(ha[0])}</b>.`;
+    if(power%2===0) out += `<br>Because the denominator is raised to an even power, the graph is positive on both sides of the asymptote when the numerator is positive.`;
+    return out;
+  }
+
+  // General reciprocal forms such as 1/x.
+  if(/^1\/x(?:\*\*\d+)?$/.test(expr)){
+    return `The denominator cannot equal 0.<br><b>Excluded value: x = 0</b><br>Vertical asymptote: <b>x = 0</b>.<br>Domain: x ≠ 0.`;
+  }
+  return `The denominator cannot equal 0.<br><b>Domain excludes denominator zeros.</b><br>Tap near a break to inspect the graph.`;
+}
+
+function radicalExplanation(expr){
+  const m=expr.match(/sqrt\(([^()]*)\)/);
+  if(!m) return `The radicand must be nonnegative.<br>Tap the graph to inspect the domain.`;
+
+  const r=m[1];
+  let domainText='';
+  if(r==='x') domainText='x ≥ 0';
+  else if(/^x[+\-]\d+(?:\.\d+)?$/.test(r)){
+    const boundary=-Number(r.slice(1));
+    domainText=`x ≥ ${fmt(boundary)}`;
+  } else domainText=`${escapeHtml(r)} ≥ 0`;
+
+  let out=`The radicand must be nonnegative: <b>${escapeHtml(r)} ≥ 0</b>.<br>`;
+  out += `<b>Radical restriction: ${domainText}.</b>`;
+
+  // A radical in a rational function has an additional denominator restriction.
+  const den=expr.match(/\/\((x([+\-]\d+(?:\.\d+)?)?)\)/);
+  if(den){
+    const d=den[1];
+    const offset=den[2] ? Number(den[2]) : 0;
+    const excluded=offset===0 ? 0 : -offset;
+    out += `<br>Also, the denominator cannot be 0: ${escapeHtml(d)} ≠ 0.`;
+    out += `<br><b>Domain: ${domainText}, except x = ${fmt(excluded)}.</b>`;
+    out += `<br>Vertical asymptote: <b>x = ${fmt(excluded)}</b>.`;
+  } else {
+    out += `<br><b>Domain: ${domainText}.</b>`;
+  }
+  out += `<br>Tap the endpoint or another key point to inspect the graph.`;
+  return out;
+}
+
+function trigExplanation(expr){
+  const fn=(expr.match(/^(sin|cos|tan)\(/)||[])[1];
+  if(!fn) return `Domain and range depend on the trigonometric function. Tap the graph to inspect coordinates.`;
+  const mode=calcMode;
+  let out='';
+  if(fn==='sin') out=`Domain: all real numbers.<br>Range: −1 ≤ y ≤ 1.<br>Period: ${mode==='DEG'?'360°':'2π'}.<br>Y-intercept: (0, 0).`;
+  else if(fn==='cos') out=`Domain: all real numbers.<br>Range: −1 ≤ y ≤ 1.<br>Period: ${mode==='DEG'?'360°':'2π'}.<br>Y-intercept: (0, 1).`;
+  else out=`Domain: all real numbers except where cos(x) = 0.<br>Range: all real numbers.<br>Period: ${mode==='DEG'?'180°':'π'}.<br>Y-intercept: (0, 0).`;
+  out += `<br>Angle mode: ${mode}.<br>Tap the graph to inspect key points.`;
+  return out;
+}
+
+function fmt(n){ return Number.isFinite(n) ? (Math.abs(n)<1e-10?'0':Number(n.toFixed(4)).toString()) : '—'; }
+
+function graphToScreen(x,y){
+  return [ox+x*scale, oy-y*scale];
+}
+function screenToGraph(px,py){
+  return [(px-ox)/scale, (oy-py)/scale];
+}
+
+function niceStep(){
+  const target=75/scale;
+  const p=10**Math.floor(Math.log10(target));
+  const n=target/p;
+  return (n<1.5?1:n<3?2:n<7?5:10)*p;
+}
+
+
+function equationName(index){
+  return `Equation ${index+1}`;
+}
+
+function rootsForQuadratic(a,b,c){
+  const d=b*b-4*a*c;
+  if(Math.abs(a)<1e-12) return Math.abs(b)<1e-12 ? [] : [-c/b];
+  if(d < -1e-10) return [];
+  if(Math.abs(d) < 1e-10) return [-b/(2*a)];
+  const sd=Math.sqrt(d);
+  return [(-b-sd)/(2*a),(-b+sd)/(2*a)].sort((u,v)=>u-v);
+}
+
+function showPoint(px,py){
+  const r=canvas.getBoundingClientRect();
+
+  // Only SAT-relevant points are selectable:
+  // intercepts, vertices/corners, and intersections.
+  const candidates=[];
+
+  equations.forEach((e,i)=>{
+    const p=parseEquation(e.value);
+    if(!p) return;
+    specialPoints(p).forEach(pt=>candidates.push({...pt,eq:i}));
+  });
+
+  intersections().forEach(pt=>candidates.push(pt));
+
+  let best=null;
+  let bestDist=Infinity;
+
+  candidates.forEach(pt=>{
+    const sx=ox+pt.x*scale;
+    const sy=oy-pt.y*scale;
+    const d=Math.hypot(sx-px,sy-py);
+
+    // A deliberately forgiving but finite tap target.
+    if(d<=30 && d<bestDist){
+      best={...pt};
+      bestDist=d;
+    }
+  });
+
+  if(!best){
+    hidePoint();
+    return;
+  }
+
+  const x=best.x, y=best.y;
+  const screenX=ox+x*scale, screenY=oy-y*scale;
+
+  pointDot.style.left=screenX+'px';
+  pointDot.style.top=screenY+'px';
+  pointDot.style.background=best.label==='intersection' ? '#7c3aed' : best.label==='coincident' ? '#0891b2' : '#172a46';
+  pointDot.style.display='block';
+
+  let content='';
+
+  if(best.label==='intersection'){
+    content += `<div class="title">Intersection</div>`;
+    content += `<b>(${fmt(x)}, ${fmt(y)})</b><br><br>`;
+    content += `${equationName(best.eq1)}: ${escapeHtml(equations[best.eq1].value)}<br>`;
+    content += `${equationName(best.eq2)}: ${escapeHtml(equations[best.eq2].value)}<br><br>`;
+    content += `<b>Solution:</b> x = ${fmt(x)}, y = ${fmt(y)}`;
+  }else if(best.label==='boundary'){
+    content += `<div class="title">Boundary</div>`;
+    content += `<b>(${fmt(x)}, 0)</b><br><br>`;
+    content += `${equationName(best.eq)}: ${escapeHtml(equations[best.eq].value)}<br><br>`;
+    content += `This vertical boundary is included/excluded according to the inequality.`;
+  }else if(best.label==='center' || best.label==='circle-point'){
+    const title=best.label==='center' ? 'Circle center' : 'Circle key point';
+    content += `<div class="title">${title}</div>`;
+    content += `<b>(${fmt(x)}, ${fmt(y)})</b><br><br>`;
+    content += `${equationName(best.eq)}: ${escapeHtml(equations[best.eq].value)}<br><br>`;
+    if(best.label==='center') content += `This is the center of the circle.`;
+    else content += `This point is ${fmt(parseEquation(equations[best.eq].value).radius)} units from the center.`;
+  }else if(best.label==='coincident'){
+    content += `<div class="title">Same Line — Infinite Solutions</div>`;
+    content += `${equationName(best.eq1)}: ${escapeHtml(equations[best.eq1].value)}<br>`;
+    content += `${equationName(best.eq2)}: ${escapeHtml(equations[best.eq2].value)}<br><br>`;
+    content += `These two equations describe the exact same line — every point on it is a solution, not just this one. (${fmt(x)}, ${fmt(y)}) is just one example.`;
+  }else{
+    content += `<div class="title">${best.label[0].toUpperCase()+best.label.slice(1)}</div>`;
+    content += `<b>(${fmt(x)}, ${fmt(y)})</b><br><br>`;
+    content += `${equationName(best.eq)}: ${escapeHtml(equations[best.eq].value)}`;
+
+    const p=parseEquation(equations[best.eq].value);
+
+    if(best.label==='vertex' && classify(p.expr)==='quadratic'){
+      const {a}=coefficients(p.expr);
+      if(Number.isFinite(a) && Math.abs(a)>1e-12){
+        const direction=a>0 ? 'upward' : 'downward';
+        const kind=a>0 ? 'minimum' : 'maximum';
+        content += `<br><br>Parabola opens <b>${direction}</b>.<br>This vertex is the <b>${kind}</b> point of the parabola.`;
+      }
+    }
+
+    if(best.label==='vertex' && classify(p.expr)==='absolute value'){
+      content += `<br><br>This is the corner/vertex of the absolute-value graph.`;
+    }
+
+    if(best.label==='x-intercept'){
+      content += `<br><br><b>Solution when y = 0:</b> x = ${fmt(x)}`;
+    }
+
+    if(best.label==='y-intercept'){
+      content += `<br><br><b>When x = 0:</b> y = ${fmt(y)}`;
+    }
+  }
+
+  pointContent.innerHTML=content;
+
+  const cardWidth=Math.min(250,r.width-28);
+  let left=Math.min(Math.max(screenX+14,14),r.width-cardWidth-14);
+  let top=Math.min(Math.max(screenY+14,56),r.height-190);
+
+  pointCard.style.left=left+'px';
+  pointCard.style.right='auto';
+  pointCard.style.top=top+'px';
+  pointCard.style.display='block';
+}
+
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+function hidePoint(){
+  pointCard.style.display='none';
+  pointDot.style.display='none';
+}
+
+// Fast drags/pinches can fire dozens of pointermove events per real
+// screen frame. Calling draw() synchronously on every single one made the
+// canvas try to redraw far more often than the browser can actually paint,
+// and under that load frames could get dropped or shown mid-render --
+// looking exactly like "part of the graph vanishes" or a stray line
+// flashing in during quick swipes (confirmed, Mohan testing 2026-08-18).
+// Routing high-frequency callers through scheduleDraw() collapses any
+// number of updates within one real frame into a single draw() call.
+let rafScheduled = false;
+function scheduleDraw(){
+  if(rafScheduled) return;
+  rafScheduled = true;
+  requestAnimationFrame(()=>{ rafScheduled = false; draw(); });
+}
+
+function syncCanvasSize(){
+  const r = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  const w = Math.max(1, Math.floor(r.width * dpr));
+  const h = Math.max(1, Math.floor(r.height * dpr));
+
+  // Keep the backing store in sync with the CSS size without changing the
+  // graph's coordinate system. All drawing coordinates below are CSS pixels.
+  if (canvas.width !== w || canvas.height !== h) {
+    canvas.width = w;
+    canvas.height = h;
+  }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  return { width: r.width, height: r.height, dpr };
+}
+
+function draw(){
+  hidePoint();
+  const r=syncCanvasSize();
+  ctx.clearRect(0,0,r.width,r.height);
+  ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,r.width,r.height);
+
+  const step=niceStep();
+  ctx.lineWidth=1; ctx.strokeStyle='#e7eaf0'; ctx.fillStyle='#667085'; ctx.font='11px Arial';
+  const [x0,y0]=screenToGraph(0,r.height), [x1,y1]=screenToGraph(r.width,0);
+  const labelY=Math.max(12,Math.min(r.height-4,oy+13));
+  const labelX=Math.max(2,Math.min(r.width-32,ox+5));
+
+  for(let x=Math.ceil(x0/step)*step;x<=x1;x+=step){
+    const [sx]=graphToScreen(x,0); ctx.beginPath();ctx.moveTo(sx,0);ctx.lineTo(sx,r.height);ctx.stroke();
+    if(Math.abs(x)>step/1000) ctx.fillText(fmt(x),sx+3,labelY);
+  }
+  for(let y=Math.ceil(y0/step)*step;y<=y1;y+=step){
+    const [,sy]=graphToScreen(0,y); ctx.beginPath();ctx.moveTo(0,sy);ctx.lineTo(r.width,sy);ctx.stroke();
+    if(Math.abs(y)>step/1000) ctx.fillText(fmt(y),labelX,sy-3);
+  }
+  ctx.strokeStyle='#344054';ctx.lineWidth=1.5;
+  if(oy>=0&&oy<=r.height){ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(r.width,oy);ctx.stroke();}
+  if(ox>=0&&ox<=r.width){ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,r.height);ctx.stroke();}
+
+  const lineStyles=['#536dfe','#e25555','#20a77a','#a855f7','#f59e0b'];
+
+  // ---------- transformation reference ----------
+  // When the current equation is a recognizable transformation, draw its
+  // parent function as a fixed dashed reference. This makes the movement
+  // visible instead of asking the student to mentally compare two graphs.
+  const transformIdx=equations.findIndex(e=>{const p=parseEquation(e.value); return p && transformationData(p);});
+  if(transformIdx>=0){
+    const tp=parseEquation(equations[transformIdx].value);
+    const td=transformationData(tp);
+    const sameAsParent=Math.abs(td.a-1)<1e-10 && Math.abs(td.h)<1e-10 && Math.abs(td.k)<1e-10;
+    if(!sameAsParent){
+      ctx.save();
+      ctx.strokeStyle='#98a2b3';
+      ctx.lineWidth=2.1;
+      ctx.setLineDash([7,6]);
+      ctx.beginPath();
+      let started=false;
+      for(let px=0;px<=r.width;px++){
+        const x=(px-ox)/scale;
+        let y;
+        try{ y=td.type==='absolute value' ? Math.abs(x) : x*x; }catch(_){ y=NaN; }
+        const py=oy-y*scale;
+        if(!Number.isFinite(y) || !Number.isFinite(py) || py < -r.height*5 || py > r.height*6){ started=false; continue; }
+        if(!started){ ctx.moveTo(px,py); started=true; }
+        else ctx.lineTo(px,py);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  // ---------- inequality shading ----------
+  equations.forEach((e,idx)=>{
+    const p=parseEquation(e.value); if(!p || !p.inequality) return;
+    const q=p.inequality, color=lineStyles[idx%lineStyles.length];
+    ctx.save(); ctx.fillStyle=color; ctx.globalAlpha=.14;
+    if(q.side==='y'){
+      for(let px=0;px<r.width;px+=2){
+        const x=(px-ox)/scale; let y;
+        try{y=p.f(x);}catch(_){y=NaN;}
+        if(!Number.isFinite(y)) continue;
+        const py=oy-y*scale;
+        if(py < -r.height*2 || py > r.height*3) continue;
+        const above=(q.op==='>'||q.op==='>=');
+        ctx.fillRect(px, above?0:Math.max(py,0), 2,
+          above?Math.min(py,r.height):Math.max(0,r.height-py));
+      }
+    }else if(q.side==='x'){
+      let c=NaN; try{c=p.f(0);}catch(_){ }
+      if(Number.isFinite(c)){
+        const sx=ox+c*scale;
+        const left=(q.op==='<'||q.op==='<=');
+        if(left) ctx.fillRect(0,0,Math.max(0,Math.min(sx,r.width)),r.height);
+        else ctx.fillRect(Math.max(0,sx),0,Math.max(0,r.width-sx),r.height);
+      }
+    }
+    ctx.restore();
+  });
+
+  // ---------- asymptotes ----------
+  equations.forEach((e,idx)=>{
+    const p=parseEquation(e.value); if(!p || classify(p)!=='rational') return;
+    const color=lineStyles[idx%lineStyles.length];
+    const a=asymptotesFor(p);
+    ctx.save(); ctx.strokeStyle=color; ctx.lineWidth=1.6; ctx.setLineDash([7,6]);
+    a.vertical.forEach(x=>{ const sx=ox+x*scale; if(sx>=-2&&sx<=r.width+2){ctx.beginPath();ctx.moveTo(sx,0);ctx.lineTo(sx,r.height);ctx.stroke();} });
+    a.horizontal.forEach(y=>{ const sy=oy-y*scale; if(sy>=-2&&sy<=r.height+2){ctx.beginPath();ctx.moveTo(0,sy);ctx.lineTo(r.width,sy);ctx.stroke();} });
+    ctx.restore();
+  });
+
+  // ---------- circles / implicit circle inequalities ----------
+  equations.forEach((e,idx)=>{
+    const p=parseEquation(e.value); if(!p || p.kind!=='circle') return;
+    const color=lineStyles[idx%lineStyles.length];
+    const {x:h,y:k}=p.center, r0=p.radius;
+    const sx=ox+h*scale, sy=oy-k*scale, sr=r0*scale;
+    const inside=(p.relation==='<'||p.relation==='<=');
+    const outside=(p.relation==='>'||p.relation==='>=');
+    if(p.relation!=='='){
+      ctx.save(); ctx.fillStyle=color; ctx.globalAlpha=.14;
+      if(inside){
+        ctx.beginPath(); ctx.arc(sx,sy,sr,0,Math.PI*2); ctx.fill();
+      } else if(outside){
+        // Shade the complement using an even-odd path so the graph/grid
+        // underneath remains intact.
+        ctx.beginPath();
+        ctx.rect(0,0,r.width,r.height);
+        ctx.moveTo(sx+sr,sy);
+        ctx.arc(sx,sy,sr,0,Math.PI*2,true);
+        ctx.fill('evenodd');
+      }
+      ctx.restore();
+    }
+    ctx.save(); ctx.strokeStyle=color; ctx.lineWidth=2.7;
+    ctx.setLineDash(p.relation==='<'||p.relation==='>' ? [8,6] : []);
+    ctx.beginPath(); ctx.arc(sx,sy,sr,0,Math.PI*2); ctx.stroke();
+    ctx.restore();
+  });
+
+  // ---------- boundaries / ordinary curves ----------
+  equations.forEach((e,idx)=>{
+    const p=parseEquation(e.value); if(!p || p.kind==='circle') return;
+    const color=lineStyles[idx%lineStyles.length];
+    ctx.strokeStyle=color; ctx.lineWidth=2.7;
+
+    if(p.inequality && (p.inequality.op==='<'||p.inequality.op==='>')) ctx.setLineDash([8,6]);
+    else ctx.setLineDash([]);
+
+    // x inequalities have vertical boundary lines. Do not feed them through
+    // the y=f(x) curve renderer; that was the source of the bogus horizontal
+    // line seen for x <= -2.
+    if(p.inequality && p.inequality.side==='x'){
+      let c=NaN; try{c=p.f(0);}catch(_){ }
+      if(Number.isFinite(c)){
+        const sx=ox+c*scale;
+        ctx.beginPath();ctx.moveTo(sx,0);ctx.lineTo(sx,r.height);ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      return;
+    }
+
+    ctx.beginPath();
+    let started=false, prevY=null, prevX=null;
+    const graphYVisible=Math.max(Math.abs(y1-y0),1);
+    const valueThreshold=Math.max(1e4,graphYVisible*25,Math.abs(r.height/scale)*25);
+    const screenMargin=Math.max(r.height*5,2500);
+
+    function breakBranch(){ started=false; prevY=null; prevX=null; }
+    function finiteAt(x){ let v; try{v=p.f(x);}catch(_){v=NaN;} return Number.isFinite(v)?v:NaN; }
+
+    // One sample per screen column. This keeps vertical panning/zooming stable
+    // and avoids the old fixed graph-space sampling problem.
+    for(let px=0;px<=r.width;px++){
+      const x=(px-ox)/scale;
+      const y=finiteAt(x);
+      if(!Number.isFinite(y) || Math.abs(y)>valueThreshold){ breakBranch(); continue; }
+      const py=oy-y*scale;
+      if(!Number.isFinite(py) || Math.abs(py)>screenMargin){ breakBranch(); continue; }
+
+      let discontinuity=false;
+      if(prevY!==null && prevX!==null){
+        const prevPy=oy-prevY*scale;
+        const screenJump=Math.abs(py-prevPy);
+        if(screenJump>r.height*1.05){
+          const midX=(prevX+x)/2;
+          const midY=finiteAt(midX);
+          const visibleY=Math.max(Math.abs(y1-y0),1);
+          const bothLarge=Math.abs(prevY)>visibleY*4 && Math.abs(y)>visibleY*4;
+          const signFlip=(prevY*y<0);
+          const midpointSpike=Number.isFinite(midY) && Math.abs(midY) > Math.max(Math.abs(prevY),Math.abs(y))*1.25;
+          discontinuity=!Number.isFinite(midY) || bothLarge || signFlip || midpointSpike;
+        }
+      }
+
+      // Same-sign poles such as 1/(x-3)^2 do not flip sign. Probe a narrower
+      // midpoint when the local jump is steep; if the midpoint blows up,
+      // this is a discontinuity, not a steep continuous curve.
+      if(!discontinuity && prevY!==null && prevX!==null){
+        const prevPy=oy-prevY*scale;
+        if(Math.abs(py-prevPy)>r.height*.55){
+          const midX=(prevX+x)/2, midY=finiteAt(midX);
+          if(!Number.isFinite(midY) || Math.abs(midY)>valueThreshold ||
+             Math.abs(midY)>Math.max(Math.abs(prevY),Math.abs(y))*2.5){
+            discontinuity=true;
+          }
+        }
+      }
+
+      if(discontinuity){ breakBranch(); continue; }
+      if(!started){ctx.moveTo(px,py);started=true;} else ctx.lineTo(px,py);
+      prevY=y; prevX=x;
+    }
+    ctx.stroke();ctx.setLineDash([]);
+  // ---------- intersection markers ----------
+  intersections().filter(p=>p.label==='intersection').forEach(pt=>{
+    const sx=ox+pt.x*scale, sy=oy-pt.y*scale;
+    if(sx<-8||sx>r.width+8||sy<-8||sy>r.height+8) return;
+    ctx.save(); ctx.fillStyle='#7c3aed'; ctx.beginPath(); ctx.arc(sx,sy,5,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke(); ctx.restore();
+  });
+
+  });
+
+}
+
+function zoom(f){
+  const r=canvas.getBoundingClientRect();
+  const cx=r.width/2, cy=r.height/2;
+  const [gx,gy]=screenToGraph(cx,cy);
+  scale=Math.max(0.25,Math.min(2500,scale*f));
+  ox=cx-gx*scale; oy=cy+gy*scale;
+  scheduleDraw();
+}
+// Zoom centered on an arbitrary screen point (used by pinch-to-zoom, where
+// the fixed point is the midpoint between the two fingers, not the canvas
+// center — keeps whatever the student is pinching on staying under their
+// fingers instead of jumping to the middle of the screen).
+function zoomAt(newScale, px, py){
+  const [gx,gy]=screenToGraph(px,py);
+  scale=Math.max(0.25,Math.min(2500,newScale));
+  ox=px-gx*scale; oy=py+gy*scale;
+  scheduleDraw();
+}
+function resetView(){
+  const r=canvas.getBoundingClientRect();
+  scale=55; ox=r.width/2; oy=r.height/2; draw();
+}
+function clearAll(){ equations=[]; renderInputs(); draw(); updateTable(); updateIntersectionsPanel(); updateSliders(); updateAsymptotes(); }
+
+canvas.addEventListener('wheel',e=>{e.preventDefault(); zoom(e.deltaY<0?1.15:0.87);},{passive:false});
+
+let pointerDragging=false;
+let pointerMoved=false;
+let pointerStartX=0, pointerStartY=0;
+let lastPointerX=0, lastPointerY=0;
+
+// Two-finger pinch-to-zoom: tracks every active touch by pointerId. Pointer
+// Events fire a distinct pointerId per finger, so a genuine pinch is
+// detected the moment a 2nd concurrent pointer shows up. While pinching we
+// zoom around the midpoint between the two fingers (not the canvas center)
+// so whatever the student is pinching stays under their fingers, matching
+// how pinch-zoom behaves in Google Maps / Desmos itself.
+const activePointers = new Map();
+let pinchStartDist = null, pinchStartScale = null;
+let multiDragLastX = null, multiDragLastY = null;
+
+// Mobile gesture policy:
+//  • one-finger tap = inspect a key point
+//  • one-finger vertical swipe = page scroll
+//  • one-finger horizontal swipe = graph pan
+//  • two-finger drag = graph pan
+//  • two-finger pinch = graph zoom
+// A single touch is NEVER allowed to enter the zoom path.
+canvas.style.touchAction='pan-y';
+
+function clearPointerState(){
+  activePointers.clear();
+  pinchStartDist=null;
+  pinchStartScale=null;
+  multiDragLastX=null;
+  multiDragLastY=null;
+  pointerDragging=false;
+  pointerMoved=false;
+}
+
+canvas.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse' && e.button!==0) return;
+
+  // Ignore non-touch pointers when a touch gesture is active.
+  if(e.pointerType!=='touch' && activePointers.size) return;
+
+  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY,type:e.pointerType});
+
+  const touchPointers=[...activePointers.values()].filter(p=>p.type==='touch');
+  if(e.pointerType==='touch' && touchPointers.length===2){
+    pointerDragging=false;
+    const pts=touchPointers;
+    pinchStartDist=Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);
+    pinchStartScale=scale;
+    multiDragLastX=(pts[0].x+pts[1].x)/2;
+    multiDragLastY=(pts[0].y+pts[1].y)/2;
+    try{canvas.setPointerCapture(e.pointerId);}catch(_){ }
+    return;
+  }
+
+  // First/only pointer: no zoom state is created.
+  if(e.pointerType==='touch'){
+    pinchStartDist=null;
+    pinchStartScale=null;
+  }
+  pointerDragging=true;
+  pointerMoved=false;
+  pointerStartX=e.clientX; pointerStartY=e.clientY;
+  lastPointerX=e.clientX; lastPointerY=e.clientY;
+});
+
+canvas.addEventListener('pointermove',e=>{
+  if(!activePointers.has(e.pointerId)) return;
+  const old=activePointers.get(e.pointerId);
+  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY,type:old.type});
+
+  const touchPointers=[...activePointers.values()].filter(p=>p.type==='touch');
+  if(touchPointers.length===2 && pinchStartDist!==null){
+    const pts=touchPointers;
+    const dist=Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);
+    if(dist<1) return;
+    const r=canvas.getBoundingClientRect();
+    const midX=(pts[0].x+pts[1].x)/2-r.left;
+    const midY=(pts[0].y+pts[1].y)/2-r.top;
+    const newScale=pinchStartScale*(dist/pinchStartDist);
+    zoomAt(newScale,midX,midY);
+    multiDragLastX=(pts[0].x+pts[1].x)/2;
+    multiDragLastY=(pts[0].y+pts[1].y)/2;
+    return;
+  }
+
+  if(touchPointers.length===2){
+    const pts=touchPointers;
+    const mx=(pts[0].x+pts[1].x)/2, my=(pts[0].y+pts[1].y)/2;
+    if(multiDragLastX!==null){
+      ox+=mx-multiDragLastX; oy+=my-multiDragLastY; scheduleDraw();
+    }
+    multiDragLastX=mx; multiDragLastY=my;
+    return;
+  }
+
+  // Critical guard: one finger can only pan/tap. It can never zoom.
+  if(e.pointerType==='touch' && touchPointers.length!==1) return;
+  if(!pointerDragging) return;
+
+  const dx=e.clientX-lastPointerX, dy=e.clientY-lastPointerY;
+  const totalDx=e.clientX-pointerStartX, totalDy=e.clientY-pointerStartY;
+  if(Math.hypot(totalDx,totalDy)>6) pointerMoved=true;
+
+  if(pointerMoved && e.pointerType==='touch'){
+    if(Math.abs(totalDy)>Math.abs(totalDx)*1.15){
+      // Let the browser scroll the page. Do not modify graph coordinates.
+      pointerDragging=false;
+      try{canvas.releasePointerCapture(e.pointerId);}catch(_){ }
+      return;
+    }
+    try{canvas.setPointerCapture(e.pointerId);}catch(_){ }
+  }
+
+  if(pointerMoved){
+    ox+=dx; oy+=dy;
+    lastPointerX=e.clientX; lastPointerY=e.clientY;
+    scheduleDraw();
+  }
+});
+
+function finishPointer(e, canceled=false){
+  activePointers.delete(e.pointerId);
+  try{canvas.releasePointerCapture(e.pointerId);}catch(_){ }
+
+  const remaining=[...activePointers.values()].filter(p=>p.type==='touch');
+  if(remaining.length<2){
+    pinchStartDist=null;
+    pinchStartScale=null;
+    multiDragLastX=null;
+    multiDragLastY=null;
+  }
+
+  if(canceled){
+    if(activePointers.size===0) clearPointerState();
+    return;
+  }
+
+  if(e.pointerType==='touch' && remaining.length>0){
+    pointerDragging=false;
+    pointerMoved=false;
+    return;
+  }
+
+  if(!pointerDragging) return;
+  const r=canvas.getBoundingClientRect();
+  if(!pointerMoved) showPoint(e.clientX-r.left,e.clientY-r.top);
+  pointerDragging=false;
+}
+
+canvas.addEventListener('pointerup',e=>finishPointer(e,false));
+canvas.addEventListener('pointercancel',e=>finishPointer(e,true));
+canvas.addEventListener('lostpointercapture',e=>{
+  // Prevent a lost capture from leaving a stale pointer that can make the
+  // next single-finger touch look like a second finger.
+  if(e.pointerType==='touch' && activePointers.has(e.pointerId)) activePointers.delete(e.pointerId);
+  if(activePointers.size===0) clearPointerState();
+});
+
+renderTransformationPractice();
+resize();
+// Start with a genuinely blank equation field.
+// The first field is created by renderInputs() through addEquation(),
+// but no demo equation is inserted automatically.
+renderInputs();
+updateTable();
+updateIntersectionsPanel();
+
+['tableStart','tableStep'].forEach(id=>document.getElementById(id).addEventListener('input',updateTable));
+
+function toggleCalculator(){
+  const body=document.getElementById('calcBody');
+  const btn=document.getElementById('calcCollapseBtn');
+  const hidden=body.style.display==='none';
+  body.style.display=hidden?'block':'none';
+  btn.textContent=hidden?'Hide':'Show';
+}
+
+/* ===== SOMSED Calculator v3 ===== */
+// calcMode itself is declared near the top of the script now (shared with
+// the graph parser) — this section only sets/reads it from here on.
+let calcAns=0;
+
+function setCalcMode(mode){
+  calcMode=mode;
+  document.getElementById('degBtn').classList.toggle('active',mode==='DEG');
+  document.getElementById('radBtn').classList.toggle('active',mode==='RAD');
+  calcUpdatePreview();
+  analyze();
+}
+function calcInsert(text){
+  const d=document.getElementById('calcDisplay');
+  const start=d.selectionStart ?? d.value.length;
+  const end=d.selectionEnd ?? d.value.length;
+  d.value=d.value.slice(0,start)+text+d.value.slice(end);
+  d.focus();
+  const pos=start+text.length;
+  d.setSelectionRange(pos,pos);
+  calcUpdatePreview();
+}
+function calcClear(){
+  document.getElementById('calcDisplay').value='';
+  document.getElementById('calcResult').textContent='';
+}
+function calcBack(){
+  const d=document.getElementById('calcDisplay');
+  const start=d.selectionStart ?? d.value.length;
+  const end=d.selectionEnd ?? d.value.length;
+  if(start!==end){
+    d.value=d.value.slice(0,start)+d.value.slice(end);
+    d.setSelectionRange(start,start);
+  }else if(start>0){
+    d.value=d.value.slice(0,start-1)+d.value.slice(start);
+    d.setSelectionRange(start-1,start-1);
+  }
+  d.focus(); calcUpdatePreview();
+}
+function calcToggleSign(){
+  const d=document.getElementById('calcDisplay');
+  if(d.value.startsWith('−(') && d.value.endsWith(')'))
+    d.value=d.value.slice(2,-1);
+  else
+    d.value='−('+d.value+')';
+  d.focus(); d.setSelectionRange(d.value.length,d.value.length);
+  calcUpdatePreview();
+}
+function calcPrepare(s){
+  s=s.replace(/\s+/g,'').replace(/×/g,'*').replace(/÷/g,'/')
+    .replace(/−/g,'-').replace(/π/g,'Math.PI')
+    .replace(/\bAns\b/g,'ANS').replace(/\be\b/g,'Math.E')
+    .replace(/√\(/g,'sqrt(').replace(/\^/g,'**');
+
+  s=s.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');
+  const angle=calcMode==='DEG'?'(Math.PI/180)*':'';
+  s=s.replace(/\bsin\(/g,`Math.sin(${angle}`)
+     .replace(/\bcos\(/g,`Math.cos(${angle}`)
+     .replace(/\btan\(/g,`Math.tan(${angle}`)
+     .replace(/\blog\(/g,'Math.log10(')
+     .replace(/\bln\(/g,'Math.log(')
+     .replace(/\bsqrt\(/g,'Math.sqrt(');
+  return s;
+}
+function calcEvaluate(raw){
+  let s=calcPrepare(raw);
+  if(!s) return null;
+  if(!/^[0-9+\-*/()._a-zA-Z]+$/.test(s)) return null;
+  s=s.replace(/\bANS\b/g,String(calcAns));
+  try{
+    const value=Function('"use strict";return ('+s+')')();
+    return typeof value==='number' && Number.isFinite(value) ? value : null;
+  }catch(_){return null}
+}
+function calcFormat(v){
+  if(v===0 || Math.abs(v)<1e-12) return '0';
+  if(Math.abs(v)>=1e10 || Math.abs(v)<1e-8)
+    return v.toExponential(8).replace(/\.?0+e/,'e');
+  return Number(v.toPrecision(12)).toString();
+}
+function pushCalcHistory(expr,result){
+  if(!expr || !result) return;
+  calcHistory.unshift({expr,result}); calcHistory=calcHistory.slice(0,8); renderCalcHistory();
+}
+function renderCalcHistory(){
+  const box=document.getElementById('calcHistory');
+  if(!calcHistory.length){box.innerHTML='';box.style.display='none';return;}
+  box.innerHTML='<div class="calc-history-title">Recent calculations</div>'+calcHistory.map((h,i)=>`<div class="calc-history-item" onclick="useCalcHistory(${i})"><b>${escapeHtml(h.expr)}</b><br>= ${escapeHtml(h.result)}</div>`).join('');
+}
+function toggleCalcHistory(){
+  const box=document.getElementById('calcHistory'); if(!calcHistory.length){return;}
+  box.style.display=box.style.display==='none'?'block':'none';
+}
+function useCalcHistory(i){
+  const h=calcHistory[i]; if(!h)return; const d=document.getElementById('calcDisplay'); d.value=h.expr; d.focus(); d.setSelectionRange(d.value.length,d.value.length); calcUpdatePreview();
+}
+function calcSolveEquation(){
+  const d=document.getElementById('calcDisplay'), out=document.getElementById('calcResult'), raw=d.value.trim();
+  if(!raw.includes('=')){out.textContent='Enter an equation, e.g. 2x + 3 = 11';return;}
+  const parts=raw.split('='); if(parts.length!==2){out.textContent='Use one equals sign.';return;}
+  const L=polynomialCoefficients(normalizeMath(parts[0])), R=polynomialCoefficients(normalizeMath(parts[1]));
+  if(!L||!R){out.textContent='Solve supports linear and quadratic equations in x.';return;}
+  const a=L.a-R.a,b=L.b-R.b,c=L.c-R.c; let text='';
+  if(Math.abs(a)<1e-12&&Math.abs(b)<1e-12) text=Math.abs(c)<1e-12?'All real numbers':'No solution';
+  else if(Math.abs(a)<1e-12){const x=-c/b;text=`x = ${calcFormat(x)}`;calcAns=x;}
+  else {const disc=b*b-4*a*c;if(disc<-1e-12) text='No real solutions'; else if(Math.abs(disc)<1e-12){const x=-b/(2*a);text=`x = ${calcFormat(x)}`;calcAns=x;} else {const r=Math.sqrt(disc),v=[(-b-r)/(2*a),(-b+r)/(2*a)].sort((u,v)=>u-v);text=`x = ${calcFormat(v[0])}, ${calcFormat(v[1])}`;calcAns=v[1];}}
+  out.textContent=text; pushCalcHistory(raw,text);
+}
+
+function calcEquals(){
+  const d=document.getElementById('calcDisplay');
+  const out=document.getElementById('calcResult');
+  const value=calcEvaluate(d.value);
+  if(value===null){out.textContent='Invalid expression';return}
+  calcAns=value; out.textContent='= '+calcFormat(value); pushCalcHistory(d.value,calcFormat(value));
+}
+function calcUpdatePreview(){
+  const d=document.getElementById('calcDisplay');
+  const out=document.getElementById('calcResult');
+  if(!d.value.trim()){out.textContent='';return}
+  const value=calcEvaluate(d.value);
+  out.textContent=value===null?'':'= '+calcFormat(value);
+}
+document.getElementById('calcDisplay').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){e.preventDefault();calcEquals()}
+  else if(e.key==='Escape'){calcClear()}
+});
+document.getElementById('calcDisplay').addEventListener('input',calcUpdatePreview);
+
+</script>
+</body>
+</html>

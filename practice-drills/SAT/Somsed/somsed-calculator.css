@@ -1,0 +1,31 @@
+/* ============================================================
+   SOMSED shared calculator stylesheet (Mohan, 2026-08-20)
+   Single source of truth for calculator button layout + related
+   mobile overrides. Extracted byte-for-byte from the 16 demo files
+   (verified identical via hash before moving) — every demo now
+   links here instead of carrying its own copy. Change the layout
+   once here; it updates on every demo next time that page loads.
+   ============================================================ */
+
+.calc-utility{display:flex;gap:5px;margin-bottom:5px}
+.calc-utility button{flex:1}
+.calc-funcs{display:none;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:5px}
+.calc-funcs.open{display:grid}
+.calc-desmos{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}
+.calc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.calc-grid button,.calc-utility button,.calc-funcs button,.calc-desmos button{
+  min-height:39px;border:0;border-radius:8px;background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.07);font-size:15px;font-weight:600;color:#172a46
+}
+.calc-grid button:active,.calc-utility button:active,.calc-funcs button:active,.calc-desmos button:active{transform:scale(.97)}
+.calc-grid .op,.calc-desmos .op{background:#e9eef6}
+.calc-grid .equals,.calc-desmos .equals{background:#172a46;color:#fff}
+.calc-grid .danger,.calc-utility .danger{background:#f1e8e8}
+.calc-funcs-toggle.open{background:#e9eef6}
+.calc-hint{margin-top:5px;font-size:10px;color:#64748b;text-align:center}
+@media (max-width:430px){
+  .calc-panel{margin:6px 8px 8px;padding:8px}
+  .calc-grid,.calc-funcs,.calc-desmos,.calc-utility{gap:4px}
+  .calc-grid button,.calc-funcs button,.calc-desmos button,.calc-utility button{min-height:36px;font-size:14px}
+  .calc-display{min-height:44px;font-size:20px}
+}
